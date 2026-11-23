@@ -60,7 +60,7 @@ export const ATELIER_POLAROID_PROCESS_STAGES: ReadonlyArray<PolaroidProcessStage
       description:
         "Explore our curated wall art collections or collaborate with the studio to discover a bespoke mural or conceptual artwork suited to your space.",
       highlights: [
-        "Explore all 13 curated design categories",
+        "Explore all 12 curated design categories",
         "Discover compositions, colours, and mural styles",
         "Shortlist artwork suitable for your interiors",
       ],

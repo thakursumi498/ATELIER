@@ -152,7 +152,7 @@ export function ProcessWallPreview() {
             {/* Feature Highlights */}
             <ul className="mt-6 space-y-2.5 border-t border-[#DDD2C5] pt-5">
               {[
-                "Preview any artwork from our 13 curated design categories",
+                "Preview any artwork from our 12 curated design categories",
                 "Test both full-wall Mural Mode and repeating Pattern Mode",
                 "Adjust wall perspective, scale, and positioning in real time",
               ].map((feature) => (

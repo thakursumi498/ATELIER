@@ -20,6 +20,9 @@ export interface FeaturedSampleDesignItem {
   sampleImageUrl: string;
   caption: string;
   isTemporarySample: true;
+  width?: number;
+  height?: number;
+  mimeType?: string;
 }
 
 export interface WallPrintingPillarItem {
@@ -166,9 +169,9 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
   },
   collectionPreview: {
     sectionLabel: "Explore Our Wall Art Collection",
-    heading: "Curated Compositions Across 13 Unified Design Categories",
+    heading: "Curated Compositions Across 12 Unified Design Categories",
     supportingText:
-      "Our complete design catalogue brings together 13 curated categories on a single interactive page. Explore how architectural murals, textured reliefs, and botanical compositions transition seamlessly from selection to live wall preview.",
+      "Our complete design catalogue brings together 12 curated categories on a single interactive page. Explore how architectural murals, textured reliefs, and botanical compositions transition seamlessly from selection to live wall preview.",
     ctaLabel: "Explore All Designs",
     ctaHref: "/explore-designs",
     sampleItems: [
@@ -253,7 +256,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
         title: "Conceptual Wall Art",
         description:
           "Expressive graphic, minimalist, and textural compositions that turn blank elevations into curated gallery moments.",
-        surfaceNote: "Curated across 13 studio categories",
+        surfaceNote: "Curated across 12 studio categories",
       },
       {
         code: "04",
@@ -302,7 +305,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
         step: "02",
         title: "Design Selection",
         description:
-          "Explore our unified 13-category catalogue or brief our team on a custom mural or conceptual artwork.",
+          "Explore our unified 12-category catalogue or brief our team on a custom mural or conceptual artwork.",
         isProvisional: true,
       },
       {
@@ -346,7 +349,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
         title: "Design-Led Visual Expression",
         summary: "Art, texture, and detail curated with editorial restraint.",
         detail:
-          "Our unified 13-category catalogue and custom design service prioritize visual harmony with your interior architecture, furnishings, and lighting.",
+          "Our unified 12-category catalogue and custom design service prioritize visual harmony with your interior architecture, furnishings, and lighting.",
       },
       {
         code: "III",

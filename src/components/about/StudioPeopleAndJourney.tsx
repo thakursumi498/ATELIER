@@ -48,7 +48,7 @@ export function StudioPeopleAndJourney() {
               <p className="mt-3 max-w-[48ch] text-[14px] leading-[1.65] text-[#5C534C]">
                 Every mural and surface print is conceived to harmonize with
                 your room&apos;s daylight, proportions, and material palette.
-                Preview any design from our 13-category catalogue directly on a
+                Preview any design from our 12-category catalogue directly on a
                 photograph of your own wall.
               </p>
 

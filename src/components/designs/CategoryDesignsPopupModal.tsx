@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -54,11 +54,13 @@ function buildCategoryPopupCards(
     const idKey = item.id.trim().toLowerCase();
     const slugKey = item.slug.trim().toLowerCase();
     const titleKey = item.title.trim().toLowerCase();
+    const duplicateTitle =
+      seenTitles.has(titleKey) && !item.id.startsWith("drive-");
 
     if (
       seenIds.has(idKey) ||
       seenSlugs.has(slugKey) ||
-      seenTitles.has(titleKey)
+      duplicateTitle
     ) {
       continue;
     }
@@ -86,6 +88,7 @@ export function CategoryDesignsPopupModal({
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const categoryStripRef = useRef<HTMLDivElement | null>(null);
   const chipRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const [selectedSubCategory, setSelectedSubCategory] = useState("all");
 
   const currentIdx = useMemo(() => {
     if (!category) return -1;
@@ -192,10 +195,36 @@ export function CategoryDesignsPopupModal({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [category, onClose]);
 
-  const popupCards = useMemo(() => {
+  useEffect(() => {
+    setSelectedSubCategory("all");
+  }, [category?.id]);
+
+  const allPopupCards = useMemo(() => {
     if (!category) return [];
     return buildCategoryPopupCards(category, allDesigns);
   }, [category, allDesigns]);
+
+  const subCategoryOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          allPopupCards
+            .map((design) => design.subCategoryLabel)
+            .filter((label): label is string => Boolean(label)),
+        ),
+      ).sort((a, b) => a.localeCompare(b)),
+    [allPopupCards],
+  );
+
+  const popupCards = useMemo(
+    () =>
+      selectedSubCategory === "all"
+        ? allPopupCards
+        : allPopupCards.filter(
+            (design) => design.subCategoryLabel === selectedSubCategory,
+          ),
+    [allPopupCards, selectedSubCategory],
+  );
 
   if (!category) return null;
 
@@ -302,7 +331,7 @@ export function CategoryDesignsPopupModal({
             </div>
           </div>
 
-          {/* Horizontal 13-Category Switcher with Scroll Affordances & Edge Fades */}
+          {/* Horizontal category switcher with scroll affordances and edge fades */}
           <div className="relative mt-4 flex items-center gap-1.5">
             <button
               type="button"
@@ -325,7 +354,7 @@ export function CategoryDesignsPopupModal({
               <div
                 ref={categoryStripRef}
                 role="tablist"
-                aria-label="Switch between the 13 Atelier design categories"
+                aria-label={`Switch between the ${categories.length} Atelier design categories`}
                 className="flex items-center gap-1.5 overflow-x-auto px-2 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               >
                 {categories.map((cat, idx) => {
@@ -369,6 +398,42 @@ export function CategoryDesignsPopupModal({
 
         {/* Popup Cards Grid Body */}
         <div className="flex-1 overflow-y-auto p-5 sm:p-7 lg:p-8">
+          {subCategoryOptions.length > 0 ? (
+            <div
+              role="group"
+              aria-label={`${category.title} subcategories`}
+              className="mb-5 flex flex-wrap items-center gap-2 border-b border-[#E8E2D9] pb-4"
+            >
+              <span className="mr-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#6F6862]">
+                Subcategories
+              </span>
+              {["all", ...subCategoryOptions].map((subCategory) => {
+                const count =
+                  subCategory === "all"
+                    ? allPopupCards.length
+                    : allPopupCards.filter(
+                        (design) => design.subCategoryLabel === subCategory,
+                      ).length;
+                const isSelected = selectedSubCategory === subCategory;
+                return (
+                  <button
+                    key={subCategory}
+                    type="button"
+                    aria-pressed={isSelected}
+                    onClick={() => setSelectedSubCategory(subCategory)}
+                    className={`rounded-full px-3.5 py-2 text-xs transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9B1C1C] ${
+                      isSelected
+                        ? "bg-[#9B1C1C] font-semibold text-white"
+                        : "border border-[#DDD2C5] bg-white text-[#514941] hover:border-[#9B1C1C]/60"
+                    }`}
+                  >
+                    {subCategory === "all" ? "All images" : subCategory} ({count})
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
+
           {popupCards.length === 0 ? (
             <div className="rounded-2xl border border-[#E8E2D9] bg-white p-10 text-center">
               <p className="font-serif text-2xl text-[#1A1A1A]">
@@ -388,7 +453,7 @@ export function CategoryDesignsPopupModal({
                   className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#E8E2D9] bg-white shadow-[0_10px_28px_-14px_rgba(26,26,26,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[#9B1C1C]/45 hover:shadow-[0_20px_42px_-16px_rgba(26,26,26,0.18)]"
                 >
                   {/* Card Artwork Image */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#E8E2D9]">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#F2EBE2]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={design.coverImage.secureUrl}
@@ -404,8 +469,15 @@ export function CategoryDesignsPopupModal({
                           target.src = fallback;
                         }
                       }}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      className="h-full w-full object-contain p-3"
                     />
+
+                    {design.subCategoryLabel &&
+                    design.subCategoryLabel !== "Main collection" ? (
+                      <span className="absolute left-3.5 top-3.5 rounded-full bg-white/95 px-3 py-1 text-[10px] font-semibold text-[#514941] shadow-sm">
+                        {design.subCategoryLabel}
+                      </span>
+                    ) : null}
 
                     {/* Subtle hover inspect affordance */}
                     <span
@@ -433,6 +505,12 @@ export function CategoryDesignsPopupModal({
                       <h3 className="mt-2.5 font-serif text-[21px] font-semibold leading-snug text-[#1A1A1A] transition-colors group-hover:text-[#9B1C1C]">
                         {design.title}
                       </h3>
+
+                      {design.artworkCode ? (
+                        <p className="mt-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#9B1C1C]">
+                          Artwork code: {design.artworkCode}
+                        </p>
+                      ) : null}
 
                       <p className="mt-2 line-clamp-2 text-[13px] leading-relaxed text-[#6F6862]">
                         {design.summary}

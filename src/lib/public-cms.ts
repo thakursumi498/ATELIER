@@ -14,8 +14,10 @@ import {
   listStoredProjects,
 } from "@/lib/cms-store";
 import {
+  assignArtworkReferenceCodes,
   DEVELOPMENT_FIXTURE_DESIGNS,
   DESIGN_CATEGORY_RECORDS,
+  isHiddenCatalogueCategory,
 } from "@/lib/designs-catalogue";
 import { StorageUnavailableError } from "@/lib/mongodb";
 import { ADMIN_SESSION_COOKIE, requireAdminRequest } from "@/lib/admin-auth";
@@ -24,9 +26,18 @@ import { DEVELOPMENT_BLOG_FIXTURES } from "@/lib/blogs-catalogue";
 import { DEVELOPMENT_PROJECT_FIXTURES } from "@/lib/projects-catalogue";
 import type { PageContentDocument } from "@/types/models";
 
+const publicCmsWarningState = globalThis as typeof globalThis & {
+  atelierPublicCmsWarnings?: Set<string>;
+};
+const warnedFallbackSections =
+  (publicCmsWarningState.atelierPublicCmsWarnings ??= new Set<string>());
+
 function usePublicFallback<T>(section: string, error: unknown, fallback: T): T {
   if (!(error instanceof StorageUnavailableError)) throw error;
-  console.warn(`[public-cms] Storage unavailable; serving default ${section}.`);
+  if (!warnedFallbackSections.has(section)) {
+    console.warn(`[public-cms] Storage unavailable; serving default ${section}.`);
+    warnedFallbackSections.add(section);
+  }
   return fallback;
 }
 
@@ -38,10 +49,20 @@ export const isPrivatePreview = cache(async () => {
 
 export const getPublicCategories = cache(async () => {
   try {
-    const categories = (await isPrivatePreview())
+    const configuredCategories = (await isPrivatePreview())
       ? await listStoredCategories()
       : await getPublishedCmsCollection<Awaited<ReturnType<typeof listStoredCategories>>[number]>("categories");
-    return categories.length ? categories : [...DESIGN_CATEGORY_RECORDS];
+    const categoriesBySlot = new Map(
+      DESIGN_CATEGORY_RECORDS.map(category => [category.slotNumber, category]),
+    );
+    for (const category of configuredCategories) {
+      if (isHiddenCatalogueCategory(category)) continue;
+      categoriesBySlot.set(category.slotNumber, category);
+    }
+    const extraCategories = configuredCategories.filter(
+      category => !category.slotNumber && !isHiddenCatalogueCategory(category),
+    );
+    return [...categoriesBySlot.values(), ...extraCategories];
   } catch (error) {
     return usePublicFallback("categories", error, [...DESIGN_CATEGORY_RECORDS]);
   }
@@ -53,13 +74,33 @@ export const getPublicDesigns = cache(async () => {
     const storedDesigns = preview
       ? (await listStoredDesigns()).map(item => ({ ...item, published: true }))
       : await getPublishedCmsCollection<Awaited<ReturnType<typeof listStoredDesigns>>[number]>("designs");
-    const designs = storedDesigns.length ? storedDesigns : localFixtures;
-    return designs.flatMap(design => {
-      const category = categories.find(item => item.id === design.categoryId && item.isActive);
-      return category ? [{ ...design, categorySlug: category.slug, categoryLabel: category.name, categorySlotNumber: category.slotNumber, categoryCode: category.slotCode }] : [];
-    });
+    const designsBySlug = new Map(
+      localFixtures.map(design => [design.slug.toLowerCase(), design]),
+    );
+    for (const design of storedDesigns) {
+      if (isHiddenCatalogueCategory({
+        slotNumber: design.categorySlotNumber,
+        name: design.categoryLabel,
+        slug: design.categorySlug,
+      })) continue;
+      designsBySlug.set(design.slug.toLowerCase(), design);
+    }
+
+    return assignArtworkReferenceCodes([...designsBySlug.values()].flatMap(design => {
+      if (isHiddenCatalogueCategory({
+        slotNumber: design.categorySlotNumber,
+        name: design.categoryLabel,
+        slug: design.categorySlug,
+      })) return [];
+      const configuredCategory =
+        categories.find(item => item.id === design.categoryId) ||
+        categories.find(item => item.slotNumber === design.categorySlotNumber);
+      const category = configuredCategory ||
+        DESIGN_CATEGORY_RECORDS.find(item => item.slotNumber === design.categorySlotNumber);
+      return category?.isActive ? [{ ...design, categoryId: category.id, categorySlug: category.slug, categoryLabel: category.name, categorySlotNumber: category.slotNumber, categoryCode: category.slotCode }] : [];
+    }));
   } catch (error) {
-    return usePublicFallback("designs", error, localFixtures);
+    return assignArtworkReferenceCodes(usePublicFallback("designs", error, localFixtures));
   }
 });
 export const getPublicProjects = cache(async () => {

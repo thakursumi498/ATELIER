@@ -45,7 +45,7 @@ const WHY_ATELIER_CARDS: WhyAtelierCardItem[] = [
     microHeading:
       "ART, TEXTURE, AND DETAIL CURATED WITH EDITORIAL RESTRAINT.",
     description:
-      "Our unified 13-category catalogue and custom design service prioritize visual harmony with your interior architecture, furnishings, and lighting.",
+      "Our unified 12-category catalogue and custom design service prioritize visual harmony with your interior architecture, furnishings, and lighting.",
     href: "/explore-designs",
     Icon: ImageIcon,
   },

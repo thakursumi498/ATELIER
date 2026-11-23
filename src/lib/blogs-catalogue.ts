@@ -129,7 +129,7 @@ export const ABOUT_PAGE_CONTENT = {
       },
       {
         id: "design-categories",
-        title: "13 Design Categories",
+        title: "12 Design Categories",
         subtitle: "Curated mural & conceptual collections",
       },
       {
@@ -158,7 +158,7 @@ export const ABOUT_PAGE_CONTENT = {
       },
       {
         code: "03",
-        label: "13 Design Categories",
+        label: "12 Design Categories",
         summary: "Curated botanical, textured, architectural & mineral collections.",
       },
       {
@@ -266,11 +266,11 @@ export const PROCESS_PAGE_CONTENT = {
       eyebrow: "STAGE 02 OF 05",
       title: "Design Exploration",
       subtitle: "CURATING ARTWORK FOR YOUR SPACE",
-      shortSummary: "Explore 13 design categories or commission bespoke art.",
+      shortSummary: "Explore 12 design categories or commission bespoke art.",
       description:
         "Explore our curated design catalogue or collaborate with the studio on a bespoke mural or conceptual wall-art direction.",
       highlights: [
-        "Discover available design categories across 13 unified collections.",
+        "Discover available design categories across 12 unified collections.",
         "Explore mural styles, textures, and architectural compositions.",
         "Shortlist artwork suited to your space and natural lighting.",
       ],
@@ -373,7 +373,7 @@ export const PROCESS_PAGE_CONTENT = {
       {
         step: "01",
         title: "Explore Designs",
-        detail: "Browse all 13 categories on /explore-designs.",
+        detail: "Browse all 12 categories on /explore-designs.",
         href: "/explore-designs",
       },
       {
@@ -566,7 +566,7 @@ const RAW_EDITORIAL_FIXTURES: ReadonlyArray<
       {
         heading: "Proportioning Murals for Real Sightlines",
         paragraphs: [
-          "Every room is experienced in motion—from the doorway, across a dining table, or along a corridor. Before printing begins, ATELIER — WALL STORY allows visitors to explore compositions across 13 unified design categories and preview selected artwork on their own wall photo via our Wall Visualizer.",
+          "Every room is experienced in motion—from the doorway, across a dining table, or along a corridor. Before printing begins, ATELIER — WALL STORY allows visitors to explore compositions across 12 unified design categories and preview selected artwork on their own wall photo via our Wall Visualizer.",
           "Whether the goal is a calm minimal horizon or an expressive conceptual statement, proportioning the artwork around existing furniture and architectural trim ensures visual harmony.",
         ],
         bullets: [
@@ -742,12 +742,12 @@ const RAW_EDITORIAL_FIXTURES: ReadonlyArray<
   {
     id: "blog-fixture-05",
     title:
-      "Inside the Unified 13-Category Catalogue & Wall Visualizer Workflow",
+      "Inside the Unified 12-Category Catalogue & Wall Visualizer Workflow",
     slug: "inside-unified-13-category-catalogue-wall-visualizer-workflow",
     categorySlug: "company-updates",
     categoryName: "Company Updates",
     excerpt:
-      "An overview of how ATELIER — WALL STORY organizes 13 curated design categories on one page and connects them to interactive wall previews.",
+      "An overview of how ATELIER — WALL STORY organizes 12 curated design categories on one page and connects them to interactive wall previews.",
     coverImage: {
       publicId: "blogs/fixture-05-cover",
       secureUrl: "/images/atelier/journal/journal-catalogue-visualizer-cover.webp",
@@ -759,14 +759,14 @@ const RAW_EDITORIAL_FIXTURES: ReadonlyArray<
     },
     sections: [
       {
-        heading: "One Unified Page for All 13 Design Categories",
+        heading: "One Unified Page for All 12 Design Categories",
         paragraphs: [
-          "Rather than fragmenting artwork across dozens of separate subpages, our Explore Designs experience brings all 13 studio categories together on a single interactive page with instant category filtering, search, and high-resolution zoom previews.",
+          "Rather than fragmenting artwork across dozens of separate subpages, our Explore Designs experience brings all 12 studio categories together on a single interactive page with instant category filtering, search, and high-resolution zoom previews.",
           "From any artwork card or modal preview, visitors can stage a design for wall visualization or send a direct enquiry with the selected design reference attached automatically.",
         ],
       },
     ],
-    tags: ["company-updates", "explore-designs", "13-categories", "visualizer"],
+    tags: ["company-updates", "explore-designs", "12-categories", "visualizer"],
     authorLabel: null,
     publishedAtLabel: "Atelier Studio Journal",
     publishedIso: null,
@@ -775,9 +775,9 @@ const RAW_EDITORIAL_FIXTURES: ReadonlyArray<
     isEditorialFixture: true,
     seo: {
       metaTitle:
-        "Unified 13-Category Catalogue & Wall Visualizer | ATELIER — WALL STORY",
+        "Unified 12-Category Catalogue & Wall Visualizer | ATELIER — WALL STORY",
       metaDescription:
-        "How ATELIER — WALL STORY connects 13 design categories with live wall visualization and direct Mumbai studio consultations.",
+        "How ATELIER — WALL STORY connects 12 design categories with live wall visualization and direct Mumbai studio consultations.",
       ogImageUrl: "/images/atelier/journal/journal-catalogue-visualizer-cover.webp",
     },
   },

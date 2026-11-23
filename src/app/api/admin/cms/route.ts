@@ -7,6 +7,7 @@ import { CmsError, deleteCmsRecord, getStoredSiteSettings, listCmsDrafts, listSt
 import type { CmsCollection } from "@/lib/cms-validation";
 import { listStoredEnquiries } from "@/lib/enquiries-store";
 import { computeReadingTimeMinutes } from "@/lib/blogs-catalogue";
+import { assignArtworkReferenceCodes, DEVELOPMENT_FIXTURE_DESIGNS, type CatalogueDesignItem } from "@/lib/designs-catalogue";
 import { getEnvironmentReadiness } from "@/lib/env";
 import { privateJson, readJsonBody, RequestError } from "@/lib/request-security";
 import type { Document } from "mongodb";
@@ -15,6 +16,12 @@ const collectionNames:Record<string,CmsCollection>={categories:"categories",desi
 const slug=(v:string)=>v.toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
 const strings=(v:unknown):string[]=>Array.isArray(v)?v.map(String):String(v||"").split(",").map(s=>s.trim()).filter(Boolean);
 const media=(url:string,title:string,type:"image"|"video"="image")=>({publicId:"",secureUrl:url,resourceType:type,altText:title});
+function nextArtworkReferenceCode(categoryNumber: number, designs: CatalogueDesignItem[], excludedId?: string) {
+ const used=new Set(assignArtworkReferenceCodes([...DEVELOPMENT_FIXTURE_DESIGNS,...designs]).filter(d=>d.categorySlotNumber===categoryNumber&&d.id!==excludedId).map(d=>d.artworkCode?.toUpperCase()));
+ let number=1;let code=`AE${String(categoryNumber).padStart(2,"0")}-${String(number).padStart(2,"0")}`;
+ while(used.has(code)){number++;code=`AE${String(categoryNumber).padStart(2,"0")}-${String(number).padStart(2,"0")}`;}
+ return code;
+}
 function errorResponse(e:unknown){
  if(e instanceof ZodError)return privateJson({ok:false,error:e.issues.map(i=>`${i.path.join(".")}: ${i.message}`).join("; ")},400);
  if(e instanceof CmsError)return privateJson({ok:false,error:e.message},e.statusCode);
@@ -60,7 +67,8 @@ async function buildRecord(name:CmsCollection,b:Document):Promise<Document>{
  const shared={...base,summary:b.summary??existing?.summary??"",description:b.description??existing?.description??"",coverImage:media(imageUrl,b.altText||existing?.coverImage?.altText||title),galleryMedia:galleries,videoAsset:b.videoUrl!==undefined?(b.videoUrl?media(b.videoUrl,title,"video"):null):existing?.videoAsset||null,featured:b.featured??existing?.featured??false,published:false,isDevelopmentFixture:false};
  if(name==="designs"){
   const cats=await listCmsDrafts<Document>("categories");const cat=cats.find(c=>c.id===b.categoryId||c.slotNumber===Number(b.categorySlotNumber))||cats.find(c=>c.id===existing?.categoryId);if(!cat)throw new CmsError("Create and select a category first.");
-  return {...shared,categoryId:cat.id,categorySlug:cat.slug,categorySlotNumber:cat.slotNumber,categoryCode:cat.slotCode,categoryLabel:cat.name,tags:b.tags!==undefined?strings(b.tags):existing?.tags||[],compatibleSurfaces:b.compatibleSurfaces!==undefined?strings(b.compatibleSurfaces):existing?.compatibleSurfaces||["Walls"],dimensionsNote:b.dimensionsNote??existing?.dimensionsNote??"",aspectRatio:b.aspectRatio||existing?.aspectRatio||"landscape",sortOrder:Number(b.displayOrder??b.sortOrder??existing?.sortOrder??0),visualizerConfig:{defaultMode:b.defaultMode||existing?.visualizerConfig?.defaultMode||"mural",textureUrl:imageUrl,width:1600,height:1000,mimeType:"image/webp"},seo:{...existing?.seo,metaTitle:b.seoTitle??existing?.seo?.metaTitle??title,metaDescription:b.seoDescription??existing?.seo?.metaDescription??shared.summary}};
+  const allDesigns=await listCmsDrafts<CatalogueDesignItem>("designs");const assignedDesigns=assignArtworkReferenceCodes(allDesigns);const assignedExisting=assignedDesigns.find(d=>d.id===existing?.id);const artworkCode=existing?.categoryId===cat.id?(existing?.artworkCode||assignedExisting?.artworkCode):undefined;
+  return {...shared,categoryId:cat.id,categorySlug:cat.slug,categorySlotNumber:cat.slotNumber,categoryCode:cat.slotCode,artworkCode:artworkCode||nextArtworkReferenceCode(cat.slotNumber,allDesigns,existing?.id),categoryLabel:cat.name,tags:b.tags!==undefined?strings(b.tags):existing?.tags||[],compatibleSurfaces:b.compatibleSurfaces!==undefined?strings(b.compatibleSurfaces):existing?.compatibleSurfaces||["Walls"],dimensionsNote:b.dimensionsNote??existing?.dimensionsNote??"",aspectRatio:b.aspectRatio||existing?.aspectRatio||"landscape",sortOrder:Number(b.displayOrder??b.sortOrder??existing?.sortOrder??0),visualizerConfig:{defaultMode:b.defaultMode||existing?.visualizerConfig?.defaultMode||"mural",textureUrl:imageUrl,width:1600,height:1000,mimeType:"image/webp"},seo:{...existing?.seo,metaTitle:b.seoTitle??existing?.seo?.metaTitle??title,metaDescription:b.seoDescription??existing?.seo?.metaDescription??shared.summary}};
  }
  if(name==="projects")return {...shared,shortTitle:title,projectType:b.projectType||existing?.projectType||"Surface Installation",spaceCategory:b.spaceCategory||existing?.spaceCategory||"Residential",recordClassification:b.recordClassification||existing?.recordClassification||"Studio Surface Study",artisticDirection:b.artisticDirection??existing?.artisticDirection??"",surfaceName:b.surfaceName||existing?.surfaceName||"Walls",surfaceId:slug(b.surfaceName||existing?.surfaceName||"Walls"),locationNote:b.locationNote??existing?.locationNote??"",architecturalNotes:existing?.architecturalNotes||[],exhibitionImage:imageUrl,beforeAfterMedia:{beforeLabel:b.beforeLabel||existing?.beforeAfterMedia?.beforeLabel||"Before",afterLabel:b.afterLabel||existing?.beforeAfterMedia?.afterLabel||"After",beforeImageUrl:b.beforeImageUrl??existing?.beforeAfterMedia?.beforeImageUrl??"",afterImageUrl:b.afterImageUrl??existing?.beforeAfterMedia?.afterImageUrl??""},displayOrder:Number(b.displayOrder??existing?.displayOrder??0),seoTitle:b.seoTitle??existing?.seoTitle??title,seoDescription:b.seoDescription??existing?.seoDescription??shared.summary};
  const excerpt=b.excerpt??existing?.excerpt??"";const sections=b.content!==undefined?[{heading:b.sectionHeading??"",paragraphs:String(b.content).split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean)}]:existing?.sections||[];

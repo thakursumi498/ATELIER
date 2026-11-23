@@ -25,6 +25,18 @@
       ]
     },
     {
+      "id": "drive-category-artwork-covers-and-enquiries",
+      "reason": "Client-supplied Drive artworks are shown in their category collection and reused as the corresponding category cover and visualizer handoff image.",
+      "assets": [
+        "/images/atelier/drive-categories/*"
+      ],
+      "allowedContexts": [
+        "^/ :: Atelier 3D Wall Art Collection$",
+        "^/explore-designs :: ",
+        "^/visualizer :: "
+      ]
+    },
+    {
       "id": "portfolio-project-entity-identity",
       "reason": "Each of the 6 Studio Surface Studies uses its own canonical cover and detail plate across /projects (exhibition, portfolio grid, signature study) and /projects/[slug] (detail page + related study cards).",
       "assets": [

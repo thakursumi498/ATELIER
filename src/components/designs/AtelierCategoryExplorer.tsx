@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/zoom-slider";
 import {
   ATELIER_ART_VAULT_CONTENT,
+  DESIGN_CATEGORY_RECORDS,
   type AtelierVaultCategoryItem,
 } from "@/lib/designs-catalogue";
 import { cn } from "@/lib/cn";
@@ -101,7 +102,7 @@ export function CategoryExplorerControls({
             className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[#9B1C1C]/40 bg-[#F6EAE6] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#9B1C1C] transition-colors hover:bg-[#9B1C1C] hover:text-[#FAF9F6]"
           >
             <RotateCcw className="h-3 w-3" />
-            <span>All 13</span>
+            <span>All {totalCount}</span>
           </button>
         )}
       </div>
@@ -186,7 +187,7 @@ export function CategoryActiveDetails({
               className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-[#DDD2C5] bg-[#F2EBE2] px-4 py-3.5 text-xs font-medium text-[#211D1A] transition-colors hover:border-[#9B1C1C] hover:text-[#9B1C1C]"
             >
               <RotateCcw className="h-3.5 w-3.5" />
-              <span>Show All 13 Categories</span>
+              <span>Show All {totalCount} Categories</span>
             </button>
           )}
         </div>
@@ -242,7 +243,7 @@ export function CategoryCatalogueBridge({
       />
       <nav
         ref={navRef}
-        aria-label="13 Design Categories Quick Index"
+        aria-label={`${categories.length} Design Categories Quick Index`}
         className="flex items-center gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <button
@@ -256,7 +257,7 @@ export function CategoryCatalogueBridge({
               : "border border-[#DDD2C5] bg-[#FBF8F3] text-[#6F665E] hover:border-[#9B1C1C]/45 hover:text-[#211D1A]"
           )}
         >
-          All 13 Worlds
+          All {categories.length} Worlds
         </button>
 
         {categories.map((cat, idx) => {
@@ -489,20 +490,20 @@ export function AtelierCategoryExplorer({
           </div>
         )}
 
-        {/* Discrepancy note if fewer than 13 published categories are configured (Section 21) */}
-        {!isLoading && categories.length > 0 && categories.length < 13 && (
+        {/* Discrepancy note if fewer than the public catalogue categories are active */}
+        {!isLoading && categories.length > 0 && categories.length < DESIGN_CATEGORY_RECORDS.length && (
           <div className="mt-4 rounded-xl border border-[#DDD2C5] bg-[#FBF8F3] px-4 py-2.5 text-xs text-[#6F665E]">
-            Showing {categories.length} of 13 configured studio category slots
+            Showing {categories.length} of {DESIGN_CATEGORY_RECORDS.length} public design categories
             currently marked active in CMS.
           </div>
         )}
 
-        {/* Interactive 13-Category ZoomSlider Gallery */}
+        {/* Interactive category ZoomSlider gallery */}
         <div className="mt-4">
           {isLoading ? (
             <div
               aria-busy="true"
-              aria-label="Loading 13 Worlds of Wall Art gallery"
+              aria-label={`Loading ${DESIGN_CATEGORY_RECORDS.length} Worlds of Wall Art gallery`}
               className="flex h-[390px] w-full items-end gap-3 overflow-hidden rounded-2xl border border-[#DDD2C5] bg-[#F2EBE2] p-4 sm:h-[420px] lg:h-[450px]"
             >
               <div className="h-[25%] w-[8%] animate-pulse rounded-t-xl bg-[#DDD2C5]/60" />
@@ -527,7 +528,7 @@ export function AtelierCategoryExplorer({
                 sliderData={zoomSlides}
                 title={ATELIER_ART_VAULT_CONTENT.headline}
                 subheading={ATELIER_ART_VAULT_CONTENT.subheading}
-                scaleOnHover
+                scaleOnHover={false}
                 textOnHover
                 size={1}
                 easeScrollPercentage={100}

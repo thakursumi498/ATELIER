@@ -38,22 +38,19 @@ import {
 import { PageContentDocument } from "@/types/models";
 
 function formatVisualizerDisplayTitle(design: CatalogueDesignItem): string {
-  if (
-    design.id === "design-slot-1" &&
-    design.title.toLowerCase() === "botanical canopy"
-  ) {
-    return "Botanical Canopy Wall Mural";
-  }
   return design.title;
 }
 
 function formatCollectionSlotLabel(slotNumber: number): string {
-  const padded = String(slotNumber).padStart(2, "0");
+  const visibleIndex = DESIGN_CATEGORY_RECORDS.findIndex(
+    (category) => category.slotNumber === slotNumber,
+  );
+  const padded = String(visibleIndex >= 0 ? visibleIndex + 1 : slotNumber).padStart(2, "0");
   return `Category ${padded}`;
 }
 
 function VisualizerExperienceWorkspace() {
-  // Synchronize published designs, 13 categories & optional CMS hero/process copy
+  // Synchronize published designs, categories, and optional CMS hero/process copy
   const [catalogueCategories, setCatalogueCategories] = useState<
     ReadonlyArray<CatalogueCategoryRecord>
   >(DESIGN_CATEGORY_RECORDS);
@@ -120,7 +117,7 @@ function VisualizerWithCatalogue({ catalogueCategories, catalogueDesigns, visual
     process.env.NEXT_PUBLIC_WALL_VISUALIZER_URL ||
     "http://localhost:3001/visualizer";
 
-  // Resolve initial design from URL params -> sessionStorage -> default Botanical Canopy Wall Mural
+  // Resolve the requested artwork, staged artwork, or first available catalogue item.
   const resolution = useMemo<{
     design: CatalogueDesignItem;
     wasInvalidQuery: boolean;

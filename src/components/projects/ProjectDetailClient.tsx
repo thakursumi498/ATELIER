@@ -330,7 +330,7 @@ export function ProjectDetailClient({
                     href="/explore-designs"
                     className="inline-flex items-center gap-1.5 rounded-lg bg-[#201C1A] px-4 py-2 text-xs font-medium text-[#F8F3ED] transition-colors hover:bg-[#991D20]"
                   >
-                    <span>Explore 13 Design Categories</span>
+                    <span>Explore 12 Design Categories</span>
                   </Link>
                 </div>
               </div>

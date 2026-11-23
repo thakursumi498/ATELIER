@@ -3,11 +3,11 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import type { FeaturedSampleDesignItem } from "@/lib/homepage-content";
 import {
-  DEFAULT_HOMEPAGE_CONTENT,
-  FeaturedSampleDesignItem,
-} from "@/lib/homepage-content";
-import { DESIGN_CATEGORY_RECORDS } from "@/lib/designs-catalogue";
+  DESIGN_CATEGORY_RECORDS,
+  DEVELOPMENT_FIXTURE_DESIGNS,
+} from "@/lib/designs-catalogue";
 import {
   buildVisualizerBridgeHref,
   stageDesignForWallVisualizer,
@@ -18,11 +18,35 @@ import { ArrowRight, ArrowUpRight, Scan } from "lucide-react";
 /**
  * SECTION 03 — EXPLORE OUR WALL ART COLLECTION
  * Editorial asymmetrical gallery previewing selected compositions from the
- * studio catalogue, plus a direct visual category ribbon for all 13 categories.
+ * studio catalogue, plus a direct visual category ribbon for every category.
  */
 export function FeaturedCollectionGallery() {
   const router = useRouter();
-  const { sampleItems } = DEFAULT_HOMEPAGE_CONTENT.collectionPreview;
+  const categoryCount = DESIGN_CATEGORY_RECORDS.length;
+  const sampleItems: ReadonlyArray<FeaturedSampleDesignItem> =
+    DEVELOPMENT_FIXTURE_DESIGNS.filter((design) => design.featured)
+      .slice(0, 4)
+      .map((design) => ({
+        id: design.id,
+        slug: design.slug,
+        title: design.title,
+        slotNumber: design.categorySlotNumber,
+        slotCode: design.artworkCode || design.categoryCode,
+        surfaceTag: design.categoryLabel,
+        defaultMode: design.visualizerConfig.defaultMode,
+        aspectClass:
+          design.aspectRatio === "portrait"
+            ? "tall"
+            : design.aspectRatio === "landscape"
+              ? "wide"
+              : "square",
+        sampleImageUrl: design.coverImage.secureUrl,
+        caption: `${design.categoryLabel} · ${design.artworkCode}`,
+        isTemporarySample: true,
+        width: design.visualizerConfig.width,
+        height: design.visualizerConfig.height,
+        mimeType: design.visualizerConfig.mimeType,
+      }));
 
   const handlePreviewDesignOnWall = async (item: FeaturedSampleDesignItem) => {
     await stageDesignForWallVisualizer({
@@ -30,9 +54,9 @@ export function FeaturedCollectionGallery() {
       name: item.title,
       category: `${item.slotCode} (${item.surfaceTag})`,
       dataUrl: item.sampleImageUrl,
-      width: 1600,
-      height: 1000,
-      mimeType: "image/jpeg",
+      width: item.width || 1600,
+      height: item.height || 1000,
+      mimeType: item.mimeType || "image/jpeg",
       defaultMode: item.defaultMode,
       description: `${ATELIER_BRAND.name} • ${item.caption}`,
     });
@@ -58,19 +82,19 @@ export function FeaturedCollectionGallery() {
         {/* Left Tall Feature Composition (5 Columns) */}
         {primaryItem && (
           <article className="group flex flex-col justify-between rounded-2xl border border-[#DED5CB] bg-[#FDF8F3] overflow-hidden shadow-sm lg:col-span-5">
-            <div className="relative aspect-[4/4.2] w-full overflow-hidden bg-brand-charcoal">
+            <div className="relative aspect-[4/4.2] w-full overflow-hidden bg-[#EDE4DA]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={primaryItem.sampleImageUrl}
                 alt={primaryItem.title}
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="h-full w-full object-contain p-3"
               />
               <div className="absolute inset-x-0 top-0 flex items-center justify-between p-4">
                 <span className="rounded-full bg-[#201C1A]/85 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-[#F8F3ED] backdrop-blur-xs">
                   {primaryItem.slotCode}
                 </span>
                 <span className="rounded-full bg-[#991D20] px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-[#F8F3ED]">
-                  Featured Relief
+                  Featured Artwork
                 </span>
               </div>
             </div>
@@ -117,12 +141,12 @@ export function FeaturedCollectionGallery() {
                 key={item.id}
                 className="group flex flex-col justify-between rounded-2xl border border-[#DED5CB] bg-[#FDF8F3] overflow-hidden shadow-sm"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-charcoal">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#EDE4DA]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.sampleImageUrl}
                     alt={item.title}
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    className="h-full w-full object-contain p-3"
                   />
                   <div className="absolute inset-x-0 top-0 flex items-center justify-between p-3.5">
                     <span className="rounded-full bg-[#201C1A]/85 px-2.5 py-0.5 text-[10px] font-medium uppercase text-[#F8F3ED] backdrop-blur-xs">
@@ -166,12 +190,12 @@ export function FeaturedCollectionGallery() {
           {/* Bottom Panoramic Study */}
           {panoramicItem && (
             <article className="group grid grid-cols-1 overflow-hidden rounded-2xl border border-[#DED5CB] bg-[#FDF8F3] shadow-sm sm:grid-cols-12">
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-brand-charcoal sm:col-span-6 sm:aspect-auto">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#EDE4DA] sm:col-span-6 sm:aspect-auto">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={panoramicItem.sampleImageUrl}
                   alt={panoramicItem.title}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  className="h-full w-full object-contain p-3"
                 />
                 <span className="absolute left-3.5 top-3.5 rounded-full bg-[#991D20] px-3 py-0.5 text-[10px] font-medium uppercase text-[#F8F3ED]">
                   {panoramicItem.slotCode}
@@ -215,12 +239,12 @@ export function FeaturedCollectionGallery() {
         </div>
       </div>
 
-      {/* Unified 13-Category Catalogue Index Bar */}
+      {/* Unified Category Catalogue Index Bar */}
       <div className="rounded-2xl border border-[#DED5CB] bg-[#FDF8F3] p-6 sm:p-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between border-b border-[#DED5CB] pb-5">
           <div>
             <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#991D20]">
-              13 Curated Design Categories
+              {categoryCount} Curated Design Categories
             </span>
             <h3 className="mt-1 font-serif text-2xl font-medium text-[#201C1A]">
               Explore by Design Style &amp; Surface Character
@@ -230,7 +254,7 @@ export function FeaturedCollectionGallery() {
             href="/explore-designs"
             className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-[#991D20] hover:underline"
           >
-            <span>Explore All 13 Categories</span>
+            <span>Explore All {categoryCount} Categories</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
@@ -250,7 +274,7 @@ export function FeaturedCollectionGallery() {
                     "/images/atelier/cat-01-botanical.jpg"
                   }
                   alt={cat.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-contain p-1.5"
                 />
               </div>
               <span className="mt-2 pb-1 text-center text-xs font-medium text-[#201C1A] group-hover:text-[#991D20]">
@@ -264,7 +288,7 @@ export function FeaturedCollectionGallery() {
             className="flex flex-col items-center justify-center rounded-xl border border-[#991D20] bg-[#991D20] p-4 text-center text-[#F8F3ED] transition-colors hover:bg-[#73171B]"
           >
             <span className="text-[10px] uppercase tracking-wider text-[#EDE4DA]">
-              ALL 13
+              ALL {categoryCount}
             </span>
             <span className="mt-1 font-serif text-base font-medium">
               Full Collection →

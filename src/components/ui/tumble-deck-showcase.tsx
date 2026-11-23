@@ -144,7 +144,7 @@ export function TumbleDeckShowcase({
   background = "#F8F2EA",
   className,
   style,
-  ariaLabel = "Atelier Wall Art 13 Categories 3D Tumble Deck",
+  ariaLabel = "Atelier Wall Art Categories 3D Tumble Deck",
 }: TumbleDeckShowcaseProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const sceneRef = useRef<HTMLDivElement | null>(null);
@@ -687,7 +687,7 @@ export function TumbleDeckShowcase({
           width: 100%;
           height: 100%;
           max-width: none;
-          object-fit: cover;
+          object-fit: contain;
           object-position: 50% 50%;
           pointer-events: none;
         }

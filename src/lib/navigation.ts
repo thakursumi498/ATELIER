@@ -22,8 +22,8 @@ export const PUBLIC_NAV_ITEMS: ReadonlyArray<NavItem> = [
     code: "02",
     label: "Explore Designs",
     href: "/explore-designs",
-    description: "Unified catalog for all 13 configurable design categories with search and Wall Preview.",
-    badge: "13 Categories",
+    description: "Unified catalog for all 12 design categories with search and Wall Preview.",
+    badge: "12 Categories",
   },
   {
     code: "03",
@@ -91,7 +91,7 @@ export const ADMIN_NAV_MODULES: ReadonlyArray<AdminNavModule> = [
     label: "Category Management",
     href: "/admin/categories",
     collectionName: "design_categories",
-    summary: "Configure the 13 unified design categories: names, slugs, display order, cover images, and active status.",
+    summary: "Configure the 12 public design categories: names, slugs, display order, cover images, and active status.",
   },
   {
     id: "projects",

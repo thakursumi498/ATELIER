@@ -227,10 +227,10 @@ export function DesignPreviewModal({
       <div
         ref={modalRef}
         className={cn(
-          "flex w-full flex-col overflow-hidden rounded-2xl border border-[#DED5CB] bg-[#FDF8F3] text-[#201C1A] shadow-2xl transition-all duration-200",
+          "flex max-h-[calc(100dvh_-_1.5rem)] w-full min-h-0 flex-col overflow-hidden rounded-2xl border border-[#DED5CB] bg-[#FDF8F3] text-[#201C1A] shadow-2xl transition-all duration-200 sm:max-h-[calc(100dvh_-_3rem)]",
           isFullscreen
             ? "h-[96dvh] max-w-[96vw]"
-            : "max-h-[92dvh] max-w-[1180px]"
+            : "h-[92dvh] max-w-[1180px]"
         )}
       >
         {/* Top Modal Bar */}
@@ -282,11 +282,11 @@ export function DesignPreviewModal({
         </div>
 
         {/* Main Split Body */}
-        <div className="grid flex-1 grid-cols-1 overflow-y-auto lg:grid-cols-12 lg:overflow-hidden">
+        <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(0,1fr)] overflow-y-auto lg:grid-cols-12 lg:overflow-hidden">
           {/* Left Column: High-Resolution Artwork Stage + Zoom + Thumbnails */}
           <div
             className={cn(
-              "flex flex-col justify-between bg-[#201C1A] text-[#F8F3ED]",
+              "flex min-h-0 flex-col justify-between bg-[#201C1A] text-[#F8F3ED]",
               isFullscreen ? "lg:col-span-8" : "lg:col-span-7"
             )}
           >
@@ -383,7 +383,7 @@ export function DesignPreviewModal({
                   else handlePrevImage();
                 }
               }}
-              className="relative flex min-h-[280px] flex-1 items-center justify-center overflow-auto bg-[#161311] p-4 sm:min-h-[420px] sm:p-6"
+              className="relative flex min-h-[280px] flex-1 items-center justify-center overflow-auto bg-[#161311] p-4 sm:min-h-[420px] sm:p-6 lg:min-h-0"
             >
               {viewMode === "images" ? (
                 <>
@@ -540,7 +540,7 @@ export function DesignPreviewModal({
                         alt={media.altText}
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full object-cover"
+                        className="h-full w-full bg-[#F2EBE2] object-contain p-1.5"
                       />
                     </button>
                   );
@@ -552,7 +552,7 @@ export function DesignPreviewModal({
           {/* Right Column: Editorial Metadata, Surfaces, Visualizer & Enquiry CTAs */}
           <div
             className={cn(
-              "flex flex-col justify-between overflow-y-auto bg-[#FDF8F3] p-6 sm:p-8",
+              "flex min-h-0 flex-col justify-between overflow-y-auto bg-[#FDF8F3] p-6 sm:p-8",
               isFullscreen ? "lg:col-span-4" : "lg:col-span-5"
             )}
           >
@@ -560,6 +560,11 @@ export function DesignPreviewModal({
               <div>
                 <div className="flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#991D20]">
                   <span>{design.categoryLabel}</span>
+                  {design.subCategoryLabel &&
+                  design.subCategoryLabel !== "Main collection" ? (
+                    <span>· {design.subCategoryLabel}</span>
+                  ) : null}
+                  {design.artworkCode ? <span>· Ref {design.artworkCode}</span> : null}
                 </div>
 
                 <h2
@@ -648,7 +653,7 @@ export function DesignPreviewModal({
                 <a
                   href={buildWhatsAppUrl(
                     "918017463132",
-                    `Hello ATELIER — WALL STORY, I would like to enquire about "${design.title}" (${design.categoryLabel}).`
+                    `Hello ATELIER — WALL STORY, I would like to enquire about "${design.title}" (${design.categoryLabel}, ref ${design.artworkCode}).`
                   )}
                   target="_blank"
                   rel="noopener noreferrer"

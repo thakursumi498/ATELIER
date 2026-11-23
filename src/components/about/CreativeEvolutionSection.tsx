@@ -204,8 +204,8 @@ const EVOLUTION_PILLARS: ReadonlyArray<EvolutionPillar> = [
   {
     id: 3,
     code: "03",
-    title: "13 Design Categories",
-    titleLines: ["13 Design", "Categories"],
+    title: "12 Design Categories",
+    titleLines: ["12 Design", "Categories"],
     description:
       "Curated botanical, textured, architectural & mineral collections.",
     icon: DesignCategoriesIcon,

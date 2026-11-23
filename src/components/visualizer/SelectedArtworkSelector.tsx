@@ -46,12 +46,25 @@ export function ArtworkSwatchThumbnail({
       if (!ctx) return;
 
       const { sx, sy, sw, sh } = resolveArtworkSourcePixels(img);
-      // Center-square crop within the resolved pure-artwork region
-      const side = Math.min(sw, sh);
-      const cx = sx + Math.round((sw - side) / 2);
-      const cy = sy + Math.round((sh - side) / 2);
+      const padding = 12;
+      const scale = Math.min(
+        (size - padding * 2) / sw,
+        (size - padding * 2) / sh,
+      );
+      const drawWidth = sw * scale;
+      const drawHeight = sh * scale;
       ctx.clearRect(0, 0, size, size);
-      ctx.drawImage(img, cx, cy, side, side, 0, 0, size, size);
+      ctx.drawImage(
+        img,
+        sx,
+        sy,
+        sw,
+        sh,
+        (size - drawWidth) / 2,
+        (size - drawHeight) / 2,
+        drawWidth,
+        drawHeight,
+      );
     };
     img.src = src;
     return () => {
@@ -64,7 +77,7 @@ export function ArtworkSwatchThumbnail({
       ref={canvasRef}
       role="img"
       aria-label={alt}
-      className={cn("block h-full w-full bg-[#EAE0D3] object-cover", className)}
+      className={cn("block h-full w-full bg-[#EAE0D3] object-contain", className)}
     />
   );
 }
@@ -128,12 +141,11 @@ interface HorizontalSelectedArtworkBarProps {
 }
 
 const FEATURED_PILL_ORDER = [
-  "design-slot-1", // Botanical Canopy
-  "design-slot-3", // Terracotta Wave Relief
-  "design-slot-4", // Arch Series – Limestone
-  "design-slot-7", // Mountain Silhouette
-  "design-slot-8", // Lotus Atelier Study
-  "design-slot-2", // Geometric Harmony
+  "drive-food-and-lifestyle-ae02-01",
+  "drive-kids-education-ae05-01",
+  "drive-motivation-ae07-01",
+  "drive-nature-and-environment-ae08-01",
+  "drive-wildlife-ae13-01",
 ];
 
 export function HorizontalSelectedArtworkBar({
@@ -144,7 +156,7 @@ export function HorizontalSelectedArtworkBar({
   const scrollListRef = useRef<HTMLDivElement | null>(null);
   const pillRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  // Order actual published designs so the signature 6 lead naturally, followed by all other published records
+  // Order featured designs first, followed by the remaining published records.
   const orderedDesigns = useMemo(() => {
     const priorityMap = new Map(
       FEATURED_PILL_ORDER.map((id, index) => [id, index])
@@ -361,7 +373,7 @@ export function SelectedArtworkSelectorModal({
           </button>
         </div>
 
-        {/* Search & 13-Category Filter Bar */}
+        {/* Search and category filter bar */}
         <div className="border-b border-[#E5D9CA] bg-[#FAF6F0] px-5 py-3.5 sm:px-6">
           <div className="relative">
             <Search className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-[#746B64]" />

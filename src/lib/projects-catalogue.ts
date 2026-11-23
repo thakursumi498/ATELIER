@@ -448,7 +448,7 @@ export const SERVICES_PAGE_CONTENT = {
         code: "03",
         title: "Conceptual Wall Art",
         description:
-          "Curated minimalist, botanical, geometric, and textural studies organized across 13 studio design categories.",
+          "Curated minimalist, botanical, geometric, and textural studies organized across 12 studio design categories.",
       },
       {
         code: "04",
@@ -498,7 +498,7 @@ export const SERVICES_PAGE_CONTENT = {
         code: "V",
         title: "Explore & Preview Before Enquiry",
         description:
-          "Browse all 13 design categories on a single page and test selected artwork directly on a photo or live camera view of your wall.",
+          "Browse all 12 design categories on a single page and test selected artwork directly on a photo or live camera view of your wall.",
       },
     ],
   },
@@ -521,7 +521,7 @@ export const SERVICES_PAGE_CONTENT = {
         step: "02",
         title: "Design Selection",
         description:
-          "Select a composition from our 13-category catalogue or brief our creative team on a bespoke mural or conceptual artwork.",
+          "Select a composition from our 12-category catalogue or brief our creative team on a bespoke mural or conceptual artwork.",
         isProvisional: true,
       },
       {
@@ -556,7 +556,7 @@ export const SERVICES_PAGE_CONTENT = {
       "Select any artwork from our catalogue and preview how it transforms your own wall image before committing to printing.",
     primaryCtaLabel: "Open Wall Visualizer",
     primaryCtaHref: "/visualizer",
-    secondaryCtaLabel: "Browse 13 Design Categories",
+    secondaryCtaLabel: "Browse 12 Design Categories",
     secondaryCtaHref: "/explore-designs",
   },
   faqs: [
@@ -580,7 +580,7 @@ export const SERVICES_PAGE_CONTENT = {
       id: "service-faq-3",
       question: "Do you support custom murals as well as catalogue designs?",
       answer:
-        "Yes. You can either choose a design from our 13 unified catalogue categories on /explore-designs or consult with our Mumbai team to customize a mural or conceptual wall artwork for your specific space and substrate.",
+        "Yes. You can either choose a design from our 12 unified catalogue categories on /explore-designs or consult with our Mumbai team to customize a mural or conceptual wall artwork for your specific space and substrate.",
       order: 3,
       visible: true,
     },

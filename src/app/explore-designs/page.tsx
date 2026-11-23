@@ -385,7 +385,7 @@ function ExploreDesignsWorkspace() {
             className="pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-[#F5EFE6] via-[#F5EFE6]/45 to-transparent sm:h-10 lg:hidden"
           />
 
-          {/* Soft warm cream bottom edge transition into "13 Worlds of Wall Art" */}
+          {/* Soft warm cream bottom edge transition into the wall art collection */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-[#F7F3ED]/45 to-transparent"
@@ -393,7 +393,7 @@ function ExploreDesignsWorkspace() {
         </div>
       </section>
 
-      {/* 02. THE ATELIER ART VAULT — 13 WORLDS OF WALL ART (Interactive ZoomSlider) */}
+      {/* 02. THE ATELIER ART VAULT — WALL ART COLLECTION (Interactive ZoomSlider) */}
       <AtelierCategoryExplorer
         categories={vaultCategories}
         activeCategorySlug={activeCategorySlug}

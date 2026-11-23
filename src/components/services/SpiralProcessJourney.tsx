@@ -43,7 +43,7 @@ const SPIRAL_STEPS: SpiralStepItem[] = [
     title: "Design & Visualization",
     shortSummary: "Create or adapt artwork with realistic previews.",
     detailDescription:
-      "Select from 13 curated design categories or commission bespoke artwork. We map the composition directly onto your room photo for architectural sign-off.",
+      "Select from 12 curated design categories or commission bespoke artwork. We map the composition directly onto your room photo for architectural sign-off.",
     deliverable: "Scaled room elevation & colour proof",
     durationNote: "Stage 02 • Visual Sign-Off",
     icon: "visualization",

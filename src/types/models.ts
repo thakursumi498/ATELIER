@@ -44,10 +44,10 @@ export interface AdminUserDocument {
   updatedAt: string;
 }
 
-/** 2. DesignCategory (13 Admin-Configurable Slots) */
+/** 2. DesignCategory (13 stable slots; retired slots may leave gaps) */
 export interface DesignCategoryDocument extends LifecycleMetadata {
   id: string;
-  /** Slot 1..13 representing the 13 unified design categories */
+  /** Stable category slot number; retired slots may leave gaps in the public catalogue. */
   slotNumber: number;
   name: string;
   slug: string;
@@ -360,7 +360,7 @@ export const enquirySubmissionSchema = z.object({
 export type EnquirySubmissionInput = z.infer<typeof enquirySubmissionSchema>;
 
 /**
- * 13 Configurable Category Slots (Structural Registry Only — Not Fabricated Official Names).
+ * 13 stable category slots; slot 6 is retired so later category codes remain stable.
  * Official category titles, slugs, cover images, and descriptions are managed via `/admin/categories`
  * and persisted in MongoDB.
  */

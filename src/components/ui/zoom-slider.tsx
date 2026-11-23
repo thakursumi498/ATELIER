@@ -119,7 +119,7 @@ export const ZoomSliderComp = forwardRef<
     sliderData = DEFAULT_ATELIER_SLIDES,
     title,
     subheading,
-    scaleOnHover = true,
+    scaleOnHover = false,
     textOnHover = true,
     size = 1,
     easeScrollPercentage = 100,
@@ -328,7 +328,7 @@ export const ZoomSliderComp = forwardRef<
     [inactivityResumeMs, pauseAutoplay, slides.length, virtualStep]
   );
 
-  // Advance or retreat by 1 category (seamlessly wraps 13 -> 01 in circular virtual space)
+  // Advance or retreat by one category and wrap from the last card to the first.
   const stepBy = useCallback(
     (direction: 1 | -1, isManual = true) => {
       const total = slides.length;
@@ -485,7 +485,7 @@ export const ZoomSliderComp = forwardRef<
       const factor = state.isDragging ? DRAG_LERP : IDLE_LERP;
       state.current = lerp(state.current, state.target, factor);
 
-      // 4. Layout all 13 variable-width cards
+      // 4. Layout all variable-width cards
       layoutSlides(state.current);
 
       // 5. Synchronize authoritative activeIndex across header, badge, counter, and info card
@@ -876,7 +876,7 @@ export const ZoomSliderComp = forwardRef<
         ref={stageWrapperRef}
         role="region"
         aria-roledescription="carousel"
-        aria-label={title || "Atelier 13 Worlds of Wall Art Category ZoomSlider"}
+        aria-label={title || "Atelier Worlds of Wall Art Category ZoomSlider"}
         tabIndex={0}
         onKeyDown={(e) => {
           if (e.key === "ArrowRight") {
@@ -999,7 +999,7 @@ export const ZoomSliderComp = forwardRef<
                     }
                   }}
                   className={cn(
-                    "group relative overflow-hidden rounded-t-xl border transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9B1C1C]",
+                    "group relative overflow-hidden rounded-t-xl border bg-[#EAE1D5] transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9B1C1C]",
                     isActiveSlide
                       ? "border-[#9B1C1C] shadow-[0_14px_34px_-8px_rgba(155,28,28,0.28)]"
                       : "border-[#DDD2C5] hover:border-[#9B1C1C]/50"
@@ -1026,7 +1026,7 @@ export const ZoomSliderComp = forwardRef<
                         target.src = fallback;
                       }
                     }}
-                    className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover"
+                    className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain"
                     style={{
                       transform: "none",
                       objectPosition: "center center",
@@ -1136,7 +1136,7 @@ export function AtelierCategorySlider({
       sliderData={slides}
       title={ATELIER_ART_VAULT_CONTENT.headline}
       subheading="Drag to explore the Atelier collection"
-      scaleOnHover
+      scaleOnHover={false}
       textOnHover
       size={1}
       easeScrollPercentage={100}
@@ -1147,7 +1147,7 @@ export function AtelierCategorySlider({
 }
 
 export function ZoomSlider({
-  scaleOnHover = true,
+  scaleOnHover = false,
   textOnHover = true,
   size = 1,
   easeScrollPercentage = 100,

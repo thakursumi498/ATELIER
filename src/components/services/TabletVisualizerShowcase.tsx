@@ -60,7 +60,7 @@ const CAPABILITY_ROWS = [
   },
   {
     icon: LayoutGrid,
-    title: "Choose from 13+ Design Categories",
+    title: "Choose from 12 Design Categories",
     subtitle: "Botanical, Textured, Architectural, Mineral, Abstract & more.",
   },
   {

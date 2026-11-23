@@ -118,6 +118,7 @@ export function resolvePrintableArtworkInfo(
     candidateUrl.startsWith("/uploads/") ||
     candidateUrl.startsWith("/samples/") ||
     candidateUrl.startsWith("data:") ||
+    candidateUrl.startsWith("/images/atelier/drive-categories/") ||
     (Boolean(textureUrl) && textureUrl !== showcaseImageUrl);
 
   const calibratedCrop = findNormalizedArtworkCrop(candidateUrl);

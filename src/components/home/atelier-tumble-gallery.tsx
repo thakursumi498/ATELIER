@@ -13,22 +13,6 @@ import {
   type CatalogueDesignItem,
 } from "@/lib/designs-catalogue";
 
-const CATEGORY_SHOWCASE_HEADLINES: Record<string, string> = {
-  "cat-01": "Botanical Canopy & Organic Murals",
-  "cat-02": "Geometric Arches & Proportion",
-  "cat-03": "Sculpted Terracotta & Textured Relief",
-  "cat-04": "Architectural Limestone Colonnades",
-  "cat-05": "Travertine & Mineral Stone Strata",
-  "cat-06": "Contemporary Abstract Compositions",
-  "cat-07": "Panoramic Horizon Landscapes",
-  "cat-08": "Botanical & Lotus Atelier Studies",
-  "cat-09": "Artisan Plaster & Lime Finishes",
-  "cat-10": "Bespoke Ceramic & Stone Tile Editions",
-  "cat-11": "Architectural Glass & Glazing Art",
-  "cat-12": "Timber Millwork & Brushed Metal Art",
-  "cat-13": "Panoramic Architectural Window Blinds",
-};
-
 export function AtelierTumbleGallery() {
   const [catalogueCategories, setCatalogueCategories] = useState<
     ReadonlyArray<CatalogueCategoryRecord>
@@ -92,9 +76,7 @@ export function AtelierTumbleGallery() {
           ""
         ).trim();
 
-        const displayTitle =
-          CATEGORY_SHOWCASE_HEADLINES[cat.slug.toLowerCase()] ||
-          `${cat.title} Wall Art Collection`;
+        const displayTitle = `${cat.title} Wall Art Collection`;
 
         const surfacesLabel =
           cat.compatibleSurfaces && cat.compatibleSurfaces.length > 0
@@ -128,6 +110,7 @@ export function AtelierTumbleGallery() {
     >
       <TumbleDeckShowcase
         cards={tumbleCards}
+        ariaLabel={`Atelier Wall Art ${catalogueCategories.length} Category 3D Tumble Deck`}
         height="calc(100svh - var(--navbar-height, 74px))"
         aspect={1.62}
         scrollPerCard={240}

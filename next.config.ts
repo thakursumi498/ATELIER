@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   devIndicators: false,
   images: {
-    qualities: [75, 92],
+    qualities: [75, 86, 88, 92],
   },
   async redirects() {
     return [

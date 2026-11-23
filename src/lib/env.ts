@@ -33,10 +33,14 @@ export function getEnvironmentReadiness(): EnvironmentReadiness {
       process.env.CLOUDINARY_API_SECRET
   );
 
-  const emailConfigured = Boolean(
+  const brevoConfigured = Boolean(
+    process.env.BREVO_API_KEY && process.env.BREVO_SENDER_EMAIL && process.env.BREVO_RECEIVER_EMAIL
+  );
+  const resendConfigured = Boolean(
     process.env.RESEND_API_KEY && process.env.RESEND_FROM_EMAIL &&
       (process.env.ADMIN_NOTIFICATION_EMAIL || process.env.ENQUIRY_NOTIFICATION_TO_EMAIL)
   );
+  const emailConfigured = brevoConfigured || resendConfigured;
 
   const heroVideoConfigured = Boolean(
     process.env.NEXT_PUBLIC_HERO_VIDEO_URL &&

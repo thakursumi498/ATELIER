@@ -1146,7 +1146,7 @@ export function StudioRightInspector({
                   <img
                     src={printableInfo.showcaseImageUrl}
                     alt={selectedDesign.coverImage.altText || selectedDesign.title}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain p-1"
                   />
                 </div>
                 <p className="mt-1 text-center text-[10.5px] font-medium text-[#5C524B]">

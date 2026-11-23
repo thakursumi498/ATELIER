@@ -423,7 +423,7 @@ export function BlogArticleDetailClient({
                   <span className="italic text-[#9B1C1C]">on Your Wall.</span>
                 </h2>
                 <p className="mt-2.5 text-[14px] leading-[1.65] text-[#6F665E]">
-                  Browse our unified 13-category artwork collection, test scale
+                  Browse our unified 12-category artwork collection, test scale
                   in the interactive Wall Visualizer, or discuss your surface
                   with our Mumbai studio.
                 </p>

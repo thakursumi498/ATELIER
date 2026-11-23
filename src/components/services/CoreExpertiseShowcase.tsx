@@ -98,7 +98,7 @@ const CORE_DISCIPLINES: ReadonlyArray<CoreDisciplineItem> = [
     objectAlt:
       "Unfurled tactile architectural parchment and canvas-plaster roll representing custom artwork scale and tone configuration",
     detailedOverview:
-      "Every artwork in our 13-category catalogue can be adapted to your exact wall width, architectural niches, door frames, and furniture clearances — with custom colourway adjustments before printing.",
+      "Every artwork in our 12-category catalogue can be adapted to your exact wall width, architectural niches, door frames, and furniture clearances — with custom colourway adjustments before printing.",
     idealSubstrates: [
       "Walls",
       "Tiles",

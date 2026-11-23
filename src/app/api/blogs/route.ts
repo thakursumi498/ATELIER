@@ -1,29 +1,16 @@
 import { NextResponse } from "next/server";
-import { getEnvironmentReadiness } from "@/lib/env";
-import {
-  BLOG_DRAFT_CATEGORIES,
-  DEVELOPMENT_BLOG_FIXTURES,
-} from "@/lib/blogs-catalogue";
-
-/**
- * GET /api/blogs
- * Safe data-access boundary for Page 07 — Blogs (`/blogs` & `/blogs/[slug]`).
- * Returns proposed configurable blog categories, verified published articles (`[]` until
- * MongoDB is connected and client publishes articles via `/admin/blogs`), and
- * explicitly flagged editorial draft fixtures for UI, search, filter, and SEO QA.
- */
+import { getPublicBlogs } from "@/lib/public-cms";
+export const dynamic = "force-dynamic";
 export async function GET() {
-  const readiness = getEnvironmentReadiness();
-
-  return NextResponse.json({
-    status: "ok",
-    readiness: {
-      mongodbConfigured: readiness.mongodbConfigured,
-      cloudinaryConfigured: readiness.cloudinaryConfigured,
-    },
-    categories: BLOG_DRAFT_CATEGORIES,
-    publishedClientArticles: [],
-    editorialDraftFixtures: DEVELOPMENT_BLOG_FIXTURES,
-  });
+  try {
+    const items = await getPublicBlogs();
+    return NextResponse.json({
+      status: "ok",
+      articles: items,
+      publishedClientArticles: items.filter(item => !item.isEditorialFixture),
+      editorialDraftFixtures: items.filter(item => item.isEditorialFixture),
+    }, { headers: { "Cache-Control": "private, no-store" } });
+  } catch {
+    return NextResponse.json({ error: "Content is temporarily unavailable." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+  }
 }
-

@@ -5,9 +5,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { Container } from "@/components/layout/Container";
+import { FadeUp } from "@/components/motion/Reveal";
 import {
   BlogArticleRecord,
-  DEVELOPMENT_BLOG_FIXTURES,
 } from "@/lib/blogs-catalogue";
 import { ATELIER_BRAND, buildWhatsAppUrl } from "@/lib/brand";
 import {
@@ -28,16 +28,14 @@ import {
 
 interface BlogArticleDetailClientProps {
   article: BlogArticleRecord;
+  relatedArticles?: BlogArticleRecord[];
 }
 
 export function BlogArticleDetailClient({
   article,
+  relatedArticles = [],
 }: BlogArticleDetailClientProps) {
   const [copiedLink, setCopiedLink] = useState(false);
-
-  const relatedArticles = DEVELOPMENT_BLOG_FIXTURES.filter(
-    (item) => item.slug !== article.slug && item.published
-  ).slice(0, 3);
 
   const handleCopyLink = async () => {
     try {
@@ -87,7 +85,7 @@ export function BlogArticleDetailClient({
       {/* Structured Data (Article Schema) */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle).replace(/</g, "\\u003c") }}
       />
 
       <div className="min-h-screen bg-[#F8F3ED] text-[#1A1A1A]">
@@ -102,7 +100,7 @@ export function BlogArticleDetailClient({
           />
 
           <Container className="relative z-10">
-            <div className="mx-auto max-w-4xl">
+            <FadeUp className="mx-auto max-w-4xl">
               {/* Editorial Breadcrumb */}
               <nav
                 aria-label="Article breadcrumb"
@@ -196,7 +194,7 @@ export function BlogArticleDetailClient({
                   </a>
                 </div>
               </div>
-            </div>
+            </FadeUp>
           </Container>
         </section>
 
@@ -207,21 +205,23 @@ export function BlogArticleDetailClient({
           <Container>
             <div className="mx-auto max-w-4xl">
               {/* Sculptural Arch-Corner Cover Figure */}
-              <figure className="overflow-hidden rounded-tl-[72px] rounded-tr-[24px] rounded-b-[24px] border border-[#D9C8B5] bg-[#241B18] shadow-[0_24px_55px_rgba(36,27,24,0.12)]">
-                <div className="aspect-[16/9.5] w-full overflow-hidden">
-                  <img
-                    src={article.coverImage.secureUrl}
-                    alt={article.coverImage.altText}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-                <figcaption className="flex flex-wrap items-center justify-between gap-2 border-t border-[#DED5CB] bg-[#FAF9F6] px-5 py-3 text-[11.5px] text-[#6E645D]">
-                  <span>{article.coverImage.altText}</span>
-                  <span className="font-bold tracking-[0.14em] text-[#9B1C1C] uppercase">
-                    {ATELIER_BRAND.name}
-                  </span>
-                </figcaption>
-              </figure>
+              <FadeUp delay={0.08}>
+                <figure className="overflow-hidden rounded-tl-[72px] rounded-tr-[24px] rounded-b-[24px] border border-[#D9C8B5] bg-[#241B18] shadow-[0_24px_55px_rgba(36,27,24,0.12)]">
+                  <div className="aspect-[16/9.5] w-full overflow-hidden">
+                    <img
+                      src={article.coverImage.secureUrl}
+                      alt={article.coverImage.altText}
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+                  <figcaption className="flex flex-wrap items-center justify-between gap-2 border-t border-[#DED5CB] bg-[#FAF9F6] px-5 py-3 text-[11.5px] text-[#6E645D]">
+                    <span>{article.coverImage.altText}</span>
+                    <span className="font-bold tracking-[0.14em] text-[#9B1C1C] uppercase">
+                      {ATELIER_BRAND.name}
+                    </span>
+                  </figcaption>
+                </figure>
+              </FadeUp>
 
               {/* Readable Editorial Column (max-w-3xl centered) */}
               <div className="mx-auto mt-12 max-w-[68ch] space-y-12">

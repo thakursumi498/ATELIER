@@ -1,19 +1,22 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { usePageContent } from "@/components/layout/PublicContentProvider";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { Container } from "@/components/layout/Container";
+import { FadeUp } from "@/components/motion/Reveal";
 import { ProjectMediaModal } from "@/components/projects/ProjectMediaModal";
 import {
   ScrollPortraitWall,
   mapPortfolioProjectToWallItem,
 } from "@/components/ui/scroll-portrait-wall";
 import {
-  DEVELOPMENT_PROJECT_FIXTURES,
   filterPortfolioProjects,
   PortfolioProjectRecord,
   PROJECTS_HERO_SLIDES,
+  DEVELOPMENT_PROJECT_FIXTURES,
+  type ProjectHeroSlide,
   PROJECTS_PAGE_CONTENT,
 } from "@/lib/projects-catalogue";
 import { ATELIER_SURFACES, buildWhatsAppUrl } from "@/lib/brand";
@@ -55,10 +58,12 @@ const STUDIO_APPROACH_PILLARS = [
 ] as const;
 
 export default function ProjectsPage() {
+  const pageContent = usePageContent("projects");
   // Live API-backed project records (preserving MongoDB /api/projects contract)
   const [projectsData, setProjectsData] = useState<
     ReadonlyArray<PortfolioProjectRecord>
-  >(DEVELOPMENT_PROJECT_FIXTURES);
+  >([...DEVELOPMENT_PROJECT_FIXTURES]);
+  const [heroSlideIndex, setHeroSlideIndex] = useState<number>(0);
 
   useEffect(() => {
     let active = true;
@@ -69,15 +74,19 @@ export default function ProjectsPage() {
         const clientList = Array.isArray(payload.approvedClientProjects)
           ? (payload.approvedClientProjects as PortfolioProjectRecord[])
           : [];
-        const fixtureList = Array.isArray(payload.developmentFixtures)
+        const developmentList = Array.isArray(payload.developmentFixtures)
           ? (payload.developmentFixtures as PortfolioProjectRecord[])
           : [];
-        if (clientList.length > 0) {
-          setProjectsData([...clientList, ...fixtureList]);
+        if (
+          Array.isArray(payload.approvedClientProjects) ||
+          Array.isArray(payload.developmentFixtures)
+        ) {
+          setHeroSlideIndex(0);
+          setProjectsData([...clientList, ...developmentList]);
         }
       })
       .catch(() => {
-        // Fallback to canonical studio studies
+        // Keep local development fixtures visible if the request fails.
       });
     return () => {
       active = false;
@@ -85,10 +94,29 @@ export default function ProjectsPage() {
   }, []);
 
   // Section 01: Hero Carousel State
-  const [heroSlideIndex, setHeroSlideIndex] = useState<number>(0);
-  const totalHeroSlides = PROJECTS_HERO_SLIDES.length;
+  const heroTouchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const projectHeroSlides = useMemo<ProjectHeroSlide[]>(
+    () =>
+      projectsData.length
+        ? projectsData.map((project, index) => ({
+            id: project.id,
+            slideNumber: String(index + 1).padStart(2, "0"),
+            title: project.title,
+            classification:
+              project.recordClassification || "Verified Completed Installation",
+            locationOrContext: project.locationNote,
+            spaceCategory: project.spaceCategory || "Residential",
+            surfaceName: project.surfaceName,
+            imageUrl: project.coverImage.secureUrl,
+            imageAlt: project.coverImage.altText,
+            projectSlug: project.slug,
+          }))
+        : [...PROJECTS_HERO_SLIDES],
+    [projectsData]
+  );
+  const totalHeroSlides = projectHeroSlides.length;
   const activeHeroSlide =
-    PROJECTS_HERO_SLIDES[heroSlideIndex] ?? PROJECTS_HERO_SLIDES[0];
+    projectHeroSlides[heroSlideIndex] ?? projectHeroSlides[0];
 
   const handlePrevHeroSlide = useCallback(() => {
     setHeroSlideIndex((prev) => (prev - 1 + totalHeroSlides) % totalHeroSlides);
@@ -104,19 +132,88 @@ export default function ProjectsPage() {
     [projectsData]
   );
   const [activeExhibitionIdx, setActiveExhibitionIdx] = useState<number>(0);
+  const mobileExhibitionRef = useRef<HTMLDivElement | null>(null);
+  const exhibitionScrollRafRef = useRef<number | null>(null);
+  const programmaticScrollTimeoutRef = useRef<number | null>(null);
+  const isProgrammaticExhibitionScrollRef = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      if (exhibitionScrollRafRef.current !== null) {
+        window.cancelAnimationFrame(exhibitionScrollRafRef.current);
+      }
+      if (programmaticScrollTimeoutRef.current !== null) {
+        window.clearTimeout(programmaticScrollTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const scrollMobileExhibitionToIndex = useCallback((targetIdx: number) => {
+    const container = mobileExhibitionRef.current;
+    if (!container) return;
+    const card = container.children[targetIdx] as HTMLElement | undefined;
+    if (!card) return;
+    isProgrammaticExhibitionScrollRef.current = true;
+    const targetLeft =
+      card.offsetLeft -
+      Math.max(0, (container.clientWidth - card.offsetWidth) / 2);
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    container.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+    if (programmaticScrollTimeoutRef.current !== null) {
+      window.clearTimeout(programmaticScrollTimeoutRef.current);
+    }
+    programmaticScrollTimeoutRef.current = window.setTimeout(() => {
+      isProgrammaticExhibitionScrollRef.current = false;
+      programmaticScrollTimeoutRef.current = null;
+    }, 450);
+  }, []);
+
+  const handleMobileExhibitionScroll = useCallback(() => {
+    if (isProgrammaticExhibitionScrollRef.current) return;
+    if (exhibitionScrollRafRef.current !== null) return;
+    exhibitionScrollRafRef.current = window.requestAnimationFrame(() => {
+      exhibitionScrollRafRef.current = null;
+      const container = mobileExhibitionRef.current;
+      if (!container || container.children.length === 0) return;
+      const center = container.scrollLeft + container.clientWidth / 2;
+      let closestIdx = 0;
+      let minDistance = Number.POSITIVE_INFINITY;
+      Array.from(container.children).forEach((child, idx) => {
+        const el = child as HTMLElement;
+        const cardCenter = el.offsetLeft + el.offsetWidth / 2;
+        const dist = Math.abs(cardCenter - center);
+        if (dist < minDistance) {
+          minDistance = dist;
+          closestIdx = idx;
+        }
+      });
+      setActiveExhibitionIdx((prev) => (prev === closestIdx ? prev : closestIdx));
+    });
+  }, []);
 
   const handlePrevExhibition = useCallback(() => {
     if (exhibitionProjects.length <= 1) return;
-    setActiveExhibitionIdx(
-      (prev) =>
-        (prev - 1 + exhibitionProjects.length) % exhibitionProjects.length
-    );
-  }, [exhibitionProjects.length]);
+    setActiveExhibitionIdx((prev) => {
+      const next =
+        (prev - 1 + exhibitionProjects.length) % exhibitionProjects.length;
+      scrollMobileExhibitionToIndex(next);
+      return next;
+    });
+  }, [exhibitionProjects.length, scrollMobileExhibitionToIndex]);
 
   const handleNextExhibition = useCallback(() => {
     if (exhibitionProjects.length <= 1) return;
-    setActiveExhibitionIdx((prev) => (prev + 1) % exhibitionProjects.length);
-  }, [exhibitionProjects.length]);
+    setActiveExhibitionIdx((prev) => {
+      const next = (prev + 1) % exhibitionProjects.length;
+      scrollMobileExhibitionToIndex(next);
+      return next;
+    });
+  }, [exhibitionProjects.length, scrollMobileExhibitionToIndex]);
 
   // Compute the 4 visible ordered panels for the overlapping 3D exhibition stack
   const layeredExhibitionPanels = useMemo(() => {
@@ -175,6 +272,7 @@ export default function ProjectsPage() {
     [projectsData]
   );
   const [signatureMediaIdx, setSignatureMediaIdx] = useState<number>(0);
+  const signatureTouchStartRef = useRef<{ x: number; y: number } | null>(null);
 
   // Media Lightbox Modal
   const [lightboxState, setLightboxState] = useState<{
@@ -213,12 +311,12 @@ export default function ProjectsPage() {
       >
         {/* Left Editorial Column inside Shared Container (First in DOM for semantic mobile-first order) */}
         <Container className="relative z-10 w-full">
-          <div className="flex flex-col justify-between pt-8 pb-6 sm:pt-11 sm:pb-8 lg:max-w-[490px] lg:py-12 xl:max-w-[505px]">
+          <FadeUp className="flex flex-col justify-between pt-8 pb-6 sm:pt-11 sm:pb-8 lg:max-w-[490px] lg:py-12 xl:max-w-[505px]">
             <div>
               <div className="inline-flex items-center gap-3">
                 <span className="h-[1.5px] w-7 bg-[#9B1C1C]" />
                 <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#9B1C1C]">
-                  {PROJECTS_PAGE_CONTENT.hero.eyebrow}
+                  {pageContent?.hero.eyebrow || PROJECTS_PAGE_CONTENT.hero.eyebrow}
                 </span>
               </div>
 
@@ -226,26 +324,20 @@ export default function ProjectsPage() {
                 id="projects-hero-heading"
                 className="mt-4 font-serif text-[clamp(2.35rem,4.2vw,3.75rem)] font-semibold leading-[1.04] tracking-[-0.02em] text-[#211D1A]"
               >
-                Real Spaces,
-                <br />
-                Lasting{" "}
-                <em className="font-serif italic font-semibold text-[#9B1C1C]">
-                  Impressions
-                </em>
-                .
+                <span className="block">{pageContent?.hero.heading || "Real Spaces,"}</span><em className="block text-[#9B1C1C]">{pageContent?.hero.highlightedText || "Lasting Impressions."}</em>
               </h1>
 
               <p className="mt-4 max-w-[430px] text-[14.5px] leading-[1.65] text-[#6F665E]">
-                {PROJECTS_PAGE_CONTENT.hero.supportingText}
+                {pageContent?.hero.subheading || PROJECTS_PAGE_CONTENT.hero.supportingText}
               </p>
 
               {/* Hero CTAs */}
               <div className="mt-7 flex flex-col gap-3 min-[430px]:flex-row min-[430px]:flex-wrap min-[430px]:items-center min-[430px]:gap-3.5">
                 <a
-                  href="#portfolio-gallery"
+                  href={pageContent?.hero.primaryCta.href || "#portfolio-gallery"}
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#9B1C1C] px-6 py-3.5 text-[13px] font-medium text-[#FAF9F6] shadow-md transition-all duration-200 hover:bg-[#73171B]"
                 >
-                  <span>Explore Projects</span>
+                  <span>{pageContent?.hero.primaryCta.label || "Explore Projects"}</span>
                   <ArrowRight className="h-4 w-4" />
                 </a>
 
@@ -302,12 +394,37 @@ export default function ProjectsPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </FadeUp>
         </Container>
 
         {/* Right Full-Bleed Architectural Interior Stage (Native 1376/768 below editorial on Mobile/Tablet; 73-75% right stage on Desktop so full Crane mural, sofa, coffee table & floor are framed) */}
         <div className="relative w-full lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-[73%] xl:w-[75%]">
-          <div className="relative aspect-[1376/768] min-h-[235px] w-full overflow-hidden lg:aspect-auto lg:h-full">
+          <div
+            style={{ touchAction: "pan-y" }}
+            onTouchStart={(e) => {
+              if (e.touches.length !== 1) return;
+              heroTouchStartRef.current = {
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY,
+              };
+            }}
+            onTouchEnd={(e) => {
+              if (!heroTouchStartRef.current) return;
+              const touch = e.changedTouches[0];
+              if (!touch) return;
+              const dx = touch.clientX - heroTouchStartRef.current.x;
+              const dy = touch.clientY - heroTouchStartRef.current.y;
+              heroTouchStartRef.current = null;
+              if (Math.abs(dx) >= 36 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+                if (dx < 0) {
+                  handleNextHeroSlide();
+                } else {
+                  handlePrevHeroSlide();
+                }
+              }
+            }}
+            className="relative aspect-[1376/768] min-h-[235px] w-full overflow-hidden lg:aspect-auto lg:h-full"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               key={activeHeroSlide.imageUrl}
@@ -319,7 +436,7 @@ export default function ProjectsPage() {
             {/* Seamless Multi-Stop Warm Cream Gradient Blend on Left & Top */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-y-0 left-0 hidden w-60 bg-gradient-to-r from-[#F7F3ED] via-[#F7F3ED]/90 via-38% to-transparent lg:block xl:w-72"
+              className="pointer-events-none absolute inset-y-0 left-0 hidden w-[420px] bg-gradient-to-r from-[#F7F3ED] via-[#F7F3ED]/90 via-38% to-transparent lg:block xl:w-[520px]"
             />
             <div
               aria-hidden="true"
@@ -343,7 +460,7 @@ export default function ProjectsPage() {
             className="absolute right-4 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-end gap-4 lg:flex xl:right-6"
           >
             <div className="relative flex flex-col items-end gap-4 rounded-2xl border border-[#DDD2C5]/85 bg-[#FBF8F3]/92 px-3 py-3 shadow-md backdrop-blur-xs">
-              {PROJECTS_HERO_SLIDES.map((slide, idx) => {
+              {projectHeroSlides.map((slide, idx) => {
                 const isCurrent = idx === heroSlideIndex;
                 return (
                   <button
@@ -381,11 +498,11 @@ export default function ProjectsPage() {
 
           {/* Warm Ivory Project Caption & Controls — Below photo on Mobile/Tablet so furniture is never covered; compact floating card on Desktop */}
           <div className="relative z-20 border-t border-[#DDD2C5]/80 bg-[#FBF8F3] px-4 py-3 text-[#211D1A] sm:px-6 lg:absolute lg:bottom-5 lg:right-6 lg:left-auto lg:min-w-[380px] lg:max-w-[440px] lg:rounded-xl lg:border lg:border-[#DDD2C5] lg:bg-[#FBF8F3]/95 lg:px-4.5 lg:py-3 lg:shadow-[0_16px_36px_rgba(33,29,26,0.15)] lg:backdrop-blur-md">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="min-w-0 flex-1">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="w-full min-w-0 sm:flex-1">
                 <div className="flex items-center gap-2">
                   <Link
-                    href={`/projects/${activeHeroSlide.projectSlug}`}
+                    href={activeHeroSlide.projectSlug ? `/projects/${activeHeroSlide.projectSlug}` : "/projects"}
                     className="font-serif text-base font-semibold leading-snug text-[#211D1A] hover:text-[#9B1C1C] sm:text-lg"
                   >
                     {activeHeroSlide.title}
@@ -401,14 +518,14 @@ export default function ProjectsPage() {
                 </div>
               </div>
 
-              <div className="flex shrink-0 items-center gap-2">
+              <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:shrink-0">
                 {/* Mobile/Tablet 01-04 slide indicators */}
                 <div
                   role="tablist"
                   aria-label="Select project slide"
-                  className="mr-1 flex items-center gap-1.5 lg:hidden"
+                  className="flex items-center gap-1.5 sm:mr-1 lg:hidden"
                 >
-                  {PROJECTS_HERO_SLIDES.map((slide, idx) => {
+                  {projectHeroSlides.map((slide, idx) => {
                     const isCurrent = idx === heroSlideIndex;
                     return (
                       <button
@@ -520,7 +637,7 @@ export default function ProjectsPage() {
 
               <div className="mt-6">
                 <a
-                  href="#portfolio-gallery"
+                  href={pageContent?.hero.primaryCta.href || "#portfolio-gallery"}
                   className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#9B1C1C] transition-colors hover:text-[#211D1A]"
                 >
                   <span>View All Projects</span>
@@ -664,44 +781,60 @@ export default function ProjectsPage() {
                 )}
               </div>
 
-              {/* Mobile & Tablet Swipeable Exhibition Carousel (< lg) */}
-              <div className="flex gap-4 overflow-x-auto pb-3 pt-1 lg:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {exhibitionProjects.map((project) => (
-                  <Link
-                    key={project.id}
-                    href={`/projects/${project.slug}`}
-                    className="group relative aspect-[4/4.3] w-[265px] shrink-0 overflow-hidden rounded-2xl border border-[#E6D5C3]/35 bg-[#261C18] shadow-xl sm:w-[300px]"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={
-                        project.exhibitionImage || project.coverImage.secureUrl
-                      }
-                      alt={project.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#120D0B]/95 via-[#120D0B]/25 to-transparent" />
-                    <div className="absolute left-3.5 top-3.5">
-                      <span className="rounded-full bg-[#991D20] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[#F8F3ED]">
-                        {project.surfaceName}
-                      </span>
-                    </div>
-                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
-                      <div>
-                        <h3 className="font-serif text-xl font-semibold text-[#F8F3ED]">
-                          {project.shortTitle || project.title}
-                        </h3>
-                        <p className="mt-0.5 text-xs text-[#D9C8B5]/80">
-                          {project.recordClassification ||
-                            "Studio Surface Study"}
-                        </p>
+              {/* Mobile & Tablet Swipeable Exhibition Carousel (< lg) — Synchronized with Prev/Next & 01/06 Counter */}
+              <div
+                ref={mobileExhibitionRef}
+                onScroll={handleMobileExhibitionScroll}
+                className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 pt-1 lg:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              >
+                {exhibitionProjects.map((project, idx) => {
+                  const isActiveMobileCard = idx === activeExhibitionIdx;
+                  return (
+                    <Link
+                      key={project.id}
+                      href={`/projects/${project.slug}`}
+                      className={cn(
+                        "group relative aspect-[4/4.3] w-[265px] shrink-0 snap-center overflow-hidden rounded-2xl bg-[#261C18] shadow-xl transition-all duration-300 sm:w-[300px]",
+                        isActiveMobileCard
+                          ? "border-2 border-[#9B1C1C]/85 ring-2 ring-[#9B1C1C]/20"
+                          : "border border-[#E6D5C3]/35 opacity-90"
+                      )}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={
+                          project.exhibitionImage ||
+                          project.coverImage.secureUrl
+                        }
+                        alt={project.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#120D0B]/95 via-[#120D0B]/25 to-transparent" />
+                      <div className="absolute left-3.5 top-3.5 flex items-center gap-1.5">
+                        <span className="rounded-full bg-[#991D20] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-[#F8F3ED]">
+                          {project.surfaceName}
+                        </span>
+                        <span className="rounded-full bg-black/50 px-2 py-0.5 font-mono text-[10px] text-[#EDE4DA] backdrop-blur-xs">
+                          0{idx + 1}
+                        </span>
                       </div>
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/30 bg-white/10 text-[#F8F3ED]">
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
-                    </div>
-                  </Link>
-                ))}
+                      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
+                        <div>
+                          <h3 className="font-serif text-xl font-semibold text-[#F8F3ED]">
+                            {project.shortTitle || project.title}
+                          </h3>
+                          <p className="mt-0.5 text-xs text-[#D9C8B5]/80">
+                            {project.recordClassification ||
+                              "Studio Surface Study"}
+                          </p>
+                        </div>
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/10 text-[#F8F3ED]">
+                          <ArrowRight className="h-4 w-4" />
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 
@@ -902,8 +1035,45 @@ export default function ProjectsPage() {
 
             <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
               {/* Left Column: Large Preview + Selectable Gallery Plates (7 Cols) */}
-              <div className="lg:col-span-7">
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#DED5CB] bg-[#201C1A] shadow-md">
+              <FadeUp className="lg:col-span-7">
+                <div
+                  style={{ touchAction: "pan-y" }}
+                  onTouchStart={(e) => {
+                    if (
+                      signatureProject.galleryMedia.length <= 1 ||
+                      e.touches.length !== 1
+                    ) {
+                      return;
+                    }
+                    signatureTouchStartRef.current = {
+                      x: e.touches[0].clientX,
+                      y: e.touches[0].clientY,
+                    };
+                  }}
+                  onTouchEnd={(e) => {
+                    if (!signatureTouchStartRef.current) return;
+                    const touch = e.changedTouches[0];
+                    if (!touch) return;
+                    const dx = touch.clientX - signatureTouchStartRef.current.x;
+                    const dy = touch.clientY - signatureTouchStartRef.current.y;
+                    signatureTouchStartRef.current = null;
+                    const total = signatureProject.galleryMedia.length;
+                    if (
+                      total > 1 &&
+                      Math.abs(dx) >= 36 &&
+                      Math.abs(dx) > Math.abs(dy) * 1.2
+                    ) {
+                      if (dx < 0) {
+                        setSignatureMediaIdx((prev) => (prev + 1) % total);
+                      } else {
+                        setSignatureMediaIdx(
+                          (prev) => (prev - 1 + total) % total
+                        );
+                      }
+                    }
+                  }}
+                  className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#DED5CB] bg-[#201C1A] shadow-md"
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={
@@ -969,7 +1139,7 @@ export default function ProjectsPage() {
                     })}
                   </div>
                 )}
-              </div>
+              </FadeUp>
 
               {/* Right Column: Editorial Project Narrative & Metadata (5 Cols) */}
               <div className="flex flex-col justify-between lg:col-span-5">

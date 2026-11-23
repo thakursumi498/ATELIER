@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 
+import { usePageContent } from "@/components/layout/PublicContentProvider";
 import React, {
   Suspense,
   useCallback,
@@ -12,6 +13,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { Container } from "@/components/layout/Container";
+import { FadeUp, StaggerContainer, StaggerItem } from "@/components/motion/Reveal";
 import {
   BLOG_DRAFT_CATEGORIES,
   BlogArticleRecord,
@@ -32,6 +34,7 @@ import {
 const INITIAL_GRID_PAGE_SIZE = 3;
 
 function BlogsListingWorkspace() {
+  const pageContent = usePageContent("blogs");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -55,7 +58,9 @@ function BlogsListingWorkspace() {
     INITIAL_GRID_PAGE_SIZE
   );
   const [liveDbArticles, setLiveDbArticles] =
-    useState<ReadonlyArray<BlogArticleRecord> | null>(null);
+    useState<ReadonlyArray<BlogArticleRecord> | null>([
+      ...DEVELOPMENT_BLOG_FIXTURES,
+    ]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -71,12 +76,12 @@ function BlogsListingWorkspace() {
       .then((res) => (res.ok ? res.json() : null))
       .then((payload) => {
         if (!active || !payload) return;
-        if (Array.isArray(payload.articles) && payload.articles.length > 0) {
+        if (Array.isArray(payload.articles)) {
           setLiveDbArticles(payload.articles);
         }
       })
       .catch(() => {
-        // Use fallback DEVELOPMENT_BLOG_FIXTURES
+        // Keep local editorial fixtures visible if the request fails.
       });
     return () => {
       active = false;
@@ -111,7 +116,7 @@ function BlogsListingWorkspace() {
     () =>
       liveDbArticles && liveDbArticles.length > 0
         ? liveDbArticles
-        : DEVELOPMENT_BLOG_FIXTURES,
+        : [],
     [liveDbArticles]
   );
 
@@ -184,7 +189,7 @@ function BlogsListingWorkspace() {
         />
 
         <Container className="relative z-10">
-          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-8">
+          <FadeUp className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-8">
             {/* Left Column (5 cols): Editorial Headline & Supporting Copy */}
             <div className="lg:col-span-5">
               <div className="mb-3.5 flex items-center gap-3">
@@ -193,7 +198,7 @@ function BlogsListingWorkspace() {
                   className="h-[1.5px] w-8 bg-[#9B1C1C]"
                 />
                 <span className="text-[11px] font-bold tracking-[0.22em] text-[#9B1C1C] uppercase">
-                  {BLOGS_PAGE_CONTENT.hero.eyebrow}
+                  {pageContent?.hero.eyebrow || BLOGS_PAGE_CONTENT.hero.eyebrow}
                 </span>
               </div>
 
@@ -202,15 +207,15 @@ function BlogsListingWorkspace() {
                 className="font-serif text-[clamp(2.65rem,4.7vw,4.35rem)] leading-[1.02] font-normal tracking-[-0.02em]"
               >
                 <span className="block text-[#1A1A1A]">
-                  {BLOGS_PAGE_CONTENT.hero.headlineLine1}
+                  {pageContent?.hero.heading || BLOGS_PAGE_CONTENT.hero.headlineLine1}
                 </span>
                 <span className="mt-1 block text-[#9B1C1C]">
-                  {BLOGS_PAGE_CONTENT.hero.headlineLine2}
+                  {pageContent?.hero.highlightedText || BLOGS_PAGE_CONTENT.hero.headlineLine2}
                 </span>
               </h1>
 
               <p className="mt-4 max-w-[38ch] text-[15px] leading-[1.68] text-[#655B54] sm:text-[16px]">
-                {BLOGS_PAGE_CONTENT.hero.supportingText}
+                {pageContent?.hero.subheading || BLOGS_PAGE_CONTENT.hero.supportingText}
               </p>
             </div>
 
@@ -246,7 +251,7 @@ function BlogsListingWorkspace() {
                 </div>
               </div>
             </div>
-          </div>
+          </FadeUp>
         </Container>
       </section>
 
@@ -259,7 +264,10 @@ function BlogsListingWorkspace() {
         className="relative z-20 -mt-8 pb-6 lg:-mt-10"
       >
         <Container>
-          <div className="rounded-[26px] border border-[#DED5CB] bg-[#FAF9F6]/95 p-4 shadow-[0_20px_50px_rgba(26,26,26,0.08)] backdrop-blur-md sm:p-6">
+          <FadeUp
+            delay={0.06}
+            className="rounded-[26px] border border-[#DED5CB] bg-[#FAF9F6]/95 p-4 shadow-[0_20px_50px_rgba(26,26,26,0.08)] backdrop-blur-md sm:p-6"
+          >
             <div className="grid grid-cols-1 items-center gap-4 lg:grid-cols-12 lg:gap-6">
               {/* Left: Search Input (5 cols) */}
               <div className="lg:col-span-5">
@@ -365,7 +373,7 @@ function BlogsListingWorkspace() {
                 </div>
               </div>
             </div>
-          </div>
+          </FadeUp>
         </Container>
       </section>
 
@@ -485,19 +493,19 @@ function BlogsListingWorkspace() {
                   ============================================================= */}
               {visibleGridArticles.length > 0 && (
                 <div>
-                  <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
+                  <StaggerContainer className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
                     {visibleGridArticles.map((post, idx) => {
                       // Center card in the 3-column row gets a subtle magazine highlight border
                       const isCenterFeature = idx === 1;
                       return (
-                        <article
-                          key={post.id}
-                          className={`group flex flex-col justify-between overflow-hidden rounded-[22px] border bg-[#FAF9F6] transition-all duration-300 hover:-translate-y-1.5 ${
-                            isCenterFeature
-                              ? "border-[#9B1C1C]/45 shadow-[0_20px_45px_rgba(115,23,27,0.1)] lg:-translate-y-2"
-                              : "border-[#DED5CB] shadow-[0_14px_34px_rgba(26,26,26,0.06)] hover:border-[#9B1C1C]/45"
-                          }`}
-                        >
+                        <StaggerItem key={post.id}>
+                          <article
+                            className={`group flex h-full flex-col justify-between overflow-hidden rounded-[22px] border bg-[#FAF9F6] transition-all duration-300 hover:-translate-y-1.5 ${
+                              isCenterFeature
+                                ? "border-[#9B1C1C]/45 shadow-[0_20px_45px_rgba(115,23,27,0.1)] lg:-translate-y-2"
+                                : "border-[#DED5CB] shadow-[0_14px_34px_rgba(26,26,26,0.06)] hover:border-[#9B1C1C]/45"
+                            }`}
+                          >
                           <div>
                             <Link
                               href={`/blogs/${post.slug}`}
@@ -555,10 +563,11 @@ function BlogsListingWorkspace() {
                               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                             </Link>
                           </div>
-                        </article>
+                          </article>
+                        </StaggerItem>
                       );
                     })}
-                  </div>
+                  </StaggerContainer>
                 </div>
               )}
             </div>

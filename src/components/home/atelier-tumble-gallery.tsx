@@ -7,10 +7,10 @@ import {
 } from "@/components/ui/tumble-deck-showcase";
 import {
   buildAtelierVaultCategories,
-  type CatalogueCategoryRecord,
-  type CatalogueDesignItem,
   DESIGN_CATEGORY_RECORDS,
   DEVELOPMENT_FIXTURE_DESIGNS,
+  type CatalogueCategoryRecord,
+  type CatalogueDesignItem,
 } from "@/lib/designs-catalogue";
 
 const CATEGORY_SHOWCASE_HEADLINES: Record<string, string> = {
@@ -32,10 +32,10 @@ const CATEGORY_SHOWCASE_HEADLINES: Record<string, string> = {
 export function AtelierTumbleGallery() {
   const [catalogueCategories, setCatalogueCategories] = useState<
     ReadonlyArray<CatalogueCategoryRecord>
-  >(DESIGN_CATEGORY_RECORDS);
+  >([...DESIGN_CATEGORY_RECORDS]);
   const [catalogueDesigns, setCatalogueDesigns] = useState<
     ReadonlyArray<CatalogueDesignItem>
-  >(DEVELOPMENT_FIXTURE_DESIGNS);
+  >([...DEVELOPMENT_FIXTURE_DESIGNS]);
 
   useEffect(() => {
     let cancelled = false;
@@ -45,7 +45,7 @@ export function AtelierTumbleGallery() {
         if (!res.ok) return;
         const data = await res.json();
         if (cancelled) return;
-        if (Array.isArray(data?.categories) && data.categories.length > 0) {
+        if (Array.isArray(data?.categories)) {
           setCatalogueCategories(data.categories);
         }
         const combinedDesigns: CatalogueDesignItem[] = [
@@ -56,7 +56,7 @@ export function AtelierTumbleGallery() {
             ? data.developmentFixtures
             : []),
         ];
-        if (combinedDesigns.length > 0) {
+        if (Array.isArray(data?.approvedClientDesigns)) {
           setCatalogueDesigns(combinedDesigns);
         }
       } catch {
@@ -128,7 +128,7 @@ export function AtelierTumbleGallery() {
     >
       <TumbleDeckShowcase
         cards={tumbleCards}
-        height="calc(100svh - var(--atelier-navbar-offset, 4.75rem))"
+        height="calc(100svh - var(--navbar-height, 74px))"
         aspect={1.62}
         scrollPerCard={240}
         depth={5}

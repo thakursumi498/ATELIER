@@ -1,32 +1,21 @@
 import { NextResponse } from "next/server";
-import { getEnvironmentReadiness } from "@/lib/env";
-import {
-  DESIGN_CATEGORY_RECORDS,
-  DEVELOPMENT_FIXTURE_DESIGNS,
-} from "@/lib/designs-catalogue";
-
-/**
- * GET /api/designs
- * Safe data-access boundary for Page 02 — Explore Designs (`/explore-designs`).
- * Returns the 13 admin-configurable category records, verified client designs
- * (empty array until MongoDB is connected and client uploads approved designs),
- * and explicitly flagged development fixtures for pre-launch QA.
- */
+import { getPublicCategories, getPublicDesigns, getPublicPages } from "@/lib/public-cms";
+export const dynamic = "force-dynamic";
 export async function GET() {
-  const readiness = getEnvironmentReadiness();
-
-  return NextResponse.json({
-    status: "ok",
-    totalCategorySlots: 13,
-    officialCategoryNamesPendingClient: true,
-    readiness: {
-      mongodbConfigured: readiness.mongodbConfigured,
-      cloudinaryConfigured: readiness.cloudinaryConfigured,
-      visualizerUrl: readiness.visualizerUrl,
-    },
-    categories: DESIGN_CATEGORY_RECORDS,
-    approvedClientDesigns: [],
-    developmentFixtures: DEVELOPMENT_FIXTURE_DESIGNS,
-  });
+  try {
+    const [categories, designs, pages] = await Promise.all([getPublicCategories(), getPublicDesigns(), getPublicPages()]);
+    const activeCategories = categories.filter(category => category.isActive);
+    const visibleIds = new Set(activeCategories.map(category => category.id));
+    const visibleDesigns = designs.filter(design => visibleIds.has(design.categoryId));
+    return NextResponse.json({
+      status: "ok",
+      categories: activeCategories,
+      totalCategorySlots: activeCategories.length,
+      approvedClientDesigns: visibleDesigns.filter(design => !design.isDevelopmentFixture),
+      developmentFixtures: visibleDesigns.filter(design => design.isDevelopmentFixture),
+      visualizerPageContent: pages.find(page => page.pageKey === "visualizer") || null,
+    }, { headers: { "Cache-Control": "private, no-store" } });
+  } catch {
+    return NextResponse.json({ error: "The design catalogue is temporarily unavailable." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+  }
 }
-

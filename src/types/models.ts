@@ -1,4 +1,11 @@
 import { z } from "zod";
+import type { HomepageContentConfig } from "@/lib/homepage-content";
+
+export interface LifecycleMetadata {
+  revision?: number;
+  status?: "draft" | "scheduled" | "published" | "archived";
+  publishAt?: string | null;
+}
 
 /**
  * Canonical TypeScript interfaces & Zod validation schemas for all 10 persistent
@@ -38,7 +45,7 @@ export interface AdminUserDocument {
 }
 
 /** 2. DesignCategory (13 Admin-Configurable Slots) */
-export interface DesignCategoryDocument {
+export interface DesignCategoryDocument extends LifecycleMetadata {
   id: string;
   /** Slot 1..13 representing the 13 unified design categories */
   slotNumber: number;
@@ -174,7 +181,7 @@ export interface VerifiedTestimonialItem {
   isVerified: boolean;
 }
 
-export interface PageContentDocument {
+export interface PageContentDocument extends LifecycleMetadata {
   id: string;
   pageKey:
     | "home"
@@ -184,6 +191,7 @@ export interface PageContentDocument {
     | "about"
     | "process"
     | "blogs"
+    | "visualizer"
     | "contact";
   hero: {
     eyebrow: string;
@@ -198,6 +206,8 @@ export interface PageContentDocument {
   processStages?: ProcessStageItem[];
   faqs?: FaqItem[];
   testimonials?: VerifiedTestimonialItem[];
+  homepage?: Partial<HomepageContentConfig>;
+  sections?: Record<string, unknown>;
   seo?: SeoMetadata;
   updatedAt: string;
 }
@@ -222,7 +232,7 @@ export interface BlogPostDocument {
 }
 
 /** 9. Enquiry */
-export type EnquiryStatus = "New" | "Contacted" | "In Progress" | "Closed" | "new";
+export type EnquiryStatus = "New" | "Contacted" | "Follow-up" | "Qualified" | "Converted" | "In Progress" | "Closed" | "new";
 
 export interface EnquiryDocument {
   id: string;
@@ -248,7 +258,7 @@ export interface EnquiryDocument {
 }
 
 /** 10. SiteSettings */
-export interface SiteSettingsDocument {
+export interface SiteSettingsDocument extends LifecycleMetadata {
   id: string;
   singletonKey: "global";
   brandName: string;
@@ -274,6 +284,11 @@ export interface SiteSettingsDocument {
     enableEmbeddedPreview: boolean;
   };
   defaultSeo: SeoMetadata;
+  favicon?: MediaAssetRef | null;
+  footerText?: string;
+  copyrightText?: string;
+  analyticsId?: string;
+  enquiryNotifications?: { enabled: boolean; destinationEmail: string };
   updatedAt: string;
 }
 
@@ -294,7 +309,19 @@ export const enquirySubmissionSchema = z.object({
     .string()
     .trim()
     .min(7, "Please enter a valid contact phone number.")
-    .max(24, "Phone number is too long."),
+    .max(24, "Phone number is too long.")
+    .refine(
+      (val) => {
+        if (!/^\+?[0-9\s\-().]{7,24}$/.test(val)) return false;
+        const digitCount = val.replace(/\D/g, "").length;
+        return digitCount >= 7 && digitCount <= 15;
+      },
+      {
+        message:
+          "Please enter a valid phone number (7–15 digits, with optional country code such as +91).",
+      }
+    )
+    .optional(),
   serviceInterest: z
     .string()
     .trim()

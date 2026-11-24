@@ -27,15 +27,16 @@ import {
   CatalogueCategoryRecord,
   CatalogueDesignItem,
   DESIGN_CATEGORY_RECORDS,
+  DEVELOPMENT_FIXTURE_DESIGNS,
   findDesignBySlugOrId,
-  VISUALIZER_SAMPLE_DESIGNS,
+  mergeManagedCategoryImages,
 } from "@/lib/designs-catalogue";
+import { useManagedCatalogueDesigns, useManagedCatalogueImages } from "@/lib/catalogue-images-client";
 import {
   readStagedDesignFromSession,
   stageDesignForWallVisualizer,
   WallVisionAssetPayload,
 } from "@/lib/visualizer-bridge";
-import { PageContentDocument } from "@/types/models";
 
 function formatVisualizerDisplayTitle(design: CatalogueDesignItem): string {
   return design.title;
@@ -50,58 +51,23 @@ function formatCollectionSlotLabel(slotNumber: number): string {
 }
 
 function VisualizerExperienceWorkspace() {
-  // Synchronize published designs, categories, and optional CMS hero/process copy
-  const [catalogueCategories, setCatalogueCategories] = useState<
-    ReadonlyArray<CatalogueCategoryRecord>
-  >(DESIGN_CATEGORY_RECORDS);
-  const [catalogueDesigns, setCatalogueDesigns] = useState<
-    ReadonlyArray<CatalogueDesignItem>
-  >(VISUALIZER_SAMPLE_DESIGNS);
-  const [isShowingSampleArtwork, setIsShowingSampleArtwork] = useState(true);
-  const [visualizerPageContent, setVisualizerPageContent] =
-    useState<PageContentDocument | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch("/api/designs", { cache: "no-store" });
-        if (!res.ok) return;
-        const data = await res.json();
-        if (cancelled) return;
-        if (Array.isArray(data?.categories)) {
-          setCatalogueCategories(data.categories);
-        }
-        const publishedDesigns: CatalogueDesignItem[] = Array.isArray(
-          data?.approvedClientDesigns
-        )
-          ? data.approvedClientDesigns
-          : [];
-        const sampleDesigns: CatalogueDesignItem[] = Array.isArray(
-          data?.visualizerSamples
-        )
-          ? data.visualizerSamples
-          : VISUALIZER_SAMPLE_DESIGNS;
-        setCatalogueDesigns(
-          publishedDesigns.length > 0 ? publishedDesigns : sampleDesigns
-        );
-        setIsShowingSampleArtwork(publishedDesigns.length === 0);
-        if (data?.visualizerPageContent) {
-          setVisualizerPageContent(data.visualizerPageContent);
-        }
-      } catch {
-        // Retain verified canonical catalogue when offline
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const [managedImages] = useManagedCatalogueImages();
+  const catalogueCategories: ReadonlyArray<CatalogueCategoryRecord> = useMemo(
+    () => managedImages.length ? mergeManagedCategoryImages(DESIGN_CATEGORY_RECORDS, managedImages) : DESIGN_CATEGORY_RECORDS,
+    [managedImages],
+  );
+  const allDesigns = useManagedCatalogueDesigns(DEVELOPMENT_FIXTURE_DESIGNS);
+  const catalogueDesigns: ReadonlyArray<CatalogueDesignItem> = useMemo(() => {
+    const byCategory = new Map<number, CatalogueDesignItem>();
+    for (const design of allDesigns) if (!byCategory.has(design.categorySlotNumber)) byCategory.set(design.categorySlotNumber, design);
+    return [...byCategory.values()];
+  }, [allDesigns]);
+  const isShowingSampleArtwork = true;
 
   if (!catalogueDesigns.length) return <div className="mx-auto max-w-2xl px-5 py-24 text-center"><h1 className="font-serif text-3xl">Choose your wall art</h1><p className="mt-4">No artwork is available to preview right now.</p><Link className="mt-5 inline-block underline" href="/explore-designs">Explore designs</Link></div>;
-  return <VisualizerWithCatalogue catalogueCategories={catalogueCategories} catalogueDesigns={catalogueDesigns} visualizerPageContent={visualizerPageContent} isShowingSampleArtwork={isShowingSampleArtwork} />;
+  return <VisualizerWithCatalogue catalogueCategories={catalogueCategories} catalogueDesigns={catalogueDesigns} isShowingSampleArtwork={isShowingSampleArtwork} />;
 }
-function VisualizerWithCatalogue({ catalogueCategories, catalogueDesigns, visualizerPageContent, isShowingSampleArtwork }: { catalogueCategories: ReadonlyArray<CatalogueCategoryRecord>; catalogueDesigns: ReadonlyArray<CatalogueDesignItem>; visualizerPageContent: PageContentDocument | null; isShowingSampleArtwork: boolean }) {
+function VisualizerWithCatalogue({ catalogueCategories, catalogueDesigns, isShowingSampleArtwork }: { catalogueCategories: ReadonlyArray<CatalogueCategoryRecord>; catalogueDesigns: ReadonlyArray<CatalogueDesignItem>; isShowingSampleArtwork: boolean }) {
   const searchParams = useSearchParams();
 
   const rawDesignParam =
@@ -417,7 +383,6 @@ function VisualizerWithCatalogue({ catalogueCategories, catalogueDesigns, visual
           <VisualizerHero
             selectedDesign={selectedDesign}
             displayTitle={displayTitle}
-            heroContent={visualizerPageContent?.hero}
             activeMode={heroMode}
             activeRoom={activeSampleRoom}
             comparisonMode={comparisonMode}
@@ -435,7 +400,6 @@ function VisualizerWithCatalogue({ catalogueCategories, catalogueDesigns, visual
           />
 
           <VisualizerHowItWorks
-            cmsStages={visualizerPageContent?.processStages}
           />
 
           <HorizontalSelectedArtworkBar

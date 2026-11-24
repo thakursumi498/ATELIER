@@ -102,7 +102,7 @@ export const SAMPLE_ROOM_ELEVATIONS: ReadonlyArray<SampleRoomElevation> = [
     name: "Cream Bedroom Wall",
     shortTitle: "Modern Bedroom",
     subtitle: "Sunlit warm plaster elevation above an upholstered headboard",
-    imageUrl: "/images/atelier/visualizer/visualizer-room-cream-bedroom.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/visualizer-room-cream-bedroom.webp",
     defaultCorners: [
       { x: 0.17, y: 0.085 },
       { x: 0.83, y: 0.085 },
@@ -115,7 +115,7 @@ export const SAMPLE_ROOM_ELEVATIONS: ReadonlyArray<SampleRoomElevation> = [
     name: "Sunlit Living Room Wall",
     shortTitle: "Sunlit Living Room",
     subtitle: "Warm neutral plaster elevation with natural daylight",
-    imageUrl: "/images/atelier/visualizer/visualizer-room-neutral-living.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/visualizer-room-neutral-living.webp",
     defaultCorners: [
       { x: 0.18, y: 0.105 },
       { x: 0.85, y: 0.12 },
@@ -128,7 +128,7 @@ export const SAMPLE_ROOM_ELEVATIONS: ReadonlyArray<SampleRoomElevation> = [
     name: "Dining Space Wall",
     shortTitle: "Dining Space",
     subtitle: "Warm hospitality dining banquette with bare ceramic tile wall",
-    imageUrl: "/images/atelier/projects/tiles-hospitality-before.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-before.webp",
     defaultCorners: [
       { x: 0.08, y: 0.06 },
       { x: 0.74, y: 0.2 },
@@ -141,7 +141,7 @@ export const SAMPLE_ROOM_ELEVATIONS: ReadonlyArray<SampleRoomElevation> = [
     name: "Angled Gallery Corridor",
     shortTitle: "Gallery Corridor",
     subtitle: "Long receding cream wall with architectural skylight",
-    imageUrl: "/images/atelier/visualizer/visualizer-room-angled-gallery.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/visualizer-room-angled-gallery.webp",
     defaultCorners: [
       { x: 0.08, y: 0.1 },
       { x: 0.52, y: 0.27 },
@@ -154,7 +154,7 @@ export const SAMPLE_ROOM_ELEVATIONS: ReadonlyArray<SampleRoomElevation> = [
     name: "Office Lounge Wall",
     shortTitle: "Office Lounge",
     subtitle: "Contemporary architectural lounge with wide bare plaster wall",
-    imageUrl: "/images/atelier/projects/walls-lotus-residence-before.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-before.webp",
     defaultCorners: [
       { x: 0.2, y: 0.1 },
       { x: 0.64, y: 0.1 },

@@ -41,9 +41,11 @@ export async function POST(request: Request) {
     const events = db.collection("email_events");
     await events.createIndex({ providerEventId: 1 }, { unique: true });
     if (await events.findOne({ providerEventId: id })) return privateJson({ ok: true });
-    const update = await db.collection("enquiries").updateOne({ emailProviderId: data.email_id, $or: [{ emailEventAt: { $exists: false } }, { emailEventAt: { $lte: created_at } }] }, { $set: { emailStatus: state, emailEventAt: created_at, emailLastError: state === "failed" ? "The email provider reported a delivery failure." : null } });
+    const enquiries = db.collection("enquiries");
+    const update = await enquiries.updateOne({ emailProviderId: data.email_id, $or: [{ emailEventAt: { $exists: false } }, { emailEventAt: { $lte: created_at } }] }, { $set: { emailStatus: state, emailEventAt: created_at, emailLastError: state === "failed" ? "The email provider reported a delivery failure." : null } });
+    const customerUpdate = update.matchedCount ? null : await enquiries.updateOne({ customerEmailProviderId: data.email_id, $or: [{ customerEmailEventAt: { $exists: false } }, { customerEmailEventAt: { $lte: created_at } }] }, { $set: { customerEmailStatus: state, customerEmailEventAt: created_at, customerEmailLastError: state === "failed" ? "The email provider reported a delivery failure." : null } });
     // A webhook can race the send response; let the provider retry after the provider ID is committed.
-    if (!update.matchedCount && !await db.collection("enquiries").findOne({ emailProviderId: data.email_id })) return privateJson({ ok: false, error: "Notification record is not ready." }, 503);
+    if (!update.matchedCount && !customerUpdate?.matchedCount && !await enquiries.findOne({ $or: [{ emailProviderId: data.email_id }, { customerEmailProviderId: data.email_id }] })) return privateJson({ ok: false, error: "Notification record is not ready." }, 503);
     try { await events.insertOne({ providerEventId: id, type, providerEmailId: data.email_id, createdAt: created_at }); }
     catch (error) { if (!(typeof error === "object" && error && "code" in error && error.code === 11000)) throw error; }
     return privateJson({ ok: true });

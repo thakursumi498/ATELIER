@@ -1,0 +1,4118 @@
+{
+  "summary": {
+    "routesCrawled": 20,
+    "totalImageReferences": 217,
+    "uniqueRenderedSources": 107,
+    "assetFilesOnDisk": 235,
+    "exactDuplicateFileGroups": 0,
+    "possibleVisualDuplicatePairs": 53,
+    "intentionalBeforeAfterPairsRendered": 0,
+    "possibleVisualDuplicatesRendered": 0,
+    "missingAssets": 0,
+    "intentionalSharedReferences": 23,
+    "unresolvedCrossSectionReuse": 0,
+    "nearDuplicateCheck": "dHash via sips"
+  },
+  "crossSection": [],
+  "intentional": [
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/arts-and-entertainment/AE01-01.webp",
+      "contexts": [
+        "/ :: Atelier 3D Wall Art Collection",
+        "/explore-designs :: 12 Worlds of Wall Art."
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/food-and-lifestyle/AE02-01.webp",
+      "contexts": [
+        "/ :: Atelier 3D Wall Art Collection",
+        "/explore-designs :: 12 Worlds of Wall Art."
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "contexts": [
+        "/ :: Atelier 3D Wall Art Collection",
+        "/explore-designs :: 12 Worlds of Wall Art."
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/kids-education/AE05-01.webp",
+      "contexts": [
+        "/ :: Atelier 3D Wall Art Collection",
+        "/explore-designs :: 12 Worlds of Wall Art."
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/motivation/AE07-01.webp",
+      "contexts": [
+        "/ :: Atelier 3D Wall Art Collection",
+        "/explore-designs :: 12 Worlds of Wall Art."
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/nature-and-environment/AE08-01.webp",
+      "contexts": [
+        "/ :: Atelier 3D Wall Art Collection",
+        "/explore-designs :: 12 Worlds of Wall Art."
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/wildlife/AE13-01.webp",
+      "contexts": [
+        "/ :: Atelier 3D Wall Art Collection",
+        "/explore-designs :: 12 Worlds of Wall Art."
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "contexts": [
+        "/ :: Executed Wall & Multi-Surface Installations",
+        "/projects :: Real Spaces,Lasting Impressions.",
+        "/projects :: Spaces WorthRemembering",
+        "/projects :: article",
+        "/projects :: The Story Behind the Surface",
+        "/projects/walls-architectural-elevation-study :: Lotus & Botanical Sanctuary — Residential Wall Study",
+        "/projects/walls-architectural-elevation-study :: 3D Printing on Walls",
+        "/projects/walls-architectural-elevation-study :: Substrate Transformation Preview",
+        "/projects/tiles-architectural-elevation-study :: Lotus & Botanical Sanctuary — Residential Wall Study",
+        "/projects/plywood-architectural-elevation-study :: Lotus & Botanical Sanctuary — Residential Wall Study",
+        "/projects/office-blinds-architectural-elevation-study :: Lotus & Botanical Sanctuary — Residential Wall Study",
+        "/projects/metals-architectural-elevation-study :: Lotus & Botanical Sanctuary — Residential Wall Study",
+        "/projects/glass-architectural-elevation-study :: Lotus & Botanical Sanctuary — Residential Wall Study"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "contexts": [
+        "/ :: Executed Wall & Multi-Surface Installations",
+        "/projects :: Spaces WorthRemembering",
+        "/projects :: article",
+        "/projects/walls-architectural-elevation-study :: Mediterranean Ceramic & Travertine Tile Elevation Study",
+        "/projects/tiles-architectural-elevation-study :: Mediterranean Ceramic & Travertine Tile Elevation Study",
+        "/projects/tiles-architectural-elevation-study :: 3D Printing on Tiles",
+        "/projects/tiles-architectural-elevation-study :: Substrate Transformation Preview",
+        "/projects/plywood-architectural-elevation-study :: Mediterranean Ceramic & Travertine Tile Elevation Study",
+        "/projects/office-blinds-architectural-elevation-study :: Mediterranean Ceramic & Travertine Tile Elevation Study",
+        "/projects/metals-architectural-elevation-study :: Mediterranean Ceramic & Travertine Tile Elevation Study",
+        "/projects/glass-architectural-elevation-study :: Mediterranean Ceramic & Travertine Tile Elevation Study"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "contexts": [
+        "/ :: Executed Wall & Multi-Surface Installations",
+        "/projects :: Spaces WorthRemembering",
+        "/projects :: article",
+        "/projects/walls-architectural-elevation-study :: Sculpted Terracotta Arch & Timber Millwork Study",
+        "/projects/tiles-architectural-elevation-study :: Sculpted Terracotta Arch & Timber Millwork Study",
+        "/projects/plywood-architectural-elevation-study :: Sculpted Terracotta Arch & Timber Millwork Study",
+        "/projects/plywood-architectural-elevation-study :: 3D Printing on Plywood",
+        "/projects/plywood-architectural-elevation-study :: Substrate Transformation Preview",
+        "/projects/office-blinds-architectural-elevation-study :: Sculpted Terracotta Arch & Timber Millwork Study",
+        "/projects/metals-architectural-elevation-study :: Sculpted Terracotta Arch & Timber Millwork Study",
+        "/projects/glass-architectural-elevation-study :: Sculpted Terracotta Arch & Timber Millwork Study"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "contexts": [
+        "/ :: Executed Wall & Multi-Surface Installations",
+        "/projects :: Spaces WorthRemembering",
+        "/projects :: article",
+        "/projects/walls-architectural-elevation-study :: Panoramic Mountain Horizon Study for Office Blinds",
+        "/projects/tiles-architectural-elevation-study :: Panoramic Mountain Horizon Study for Office Blinds",
+        "/projects/plywood-architectural-elevation-study :: Panoramic Mountain Horizon Study for Office Blinds",
+        "/projects/office-blinds-architectural-elevation-study :: Panoramic Mountain Horizon Study for Office Blinds",
+        "/projects/office-blinds-architectural-elevation-study :: 3D Printing on Office Blinds",
+        "/projects/office-blinds-architectural-elevation-study :: Substrate Transformation Preview"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-cover.webp",
+      "contexts": [
+        "/projects :: Spaces WorthRemembering",
+        "/projects :: article",
+        "/projects/metals-architectural-elevation-study :: Brushed Bronze & Metallic Cladding Elevation Study",
+        "/projects/metals-architectural-elevation-study :: 3D Printing on Metals",
+        "/projects/metals-architectural-elevation-study :: Substrate Transformation Preview"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-cover.webp",
+      "contexts": [
+        "/projects :: Spaces WorthRemembering",
+        "/projects :: article",
+        "/projects/glass-architectural-elevation-study :: Botanical Relief & Frosted Glazing Partition Study",
+        "/projects/glass-architectural-elevation-study :: 3D Printing on Glass",
+        "/projects/glass-architectural-elevation-study :: Substrate Transformation Preview"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-detail.webp",
+      "contexts": [
+        "/projects :: The Story Behind the Surface",
+        "/projects/walls-architectural-elevation-study :: Lotus & Botanical Sanctuary — Residential Wall Study",
+        "/projects/walls-architectural-elevation-study :: 3D Printing on Walls"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-direct-to-surface-printing-cover.webp",
+      "contexts": [
+        "/blogs :: Direct-to-Surface 3D Wall Printing: Composing Art Around Interior Arch",
+        "/blogs/direct-to-surface-3d-wall-printing-interior-architecture :: Moving Beyond Seamed Wall Coverings",
+        "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass :: Direct-to-Surface 3D Wall Printing: Composing Art Around Interior Arch",
+        "/blogs/choosing-between-full-wall-murals-and-repeating-patterns :: Direct-to-Surface 3D Wall Printing: Composing Art Around Interior Arch",
+        "/blogs/designing-expressive-workspaces-office-blinds-glass-partitions :: Direct-to-Surface 3D Wall Printing: Composing Art Around Interior Arch"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-six-surfaces-cover.webp",
+      "contexts": [
+        "/blogs :: Six Architectural Surfaces: Extending Wall Art to Tiles, Plywood, Blin",
+        "/blogs/direct-to-surface-3d-wall-printing-interior-architecture :: Six Architectural Surfaces: Extending Wall Art to Tiles, Plywood, Blin",
+        "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass :: Why Surface Continuity Matters in Interior Design",
+        "/blogs/choosing-between-full-wall-murals-and-repeating-patterns :: Six Architectural Surfaces: Extending Wall Art to Tiles, Plywood, Blin",
+        "/blogs/designing-expressive-workspaces-office-blinds-glass-partitions :: Six Architectural Surfaces: Extending Wall Art to Tiles, Plywood, Blin"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-murals-vs-patterns-cover.webp",
+      "contexts": [
+        "/blogs :: Choosing Between Full-Wall Murals and Repeating Architectural Patterns",
+        "/blogs/direct-to-surface-3d-wall-printing-interior-architecture :: Choosing Between Full-Wall Murals and Repeating Architectural Patterns",
+        "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass :: Choosing Between Full-Wall Murals and Repeating Architectural Patterns",
+        "/blogs/choosing-between-full-wall-murals-and-repeating-patterns :: Singular Focal Point vs. Rhythmic Texture",
+        "/blogs/designing-expressive-workspaces-office-blinds-glass-partitions :: Choosing Between Full-Wall Murals and Repeating Architectural Patterns"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-expressive-workspaces-cover.webp",
+      "contexts": [
+        "/blogs :: Designing Calm, Expressive Workspaces with Printed Office Blinds and G",
+        "/blogs/direct-to-surface-3d-wall-printing-interior-architecture :: Designing Calm, Expressive Workspaces with Printed Office Blinds and G",
+        "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass :: Designing Calm, Expressive Workspaces with Printed Office Blinds and G",
+        "/blogs/choosing-between-full-wall-murals-and-repeating-patterns :: Designing Calm, Expressive Workspaces with Printed Office Blinds and G",
+        "/blogs/designing-expressive-workspaces-office-blinds-glass-partitions :: Rethinking Commercial Window Blinds and Glazing"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-detail.webp",
+      "contexts": [
+        "/projects/tiles-architectural-elevation-study :: Mediterranean Ceramic & Travertine Tile Elevation Study",
+        "/projects/tiles-architectural-elevation-study :: 3D Printing on Tiles"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-detail.webp",
+      "contexts": [
+        "/projects/plywood-architectural-elevation-study :: Sculpted Terracotta Arch & Timber Millwork Study",
+        "/projects/plywood-architectural-elevation-study :: 3D Printing on Plywood"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-detail.webp",
+      "contexts": [
+        "/projects/office-blinds-architectural-elevation-study :: Panoramic Mountain Horizon Study for Office Blinds",
+        "/projects/office-blinds-architectural-elevation-study :: 3D Printing on Office Blinds"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-detail.webp",
+      "contexts": [
+        "/projects/metals-architectural-elevation-study :: Brushed Bronze & Metallic Cladding Elevation Study",
+        "/projects/metals-architectural-elevation-study :: 3D Printing on Metals"
+      ]
+    },
+    {
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-detail.webp",
+      "contexts": [
+        "/projects/glass-architectural-elevation-study :: Botanical Relief & Frosted Glazing Partition Study",
+        "/projects/glass-architectural-elevation-study :: 3D Printing on Glass"
+      ]
+    }
+  ],
+  "exactDuplicates": [],
+  "nearDuplicates": [
+    {
+      "a": "/images/atelier/cat-03-textured.jpg",
+      "b": "/images/atelier/cat-textured-plaster.jpg",
+      "distance": 2
+    },
+    {
+      "a": "/images/atelier/cat-05-mineral.jpg",
+      "b": "/images/atelier/cat-mineral-travertine.jpg",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/drive-categories/food-and-lifestyle/AE02-01.webp",
+      "b": "/images/atelier/drive-categories/food-and-lifestyle/AE02-02.webp",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/drive-categories/food-and-lifestyle/AE02-01.webp",
+      "b": "/images/atelier/drive-categories/food-and-lifestyle/AE02-03.webp",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/drive-categories/food-and-lifestyle/AE02-01.webp",
+      "b": "/images/atelier/drive-categories/food-and-lifestyle/AE02-04.webp",
+      "distance": 6
+    },
+    {
+      "a": "/images/atelier/drive-categories/food-and-lifestyle/AE02-02.webp",
+      "b": "/images/atelier/drive-categories/food-and-lifestyle/AE02-03.webp",
+      "distance": 2
+    },
+    {
+      "a": "/images/atelier/drive-categories/food-and-lifestyle/AE02-03.webp",
+      "b": "/images/atelier/drive-categories/food-and-lifestyle/AE02-04.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-01.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-03.webp",
+      "distance": 2
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-01.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-04.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-03.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-04.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-05.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-06.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-05.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-07.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-05.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-09.webp",
+      "distance": 0
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-05.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-10.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-05.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-11.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-06.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-07.webp",
+      "distance": 0
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-06.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-08.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-06.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-09.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-07.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-08.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-07.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-09.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-08.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-10.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-08.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-11.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-09.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-10.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-09.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-11.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/kids-education/AE05-10.webp",
+      "b": "/images/atelier/drive-categories/kids-education/AE05-11.webp",
+      "distance": 0
+    },
+    {
+      "a": "/images/atelier/drive-categories/logo/AE06-02.webp",
+      "b": "/images/atelier/drive-categories/logo/AE06-07.webp",
+      "distance": 4
+    },
+    {
+      "a": "/images/atelier/drive-categories/logo/AE06-03.webp",
+      "b": "/images/atelier/drive-categories/logo/AE06-06.webp",
+      "distance": 0
+    },
+    {
+      "a": "/images/atelier/drive-categories/logo/AE06-04.webp",
+      "b": "/images/atelier/drive-categories/logo/AE06-05.webp",
+      "distance": 2
+    },
+    {
+      "a": "/images/atelier/drive-categories/logo/AE06-04.webp",
+      "b": "/images/atelier/drive-categories/logo/AE06-07.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/motivation/AE07-01.webp",
+      "b": "/images/atelier/drive-categories/motivation/AE07-02.webp",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/drive-categories/motivation/AE07-02.webp",
+      "b": "/images/atelier/drive-categories/motivation/AE07-04.webp",
+      "distance": 6
+    },
+    {
+      "a": "/images/atelier/drive-categories/motivation/AE07-03.webp",
+      "b": "/images/atelier/drive-categories/motivation/AE07-04.webp",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-01.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-02.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-01.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-06.webp",
+      "distance": 0
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-02.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-06.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-03.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-04.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-03.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-05.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-03.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-07.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-04.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-05.webp",
+      "distance": 2
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-04.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-07.webp",
+      "distance": 0
+    },
+    {
+      "a": "/images/atelier/drive-categories/nature-and-environment/AE08-05.webp",
+      "b": "/images/atelier/drive-categories/nature-and-environment/AE08-07.webp",
+      "distance": 2
+    },
+    {
+      "a": "/images/atelier/drive-categories/wildlife/AE13-01.webp",
+      "b": "/images/atelier/drive-categories/wildlife/AE13-03.webp",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/drive-categories/wildlife/AE13-01.webp",
+      "b": "/images/atelier/drive-categories/wildlife/AE13-05.webp",
+      "distance": 0
+    },
+    {
+      "a": "/images/atelier/drive-categories/wildlife/AE13-03.webp",
+      "b": "/images/atelier/drive-categories/wildlife/AE13-05.webp",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/explore-designs/explore-see-it-after-botanical.webp",
+      "b": "/images/atelier/explore-designs/explore-see-it-after-lotus.webp",
+      "distance": 5
+    },
+    {
+      "a": "/images/atelier/explore-designs/explore-see-it-after-botanical.webp",
+      "b": "/images/atelier/explore-designs/explore-see-it-before.webp",
+      "distance": 4
+    },
+    {
+      "a": "/images/atelier/explore-designs/explore-see-it-after-lotus.webp",
+      "b": "/images/atelier/explore-designs/explore-see-it-before.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/hero-poster-frame0.jpg",
+      "b": "/images/atelier-wall-printing-poster.webp",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/projects/blinds-office-before.webp",
+      "b": "/images/atelier/projects/blinds-office-cover.webp",
+      "distance": 6
+    },
+    {
+      "a": "/images/atelier/projects/glass-partition-before.webp",
+      "b": "/images/atelier/projects/glass-partition-cover.webp",
+      "distance": 1
+    },
+    {
+      "a": "/images/atelier/projects/metals-lobby-before.webp",
+      "b": "/images/atelier/projects/metals-lobby-cover.webp",
+      "distance": 3
+    },
+    {
+      "a": "/images/atelier/projects/tiles-hospitality-before.webp",
+      "b": "/images/atelier/projects/tiles-hospitality-cover.webp",
+      "distance": 4
+    },
+    {
+      "a": "/images/atelier/projects/walls-lotus-residence-before.webp",
+      "b": "/images/atelier/projects/walls-lotus-residence-cover.webp",
+      "distance": 1
+    }
+  ],
+  "missing": [],
+  "oddRatios": [
+    {
+      "path": "/images/atelier/about-evolution-plaster-alcove.png",
+      "bytes": 603577,
+      "md5": "db9ec65b3d9d3a466831f5e4db5126ce",
+      "width": 376,
+      "height": 1044,
+      "ratio": 0.36,
+      "dhash": "0000001111100000110000001100000011000000110000001101100011111111"
+    },
+    {
+      "path": "/images/atelier/ref-hero-full.jpg",
+      "bytes": 182844,
+      "md5": "a0fcaee5964901b3c3d8d82be0bfaa4b",
+      "width": 1600,
+      "height": 474,
+      "ratio": 3.376,
+      "dhash": "0111101110111011101110111101101111010011101100111011001110111011"
+    }
+  ],
+  "unusedAssets": [
+    "/images/atelier/about/about-person-saikat-ray.webp",
+    "/images/atelier/about/about-person-triparna-bardhan.webp",
+    "/images/atelier/about-consultation-workspace.jpg",
+    "/images/atelier/about-coordination-workspace.jpg",
+    "/images/atelier/about-evolution-plaster-alcove.png",
+    "/images/atelier/about-harmony-botanical-after.jpg",
+    "/images/atelier/about-hero-crane-dining.jpg",
+    "/images/atelier/about-hero-lotus-arch.jpg",
+    "/images/atelier/about-mumbai-studio-concept.jpg",
+    "/images/atelier/about-philosophy-arch-alcove.jpg",
+    "/images/atelier/about-story-arch-vase.jpg",
+    "/images/atelier/about-story-sculptural-arch.jpg",
+    "/images/atelier/about-story-sketchbook.jpg",
+    "/images/atelier/admin-login-studio-arch.jpg",
+    "/images/atelier/artwork-arch-limestone.jpg",
+    "/images/atelier/artwork-botanical-canopy.jpg",
+    "/images/atelier/artwork-geometric-harmony.jpg",
+    "/images/atelier/artwork-lotus-atelier.jpg",
+    "/images/atelier/artwork-mountain-silhouette.jpg",
+    "/images/atelier/artwork-terracotta-wave.jpg",
+    "/images/atelier/card-01-terracotta-wave.jpg",
+    "/images/atelier/card-02-botanical-canopy.jpg",
+    "/images/atelier/card-03-arch-limestone.jpg",
+    "/images/atelier/card-04-mountain-silhouette.jpg",
+    "/images/atelier/card-05-lotus-atelier.jpg",
+    "/images/atelier/card-06-geometric-harmony.jpg",
+    "/images/atelier/cat-01-botanical.jpg",
+    "/images/atelier/cat-02-geometric.jpg",
+    "/images/atelier/cat-03-textured.jpg",
+    "/images/atelier/cat-04-architectural.jpg",
+    "/images/atelier/cat-05-mineral.jpg",
+    "/images/atelier/cat-06-abstract.jpg",
+    "/images/atelier/cat-mineral-travertine.jpg",
+    "/images/atelier/cat-textured-plaster.jpg",
+    "/images/atelier/contact-hero-lotus-arch.jpg",
+    "/images/atelier/contact-location-arch-plant.jpg",
+    "/images/atelier/contact-studio-dining-mural.jpg",
+    "/images/atelier/detail-03-plywood-boards.jpg",
+    "/images/atelier/drive-categories/arts-and-entertainment/AE01-01.webp",
+    "/images/atelier/drive-categories/food-and-lifestyle/AE02-01.webp",
+    "/images/atelier/drive-categories/food-and-lifestyle/AE02-02.webp",
+    "/images/atelier/drive-categories/food-and-lifestyle/AE02-03.webp",
+    "/images/atelier/drive-categories/food-and-lifestyle/AE02-04.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-01.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-02.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-03.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-04.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-05.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-06.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-07.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-08.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-09.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-10.webp",
+    "/images/atelier/drive-categories/kids-education/AE05-11.webp",
+    "/images/atelier/drive-categories/logo/AE06-01.webp",
+    "/images/atelier/drive-categories/logo/AE06-02.webp",
+    "/images/atelier/drive-categories/logo/AE06-03.webp",
+    "/images/atelier/drive-categories/logo/AE06-04.webp",
+    "/images/atelier/drive-categories/logo/AE06-05.webp",
+    "/images/atelier/drive-categories/logo/AE06-06.webp",
+    "/images/atelier/drive-categories/logo/AE06-07.webp",
+    "/images/atelier/drive-categories/motivation/AE07-01.webp",
+    "/images/atelier/drive-categories/motivation/AE07-02.webp",
+    "/images/atelier/drive-categories/motivation/AE07-03.webp",
+    "/images/atelier/drive-categories/motivation/AE07-04.webp",
+    "/images/atelier/drive-categories/nature-and-environment/AE08-01.webp",
+    "/images/atelier/drive-categories/nature-and-environment/AE08-02.webp",
+    "/images/atelier/drive-categories/nature-and-environment/AE08-03.webp",
+    "/images/atelier/drive-categories/nature-and-environment/AE08-04.webp",
+    "/images/atelier/drive-categories/nature-and-environment/AE08-05.webp",
+    "/images/atelier/drive-categories/nature-and-environment/AE08-06.webp",
+    "/images/atelier/drive-categories/nature-and-environment/AE08-07.webp",
+    "/images/atelier/drive-categories/wildlife/AE13-01.webp",
+    "/images/atelier/drive-categories/wildlife/AE13-02.webp",
+    "/images/atelier/drive-categories/wildlife/AE13-03.webp",
+    "/images/atelier/drive-categories/wildlife/AE13-04.webp",
+    "/images/atelier/drive-categories/wildlife/AE13-05.webp",
+    "/images/atelier/drive-categories/wildlife/AE13-06.webp",
+    "/images/atelier/explore-designs/abstract/crimson-alcove-ochre-study.webp",
+    "/images/atelier/explore-designs/abstract/gallery-tonal-planes-study.webp",
+    "/images/atelier/explore-designs/abstract/siena-abstract-horizon.webp",
+    "/images/atelier/explore-designs/explore-hero-curated-gallery.webp",
+    "/images/atelier/explore-designs/explore-see-it-after-botanical.webp",
+    "/images/atelier/explore-designs/explore-see-it-after-lotus.webp",
+    "/images/atelier/explore-designs/explore-see-it-after-terracotta.webp",
+    "/images/atelier/explore-designs/explore-see-it-before.webp",
+    "/images/atelier/explore-designs/floral-studies/pressed-herbarium-linen-study.webp",
+    "/images/atelier/explore-designs/glass-glazing/fluted-reed-linen-glass-screen.webp",
+    "/images/atelier/explore-designs/glass-glazing/translucent-lotus-glazing-mural.webp",
+    "/images/atelier/explore-designs/landscapes/backlit-dune-valley-horizon.webp",
+    "/images/atelier/explore-designs/landscapes/kyoto-crane-crimson-sun.webp",
+    "/images/atelier/explore-designs/mineral/raw-umber-sandstone-quarry.webp",
+    "/images/atelier/explore-designs/mineral/roman-vein-cut-alabaster.webp",
+    "/images/atelier/explore-designs/plaster-lime/burgundy-lime-alcove-patina.webp",
+    "/images/atelier/explore-designs/plaster-lime/venetian-marmorino-warm-sand.webp",
+    "/images/atelier/explore-designs/textured/raw-travertine-plaster-ribbons.webp",
+    "/images/atelier/explore-designs/textured/sculpted-dune-ochre-relief.webp",
+    "/images/atelier/explore-designs/tile-editions/amalfi-terracotta-tile-arch.webp",
+    "/images/atelier/explore-designs/tile-editions/travertine-lotus-tile-edition.webp",
+    "/images/atelier/explore-designs/timber-metal/nordic-birch-terracotta-millwork.webp",
+    "/images/atelier/explore-designs/window-blinds/architectural-arch-blind-triptych.webp",
+    "/images/atelier/explore-designs/window-blinds/botanical-solar-screen-blind.webp",
+    "/images/atelier/hero-botanical-living.jpg",
+    "/images/atelier/hero-poster-frame0.jpg",
+    "/images/atelier/hero-wall-printer-closeup.jpg",
+    "/images/atelier/hero-wall-printer-wide.jpg",
+    "/images/atelier/home/home-executed-glass-partition.webp",
+    "/images/atelier/home/home-executed-residential-mural.webp",
+    "/images/atelier/home/home-philosophy-blinds.webp",
+    "/images/atelier/home/home-philosophy-glass.webp",
+    "/images/atelier/home/home-philosophy-metals.webp",
+    "/images/atelier/home/home-philosophy-plywood.webp",
+    "/images/atelier/home/home-philosophy-tiles.webp",
+    "/images/atelier/home/home-philosophy-walls.webp",
+    "/images/atelier/home/home-printing-technology-closeup.webp",
+    "/images/atelier/home/home-scroll-3d-wall-printing.webp",
+    "/images/atelier/home/home-scroll-custom-murals.webp",
+    "/images/atelier/home/home-scroll-glass-printing.webp",
+    "/images/atelier/home/home-scroll-office-blind-printing.webp",
+    "/images/atelier/home/home-scroll-plywood-metal-printing.webp",
+    "/images/atelier/home/home-scroll-tile-printing.webp",
+    "/images/atelier/home/home-studio-philosophy.webp",
+    "/images/atelier/home/home-substrate-blinds.webp",
+    "/images/atelier/home/home-substrate-glass.webp",
+    "/images/atelier/home/home-substrate-metals.webp",
+    "/images/atelier/home/home-substrate-plywood.webp",
+    "/images/atelier/home/home-substrate-tiles.webp",
+    "/images/atelier/home/home-substrate-walls.webp",
+    "/images/atelier/home/home-why-atelier-completed-wall.webp",
+    "/images/atelier/journal/journal-catalogue-visualizer-cover.webp",
+    "/images/atelier/journal/journal-direct-to-surface-printing-cover.webp",
+    "/images/atelier/journal/journal-expressive-workspaces-cover.webp",
+    "/images/atelier/journal/journal-murals-vs-patterns-cover.webp",
+    "/images/atelier/journal/journal-seamless-wall-detail.webp",
+    "/images/atelier/journal/journal-six-surfaces-cover.webp",
+    "/images/atelier/journal/journal-surface-continuity.webp",
+    "/images/atelier/journal-divider-still-life.jpg",
+    "/images/atelier/journal-hero-burgundy-alcove.jpg",
+    "/images/atelier/material-universe-sculptural-wall.jpg",
+    "/images/atelier/process/process-brief-checklist.webp",
+    "/images/atelier/process/process-stage-02-design-exploration.webp",
+    "/images/atelier/process/process-stage-03-customization.webp",
+    "/images/atelier/process-hero-idea-to-wall.jpg",
+    "/images/atelier/process-hero-living-arch.jpg",
+    "/images/atelier/process-hero-sculptural-arch.jpg",
+    "/images/atelier/process-stage-01-consultation.jpg",
+    "/images/atelier/process-stage-04-approval.jpg",
+    "/images/atelier/process-stage-05-execution.jpg",
+    "/images/atelier/project-boardroom-relief-wall.jpg",
+    "/images/atelier/project-hero-crane-living.jpg",
+    "/images/atelier/project-retail-terracotta-arch.jpg",
+    "/images/atelier/projects/blinds-office-before.webp",
+    "/images/atelier/projects/blinds-office-cover.webp",
+    "/images/atelier/projects/blinds-office-detail.webp",
+    "/images/atelier/projects/glass-partition-before.webp",
+    "/images/atelier/projects/glass-partition-cover.webp",
+    "/images/atelier/projects/glass-partition-detail.webp",
+    "/images/atelier/projects/hero-mediterranean-tile-hospitality.webp",
+    "/images/atelier/projects/metals-lobby-before.webp",
+    "/images/atelier/projects/metals-lobby-cover.webp",
+    "/images/atelier/projects/metals-lobby-detail.webp",
+    "/images/atelier/projects/plywood-retail-before.webp",
+    "/images/atelier/projects/plywood-retail-cover.webp",
+    "/images/atelier/projects/plywood-retail-detail.webp",
+    "/images/atelier/projects/tiles-hospitality-before.webp",
+    "/images/atelier/projects/tiles-hospitality-cover.webp",
+    "/images/atelier/projects/tiles-hospitality-detail.webp",
+    "/images/atelier/projects/walls-lotus-residence-before.webp",
+    "/images/atelier/projects/walls-lotus-residence-cover.webp",
+    "/images/atelier/projects/walls-lotus-residence-detail.webp",
+    "/images/atelier/ref-hero-botanical.jpg",
+    "/images/atelier/ref-hero-full.jpg",
+    "/images/atelier/service-obj-01-printing.jpg",
+    "/images/atelier/service-obj-02-murals.jpg",
+    "/images/atelier/service-obj-03-conceptual.jpg",
+    "/images/atelier/service-obj-04-customization.jpg",
+    "/images/atelier/services/services-material-blinds-closeup.webp",
+    "/images/atelier/services/services-material-glass-closeup.webp",
+    "/images/atelier/services/services-material-metals-closeup.webp",
+    "/images/atelier/services/services-material-tiles-closeup.webp",
+    "/images/atelier/services/services-real-cafe-terra.webp",
+    "/images/atelier/services/services-real-creative-office.webp",
+    "/images/atelier/services/services-real-executive-boardroom.webp",
+    "/images/atelier/services/services-real-lotus-residence.webp",
+    "/images/atelier/services/services-real-terracotta-boutique.webp",
+    "/images/atelier/services-hero-sculptural-lotus.jpg",
+    "/images/atelier/services-living-canvas-hero.jpg",
+    "/images/atelier/services-living-canvas-wide.jpg",
+    "/images/atelier/services-plaster-sunlight.jpg",
+    "/images/atelier/services-spiral-staircase.jpg",
+    "/images/atelier/slab-01-walls-relief.jpg",
+    "/images/atelier/slab-01-walls.jpg",
+    "/images/atelier/slab-02-tiles.jpg",
+    "/images/atelier/slab-03-plywood.jpg",
+    "/images/atelier/slab-04-office-blinds.jpg",
+    "/images/atelier/slab-05-metals.jpg",
+    "/images/atelier/slab-06-glass.jpg",
+    "/images/atelier/studio-about-interior.jpg",
+    "/images/atelier/surface-glass-interior.jpg",
+    "/images/atelier/surface-metals-brushed-bronze.jpg",
+    "/images/atelier/surface-office-blinds-interior.jpg",
+    "/images/atelier/surface-plywood-metal-interior.jpg",
+    "/images/atelier/surface-tiles-interior.jpg",
+    "/images/atelier/visualizer/phone-camera-wall-preview.webp",
+    "/images/atelier/visualizer/step-01-choose-mode.webp",
+    "/images/atelier/visualizer/step-02-map-your-wall.webp",
+    "/images/atelier/visualizer/step-03-adjust-the-design.webp",
+    "/images/atelier/visualizer/step-04-compare-review.webp",
+    "/images/atelier/visualizer/step-05-save-enquire.webp",
+    "/images/atelier/visualizer/visualizer-hero-limestone-set.webp",
+    "/images/atelier/visualizer/visualizer-room-angled-gallery.webp",
+    "/images/atelier/visualizer/visualizer-room-cream-bedroom.webp",
+    "/images/atelier/visualizer/visualizer-room-neutral-living.webp",
+    "/images/atelier/visualizer-hero-burgundy-alcove.jpg",
+    "/images/atelier/wall-after-scene.jpg",
+    "/images/atelier/wall-before-scene.jpg",
+    "/images/atelier/wall-preview-after.jpg",
+    "/images/atelier/wall-preview-before.jpg",
+    "/images/atelier/wall-preview-matched-after.jpg",
+    "/images/atelier-wall-printing-poster.webp",
+    "/samples/atelier-crimson-relief.svg",
+    "/samples/atelier-fluted-marble.svg",
+    "/samples/atelier-metallic-patina.svg",
+    "/samples/atelier-monolith-grid.svg",
+    "/samples/atelier-philosophy-wall.svg",
+    "/samples/bauhaus-terracotta.svg",
+    "/samples/botanical-atelier.svg",
+    "/samples/kyoto-botanical.svg",
+    "/samples/services/service-01-3d-wall-printing.svg",
+    "/samples/services/service-02-custom-murals.svg",
+    "/samples/services/service-03-tile-printing.svg",
+    "/samples/services/service-04-glass-printing.svg",
+    "/samples/services/service-05-plywood-metal-printing.svg",
+    "/samples/services/service-06-office-blind-printing.svg",
+    "/samples/venetian-travertine.svg"
+  ],
+  "usages": [
+    {
+      "route": "/",
+      "section": "ATELIER — WALL STORY 3D wall printing studio hero",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/images/atelier-wall-printing-poster.webp",
+      "rendered": "1440x826"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-3d-wall-printing.webp",
+      "rendered": "1512x945"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-custom-murals.webp",
+      "rendered": "1512x945"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-tile-printing.webp",
+      "rendered": "1512x945"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-glass-printing.webp",
+      "rendered": "1512x945"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-plywood-metal-printing.webp",
+      "rendered": "1512x945"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-office-blind-printing.webp",
+      "rendered": "1512x945"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-3d-wall-printing.webp",
+      "rendered": "96x52"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-custom-murals.webp",
+      "rendered": "96x52"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-tile-printing.webp",
+      "rendered": "96x52"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-glass-printing.webp",
+      "rendered": "96x52"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-plywood-metal-printing.webp",
+      "rendered": "96x52"
+    },
+    {
+      "route": "/",
+      "section": "Every Surface Has a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-office-blind-printing.webp",
+      "rendered": "96x52"
+    },
+    {
+      "route": "/",
+      "section": "Where Architectural Surfaces Become Canvas for Expressive Art, Texture",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-studio-philosophy.webp",
+      "rendered": "543x508"
+    },
+    {
+      "route": "/",
+      "section": "Where Architectural Surfaces Become Canvas for Expressive Art, Texture",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-walls.webp",
+      "rendered": "543x508"
+    },
+    {
+      "route": "/",
+      "section": "Where Architectural Surfaces Become Canvas for Expressive Art, Texture",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-tiles.webp",
+      "rendered": "543x508"
+    },
+    {
+      "route": "/",
+      "section": "Where Architectural Surfaces Become Canvas for Expressive Art, Texture",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-plywood.webp",
+      "rendered": "543x508"
+    },
+    {
+      "route": "/",
+      "section": "Where Architectural Surfaces Become Canvas for Expressive Art, Texture",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-blinds.webp",
+      "rendered": "543x508"
+    },
+    {
+      "route": "/",
+      "section": "Where Architectural Surfaces Become Canvas for Expressive Art, Texture",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-metals.webp",
+      "rendered": "543x508"
+    },
+    {
+      "route": "/",
+      "section": "Where Architectural Surfaces Become Canvas for Expressive Art, Texture",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-glass.webp",
+      "rendered": "543x508"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/arts-and-entertainment/AE01-01.webp",
+      "rendered": "1240x576"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/food-and-lifestyle/AE02-01.webp",
+      "rendered": "1204x560"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "1171x544"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "1139x529"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/kids-education/AE05-01.webp",
+      "rendered": "1109x515"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/motivation/AE07-01.webp",
+      "rendered": "1080x502"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/nature-and-environment/AE08-01.webp",
+      "rendered": "1053x489"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "1027x477"
+    },
+    {
+      "route": "/",
+      "section": "Atelier 3D Wall Art Collection",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/wildlife/AE13-01.webp",
+      "rendered": "1244x0"
+    },
+    {
+      "route": "/",
+      "section": "Direct-to-Surface 3D Printing Without Seams, Vinyl, or Framing",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-printing-technology-closeup.webp",
+      "rendered": "511x246"
+    },
+    {
+      "route": "/",
+      "section": "Six Architectural Substrates. Direct 3D Printing.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-walls.webp",
+      "rendered": "536x334"
+    },
+    {
+      "route": "/",
+      "section": "Six Architectural Substrates. Direct 3D Printing.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-tiles.webp",
+      "rendered": "547x341"
+    },
+    {
+      "route": "/",
+      "section": "Six Architectural Substrates. Direct 3D Printing.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-plywood.webp",
+      "rendered": "547x341"
+    },
+    {
+      "route": "/",
+      "section": "Six Architectural Substrates. Direct 3D Printing.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-blinds.webp",
+      "rendered": "547x341"
+    },
+    {
+      "route": "/",
+      "section": "Six Architectural Substrates. Direct 3D Printing.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-metals.webp",
+      "rendered": "547x341"
+    },
+    {
+      "route": "/",
+      "section": "Six Architectural Substrates. Direct 3D Printing.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-glass.webp",
+      "rendered": "547x341"
+    },
+    {
+      "route": "/",
+      "section": "Executed Wall & Multi-Surface Installations",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "606x379"
+    },
+    {
+      "route": "/",
+      "section": "Executed Wall & Multi-Surface Installations",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "606x379"
+    },
+    {
+      "route": "/",
+      "section": "Executed Wall & Multi-Surface Installations",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "606x379"
+    },
+    {
+      "route": "/",
+      "section": "Executed Wall & Multi-Surface Installations",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "606x379"
+    },
+    {
+      "route": "/",
+      "section": "An Architectural Approach to Surface Art & Wall Printing",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-why-atelier-completed-wall.webp",
+      "rendered": "510x318"
+    },
+    {
+      "route": "/",
+      "section": "ATELIER — WALL STORY 3D wall printing studio hero",
+      "kind": "poster",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/images/atelier-wall-printing-poster.webp"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "Explore Wall Art Designs Hero",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/explore-designs/explore-hero-curated-gallery.webp",
+      "rendered": "979x825"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/arts-and-entertainment/AE01-01.webp",
+      "rendered": "471x305"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/food-and-lifestyle/AE02-01.webp",
+      "rendered": "569x349"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "573x351"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "573x351"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/kids-education/AE05-01.webp",
+      "rendered": "573x351"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/motivation/AE07-01.webp",
+      "rendered": "573x351"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/nature-and-environment/AE08-01.webp",
+      "rendered": "573x351"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "573x351"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "573x351"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "57x117"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp",
+      "rendered": "195x180"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "12 Worlds of Wall Art.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/designs/categories/wildlife/AE13-01.webp",
+      "rendered": "333x242"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "See It on Your Wall.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/explore-designs/explore-see-it-after-lotus.webp",
+      "rendered": "464x305"
+    },
+    {
+      "route": "/explore-designs",
+      "section": "See It on Your Wall.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/explore-designs/explore-see-it-before.webp",
+      "rendered": "464x305"
+    },
+    {
+      "route": "/projects",
+      "section": "Real Spaces,Lasting Impressions.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "1080x819"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "263x299"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "267x114"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "192x258"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "194x113"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "160x221"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "162x110"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "135x189"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "137x108"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-cover.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/projects",
+      "section": "Spaces WorthRemembering",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-cover.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/projects",
+      "section": "article",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "146x91"
+    },
+    {
+      "route": "/projects",
+      "section": "article",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "161x201"
+    },
+    {
+      "route": "/projects",
+      "section": "article",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "195x121"
+    },
+    {
+      "route": "/projects",
+      "section": "article",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "270x270"
+    },
+    {
+      "route": "/projects",
+      "section": "article",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-cover.webp",
+      "rendered": "334x250"
+    },
+    {
+      "route": "/projects",
+      "section": "article",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-cover.webp",
+      "rendered": "340x212"
+    },
+    {
+      "route": "/projects",
+      "section": "The Story Behind the Surface",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "705x440"
+    },
+    {
+      "route": "/projects",
+      "section": "The Story Behind the Surface",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "164x101"
+    },
+    {
+      "route": "/projects",
+      "section": "The Story Behind the Surface",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-detail.webp",
+      "rendered": "166x103"
+    },
+    {
+      "route": "/services",
+      "section": "Direct-to-Surface Printing Across6 Architectural Substrates",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/services-plaster-sunlight.webp",
+      "rendered": "634x825"
+    },
+    {
+      "route": "/services",
+      "section": "Direct-to-Surface Printing Across6 Architectural Substrates",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/services-living-canvas-hero.webp",
+      "rendered": "886x825"
+    },
+    {
+      "route": "/services",
+      "section": "Direct-to-Surface Printing Across6 Architectural Substrates",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/services-living-canvas-hero.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-01-walls-relief.webp",
+      "rendered": "160x105"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-02-tiles.webp",
+      "rendered": "160x105"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-03-plywood.webp",
+      "rendered": "174x114"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-04-office-blinds.webp",
+      "rendered": "160x105"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-05-metals.webp",
+      "rendered": "160x105"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-06-glass.webp",
+      "rendered": "160x105"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-01-walls.webp",
+      "rendered": "176x140"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-material-tiles-closeup.webp",
+      "rendered": "176x140"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/detail-03-plywood-boards.webp",
+      "rendered": "176x140"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-material-blinds-closeup.webp",
+      "rendered": "176x140"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-material-metals-closeup.webp",
+      "rendered": "176x140"
+    },
+    {
+      "route": "/services",
+      "section": "One Vision.Six Extraordinary Surfaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-material-glass-closeup.webp",
+      "rendered": "176x140"
+    },
+    {
+      "route": "/services",
+      "section": "Where Art Meets Architectural Precision",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/service-obj-01-printing.webp",
+      "rendered": "261x147"
+    },
+    {
+      "route": "/services",
+      "section": "Where Art Meets Architectural Precision",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/service-obj-02-murals.webp",
+      "rendered": "261x147"
+    },
+    {
+      "route": "/services",
+      "section": "Where Art Meets Architectural Precision",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/service-obj-03-conceptual.webp",
+      "rendered": "261x147"
+    },
+    {
+      "route": "/services",
+      "section": "Where Art Meets Architectural Precision",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/service-obj-04-customization.webp",
+      "rendered": "261x147"
+    },
+    {
+      "route": "/services",
+      "section": "Real Spaces, Real Impact.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-real-lotus-residence.webp",
+      "rendered": "280x210"
+    },
+    {
+      "route": "/services",
+      "section": "Real Spaces, Real Impact.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-real-creative-office.webp",
+      "rendered": "280x210"
+    },
+    {
+      "route": "/services",
+      "section": "Real Spaces, Real Impact.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-real-cafe-terra.webp",
+      "rendered": "280x210"
+    },
+    {
+      "route": "/about",
+      "section": "Every WallHas a Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-hero-crane-dining.webp",
+      "rendered": "759x531"
+    },
+    {
+      "route": "/about",
+      "section": "Design. Print. Transform Spaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-story-sculptural-arch.webp",
+      "rendered": "365x505"
+    },
+    {
+      "route": "/about",
+      "section": "Design. Print. Transform Spaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-story-sketchbook.webp",
+      "rendered": "330x276"
+    },
+    {
+      "route": "/about",
+      "section": "The Principles That Guide Us.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-philosophy-arch-alcove.webp",
+      "rendered": "310x468"
+    },
+    {
+      "route": "/about",
+      "section": "Saikat Ray",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-person-saikat-ray.webp",
+      "rendered": "215x164"
+    },
+    {
+      "route": "/about",
+      "section": "Triparna Bardhan",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-person-triparna-bardhan.webp",
+      "rendered": "215x164"
+    },
+    {
+      "route": "/about",
+      "section": "The People Behind ATELIER.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-mumbai-studio-concept.webp",
+      "rendered": "354x205"
+    },
+    {
+      "route": "/about",
+      "section": "A Growing Wall Story.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-evolution-plaster-alcove.webp",
+      "rendered": "156x433"
+    },
+    {
+      "route": "/about",
+      "section": "Beyond the Wall. Into the Space.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/wall-preview-before.webp",
+      "rendered": "277x207"
+    },
+    {
+      "route": "/about",
+      "section": "Beyond the Wall. Into the Space.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-harmony-botanical-after.webp",
+      "rendered": "277x207"
+    },
+    {
+      "route": "/process",
+      "section": "From an Idea to anExtraordinary Wall.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-hero-living-arch.webp",
+      "rendered": "672x514"
+    },
+    {
+      "route": "/process",
+      "section": "Five Stages. One Beautiful Transformation.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-01-consultation.webp",
+      "rendered": "274x215"
+    },
+    {
+      "route": "/process",
+      "section": "Five Stages. One Beautiful Transformation.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-02-design-exploration.webp",
+      "rendered": "232x183"
+    },
+    {
+      "route": "/process",
+      "section": "Five Stages. One Beautiful Transformation.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-03-customization.webp",
+      "rendered": "232x183"
+    },
+    {
+      "route": "/process",
+      "section": "Five Stages. One Beautiful Transformation.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-04-approval.webp",
+      "rendered": "232x183"
+    },
+    {
+      "route": "/process",
+      "section": "Five Stages. One Beautiful Transformation.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-05-execution.webp",
+      "rendered": "232x183"
+    },
+    {
+      "route": "/process",
+      "section": "What to Share for Your First Brief",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-brief-checklist.webp",
+      "rendered": "464x371"
+    },
+    {
+      "route": "/blogs",
+      "section": "IDEAS, ART& INSPIRATION.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal-hero-burgundy-alcove.webp",
+      "rendered": "708x434"
+    },
+    {
+      "route": "/blogs",
+      "section": "Direct-to-Surface 3D Wall Printing: Composing Art Around Interior Arch",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-direct-to-surface-printing-cover.webp",
+      "rendered": "701x438"
+    },
+    {
+      "route": "/blogs",
+      "section": "Six Architectural Surfaces: Extending Wall Art to Tiles, Plywood, Blin",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-six-surfaces-cover.webp",
+      "rendered": "393x258"
+    },
+    {
+      "route": "/blogs",
+      "section": "Choosing Between Full-Wall Murals and Repeating Architectural Patterns",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-murals-vs-patterns-cover.webp",
+      "rendered": "393x258"
+    },
+    {
+      "route": "/blogs",
+      "section": "Designing Calm, Expressive Workspaces with Printed Office Blinds and G",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-expressive-workspaces-cover.webp",
+      "rendered": "393x258"
+    },
+    {
+      "route": "/blogs",
+      "section": "Curated Thoughts for Design-Led Spaces.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal-divider-still-life.webp",
+      "rendered": "516x288"
+    },
+    {
+      "route": "/contact",
+      "section": "Let's Create SomethingRemarkable.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/contact/contact-hero-lotus-arch.webp",
+      "rendered": "893x433"
+    },
+    {
+      "route": "/contact",
+      "section": "Let's Create SomethingRemarkable.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/contact/contact-hero-lotus-arch.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/contact",
+      "section": "Share Your Wall or Surface Brief",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/contact/contact-location-arch-plant.webp",
+      "rendered": "227x228"
+    },
+    {
+      "route": "/contact",
+      "section": "Share Your Wall or Surface Brief",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/contact/contact-studio-dining-mural.webp",
+      "rendered": "512x320"
+    },
+    {
+      "route": "/visualizer",
+      "section": "Visualize the Designin Your Own Space.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/visualizer-hero-limestone-set.webp",
+      "rendered": "1440x641"
+    },
+    {
+      "route": "/visualizer",
+      "section": "Visualize the Designin Your Own Space.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/visualizer-room-cream-bedroom.webp",
+      "rendered": "533x333"
+    },
+    {
+      "route": "/visualizer",
+      "section": "Visualize the Designin Your Own Space.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/phone-camera-wall-preview.webp",
+      "rendered": "124x256"
+    },
+    {
+      "route": "/visualizer",
+      "section": "Visualize the Designin Your Own Space.",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/phone-camera-wall-preview.webp",
+      "rendered": "0x0"
+    },
+    {
+      "route": "/visualizer",
+      "section": "How ItWorks(5 Steps)",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/step-01-choose-mode.webp",
+      "rendered": "150x150"
+    },
+    {
+      "route": "/visualizer",
+      "section": "How ItWorks(5 Steps)",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/step-02-map-your-wall.webp",
+      "rendered": "150x150"
+    },
+    {
+      "route": "/visualizer",
+      "section": "How ItWorks(5 Steps)",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/step-03-adjust-the-design.webp",
+      "rendered": "150x150"
+    },
+    {
+      "route": "/visualizer",
+      "section": "How ItWorks(5 Steps)",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/step-04-compare-review.webp",
+      "rendered": "150x150"
+    },
+    {
+      "route": "/visualizer",
+      "section": "How ItWorks(5 Steps)",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/visualizer/step-05-save-enquire.webp",
+      "rendered": "150x150"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "Lotus & Botanical Sanctuary — Residential Wall Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "1238x696"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "Lotus & Botanical Sanctuary — Residential Wall Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "140x86"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "Lotus & Botanical Sanctuary — Residential Wall Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-detail.webp",
+      "rendered": "142x88"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "3D Printing on Walls",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "3D Printing on Walls",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-detail.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-before.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "Mediterranean Ceramic & Travertine Tile Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "Sculpted Terracotta Arch & Timber Millwork Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/walls-architectural-elevation-study",
+      "section": "Panoramic Mountain Horizon Study for Office Blinds",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "Mediterranean Ceramic & Travertine Tile Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "1238x696"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "Mediterranean Ceramic & Travertine Tile Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "140x86"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "Mediterranean Ceramic & Travertine Tile Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-detail.webp",
+      "rendered": "142x88"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "3D Printing on Tiles",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "3D Printing on Tiles",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-detail.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-before.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "Lotus & Botanical Sanctuary — Residential Wall Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "Sculpted Terracotta Arch & Timber Millwork Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/tiles-architectural-elevation-study",
+      "section": "Panoramic Mountain Horizon Study for Office Blinds",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "Sculpted Terracotta Arch & Timber Millwork Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "1238x696"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "Sculpted Terracotta Arch & Timber Millwork Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "140x86"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "Sculpted Terracotta Arch & Timber Millwork Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-detail.webp",
+      "rendered": "142x88"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "3D Printing on Plywood",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "3D Printing on Plywood",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-detail.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-before.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "Lotus & Botanical Sanctuary — Residential Wall Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "Mediterranean Ceramic & Travertine Tile Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/plywood-architectural-elevation-study",
+      "section": "Panoramic Mountain Horizon Study for Office Blinds",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "Panoramic Mountain Horizon Study for Office Blinds",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "1238x696"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "Panoramic Mountain Horizon Study for Office Blinds",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "140x86"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "Panoramic Mountain Horizon Study for Office Blinds",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-detail.webp",
+      "rendered": "142x88"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "3D Printing on Office Blinds",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "3D Printing on Office Blinds",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-detail.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-before.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/blinds-office-cover.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "Lotus & Botanical Sanctuary — Residential Wall Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "Mediterranean Ceramic & Travertine Tile Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/office-blinds-architectural-elevation-study",
+      "section": "Sculpted Terracotta Arch & Timber Millwork Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "Brushed Bronze & Metallic Cladding Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-cover.webp",
+      "rendered": "1238x696"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "Brushed Bronze & Metallic Cladding Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-cover.webp",
+      "rendered": "140x86"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "Brushed Bronze & Metallic Cladding Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-detail.webp",
+      "rendered": "142x88"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "3D Printing on Metals",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-cover.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "3D Printing on Metals",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-detail.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-before.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/metals-lobby-cover.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "Lotus & Botanical Sanctuary — Residential Wall Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "Mediterranean Ceramic & Travertine Tile Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/metals-architectural-elevation-study",
+      "section": "Sculpted Terracotta Arch & Timber Millwork Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "Botanical Relief & Frosted Glazing Partition Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-cover.webp",
+      "rendered": "1238x696"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "Botanical Relief & Frosted Glazing Partition Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-cover.webp",
+      "rendered": "140x86"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "Botanical Relief & Frosted Glazing Partition Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-detail.webp",
+      "rendered": "142x88"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "3D Printing on Glass",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-cover.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "3D Printing on Glass",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-detail.webp",
+      "rendered": "342x256"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-before.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "Substrate Transformation Preview",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/glass-partition-cover.webp",
+      "rendered": "655x408"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "Lotus & Botanical Sanctuary — Residential Wall Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/walls-lotus-residence-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "Mediterranean Ceramic & Travertine Tile Elevation Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/tiles-hospitality-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/projects/glass-architectural-elevation-study",
+      "section": "Sculpted Terracotta Arch & Timber Millwork Study",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/projects/plywood-retail-cover.webp",
+      "rendered": "395x298"
+    },
+    {
+      "route": "/blogs/direct-to-surface-3d-wall-printing-interior-architecture",
+      "section": "Moving Beyond Seamed Wall Coverings",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-direct-to-surface-printing-cover.webp",
+      "rendered": "894x531"
+    },
+    {
+      "route": "/blogs/direct-to-surface-3d-wall-printing-interior-architecture",
+      "section": "Moving Beyond Seamed Wall Coverings",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-seamless-wall-detail.webp",
+      "rendered": "794x497"
+    },
+    {
+      "route": "/blogs/direct-to-surface-3d-wall-printing-interior-architecture",
+      "section": "Six Architectural Surfaces: Extending Wall Art to Tiles, Plywood, Blin",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-six-surfaces-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/direct-to-surface-3d-wall-printing-interior-architecture",
+      "section": "Choosing Between Full-Wall Murals and Repeating Architectural Patterns",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-murals-vs-patterns-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/direct-to-surface-3d-wall-printing-interior-architecture",
+      "section": "Designing Calm, Expressive Workspaces with Printed Office Blinds and G",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-expressive-workspaces-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass",
+      "section": "Why Surface Continuity Matters in Interior Design",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-six-surfaces-cover.webp",
+      "rendered": "894x531"
+    },
+    {
+      "route": "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass",
+      "section": "Why Surface Continuity Matters in Interior Design",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-surface-continuity.webp",
+      "rendered": "794x497"
+    },
+    {
+      "route": "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass",
+      "section": "Direct-to-Surface 3D Wall Printing: Composing Art Around Interior Arch",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-direct-to-surface-printing-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass",
+      "section": "Choosing Between Full-Wall Murals and Repeating Architectural Patterns",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-murals-vs-patterns-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/six-architectural-surfaces-tiles-plywood-blinds-metals-glass",
+      "section": "Designing Calm, Expressive Workspaces with Printed Office Blinds and G",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-expressive-workspaces-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/choosing-between-full-wall-murals-and-repeating-patterns",
+      "section": "Singular Focal Point vs. Rhythmic Texture",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-murals-vs-patterns-cover.webp",
+      "rendered": "894x531"
+    },
+    {
+      "route": "/blogs/choosing-between-full-wall-murals-and-repeating-patterns",
+      "section": "Direct-to-Surface 3D Wall Printing: Composing Art Around Interior Arch",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-direct-to-surface-printing-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/choosing-between-full-wall-murals-and-repeating-patterns",
+      "section": "Six Architectural Surfaces: Extending Wall Art to Tiles, Plywood, Blin",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-six-surfaces-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/choosing-between-full-wall-murals-and-repeating-patterns",
+      "section": "Designing Calm, Expressive Workspaces with Printed Office Blinds and G",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-expressive-workspaces-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/designing-expressive-workspaces-office-blinds-glass-partitions",
+      "section": "Rethinking Commercial Window Blinds and Glazing",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-expressive-workspaces-cover.webp",
+      "rendered": "894x531"
+    },
+    {
+      "route": "/blogs/designing-expressive-workspaces-office-blinds-glass-partitions",
+      "section": "Direct-to-Surface 3D Wall Printing: Composing Art Around Interior Arch",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-direct-to-surface-printing-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/designing-expressive-workspaces-office-blinds-glass-partitions",
+      "section": "Six Architectural Surfaces: Extending Wall Art to Tiles, Plywood, Blin",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-six-surfaces-cover.webp",
+      "rendered": "395x247"
+    },
+    {
+      "route": "/blogs/designing-expressive-workspaces-office-blinds-glass-partitions",
+      "section": "Choosing Between Full-Wall Murals and Repeating Architectural Patterns",
+      "kind": "img",
+      "src": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal/journal-murals-vs-patterns-cover.webp",
+      "rendered": "395x247"
+    }
+  ],
+  "assets": [
+    {
+      "path": "/images/atelier/about/about-person-saikat-ray.webp",
+      "bytes": 77442,
+      "md5": "74d68ec339e2aff6042dc762c729e538",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/about/about-person-triparna-bardhan.webp",
+      "bytes": 72650,
+      "md5": "5a885da0a6659e6320055e4415c94994",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/about-consultation-workspace.jpg",
+      "bytes": 730846,
+      "md5": "359d78ff6b074295cece68bb63b41ce7",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/about-coordination-workspace.jpg",
+      "bytes": 702784,
+      "md5": "824602377dd21f7412d9747f4ed0c5fd",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/about-evolution-plaster-alcove.png",
+      "bytes": 603577,
+      "md5": "db9ec65b3d9d3a466831f5e4db5126ce",
+      "width": 376,
+      "height": 1044,
+      "ratio": 0.36
+    },
+    {
+      "path": "/images/atelier/about-harmony-botanical-after.jpg",
+      "bytes": 728652,
+      "md5": "ab52106a3721687476ff55d344a6172f",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/about-hero-crane-dining.jpg",
+      "bytes": 336079,
+      "md5": "7ed90fc9b6583a0a9d9fa20d1d00d8a5",
+      "width": 1920,
+      "height": 1080,
+      "ratio": 1.778
+    },
+    {
+      "path": "/images/atelier/about-hero-lotus-arch.jpg",
+      "bytes": 780480,
+      "md5": "74ca0de0344fb80127f2a924b980378c",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/about-mumbai-studio-concept.jpg",
+      "bytes": 856885,
+      "md5": "8836925fb2ae00e1eee8199277406763",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/about-philosophy-arch-alcove.jpg",
+      "bytes": 122293,
+      "md5": "8a57ad371579fdd51fc3ee6c120edada",
+      "width": 620,
+      "height": 966,
+      "ratio": 0.642
+    },
+    {
+      "path": "/images/atelier/about-story-arch-vase.jpg",
+      "bytes": 780103,
+      "md5": "d2018c99e97f290efd47085204f0de5b",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/about-story-sculptural-arch.jpg",
+      "bytes": 635517,
+      "md5": "dec58485607ffc5b7af7629ebf65c140",
+      "width": 896,
+      "height": 1200,
+      "ratio": 0.747
+    },
+    {
+      "path": "/images/atelier/about-story-sketchbook.jpg",
+      "bytes": 831541,
+      "md5": "3203830088c9552db6d57c4212f1169d",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/admin-login-studio-arch.jpg",
+      "bytes": 695725,
+      "md5": "afaaba3cfea533e04fc7555c9e7867ff",
+      "width": 896,
+      "height": 1200,
+      "ratio": 0.747
+    },
+    {
+      "path": "/images/atelier/artwork-arch-limestone.jpg",
+      "bytes": 230096,
+      "md5": "afebcb40b8b9e77e5dfcad669341a454",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/artwork-botanical-canopy.jpg",
+      "bytes": 193740,
+      "md5": "6d894fd8431f12a0368934814b7390ea",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/artwork-geometric-harmony.jpg",
+      "bytes": 163327,
+      "md5": "ad43ecde3a500abfdce0a7c786dd8813",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/artwork-lotus-atelier.jpg",
+      "bytes": 202567,
+      "md5": "5f11534448b26370513a0354d1c72783",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/artwork-mountain-silhouette.jpg",
+      "bytes": 212383,
+      "md5": "fd5dafcabb45a25635c37f680b50ff64",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/artwork-terracotta-wave.jpg",
+      "bytes": 200678,
+      "md5": "4e8168154f674458b32ced3c9b2bf52d",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/card-01-terracotta-wave.jpg",
+      "bytes": 58535,
+      "md5": "51ec7637eaeb57cca493bead25c1b0cc",
+      "width": 960,
+      "height": 434,
+      "ratio": 2.212
+    },
+    {
+      "path": "/images/atelier/card-02-botanical-canopy.jpg",
+      "bytes": 63728,
+      "md5": "c3866490f7a27d6c56cfe8752b60f21f",
+      "width": 960,
+      "height": 434,
+      "ratio": 2.212
+    },
+    {
+      "path": "/images/atelier/card-03-arch-limestone.jpg",
+      "bytes": 53565,
+      "md5": "e3f5c55305f34e4bde3a0139796c501d",
+      "width": 960,
+      "height": 434,
+      "ratio": 2.212
+    },
+    {
+      "path": "/images/atelier/card-04-mountain-silhouette.jpg",
+      "bytes": 59431,
+      "md5": "f9eb9114af8fa2a80794f2390f62724a",
+      "width": 960,
+      "height": 434,
+      "ratio": 2.212
+    },
+    {
+      "path": "/images/atelier/card-05-lotus-atelier.jpg",
+      "bytes": 70162,
+      "md5": "21dddab34c603ca8c590faf3b6f27004",
+      "width": 960,
+      "height": 434,
+      "ratio": 2.212
+    },
+    {
+      "path": "/images/atelier/card-06-geometric-harmony.jpg",
+      "bytes": 53645,
+      "md5": "9b4e76c6a70409aa571e98eb545a7725",
+      "width": 960,
+      "height": 434,
+      "ratio": 2.212
+    },
+    {
+      "path": "/images/atelier/cat-01-botanical.jpg",
+      "bytes": 24074,
+      "md5": "9754706d26a1e7cfff56040a301e6164",
+      "width": 400,
+      "height": 400,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/cat-02-geometric.jpg",
+      "bytes": 24706,
+      "md5": "80830a5830f18554dbf2897f9ce834bf",
+      "width": 400,
+      "height": 400,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/cat-03-textured.jpg",
+      "bytes": 43362,
+      "md5": "f56216eedb8d2fcca863960dccc2e67f",
+      "width": 400,
+      "height": 400,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/cat-04-architectural.jpg",
+      "bytes": 12372,
+      "md5": "e6bc99a11698c43112859dd553f24805",
+      "width": 400,
+      "height": 400,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/cat-05-mineral.jpg",
+      "bytes": 63977,
+      "md5": "1c14b74436cdc407722b5fd28cbed5ed",
+      "width": 400,
+      "height": 400,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/cat-06-abstract.jpg",
+      "bytes": 17179,
+      "md5": "7956e22e91586e31a48a4817efc6c5ea",
+      "width": 400,
+      "height": 400,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/cat-mineral-travertine.jpg",
+      "bytes": 211853,
+      "md5": "2a9cfafc5372b23dcbc9ff34a24d90e3",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/cat-textured-plaster.jpg",
+      "bytes": 147258,
+      "md5": "70c0959be0dade0383a463184d797650",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/contact-hero-lotus-arch.jpg",
+      "bytes": 691923,
+      "md5": "307b356d2d9511e62b803861d84747fc",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/contact-location-arch-plant.jpg",
+      "bytes": 101400,
+      "md5": "89ddbb90bda1a033e3d0afcf79c75d46",
+      "width": 760,
+      "height": 896,
+      "ratio": 0.848
+    },
+    {
+      "path": "/images/atelier/contact-studio-dining-mural.jpg",
+      "bytes": 918137,
+      "md5": "bc88cd5072cf2faffc184d5b69971040",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/detail-03-plywood-boards.jpg",
+      "bytes": 97317,
+      "md5": "1aef441f61ec7bd2b5f05315eaaf3fc7",
+      "width": 960,
+      "height": 720,
+      "ratio": 1.333
+    },
+    {
+      "path": "/images/atelier/drive-categories/arts-and-entertainment/AE01-01.webp",
+      "bytes": 75970,
+      "md5": "35e8b3b4c3aff976dfa8a1cbca56d181",
+      "width": 1449,
+      "height": 1920,
+      "ratio": 0.755
+    },
+    {
+      "path": "/images/atelier/drive-categories/food-and-lifestyle/AE02-01.webp",
+      "bytes": 378482,
+      "md5": "88fe2caaa249dd8a9daa8b491d008744",
+      "width": 1478,
+      "height": 1920,
+      "ratio": 0.77
+    },
+    {
+      "path": "/images/atelier/drive-categories/food-and-lifestyle/AE02-02.webp",
+      "bytes": 351126,
+      "md5": "15e090611dbb83d8fb95ff3ea02c5a02",
+      "width": 1478,
+      "height": 1920,
+      "ratio": 0.77
+    },
+    {
+      "path": "/images/atelier/drive-categories/food-and-lifestyle/AE02-03.webp",
+      "bytes": 369388,
+      "md5": "5d52c931001c30bb1d6194df6503c6f8",
+      "width": 1477,
+      "height": 1920,
+      "ratio": 0.769
+    },
+    {
+      "path": "/images/atelier/drive-categories/food-and-lifestyle/AE02-04.webp",
+      "bytes": 280356,
+      "md5": "3e1bb0fdb4a75a250039b2e0644f3dc5",
+      "width": 1356,
+      "height": 1920,
+      "ratio": 0.706
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-01.webp",
+      "bytes": 376680,
+      "md5": "09f6299006610649e80285dcae4f0712",
+      "width": 1920,
+      "height": 1187,
+      "ratio": 1.618
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-02.webp",
+      "bytes": 410488,
+      "md5": "4e73150915c4b0725788fa8932c8e09a",
+      "width": 1920,
+      "height": 1186,
+      "ratio": 1.619
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-03.webp",
+      "bytes": 321014,
+      "md5": "cd46b79152d0fc98ec12a48506a8d391",
+      "width": 1920,
+      "height": 1186,
+      "ratio": 1.619
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-04.webp",
+      "bytes": 329218,
+      "md5": "fcb5893b00a05e8496f132465b96d9df",
+      "width": 1920,
+      "height": 1186,
+      "ratio": 1.619
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-05.webp",
+      "bytes": 189884,
+      "md5": "b87c0ab6ad7cf8fb434eafb49904e0a2",
+      "width": 1478,
+      "height": 1920,
+      "ratio": 0.77
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-06.webp",
+      "bytes": 198682,
+      "md5": "f098820fce2c7389334148fd55261225",
+      "width": 1478,
+      "height": 1920,
+      "ratio": 0.77
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-07.webp",
+      "bytes": 159340,
+      "md5": "dda78147c37bc927631cefea63e61349",
+      "width": 1477,
+      "height": 1920,
+      "ratio": 0.769
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-08.webp",
+      "bytes": 161292,
+      "md5": "067bf1f6241bd89e857f7dea64f7718f",
+      "width": 1477,
+      "height": 1920,
+      "ratio": 0.769
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-09.webp",
+      "bytes": 155732,
+      "md5": "d73c01354dc8a0022780306b0e83e7fe",
+      "width": 1477,
+      "height": 1920,
+      "ratio": 0.769
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-10.webp",
+      "bytes": 158108,
+      "md5": "a3afad1a14053330ad0d3fc3d1d1da5f",
+      "width": 1477,
+      "height": 1920,
+      "ratio": 0.769
+    },
+    {
+      "path": "/images/atelier/drive-categories/kids-education/AE05-11.webp",
+      "bytes": 169106,
+      "md5": "74f79bef0fc081400b6a04639e702e5c",
+      "width": 1478,
+      "height": 1920,
+      "ratio": 0.77
+    },
+    {
+      "path": "/images/atelier/drive-categories/logo/AE06-01.webp",
+      "bytes": 82586,
+      "md5": "9998db1209a906af7b597bb49c7e005a",
+      "width": 1536,
+      "height": 1024,
+      "ratio": 1.5
+    },
+    {
+      "path": "/images/atelier/drive-categories/logo/AE06-02.webp",
+      "bytes": 20984,
+      "md5": "eaa5d919eb7ef3e46499f893fbfb4228",
+      "width": 1920,
+      "height": 1920,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/drive-categories/logo/AE06-03.webp",
+      "bytes": 14022,
+      "md5": "e11d688d69302d064898cf41121f7a09",
+      "width": 1920,
+      "height": 1920,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/drive-categories/logo/AE06-04.webp",
+      "bytes": 11788,
+      "md5": "ab05e76d0e3ff20961e744e9afbecb73",
+      "width": 1920,
+      "height": 1920,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/drive-categories/logo/AE06-05.webp",
+      "bytes": 21988,
+      "md5": "5cd4adea5f49228f90f49ba61a6b33aa",
+      "width": 1920,
+      "height": 1920,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/drive-categories/logo/AE06-06.webp",
+      "bytes": 12900,
+      "md5": "4492657fc2c0af662291163e84e5d9ad",
+      "width": 1920,
+      "height": 1920,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/drive-categories/logo/AE06-07.webp",
+      "bytes": 20734,
+      "md5": "19ed6b4c29f5b424c46255d411f16d6d",
+      "width": 1920,
+      "height": 1920,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/drive-categories/motivation/AE07-01.webp",
+      "bytes": 254812,
+      "md5": "2e2b2768ff096a8ef9180d8ac952c6f9",
+      "width": 1525,
+      "height": 1920,
+      "ratio": 0.794
+    },
+    {
+      "path": "/images/atelier/drive-categories/motivation/AE07-02.webp",
+      "bytes": 216528,
+      "md5": "1152a83a58285c55c205b72a8b0251da",
+      "width": 1525,
+      "height": 1920,
+      "ratio": 0.794
+    },
+    {
+      "path": "/images/atelier/drive-categories/motivation/AE07-03.webp",
+      "bytes": 171918,
+      "md5": "72d0225582660b5052f7adb9080df37b",
+      "width": 1356,
+      "height": 1920,
+      "ratio": 0.706
+    },
+    {
+      "path": "/images/atelier/drive-categories/motivation/AE07-04.webp",
+      "bytes": 171478,
+      "md5": "a3753605e6ebce1ec1c49040b779494c",
+      "width": 1356,
+      "height": 1920,
+      "ratio": 0.706
+    },
+    {
+      "path": "/images/atelier/drive-categories/nature-and-environment/AE08-01.webp",
+      "bytes": 122826,
+      "md5": "e168ba6ce6c1401c5e735a34b226e8ae",
+      "width": 1449,
+      "height": 1920,
+      "ratio": 0.755
+    },
+    {
+      "path": "/images/atelier/drive-categories/nature-and-environment/AE08-02.webp",
+      "bytes": 124878,
+      "md5": "47a180a59efa35f7442f02acd3db3afc",
+      "width": 1449,
+      "height": 1920,
+      "ratio": 0.755
+    },
+    {
+      "path": "/images/atelier/drive-categories/nature-and-environment/AE08-03.webp",
+      "bytes": 326232,
+      "md5": "867332551c9bfd90eeed58d803f22c36",
+      "width": 1449,
+      "height": 1920,
+      "ratio": 0.755
+    },
+    {
+      "path": "/images/atelier/drive-categories/nature-and-environment/AE08-04.webp",
+      "bytes": 248672,
+      "md5": "8b32b2fbff2cfa23e56711482369f8c4",
+      "width": 1449,
+      "height": 1920,
+      "ratio": 0.755
+    },
+    {
+      "path": "/images/atelier/drive-categories/nature-and-environment/AE08-05.webp",
+      "bytes": 253756,
+      "md5": "d52563b8eea6d5fb01d202807c7b4658",
+      "width": 1449,
+      "height": 1920,
+      "ratio": 0.755
+    },
+    {
+      "path": "/images/atelier/drive-categories/nature-and-environment/AE08-06.webp",
+      "bytes": 145684,
+      "md5": "af763037a578fb49256cddbce18ed767",
+      "width": 1449,
+      "height": 1920,
+      "ratio": 0.755
+    },
+    {
+      "path": "/images/atelier/drive-categories/nature-and-environment/AE08-07.webp",
+      "bytes": 355278,
+      "md5": "5b8685206f7a7c4e203cda9adc15d9fa",
+      "width": 1449,
+      "height": 1920,
+      "ratio": 0.755
+    },
+    {
+      "path": "/images/atelier/drive-categories/wildlife/AE13-01.webp",
+      "bytes": 165982,
+      "md5": "d550e087fadcad6374a24e14ddca3cdd",
+      "width": 1071,
+      "height": 1920,
+      "ratio": 0.558
+    },
+    {
+      "path": "/images/atelier/drive-categories/wildlife/AE13-02.webp",
+      "bytes": 298894,
+      "md5": "64ed829a81fd0b6e526f7b91eb5db7c8",
+      "width": 1072,
+      "height": 1920,
+      "ratio": 0.558
+    },
+    {
+      "path": "/images/atelier/drive-categories/wildlife/AE13-03.webp",
+      "bytes": 171806,
+      "md5": "1adcd120b4515cae25c733501d31ca56",
+      "width": 1071,
+      "height": 1920,
+      "ratio": 0.558
+    },
+    {
+      "path": "/images/atelier/drive-categories/wildlife/AE13-04.webp",
+      "bytes": 31770,
+      "md5": "483c8568a9be22628a268d2fe51d7cb4",
+      "width": 1920,
+      "height": 1536,
+      "ratio": 1.25
+    },
+    {
+      "path": "/images/atelier/drive-categories/wildlife/AE13-05.webp",
+      "bytes": 223512,
+      "md5": "3a34dcc71c7921e53617e1c1fbcccfbf",
+      "width": 1072,
+      "height": 1920,
+      "ratio": 0.558
+    },
+    {
+      "path": "/images/atelier/drive-categories/wildlife/AE13-06.webp",
+      "bytes": 182976,
+      "md5": "3604ee840652dc6c60b46a50486f4658",
+      "width": 1920,
+      "height": 1536,
+      "ratio": 1.25
+    },
+    {
+      "path": "/images/atelier/explore-designs/abstract/crimson-alcove-ochre-study.webp",
+      "bytes": 109758,
+      "md5": "9d54e156b8c5440149053221a95da9c5",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/abstract/gallery-tonal-planes-study.webp",
+      "bytes": 37730,
+      "md5": "62be129930c106b1722a5bdd91959d53",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/abstract/siena-abstract-horizon.webp",
+      "bytes": 103502,
+      "md5": "5d9665a320a5317c3b7e15f23183553d",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/explore-hero-curated-gallery.webp",
+      "bytes": 54086,
+      "md5": "0a43dfaf95542080750234f8336dfa8c",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/explore-designs/explore-see-it-after-botanical.webp",
+      "bytes": 87632,
+      "md5": "4d947f78ccb2d7e3832839f4575e6097",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/explore-designs/explore-see-it-after-lotus.webp",
+      "bytes": 56116,
+      "md5": "47c1ffd61902480214d1fbf94e952b19",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/explore-designs/explore-see-it-after-terracotta.webp",
+      "bytes": 67670,
+      "md5": "e0821c94831fcacd4908296a25fb0727",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/explore-designs/explore-see-it-before.webp",
+      "bytes": 34094,
+      "md5": "1c0a1a17268d836ecac466c2a9c4b411",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/explore-designs/floral-studies/pressed-herbarium-linen-study.webp",
+      "bytes": 137542,
+      "md5": "09359ef74a8c67ac2d7d4d3d8d86f489",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/glass-glazing/fluted-reed-linen-glass-screen.webp",
+      "bytes": 63310,
+      "md5": "a4456b5831dc2c7183db91e55825de9c",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/glass-glazing/translucent-lotus-glazing-mural.webp",
+      "bytes": 147472,
+      "md5": "5c9072817b4d016bfcc1d5086ad03bfe",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/landscapes/backlit-dune-valley-horizon.webp",
+      "bytes": 74716,
+      "md5": "7d869649c9e2fede2dfe604e47b1b1ad",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/landscapes/kyoto-crane-crimson-sun.webp",
+      "bytes": 116056,
+      "md5": "91fd193b30173487eff981e21573d6be",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/mineral/raw-umber-sandstone-quarry.webp",
+      "bytes": 120366,
+      "md5": "7a6c1fa67cee337700cb7b5e0244d724",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/mineral/roman-vein-cut-alabaster.webp",
+      "bytes": 69578,
+      "md5": "68c8457d5cbab8168a4afbdea405e771",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/plaster-lime/burgundy-lime-alcove-patina.webp",
+      "bytes": 62190,
+      "md5": "2fbdb6b26e3754ebd53f25d09bda10df",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/plaster-lime/venetian-marmorino-warm-sand.webp",
+      "bytes": 43186,
+      "md5": "5dc50ab806c8a626b0d15e53aef5bf20",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/textured/raw-travertine-plaster-ribbons.webp",
+      "bytes": 145826,
+      "md5": "1ce00e92182d80b9ed3c3c150b1b04ee",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/textured/sculpted-dune-ochre-relief.webp",
+      "bytes": 166782,
+      "md5": "ad4b63fb4de8a38e3887479007a393e4",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/tile-editions/amalfi-terracotta-tile-arch.webp",
+      "bytes": 104084,
+      "md5": "3653264eb7819e9ea3ee36135b08a7ea",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/tile-editions/travertine-lotus-tile-edition.webp",
+      "bytes": 98204,
+      "md5": "141e0db509d589867fe5563cad1a5ace",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/timber-metal/nordic-birch-terracotta-millwork.webp",
+      "bytes": 97400,
+      "md5": "9f0786286e735d4ca717f14b99f60ab5",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/window-blinds/architectural-arch-blind-triptych.webp",
+      "bytes": 112066,
+      "md5": "83abf3fca7b2098de0cbcc949579bcb4",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/explore-designs/window-blinds/botanical-solar-screen-blind.webp",
+      "bytes": 123668,
+      "md5": "bd87d689f1cea2a5b8d8399d8981d723",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/hero-botanical-living.jpg",
+      "bytes": 292505,
+      "md5": "e1f35c8040c12ff83ca8c0d2c1e636f6",
+      "width": 1145,
+      "height": 768,
+      "ratio": 1.491
+    },
+    {
+      "path": "/images/atelier/hero-poster-frame0.jpg",
+      "bytes": 180610,
+      "md5": "d5d6c3f6cdb12f5826c71f11ecc25b2b",
+      "width": 1280,
+      "height": 720,
+      "ratio": 1.778
+    },
+    {
+      "path": "/images/atelier/hero-wall-printer-closeup.jpg",
+      "bytes": 751802,
+      "md5": "60e78086b05cba760994e29addd00225",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/hero-wall-printer-wide.jpg",
+      "bytes": 810056,
+      "md5": "223d0c6df1b45b3c18f22042490caefd",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-executed-glass-partition.webp",
+      "bytes": 167670,
+      "md5": "431c6375d44ab4c450f52d3af3f95e76",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-executed-residential-mural.webp",
+      "bytes": 159622,
+      "md5": "607b43e35eab312d65d1d7f94ab25244",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-philosophy-blinds.webp",
+      "bytes": 67276,
+      "md5": "173d787e60748e0cbb033d8657002b27",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/home/home-philosophy-glass.webp",
+      "bytes": 136650,
+      "md5": "f5cf48654fee75c77dcde5c55c2d89af",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/home/home-philosophy-metals.webp",
+      "bytes": 78878,
+      "md5": "0bea1034b40cb0a7cfe964cd74fb5c84",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/home/home-philosophy-plywood.webp",
+      "bytes": 120216,
+      "md5": "5142fb4b1e12306eac082cf02919bf0f",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/home/home-philosophy-tiles.webp",
+      "bytes": 123370,
+      "md5": "5c95fff0485c3e0284f91f19c3f25de3",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/home/home-philosophy-walls.webp",
+      "bytes": 82636,
+      "md5": "6c51ff1e1948765f6c03e48f151f0d19",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/home/home-printing-technology-closeup.webp",
+      "bytes": 66114,
+      "md5": "292db457775897c5ac10bffc52ed85ac",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-scroll-3d-wall-printing.webp",
+      "bytes": 85838,
+      "md5": "158c874bf48ec4244fe2416d7e77fa50",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-scroll-custom-murals.webp",
+      "bytes": 100676,
+      "md5": "ff1c99e7c4254e2613f0dbcc267b28e2",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-scroll-glass-printing.webp",
+      "bytes": 132718,
+      "md5": "834be6c9c7b1b8497557fd4379030f7e",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-scroll-office-blind-printing.webp",
+      "bytes": 97920,
+      "md5": "712dee285c3e2f4211e1ae6625681e5d",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-scroll-plywood-metal-printing.webp",
+      "bytes": 124556,
+      "md5": "22e0932a12fb9f45890336506acfda6a",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-scroll-tile-printing.webp",
+      "bytes": 139876,
+      "md5": "3ae5ea309d8a27687dc756b109f280fd",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-studio-philosophy.webp",
+      "bytes": 135084,
+      "md5": "123f0b55393c6e148a8a9ab6a5fc3edf",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/home/home-substrate-blinds.webp",
+      "bytes": 58296,
+      "md5": "b8aa7d3964b620f9a4ba5aba1e0897bd",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-substrate-glass.webp",
+      "bytes": 115854,
+      "md5": "529ed9c9b912ac33d2b987b834d38e5f",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-substrate-metals.webp",
+      "bytes": 129804,
+      "md5": "c30a899a2ccf8223ef2161947029cffa",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-substrate-plywood.webp",
+      "bytes": 56586,
+      "md5": "979b8f23c1e57a348584932711bc9ef4",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-substrate-tiles.webp",
+      "bytes": 51846,
+      "md5": "78eb8a8ab8e3fb3b506b9a969fdc0c4e",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-substrate-walls.webp",
+      "bytes": 87992,
+      "md5": "72ef92a5333f68871a72f63085085edf",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/home/home-why-atelier-completed-wall.webp",
+      "bytes": 101106,
+      "md5": "38df26778e210b66d5b20f9ad2a92ba3",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal/journal-catalogue-visualizer-cover.webp",
+      "bytes": 43538,
+      "md5": "76249af3fd6710e60458fe01a72429d0",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal/journal-direct-to-surface-printing-cover.webp",
+      "bytes": 102942,
+      "md5": "cab15a68f07830a3ec21d353cb04f9d4",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal/journal-expressive-workspaces-cover.webp",
+      "bytes": 127166,
+      "md5": "673f0287995a17c9cd1a10d81e62c584",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal/journal-murals-vs-patterns-cover.webp",
+      "bytes": 159918,
+      "md5": "28465e2664669bb6d8aad6b7594d35b6",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal/journal-seamless-wall-detail.webp",
+      "bytes": 90078,
+      "md5": "70f08f90132ef139b523fa491c39c165",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal/journal-six-surfaces-cover.webp",
+      "bytes": 163560,
+      "md5": "5d9cde58a713519cae6d0d1dcb7120f3",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal/journal-surface-continuity.webp",
+      "bytes": 68586,
+      "md5": "54580a6cbe09c4390161338fcb1f9421",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal-divider-still-life.jpg",
+      "bytes": 690135,
+      "md5": "c0035d0731cb98b9cbbe6d9bf834c14c",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/journal-hero-burgundy-alcove.jpg",
+      "bytes": 696111,
+      "md5": "eba5e1c4eab0edf55054290ed57fa604",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/material-universe-sculptural-wall.jpg",
+      "bytes": 109945,
+      "md5": "e81033e04824b45a6efc5a0fad39305b",
+      "width": 1920,
+      "height": 1000,
+      "ratio": 1.92
+    },
+    {
+      "path": "/images/atelier/process/process-brief-checklist.webp",
+      "bytes": 144502,
+      "md5": "b71dd4d85a46b1306dc099e1f93722d9",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/process/process-stage-02-design-exploration.webp",
+      "bytes": 117748,
+      "md5": "721e2b0e52ddb642a3c47d9cb04182d8",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/process/process-stage-03-customization.webp",
+      "bytes": 88590,
+      "md5": "f42dad04edcf7fe5141bb360d5f6a4d9",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/process-hero-idea-to-wall.jpg",
+      "bytes": 297343,
+      "md5": "d5d0413996dedda2cc4f31c2dc5e5cb2",
+      "width": 1357,
+      "height": 868,
+      "ratio": 1.563
+    },
+    {
+      "path": "/images/atelier/process-hero-living-arch.jpg",
+      "bytes": 169907,
+      "md5": "90b817f2499ee5c3e1a65a204eedadfe",
+      "width": 1004,
+      "height": 768,
+      "ratio": 1.307
+    },
+    {
+      "path": "/images/atelier/process-hero-sculptural-arch.jpg",
+      "bytes": 729660,
+      "md5": "4bad2fd2e9ebd2e4dba694466980b8ae",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/process-stage-01-consultation.jpg",
+      "bytes": 755926,
+      "md5": "5ae2675e22535b27ab528bf376f35dc8",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/process-stage-04-approval.jpg",
+      "bytes": 862553,
+      "md5": "01d628be32da3b0324214995352c466b",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/process-stage-05-execution.jpg",
+      "bytes": 818668,
+      "md5": "66b0ceb69f8947b8dfcdb679f322496f",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/project-boardroom-relief-wall.jpg",
+      "bytes": 824774,
+      "md5": "870d3cec74e0b9c56245d6d2562abc4e",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/project-hero-crane-living.jpg",
+      "bytes": 827074,
+      "md5": "ffb050a540e92793f8505c1b6fcc10cd",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/project-retail-terracotta-arch.jpg",
+      "bytes": 942024,
+      "md5": "389b4b4ddc31addfe7f0d59666623e0a",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/projects/blinds-office-before.webp",
+      "bytes": 73876,
+      "md5": "6a77fdcba4ff2567e0a7732540ad5e7f",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/blinds-office-cover.webp",
+      "bytes": 80372,
+      "md5": "e59f3623d4a2ac72f88fa20704b6d7c2",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/blinds-office-detail.webp",
+      "bytes": 154122,
+      "md5": "20d2af568f7fc6286349ea0fa9bc81d7",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/glass-partition-before.webp",
+      "bytes": 75124,
+      "md5": "d6a0d023f4b61e807a9525e78b56b368",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/glass-partition-cover.webp",
+      "bytes": 116874,
+      "md5": "0438355029717961b7f9f7c1476cbbaa",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/glass-partition-detail.webp",
+      "bytes": 61486,
+      "md5": "7864885a9a0e8f60b80b040c26f9ade6",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/hero-mediterranean-tile-hospitality.webp",
+      "bytes": 150374,
+      "md5": "b24d275a997c52f9978bf4826c13a326",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/projects/metals-lobby-before.webp",
+      "bytes": 98098,
+      "md5": "d583f76cd6acf7bf69f905a28d884db3",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/metals-lobby-cover.webp",
+      "bytes": 121070,
+      "md5": "8f23dd4c59003e7f8d330e0929ddbfe4",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/metals-lobby-detail.webp",
+      "bytes": 81770,
+      "md5": "7d898e536baf67d4b9c1beac25bd8776",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/plywood-retail-before.webp",
+      "bytes": 54712,
+      "md5": "3284ee07ae35c1df3b4531649c4f277d",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/plywood-retail-cover.webp",
+      "bytes": 78198,
+      "md5": "ce31552b86003944f4e8c51b558e85da",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/plywood-retail-detail.webp",
+      "bytes": 63130,
+      "md5": "96c302cd3ff7d9dcf2a3114d9fa12b82",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/tiles-hospitality-before.webp",
+      "bytes": 77808,
+      "md5": "48152db802fca615d33bad7ef5c5e035",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/tiles-hospitality-cover.webp",
+      "bytes": 126656,
+      "md5": "4b22f1d6bed580d0688bed6397eedb92",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/tiles-hospitality-detail.webp",
+      "bytes": 63564,
+      "md5": "49c17fa7d1c9c83ba8272cd658d72f74",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/walls-lotus-residence-before.webp",
+      "bytes": 93618,
+      "md5": "a057c8d72939e8807c5150cdb21b2e49",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/walls-lotus-residence-cover.webp",
+      "bytes": 110294,
+      "md5": "69cd9e6fb4ea135d94b0c068b62c5728",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/projects/walls-lotus-residence-detail.webp",
+      "bytes": 93636,
+      "md5": "a8b35dd5d8d3e7736d6271c7d15fc424",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/ref-hero-botanical.jpg",
+      "bytes": 160732,
+      "md5": "0e371efb07dfcfd0ba8f54439bbf452d",
+      "width": 1250,
+      "height": 606,
+      "ratio": 2.063
+    },
+    {
+      "path": "/images/atelier/ref-hero-full.jpg",
+      "bytes": 182844,
+      "md5": "a0fcaee5964901b3c3d8d82be0bfaa4b",
+      "width": 1600,
+      "height": 474,
+      "ratio": 3.376
+    },
+    {
+      "path": "/images/atelier/service-obj-01-printing.jpg",
+      "bytes": 85354,
+      "md5": "220da001cb8ea17044ef0a882ff8d8a3",
+      "width": 1280,
+      "height": 720,
+      "ratio": 1.778
+    },
+    {
+      "path": "/images/atelier/service-obj-02-murals.jpg",
+      "bytes": 136927,
+      "md5": "6c17eba5fc546e6bfa7c29fb52ef17a6",
+      "width": 1280,
+      "height": 720,
+      "ratio": 1.778
+    },
+    {
+      "path": "/images/atelier/service-obj-03-conceptual.jpg",
+      "bytes": 104434,
+      "md5": "2d9fb210032924aec28ec724550b0b3d",
+      "width": 1280,
+      "height": 720,
+      "ratio": 1.778
+    },
+    {
+      "path": "/images/atelier/service-obj-04-customization.jpg",
+      "bytes": 110852,
+      "md5": "0e60ad898e44ffffb89bd6e89c1e35a2",
+      "width": 1280,
+      "height": 720,
+      "ratio": 1.778
+    },
+    {
+      "path": "/images/atelier/services/services-material-blinds-closeup.webp",
+      "bytes": 117228,
+      "md5": "d3d7c3c6dde60f9903ae5761c37506ce",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services/services-material-glass-closeup.webp",
+      "bytes": 77722,
+      "md5": "aed8ac40cf78ea7846694c6faa409d26",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services/services-material-metals-closeup.webp",
+      "bytes": 78620,
+      "md5": "fa2ec8966087b92618a16bcd2c488379",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services/services-material-tiles-closeup.webp",
+      "bytes": 70624,
+      "md5": "7feef9d0b8e737f76728bdac02e8f1e1",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services/services-real-cafe-terra.webp",
+      "bytes": 103732,
+      "md5": "baf29fe8db2c192122848af37aad4550",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services/services-real-creative-office.webp",
+      "bytes": 106346,
+      "md5": "7549c6132fee416c482587cc8248ec1b",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services/services-real-executive-boardroom.webp",
+      "bytes": 140966,
+      "md5": "49ca7537af0bf8906388b8cdf88b0ce5",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services/services-real-lotus-residence.webp",
+      "bytes": 83464,
+      "md5": "9ca261f08f6e3fc805abcd912dd58a08",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services/services-real-terracotta-boutique.webp",
+      "bytes": 86012,
+      "md5": "849c0be73caf61e9933c0adf43264c8f",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/services-hero-sculptural-lotus.jpg",
+      "bytes": 783678,
+      "md5": "2a8d34f576ef52fe470ff90de09a804a",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/services-living-canvas-hero.jpg",
+      "bytes": 189257,
+      "md5": "343679b47bbd371294c41e9072b271e5",
+      "width": 850,
+      "height": 768,
+      "ratio": 1.107
+    },
+    {
+      "path": "/images/atelier/services-living-canvas-wide.jpg",
+      "bytes": 239327,
+      "md5": "6d428293101062effe9446634dda189c",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/services-plaster-sunlight.jpg",
+      "bytes": 27530,
+      "md5": "120cfffde1ec5f08e867e536ee91c479",
+      "width": 468,
+      "height": 768,
+      "ratio": 0.609
+    },
+    {
+      "path": "/images/atelier/services-spiral-staircase.jpg",
+      "bytes": 642967,
+      "md5": "b472e1c5d42c57a201c7e7034bf40690",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/slab-01-walls-relief.jpg",
+      "bytes": 68582,
+      "md5": "539d471a0c45714bcf5251029e067cd6",
+      "width": 720,
+      "height": 580,
+      "ratio": 1.241
+    },
+    {
+      "path": "/images/atelier/slab-01-walls.jpg",
+      "bytes": 314053,
+      "md5": "be73cb14638dc60a52605079c6d5cd14",
+      "width": 900,
+      "height": 1600,
+      "ratio": 0.563
+    },
+    {
+      "path": "/images/atelier/slab-02-tiles.jpg",
+      "bytes": 276872,
+      "md5": "19a826c0b0bb1820c909a1178dc66345",
+      "width": 900,
+      "height": 1600,
+      "ratio": 0.563
+    },
+    {
+      "path": "/images/atelier/slab-03-plywood.jpg",
+      "bytes": 296339,
+      "md5": "7cb95f13fd4c48997b71b2cc0b2be65c",
+      "width": 900,
+      "height": 1600,
+      "ratio": 0.563
+    },
+    {
+      "path": "/images/atelier/slab-04-office-blinds.jpg",
+      "bytes": 176495,
+      "md5": "9ac78f7a86026bd1ee614bf4247da021",
+      "width": 900,
+      "height": 1600,
+      "ratio": 0.563
+    },
+    {
+      "path": "/images/atelier/slab-05-metals.jpg",
+      "bytes": 227530,
+      "md5": "8d4da71b12f358f974ea25aca1c01100",
+      "width": 900,
+      "height": 1600,
+      "ratio": 0.563
+    },
+    {
+      "path": "/images/atelier/slab-06-glass.jpg",
+      "bytes": 275571,
+      "md5": "89b657dcb66d05f28f0e9116fc044fe9",
+      "width": 900,
+      "height": 1600,
+      "ratio": 0.563
+    },
+    {
+      "path": "/images/atelier/studio-about-interior.jpg",
+      "bytes": 248311,
+      "md5": "e450da6fc3da573949894ae4a5ae87ef",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/surface-glass-interior.jpg",
+      "bytes": 187518,
+      "md5": "6f9391b5249e82ccd7980369afcb558f",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/surface-metals-brushed-bronze.jpg",
+      "bytes": 643390,
+      "md5": "2ed0c9e53fbe5f39c134ceca25c94972",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/surface-office-blinds-interior.jpg",
+      "bytes": 191698,
+      "md5": "0fd75fdfb8b25e95f1d8bdca463f8dbd",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/surface-plywood-metal-interior.jpg",
+      "bytes": 181331,
+      "md5": "6cc0887cba402fc74acf1c49806dfa40",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/surface-tiles-interior.jpg",
+      "bytes": 228176,
+      "md5": "9f33cbc707a0ae896082801e27c7f818",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/visualizer/phone-camera-wall-preview.webp",
+      "bytes": 19508,
+      "md5": "872a8087177018b58d58a42688d84c89",
+      "width": 600,
+      "height": 1080,
+      "ratio": 0.556
+    },
+    {
+      "path": "/images/atelier/visualizer/step-01-choose-mode.webp",
+      "bytes": 15132,
+      "md5": "be28a10df3681d8bfa66d320126a2e9d",
+      "width": 800,
+      "height": 800,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/visualizer/step-02-map-your-wall.webp",
+      "bytes": 10168,
+      "md5": "f10155500309035c3b9cb6e9411b47b8",
+      "width": 800,
+      "height": 800,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/visualizer/step-03-adjust-the-design.webp",
+      "bytes": 40116,
+      "md5": "e7d300d6615a616c38387d5d91e2b96d",
+      "width": 800,
+      "height": 800,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/visualizer/step-04-compare-review.webp",
+      "bytes": 21640,
+      "md5": "9d315f1b7ade64e17a9f8df0b347c58f",
+      "width": 800,
+      "height": 800,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/visualizer/step-05-save-enquire.webp",
+      "bytes": 13308,
+      "md5": "9fbb03a3618c49b9eba805a63216a360",
+      "width": 800,
+      "height": 800,
+      "ratio": 1
+    },
+    {
+      "path": "/images/atelier/visualizer/visualizer-hero-limestone-set.webp",
+      "bytes": 33876,
+      "md5": "4bae1ccf6fc32355d4f9acf77c071737",
+      "width": 1920,
+      "height": 980,
+      "ratio": 1.959
+    },
+    {
+      "path": "/images/atelier/visualizer/visualizer-room-angled-gallery.webp",
+      "bytes": 27616,
+      "md5": "5a25bd388d5d94044ce3dea150abf989",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/visualizer/visualizer-room-cream-bedroom.webp",
+      "bytes": 47022,
+      "md5": "159c9ad9469ff402d4998630d90f3493",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/visualizer/visualizer-room-neutral-living.webp",
+      "bytes": 51078,
+      "md5": "c16a5fc45f652e5a8890b709ecbe97c5",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/visualizer-hero-burgundy-alcove.jpg",
+      "bytes": 603565,
+      "md5": "2816a1c938b3fab2e3bddb9addd3e735",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/wall-after-scene.jpg",
+      "bytes": 83884,
+      "md5": "9274c673ed821f14b9a4cfae17fd3843",
+      "width": 900,
+      "height": 520,
+      "ratio": 1.731
+    },
+    {
+      "path": "/images/atelier/wall-before-scene.jpg",
+      "bytes": 38099,
+      "md5": "7ce839047e3e29ea2db9c9e68055a18c",
+      "width": 900,
+      "height": 520,
+      "ratio": 1.731
+    },
+    {
+      "path": "/images/atelier/wall-preview-after.jpg",
+      "bytes": 207934,
+      "md5": "6f3dbc1d3f7c6c41d4df7daf1e36d6ff",
+      "width": 1376,
+      "height": 768,
+      "ratio": 1.792
+    },
+    {
+      "path": "/images/atelier/wall-preview-before.jpg",
+      "bytes": 120989,
+      "md5": "eac30079a5a6d69e0cd515b043abc3be",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier/wall-preview-matched-after.jpg",
+      "bytes": 227687,
+      "md5": "bb83512ab67dc323b521a08a381c5051",
+      "width": 1200,
+      "height": 896,
+      "ratio": 1.339
+    },
+    {
+      "path": "/images/atelier-wall-printing-poster.webp",
+      "bytes": 57834,
+      "md5": "721232563146fbc6866b02646ecfbbe7",
+      "width": 1280,
+      "height": 720,
+      "ratio": 1.778
+    },
+    {
+      "path": "/samples/atelier-crimson-relief.svg",
+      "bytes": 653,
+      "md5": "de52d8144626052295612b86ee72e57e"
+    },
+    {
+      "path": "/samples/atelier-fluted-marble.svg",
+      "bytes": 1656,
+      "md5": "33aef57e6b43642b4b49c40b22cac382"
+    },
+    {
+      "path": "/samples/atelier-metallic-patina.svg",
+      "bytes": 1547,
+      "md5": "6742eae5d26806306b37619553e32c25"
+    },
+    {
+      "path": "/samples/atelier-monolith-grid.svg",
+      "bytes": 713,
+      "md5": "21cc2ad955ae39c473b706d87a87d715"
+    },
+    {
+      "path": "/samples/atelier-philosophy-wall.svg",
+      "bytes": 1417,
+      "md5": "1df12ea27d23d228d823be3b887b743e"
+    },
+    {
+      "path": "/samples/bauhaus-terracotta.svg",
+      "bytes": 1683,
+      "md5": "e5ce6f2f022aa8b9af73830df68b3ebf"
+    },
+    {
+      "path": "/samples/botanical-atelier.svg",
+      "bytes": 5044,
+      "md5": "5ba599510d8f4fd84453df8761a20dbc"
+    },
+    {
+      "path": "/samples/kyoto-botanical.svg",
+      "bytes": 625,
+      "md5": "b7bc26445e45bf3b05dc4caf1a8a1ca6"
+    },
+    {
+      "path": "/samples/services/service-01-3d-wall-printing.svg",
+      "bytes": 3856,
+      "md5": "5572cfba3c63853eb0ea286d99959230"
+    },
+    {
+      "path": "/samples/services/service-02-custom-murals.svg",
+      "bytes": 2658,
+      "md5": "7569cbcaa044b701422c91d895eab097"
+    },
+    {
+      "path": "/samples/services/service-03-tile-printing.svg",
+      "bytes": 2358,
+      "md5": "f50b3c499d0c0845f171a5f3bffa9d87"
+    },
+    {
+      "path": "/samples/services/service-04-glass-printing.svg",
+      "bytes": 2313,
+      "md5": "4052f9ed94b0518a00a6314baf59b31c"
+    },
+    {
+      "path": "/samples/services/service-05-plywood-metal-printing.svg",
+      "bytes": 2660,
+      "md5": "3e90c337e96868b992fc7c13a1011898"
+    },
+    {
+      "path": "/samples/services/service-06-office-blind-printing.svg",
+      "bytes": 2853,
+      "md5": "24d6c9a398811fb5d6a57325c4c86f01"
+    },
+    {
+      "path": "/samples/venetian-travertine.svg",
+      "bytes": 2970,
+      "md5": "4229c2d07231aad17d0991e2c107ee4d"
+    }
+  ]
+}

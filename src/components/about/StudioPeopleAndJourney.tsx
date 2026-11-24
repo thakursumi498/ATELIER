@@ -76,7 +76,7 @@ export function StudioPeopleAndJourney() {
               <div className="grid grid-cols-2 gap-3.5">
                 <div className="overflow-hidden rounded-[18px] border border-[#D9C8B5] bg-[#241B18]">
                   <img
-                    src="/images/atelier/wall-preview-before.jpg"
+                    src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/wall-preview-before.webp"
                     alt="Before: Sunlit bare architectural wall"
                     className="aspect-[4/3] w-full object-cover"
                   />
@@ -86,7 +86,7 @@ export function StudioPeopleAndJourney() {
                 </div>
                 <div className="overflow-hidden rounded-[18px] border border-[#D9C8B5] bg-[#241B18]">
                   <img
-                    src="/images/atelier/about-harmony-botanical-after.jpg"
+                    src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-harmony-botanical-after.webp"
                     alt="After: The same sunlit wall transformed with a bespoke botanical mural"
                     className="aspect-[4/3] w-full object-cover"
                   />

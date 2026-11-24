@@ -60,8 +60,6 @@ const fallbackMetadata: Metadata = {
   },
 };
 
-export const dynamic = "force-dynamic";
-
 export async function generateMetadata(): Promise<Metadata> {
   try { return { ...fallbackMetadata, ...await siteMetadata() }; }
   catch { return fallbackMetadata; }

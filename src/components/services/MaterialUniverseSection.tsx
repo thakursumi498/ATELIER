@@ -45,11 +45,11 @@ export const MATERIAL_UNIVERSE_ITEMS: ReadonlyArray<Material> = [
     shortDescription: "Large-format wall art with seamless detail.",
     description:
       "Expressive murals and continuous artwork printed directly onto suitable prepared plaster, gypsum, or painted interior walls without wallpaper seams.",
-    sampleImage: "/images/atelier/slab-01-walls-relief.jpg",
+    sampleImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-01-walls-relief.webp",
     sampleAlt:
       "Sculptural warm cream lime-plaster architectural wall relief sample",
     sampleObjectPosition: "object-center",
-    detailImage: "/images/atelier/slab-01-walls.jpg",
+    detailImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-01-walls.webp",
     detailAlt:
       "Close-up of botanical relief artwork on warm textured interior plaster wall",
     detailObjectPosition: "object-center",
@@ -77,11 +77,11 @@ export const MATERIAL_UNIVERSE_ITEMS: ReadonlyArray<Material> = [
     shortDescription: "Artistic prints on ceramic surfaces.",
     description:
       "Curated motifs, artisanal borders, and full-elevation compositions printed across suitable prepared ceramic, porcelain, and stone-look tile grids.",
-    sampleImage: "/images/atelier/slab-02-tiles.jpg",
+    sampleImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-02-tiles.webp",
     sampleAlt:
       "Handcrafted cream and terracotta geometric floral ceramic tile sample",
     sampleObjectPosition: "object-center",
-    detailImage: "/images/atelier/services/services-material-tiles-closeup.webp",
+    detailImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-material-tiles-closeup.webp",
     detailAlt:
       "Glazed ceramic sample tile printed with a terracotta and sage pattern beside blank tiles",
     detailObjectPosition: "object-center",
@@ -109,11 +109,11 @@ export const MATERIAL_UNIVERSE_ITEMS: ReadonlyArray<Material> = [
     shortDescription: "Bespoke prints on plywood and millwork.",
     description:
       "Precision artwork printed on suitable prepared plywood, ideal for wall panelling, millwork, cabinetry, and bespoke interiors.",
-    sampleImage: "/images/atelier/slab-03-plywood.jpg",
+    sampleImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-03-plywood.webp",
     sampleAlt:
       "Sculpted wave laminated hardwood and birch plywood architectural sample",
     sampleObjectPosition: "object-center",
-    detailImage: "/images/atelier/detail-03-plywood-boards.jpg",
+    detailImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/detail-03-plywood-boards.webp",
     detailAlt:
       "Macro studio close-up of stacked multi-ply birch and oak plywood boards showing crisp layered wood edges",
     detailObjectPosition: "object-center",
@@ -141,11 +141,11 @@ export const MATERIAL_UNIVERSE_ITEMS: ReadonlyArray<Material> = [
     shortDescription: "Printed roller blinds for workspaces.",
     description:
       "Calm panoramic landscapes, architectural graphics, and brand narratives printed onto suitable flat-weave roller blinds for contemporary workspaces.",
-    sampleImage: "/images/atelier/slab-04-office-blinds.jpg",
+    sampleImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-04-office-blinds.webp",
     sampleAlt:
       "Printed misty mountain landscape across woven architectural office roller blinds",
     sampleObjectPosition: "object-[center_45%]",
-    detailImage: "/images/atelier/services/services-material-blinds-closeup.webp",
+    detailImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-material-blinds-closeup.webp",
     detailAlt:
       "Partially unrolled roller-blind fabric sample printed with a soft sand-and-taupe horizon gradient",
     detailObjectPosition: "object-center",
@@ -173,11 +173,11 @@ export const MATERIAL_UNIVERSE_ITEMS: ReadonlyArray<Material> = [
     shortDescription: "Refined prints on architectural metals.",
     description:
       "Fine-line geometry, tonal compositions, and bespoke graphic accents printed on suitable prepared brushed aluminium, brass-toned, and coated metal panels.",
-    sampleImage: "/images/atelier/slab-05-metals.jpg",
+    sampleImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-05-metals.webp",
     sampleAlt:
       "Brushed champagne bronze and brass architectural metal sample with curved etched linework",
     sampleObjectPosition: "object-center",
-    detailImage: "/images/atelier/services/services-material-metals-closeup.webp",
+    detailImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-material-metals-closeup.webp",
     detailAlt:
       "Brushed aluminium sample plate printed with fine charcoal and burgundy line art under raking light",
     detailObjectPosition: "object-center",
@@ -205,11 +205,11 @@ export const MATERIAL_UNIVERSE_ITEMS: ReadonlyArray<Material> = [
     shortDescription: "Elegant prints for glass partitions and panels.",
     description:
       "Translucent botanical studies, frosted privacy gradients, and architectural motifs printed on suitable interior glass partitions and feature panels.",
-    sampleImage: "/images/atelier/slab-06-glass.jpg",
+    sampleImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/slab-06-glass.webp",
     sampleAlt:
       "Frosted translucent architectural glass panel sample with delicate sage botanical print",
     sampleObjectPosition: "object-center",
-    detailImage: "/images/atelier/services/services-material-glass-closeup.webp",
+    detailImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-material-glass-closeup.webp",
     detailAlt:
       "Glass sample pane printed with a frosted botanical motif, daylight casting its printed shadow on the bench",
     detailObjectPosition: "object-center",

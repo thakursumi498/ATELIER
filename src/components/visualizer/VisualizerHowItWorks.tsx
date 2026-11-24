@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { atelierImages } from "@/lib/asset-registry";
-import { ProcessStageItem } from "@/types/models";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 
 interface ProcessStepItem {
@@ -140,28 +139,11 @@ function StepOverlay({ kind }: { kind: ProcessStepItem["overlayKind"] }) {
   return null;
 }
 
-interface VisualizerHowItWorksProps {
-  cmsStages?: ReadonlyArray<ProcessStageItem> | null;
-}
-
-export function VisualizerHowItWorks({
-  cmsStages,
-}: VisualizerHowItWorksProps) {
+export function VisualizerHowItWorks() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const connectorPathRef = useRef<SVGPathElement | null>(null);
 
-  const steps = useMemo<ReadonlyArray<ProcessStepItem>>(() => {
-    if (!cmsStages || cmsStages.length === 0) return DEFAULT_PROCESS_STEPS;
-    return DEFAULT_PROCESS_STEPS.map((base, idx) => {
-      const override = cmsStages[idx];
-      if (!override) return base;
-      return {
-        ...base,
-        title: override.title?.trim() || base.title,
-        description: override.description?.trim() || base.description,
-      };
-    });
-  }, [cmsStages]);
+  const steps = DEFAULT_PROCESS_STEPS;
 
   useEffect(() => {
     const section = sectionRef.current;

@@ -10,6 +10,7 @@ import { POST as submitEnquiry } from "../src/app/api/enquiries/route";
 import { POST as emailWebhook } from "../src/app/api/webhooks/resend/route";
 import { saveEnquiryRecord, type StoredEnquiryRecord } from "../src/lib/enquiries-store";
 import { sendEnquiryNotification, retryPendingEnquiryEmails } from "../src/lib/enquiry-email";
+import { DEVELOPMENT_FIXTURE_DESIGNS } from "../src/lib/designs-catalogue";
 let mongo: MongoMemoryServer;
 const realFetch = globalThis.fetch;
 before(async () => {
@@ -98,6 +99,84 @@ test("Resend retries preserve content/idempotency and acceptance is never marked
   await sendEnquiryNotification(record.id); assert.equal(bodies.length, 2);
   await retryPendingEnquiryEmails(1);
   globalThis.fetch = realFetch;
+});
+test("public enquiry sends only the owner email with the selected artwork codes", async () => {
+  const environmentKeys = ["BREVO_API_KEY", "BREVO_SENDER_EMAIL", "BREVO_RECEIVER_EMAIL", "RESEND_API_KEY", "RESEND_FROM_EMAIL", "ADMIN_NOTIFICATION_EMAIL", "ENQUIRY_NOTIFICATION_TO_EMAIL", "APP_URL", "NEXT_PUBLIC_SITE_URL"] as const;
+  const previousEnvironment = Object.fromEntries(environmentKeys.map(key => [key, process.env[key]]));
+  for (const key of ["BREVO_API_KEY", "BREVO_SENDER_EMAIL", "BREVO_RECEIVER_EMAIL", "ENQUIRY_NOTIFICATION_TO_EMAIL", "NEXT_PUBLIC_SITE_URL"]) delete process.env[key];
+  process.env.RESEND_API_KEY = "test-api-key";
+  process.env.RESEND_FROM_EMAIL = "studio@example.test";
+  process.env.ADMIN_NOTIFICATION_EMAIL = "owner@example.test";
+  process.env.APP_URL = "https://atelier-psi-lovat.vercel.app";
+  const submittedArtwork = DEVELOPMENT_FIXTURE_DESIGNS.find(item => item.artworkCode);
+  assert.ok(submittedArtwork);
+  const requests: Array<{ subject: string; to: string[]; reply_to: string; html?: string; text: string }> = [];
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async (_input, init) => {
+    const parsed = JSON.parse(String(init?.body));
+    requests.push(parsed);
+    return Response.json({ id: "workflow-owner-1" });
+  };
+  try {
+    const payload = {
+      fullName: "Sumit & Co",
+      email: "customer@example.test",
+      phone: "+919876543210",
+      serviceInterest: "Walls",
+      serviceOrDesignInterest: "3D Printing on Walls",
+      selectedDesignSlug: submittedArtwork.slug,
+      selectedDesignReference: submittedArtwork.title,
+      message: "Please print <feature wall> & hide the <script> tag.",
+      sourcePage: "/contact",
+    };
+    const response = await submitEnquiry(jsonRequest("http://localhost/api/enquiries", payload));
+    assert.equal(response.status, 201);
+    const responseBody = await response.json();
+    assert.equal(responseBody.ok, true);
+    assert.equal(requests.length, 1);
+
+    const ownerEmail = requests[0];
+    assert.deepEqual(ownerEmail.to, ["owner@example.test"]);
+    assert.equal(ownerEmail.subject, "New Enquiry – Sumit & Co | ATELIER Wall Story");
+    assert.equal(ownerEmail.reply_to, payload.email);
+    assert.match(ownerEmail.html || "", /New Enquiry Received/);
+    assert.match(ownerEmail.html || "", /Category Code/);
+    assert.match(ownerEmail.html || "", new RegExp(submittedArtwork.categoryCode));
+    assert.match(ownerEmail.html || "", new RegExp(submittedArtwork.artworkCode!));
+    assert.match(ownerEmail.text, new RegExp(submittedArtwork.categoryCode));
+    assert.match(ownerEmail.text, new RegExp(submittedArtwork.artworkCode!));
+    assert.doesNotMatch(ownerEmail.html || "", /Catalogue Category &amp; Image Code Reference/);
+    assert.doesNotMatch(ownerEmail.text, /Catalogue Category and Image Code Reference|CAT-\d{2} —/);
+    assert.doesNotMatch(ownerEmail.html || "", /AE02-01|AE05-11|AE06-07|Hidden\/retired from the public catalogue/);
+    assert.match(ownerEmail.html || "", /Call Customer/);
+    assert.match(ownerEmail.html || "", /WhatsApp Customer/);
+    assert.match(ownerEmail.html || "", /Reply via Email/);
+    assert.match(ownerEmail.html || "", /href="tel:\+919876543210"/);
+    assert.match(ownerEmail.html || "", /href="https:\/\/wa\.me\/919876543210\?text=Hello%20Sumit%20%26%20Co/);
+    assert.match(ownerEmail.html || "", /href="mailto:customer@example\.test"/);
+    assert.match(ownerEmail.html || "", /@media only screen and \(max-width:600px\)/);
+    assert.match(ownerEmail.html || "", /Sumit &amp; Co/);
+    assert.match(ownerEmail.html || "", /&lt;feature wall&gt; &amp; hide the &lt;script&gt; tag\./);
+    assert.doesNotMatch(ownerEmail.html || "", /\/admin\/enquiries|View Enquiry in Admin Panel|vercel\.app\/admin/);
+    assert.match(ownerEmail.text, /Enquiry Date and Time: .* IST/);
+    assert.match(ownerEmail.text, /Website – Contact Form/);
+    assert.doesNotMatch(ownerEmail.text, /\.vercel\.app/i);
+    assert.doesNotMatch(ownerEmail.html || "", /\.vercel\.app/i);
+    assert.doesNotMatch(ownerEmail.html || "", /Project Location|Property Type|Wall Dimensions|Reference Images/);
+    assert.equal(requests.some(request => request.to.includes(payload.email)), false);
+
+    const stored = await (await getDb()).collection("enquiries").findOne({ referenceCode: responseBody.referenceCode });
+    assert.equal(stored?.emailStatus, "sent", stored?.emailLastError || "owner email did not reach sent state");
+    assert.equal(stored?.emailProviderId, "workflow-owner-1");
+    assert.equal(stored?.customerEmailStatus, undefined);
+    assert.equal(stored?.customerEmailAttempts, undefined);
+  } finally {
+    globalThis.fetch = previousFetch;
+    for (const key of environmentKeys) {
+      if (previousEnvironment[key] === undefined) delete process.env[key];
+      else process.env[key] = previousEnvironment[key];
+    }
+  }
 });
 test("delivery webhook rejects invalid signature and verifies real delivery state", async () => {
   const raw = JSON.stringify({ type: "email.delivered", created_at: new Date().toISOString(), data: { email_id: "provider-123" } });

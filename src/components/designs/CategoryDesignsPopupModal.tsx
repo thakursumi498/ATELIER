@@ -88,7 +88,14 @@ export function CategoryDesignsPopupModal({
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const categoryStripRef = useRef<HTMLDivElement | null>(null);
   const chipRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const [selectedSubCategory, setSelectedSubCategory] = useState("all");
+  const [subcategorySelection, setSubcategorySelection] = useState<{
+    categoryId: string | null;
+    value: string;
+  }>({ categoryId: null, value: "all" });
+  const selectedSubCategory =
+    subcategorySelection.categoryId === (category?.id ?? null)
+      ? subcategorySelection.value
+      : "all";
 
   const currentIdx = useMemo(() => {
     if (!category) return -1;
@@ -194,10 +201,6 @@ export function CategoryDesignsPopupModal({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [category, onClose]);
-
-  useEffect(() => {
-    setSelectedSubCategory("all");
-  }, [category?.id]);
 
   const allPopupCards = useMemo(() => {
     if (!category) return [];
@@ -420,7 +423,12 @@ export function CategoryDesignsPopupModal({
                     key={subCategory}
                     type="button"
                     aria-pressed={isSelected}
-                    onClick={() => setSelectedSubCategory(subCategory)}
+                    onClick={() =>
+                      setSubcategorySelection({
+                        categoryId: category.id,
+                        value: subCategory,
+                      })
+                    }
                     className={`rounded-full px-3.5 py-2 text-xs transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9B1C1C] ${
                       isSelected
                         ? "bg-[#9B1C1C] font-semibold text-white"

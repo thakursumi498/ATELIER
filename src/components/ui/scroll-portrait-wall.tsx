@@ -113,7 +113,7 @@ export function mapPortfolioProjectToWallItem(
     id: project.id,
     title: project.title,
     slug: project.slug,
-    featuredImage: cover?.secureUrl || "/images/atelier/artwork-lotus-atelier.jpg",
+    featuredImage: cover?.secureUrl || "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/artwork-lotus-atelier.webp",
     imageAlt:
       cover?.altText ||
       `${project.title} — ${project.surfaceName} architectural study by ATELIER — WALL STORY`,

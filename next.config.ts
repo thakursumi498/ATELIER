@@ -4,7 +4,11 @@ const nextConfig: NextConfig = {
   /* config options here */
   devIndicators: false,
   images: {
+    unoptimized: true,
     qualities: [75, 86, 88, 92],
+    remotePatterns: [
+      { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
+    ],
   },
   async redirects() {
     return [

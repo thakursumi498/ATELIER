@@ -25,6 +25,7 @@ import { PublicShell } from "@/components/layout/PublicShell";
 import { Container } from "@/components/layout/Container";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/motion/Reveal";
 import { ProcessPolaroidJourney } from "@/components/process/ProcessPolaroidJourney";
+import { getHeroHeadingBeforeHighlight } from "@/lib/hero-copy";
 import {
   ATELIER_CONTACTS,
   ATELIER_WHATSAPP_NUMBERS,
@@ -183,7 +184,7 @@ export default function ProcessPage() {
                   id="process-hero-heading"
                   className="mt-4 font-serif text-[clamp(2rem,4.45vw,3.75rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-[#1A1A1A] min-[390px]:text-[clamp(2.3rem,4.45vw,3.75rem)] sm:text-[clamp(2.5rem,4.45vw,3.75rem)] lg:text-[clamp(2.35rem,3.8vw,3.75rem)]"
                 >
-                  <span className="block">{page?.hero.heading || "From Idea to Wall,"}</span><em className="block text-[#9B1C1C]">{page?.hero.highlightedText || "A Thoughtful Process."}</em>
+                  <span className="block">{getHeroHeadingBeforeHighlight(page?.hero.heading, page?.hero.highlightedText) || "From Idea to Wall,"}</span><em className="block text-[#9B1C1C]">{page?.hero.highlightedText || "A Thoughtful Process."}</em>
                 </h1>
 
                 {/* Supporting Paragraph */}
@@ -219,7 +220,7 @@ export default function ProcessPage() {
               <FadeUp delay={0.05} className="min-w-0">
                 <div className="overflow-hidden rounded-2xl bg-[#EAE0D3] shadow-[0_22px_50px_-18px_rgba(34,24,16,0.22)]">
                   <Image
-                    src={page?.hero.posterImage?.secureUrl || "/images/atelier/process-hero-living-arch.jpg"}
+                    src={page?.hero.posterImage?.secureUrl || "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-hero-living-arch.webp"}
                     alt="Sunlit luxury living room framed by a complete Venetian plaster archway featuring a bespoke terracotta, warm ochre, and muted olive botanical arch mural behind a curved cream bouclé sofa and travertine coffee table"
                     width={1004}
                     height={768}
@@ -375,7 +376,7 @@ export default function ProcessPage() {
                 <div className="relative overflow-hidden rounded-[22px] border border-[#DED5CB] bg-[#1A1A1A] shadow-md">
                   <div className="aspect-[4/3.2] w-full">
                     <img
-                      src="/images/atelier/process/process-brief-checklist.webp"
+                      src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-brief-checklist.webp"
                       alt="First-brief kit: a phone photo of a blank wall, tape measure, sketched wall outline, tile sample and fabric swatch"
                       className="h-full w-full object-cover object-center"
                     />

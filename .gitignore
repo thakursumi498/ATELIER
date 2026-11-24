@@ -3,3 +3,6 @@
 !.env.example
 .next/
 node_modules/
+.vercel
+.env*
+.local-migration-backups/

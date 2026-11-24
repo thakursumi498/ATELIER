@@ -350,13 +350,10 @@ export function ProjectMediaModal({
                 <div className="rounded-sm border border-white/15 bg-brand-charcoal p-6 text-brand-offwhite">
                   <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-brand-crimson">
                     <Film className="h-4 w-4" />
-                    <span>Optional Execution Video Slot</span>
+                    <span>Project Video</span>
                   </div>
                   <p className="mt-2 text-sm leading-relaxed text-brand-beige/85">
-                    This portfolio record supports an optional on-site 3D wall
-                    printing video reel. Upload an MP4/WebM reel in{" "}
-                    <code className="font-mono text-xs">/admin/projects</code>{" "}
-                    to enable native video playback here.
+                    A project video is not available for this studio study.
                   </p>
                 </div>
               )}

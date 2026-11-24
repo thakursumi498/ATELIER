@@ -20,7 +20,7 @@ const PHILOSOPHY_SURFACE_VISUALS: Record<
   }
 > = {
   walls: {
-    imageUrl: "/images/atelier/home/home-philosophy-walls.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-walls.webp",
     objectPosition: "object-center",
     badge: "Surface 01 • Direct-to-Wall Printing",
     kicker: "3D Printing on Walls — Interior & Feature Walls",
@@ -28,7 +28,7 @@ const PHILOSOPHY_SURFACE_VISUALS: Record<
       "Bespoke 3D wall printing, architectural murals, and conceptual wall art printed directly onto prepared interior wall surfaces without seams.",
   },
   tiles: {
-    imageUrl: "/images/atelier/home/home-philosophy-tiles.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-tiles.webp",
     objectPosition: "object-center",
     badge: "Surface 02 • Ceramic & Stone Tiles",
     kicker: "3D Printing on Tiles — Ceramic, Vitrified & Stone",
@@ -36,7 +36,7 @@ const PHILOSOPHY_SURFACE_VISUALS: Record<
       "Precision UV-cured 3D artwork printed directly across ceramic, vitrified, and natural stone tile elevations with crisp grout-line registration.",
   },
   plywood: {
-    imageUrl: "/images/atelier/home/home-philosophy-plywood.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-plywood.webp",
     objectPosition: "object-center",
     badge: "Surface 03 • Plywood & Timber Panels",
     kicker: "3D Printing on Plywood — Timber, Veneer & Millwork",
@@ -44,7 +44,7 @@ const PHILOSOPHY_SURFACE_VISUALS: Record<
       "Warm architectural graphics, botanical studies, and geometric reliefs printed directly onto birch plywood, veneers, and custom cabinetry.",
   },
   "office-blinds": {
-    imageUrl: "/images/atelier/home/home-philosophy-blinds.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-blinds.webp",
     objectPosition: "object-center",
     badge: "Surface 04 • Bespoke Office Blinds",
     kicker: "3D Printing on Office Blinds — Roller & Architectural Shades",
@@ -52,7 +52,7 @@ const PHILOSOPHY_SURFACE_VISUALS: Record<
       "Continuous panoramic murals and subtle brand storytelling printed across architectural roller blinds for boardrooms and studios.",
   },
   metals: {
-    imageUrl: "/images/atelier/home/home-philosophy-metals.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-metals.webp",
     objectPosition: "object-center",
     badge: "Surface 05 • Brushed & Coated Metals",
     kicker: "3D Printing on Metals — Aluminum, Brass & Steel Panels",
@@ -60,7 +60,7 @@ const PHILOSOPHY_SURFACE_VISUALS: Record<
       "High-adhesion architectural line art and tonal surface compositions printed directly onto brushed bronze, aluminum, and steel cladding.",
   },
   glass: {
-    imageUrl: "/images/atelier/home/home-philosophy-glass.webp",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-philosophy-glass.webp",
     objectPosition: "object-center",
     badge: "Surface 06 • Architectural Glass",
     kicker: "3D Printing on Glass — Partitions & Feature Glazing",

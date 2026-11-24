@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import {
   TumbleDeckShowcase,
   type TumbleCard,
@@ -9,48 +9,19 @@ import {
   buildAtelierVaultCategories,
   DESIGN_CATEGORY_RECORDS,
   DEVELOPMENT_FIXTURE_DESIGNS,
+  mergeManagedCategoryImages,
   type CatalogueCategoryRecord,
   type CatalogueDesignItem,
 } from "@/lib/designs-catalogue";
+import { useManagedCatalogueDesigns, useManagedCatalogueImages } from "@/lib/catalogue-images-client";
 
 export function AtelierTumbleGallery() {
-  const [catalogueCategories, setCatalogueCategories] = useState<
-    ReadonlyArray<CatalogueCategoryRecord>
-  >([...DESIGN_CATEGORY_RECORDS]);
-  const [catalogueDesigns, setCatalogueDesigns] = useState<
-    ReadonlyArray<CatalogueDesignItem>
-  >([...DEVELOPMENT_FIXTURE_DESIGNS]);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch("/api/designs", { cache: "no-store" });
-        if (!res.ok) return;
-        const data = await res.json();
-        if (cancelled) return;
-        if (Array.isArray(data?.categories)) {
-          setCatalogueCategories(data.categories);
-        }
-        const combinedDesigns: CatalogueDesignItem[] = [
-          ...(Array.isArray(data?.approvedClientDesigns)
-            ? data.approvedClientDesigns
-            : []),
-          ...(Array.isArray(data?.developmentFixtures)
-            ? data.developmentFixtures
-            : []),
-        ];
-        if (Array.isArray(data?.approvedClientDesigns)) {
-          setCatalogueDesigns(combinedDesigns);
-        }
-      } catch {
-        // Fallback silently to verified studio catalogue records
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const [managedImages] = useManagedCatalogueImages();
+  const catalogueCategories: ReadonlyArray<CatalogueCategoryRecord> = useMemo(
+    () => managedImages.length ? mergeManagedCategoryImages(DESIGN_CATEGORY_RECORDS, managedImages) : DESIGN_CATEGORY_RECORDS,
+    [managedImages],
+  );
+  const catalogueDesigns: ReadonlyArray<CatalogueDesignItem> = useManagedCatalogueDesigns(DEVELOPMENT_FIXTURE_DESIGNS);
 
   const tumbleCards: ReadonlyArray<TumbleCard> = useMemo(() => {
     const vaultCategories = buildAtelierVaultCategories(

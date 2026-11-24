@@ -15,6 +15,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Container } from "@/components/layout/Container";
+import { getHeroHeadingBeforeHighlight } from "@/lib/hero-copy";
 
 interface SpectrumItem {
   code: string;
@@ -119,7 +120,7 @@ export function ServicesLivingCanvasHero() {
           }}
         >
           <Image
-            src="/images/atelier/services-plaster-sunlight.jpg"
+            src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/services-plaster-sunlight.webp"
             alt=""
             fill
             sizes="44vw"
@@ -144,7 +145,7 @@ export function ServicesLivingCanvasHero() {
           }}
         >
           <Image
-            src={page?.hero.posterImage?.secureUrl || "/images/atelier/services-living-canvas-hero.jpg"}
+            src={page?.hero.posterImage?.secureUrl || "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/services-living-canvas-hero.webp"}
             alt="Sunlit luxury contemporary living room featuring an oversized sculptural terracotta and blush iris botanical 3D wall mural above a curved cream bouclé sofa and travertine coffee table"
             fill
             priority
@@ -210,7 +211,7 @@ export function ServicesLivingCanvasHero() {
                 }}
                 className="mt-4 font-serif text-[2.35rem] font-normal leading-[1.05] tracking-[-0.02em] text-[#1A1A1A] min-[390px]:text-[2.58rem] sm:mt-5 sm:text-[3.05rem] md:text-[3.4rem] lg:text-[3.45rem] lg:leading-[1.04] xl:text-[4.05rem] 2xl:text-[4.4rem]"
               >
-                {page ? <><span className="block">{page.hero.heading}</span><em className="mt-1 block text-[#9B1C1C]">{page.hero.highlightedText}</em></> : <><span className="block">Turn Any Surface</span><em className="mt-1 block text-[#9B1C1C]">into a Living Canvas.</em></>}
+                {page ? <><span className="block">{getHeroHeadingBeforeHighlight(page.hero.heading, page.hero.highlightedText)}</span><em className="mt-1 block text-[#9B1C1C]">{page.hero.highlightedText}</em></> : <><span className="block">Turn Any Surface</span><em className="mt-1 block text-[#9B1C1C]">into a Living Canvas.</em></>}
               </motion.h1>
 
               {/* 3. Restrained Editorial Description */}
@@ -277,7 +278,7 @@ export function ServicesLivingCanvasHero() {
               <div className="relative overflow-hidden rounded-2xl bg-[#E8E2D9] shadow-[0_20px_46px_-18px_rgba(26,22,18,0.2)]">
                 <div className="relative aspect-[850/660] w-full sm:aspect-[16/11]">
                   <Image
-                    src={page?.hero.posterImage?.secureUrl || "/images/atelier/services-living-canvas-hero.jpg"}
+                    src={page?.hero.posterImage?.secureUrl || "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/services-living-canvas-hero.webp"}
                     alt="Sunlit luxury contemporary living room featuring an oversized sculptural terracotta and blush iris botanical 3D wall mural above a curved cream bouclé sofa and travertine coffee table"
                     fill
                     priority

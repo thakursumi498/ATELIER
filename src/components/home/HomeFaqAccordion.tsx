@@ -27,7 +27,7 @@ const DEFAULT_ATELIER_FAQS: ReadonlyArray<HomeFaqEntry> = [
     id: "faq-3",
     question: "How are the 12 design categories organized?",
     answer:
-      "All 12 design categories are unified on a single Explore Designs page (/explore-designs) with instant category filter tabs, search, and multi-image modal previews. Category titles and designs are managed directly through our Admin CMS.",
+      "All 12 design categories are unified on a single Explore Designs page (/explore-designs) with instant category filter tabs, search, and multi-image modal previews. Our studio curates and updates the collection as new artwork is ready.",
   },
   {
     id: "faq-4",

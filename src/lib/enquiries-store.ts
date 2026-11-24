@@ -5,6 +5,10 @@ import type { EnquiryDocument, EnquiryStatus } from "@/types/models";
 
 export interface StoredEnquiryRecord extends EnquiryDocument {
   referenceCode: string;
+  projectLocation?: string | null;
+  propertyType?: string | null;
+  wallDimensions?: string | null;
+  referenceImages?: Array<string | { url?: string | null; secureUrl?: string | null; filename?: string | null; altText?: string | null }> | null;
   selectedDesignId?: string | null;
   selectedProjectId?: string | null;
   selectedDesignReference?: string | null;
@@ -20,6 +24,19 @@ export interface StoredEnquiryRecord extends EnquiryDocument {
   emailLastError?: string | null;
   emailLeaseUntil?: string | null;
   emailIdempotencyKey?: string;
+  customerEmailStatus?: "pending" | "sent" | "delivered" | "failed";
+  customerEmailSent?: boolean;
+  customerEmailNotificationSent?: boolean;
+  customerEmailProviderId?: string | null;
+  customerEmailProvider?: "brevo" | "resend";
+  customerEmailAttempts?: number;
+  customerEmailAttemptedAt?: string | null;
+  customerEmailFirstAttemptAt?: string;
+  customerEmailRetryAt?: string | null;
+  customerEmailLastError?: string | null;
+  customerEmailLeaseUntil?: string | null;
+  customerEmailEventAt?: string | null;
+  customerEmailIdempotencyKey?: string;
   deduplicationKey?: string;
 }
 export const LEAD_STATUSES = ["New", "Contacted", "Follow-up", "Qualified", "Converted", "Closed", "In Progress"] as const;

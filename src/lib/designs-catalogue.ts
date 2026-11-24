@@ -3,11 +3,11 @@
  *
  * Aligns with `DesignCategoryDocument` and `DesignDocument` in `@/types/models`.
  * The Drive manifest provides default public artwork, category covers, and stable
- * enquiry codes; CMS-published records can still override these defaults.
+ * enquiry codes; Cloudinary supplies image URLs while all copy remains here.
  */
 
 import {
-  CONFIGURABLE_CATEGORY_SLOTS,
+  CATALOGUE_CATEGORY_SLOTS,
   DesignCategoryDocument,
   MediaAssetRef,
 } from "@/types/models";
@@ -34,7 +34,7 @@ export const EXPLORE_DESIGNS_HERO_CONTENT: ExploreDesignsHeroConfig = {
     "A curated collection of murals and surface artworks crafted to bring character, texture, and personality to architectural spaces.",
   primaryCtaLabel: "Browse Collection",
   secondaryCtaLabel: "Preview on Your Wall",
-  heroImage: "/images/atelier/explore-designs/explore-hero-curated-gallery.webp",
+  heroImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/explore-designs/explore-hero-curated-gallery.webp",
   heroImageAlt:
     "Light-filled design showroom with three wall bays printed with botanical, marble-vein and terracotta geometric artworks",
   isProvisionalCopy: false,
@@ -62,7 +62,7 @@ const PUBLIC_DRIVE_CATEGORY_ASSETS = DRIVE_CATEGORY_ASSETS.filter(
 );
 
 export const DESIGN_CATEGORY_RECORDS: ReadonlyArray<CatalogueCategoryRecord> =
-  CONFIGURABLE_CATEGORY_SLOTS.flatMap((slot) => {
+  CATALOGUE_CATEGORY_SLOTS.flatMap((slot) => {
     const category = DRIVE_CATEGORY_ASSETS.find(
       (candidate) => candidate.slotNumber === slot.slotNumber,
     );
@@ -128,6 +128,83 @@ export interface CatalogueDesignItem {
   };
 }
 
+export interface ManagedCatalogueImage {
+  id: string;
+  publicId: string;
+  secureUrl: string;
+  altText: string;
+  width: number;
+  height: number;
+  format: string;
+  categorySlug: string;
+  artworkCode: string;
+  subcategorySlug?: string;
+  subcategoryName?: string;
+  replacesCategorySlug?: string;
+  replacesArtworkCode?: string;
+  displayOrder: number;
+  active: boolean;
+}
+
+/** Merge Cloudinary image metadata into the source-controlled catalogue copy. */
+export function mergeManagedDesignImages(
+  staticDesigns: ReadonlyArray<CatalogueDesignItem>,
+  images: ReadonlyArray<ManagedCatalogueImage>,
+): CatalogueDesignItem[] {
+  const byKey = new Map(images.map((image) => [`${image.categorySlug}:${image.artworkCode.toUpperCase()}`, image]));
+  const replacedStaticKeys = new Set(images.flatMap((image) =>
+    image.replacesCategorySlug && image.replacesArtworkCode
+      ? [`${image.replacesCategorySlug}:${image.replacesArtworkCode.toUpperCase()}`]
+      : [],
+  ));
+  const used = new Set<string>();
+  const result: CatalogueDesignItem[] = [];
+
+  for (const design of staticDesigns) {
+    const key = `${design.categorySlug}:${(design.artworkCode || "").toUpperCase()}`;
+    if (replacedStaticKeys.has(key) && !byKey.has(key)) continue;
+    const image = byKey.get(key);
+    if (image) {
+      used.add(key);
+      if (!image.active) continue;
+      result.push({
+        ...design,
+        subCategoryLabel: image.subcategoryName || design.subCategoryLabel,
+        sortOrder: Number.isInteger(image.displayOrder) ? image.displayOrder : design.sortOrder,
+        coverImage: { ...design.coverImage, publicId: image.publicId, secureUrl: image.secureUrl, width: image.width || design.coverImage.width, height: image.height || design.coverImage.height, format: image.format || design.coverImage.format, altText: image.altText },
+        visualizerConfig: { ...design.visualizerConfig, textureUrl: image.secureUrl, width: image.width || design.visualizerConfig.width, height: image.height || design.visualizerConfig.height, mimeType: `image/${image.format || "webp"}` },
+      });
+    } else result.push(design);
+  }
+
+  for (const image of images) {
+    const key = `${image.categorySlug}:${image.artworkCode.toUpperCase()}`;
+    if (!image.active || used.has(key) || result.some((design) => `${design.categorySlug}:${(design.artworkCode || "").toUpperCase()}` === key)) continue;
+    const category = DESIGN_CATEGORY_RECORDS.find((entry) => entry.slug === image.categorySlug);
+    if (!category || !/^AE\d{2}-\d{2}$/i.test(image.artworkCode)) continue;
+    const title = image.altText.trim() || image.artworkCode;
+    const ratio = image.width && image.height ? image.width / image.height : 1;
+    const media: MediaAssetRef = { publicId: image.publicId, secureUrl: image.secureUrl, resourceType: "image", width: image.width, height: image.height, format: image.format || "webp", altText: title };
+    result.push({
+      id: `cloudinary-${image.publicId}`, title, slug: `${category.slug}-${image.artworkCode.toLowerCase()}`, categoryId: category.id, categorySlug: category.slug, categorySlotNumber: category.slotNumber, categoryCode: category.slotCode, artworkCode: image.artworkCode.toUpperCase(), subCategoryLabel: image.subcategoryName, categoryLabel: category.name, summary: `${image.artworkCode} from the ${category.name} collection.`, description: `${title} is part of the ${category.name} collection. Share artwork code ${image.artworkCode} when enquiring about this design.`, tags: [category.slug, category.name.toLowerCase()], compatibleSurfaces: ["Walls"], dimensionsNote: "Available in custom sizes for your wall.", coverImage: media, galleryMedia: [], videoAsset: null, aspectRatio: ratio > 1.15 ? "landscape" : ratio < 0.87 ? "portrait" : "square", featured: false, published: true, sortOrder: Number.isInteger(image.displayOrder) ? image.displayOrder : 999, isDevelopmentFixture: false, visualizerConfig: { defaultMode: "mural", textureUrl: image.secureUrl, width: image.width, height: image.height, mimeType: `image/${image.format || "webp"}` },
+    });
+  }
+  return result.sort((a, b) => a.categorySlotNumber - b.categorySlotNumber || a.sortOrder - b.sortOrder || a.artworkCode!.localeCompare(b.artworkCode!));
+}
+
+export function mergeManagedCategoryImages(
+  categories: ReadonlyArray<CatalogueCategoryRecord>,
+  images: ReadonlyArray<ManagedCatalogueImage>,
+): CatalogueCategoryRecord[] {
+  return categories.map((category) => {
+    const managed = images.filter((image) => image.categorySlug === category.slug).sort((a, b) => a.displayOrder - b.displayOrder);
+    if (!managed.length) return category;
+    const cover = managed.find((image) => image.active);
+    if (!cover) return { ...category, coverImage: null };
+    return { ...category, coverImage: { publicId: cover.publicId, secureUrl: cover.secureUrl, resourceType: "image", width: cover.width, height: cover.height, format: cover.format || "webp", altText: cover.altText } };
+  });
+}
+
 /** Add stable, category-scoped human references to catalogue artworks. */
 export function assignArtworkReferenceCodes(
   designs: ReadonlyArray<CatalogueDesignItem>,
@@ -174,7 +251,7 @@ function makeDriveArtworkMedia(
   image: (typeof category.images)[number],
 ): MediaAssetRef {
   return {
-    publicId: `drive/${category.slug}/${image.code}`,
+    publicId: `atelier-wall-story/designs/categories/${category.slug}/${image.code}`,
     secureUrl: image.url,
     resourceType: "image",
     width: image.width,
@@ -396,15 +473,15 @@ export interface AtelierVaultCategoryItem {
 }
 
 const DEFAULT_CATEGORY_FALLBACK_IMAGE =
-  "/images/atelier/hero-botanical-living.jpg";
+  "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp";
 
 /**
- * Adapts canonical CMS/MongoDB category records and published artwork items into
+ * Adapts canonical source-controlled category records and artwork items into
  * normalized ZoomSlider items for THE ATELIER ART VAULT.
  *
  * Uses the exact same source of truth as the catalogue filters (`DESIGN_CATEGORY_RECORDS`
- * or live `/api/designs` response). Does not invent fake categories if fewer than 12
- * are published.
+ * static catalogue configuration. Does not invent fake categories if fewer than 12
+ * are configured.
  */
 export function buildAtelierVaultCategories(
   categories: ReadonlyArray<CatalogueCategoryRecord> = [],

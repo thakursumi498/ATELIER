@@ -32,7 +32,7 @@ const CORE_DISCIPLINES: ReadonlyArray<CoreDisciplineItem> = [
     title: "Direct-to-Surface 3D Printing",
     shortDescription:
       "High-definition artwork printed directly on prepared surfaces.",
-    sculpturalImage: "/images/atelier/service-obj-01-printing.jpg",
+    sculpturalImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/service-obj-01-printing.webp",
     objectAlt:
       "Three stepped honed travertine and warm limestone architectural slabs representing multi-layer direct-to-surface 3D printing",
     detailedOverview:
@@ -52,7 +52,7 @@ const CORE_DISCIPLINES: ReadonlyArray<CoreDisciplineItem> = [
     number: "02",
     title: "Architectural Murals",
     shortDescription: "Large-scale, space-defining murals for interiors.",
-    sculpturalImage: "/images/atelier/service-obj-02-murals.jpg",
+    sculpturalImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/service-obj-02-murals.webp",
     objectAlt:
       "Sculpted bas-relief botanical lotus palm motif carved in warm cream plaster representing bespoke architectural murals",
     detailedOverview:
@@ -73,7 +73,7 @@ const CORE_DISCIPLINES: ReadonlyArray<CoreDisciplineItem> = [
     title: "Conceptual Wall Art",
     shortDescription:
       "Bespoke compositions tailored to your space and theme.",
-    sculpturalImage: "/images/atelier/service-obj-03-conceptual.jpg",
+    sculpturalImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/service-obj-03-conceptual.webp",
     objectAlt:
       "Flowing S-curved sculptural limestone wave ridges representing conceptual architectural wall art",
     detailedOverview:
@@ -94,7 +94,7 @@ const CORE_DISCIPLINES: ReadonlyArray<CoreDisciplineItem> = [
     title: "Design Customization",
     shortDescription:
       "Scale, crop, tone and placement configured to your surface.",
-    sculpturalImage: "/images/atelier/service-obj-04-customization.jpg",
+    sculpturalImage: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/service-obj-04-customization.webp",
     objectAlt:
       "Unfurled tactile architectural parchment and canvas-plaster roll representing custom artwork scale and tone configuration",
     detailedOverview:

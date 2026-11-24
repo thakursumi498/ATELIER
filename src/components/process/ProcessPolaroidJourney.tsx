@@ -46,7 +46,7 @@ export const ATELIER_POLAROID_PROCESS_STAGES: ReadonlyArray<PolaroidProcessStage
         "Identify the relevant printing substrate",
         "Understand design preferences and project dimensions",
       ],
-      image: "/images/atelier/process-stage-01-consultation.jpg",
+      image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-01-consultation.webp",
       imageAlt:
         "Premium architectural design studio table showing material samples, texture boards, sketches, and consultation notes",
       ctaLabel: "Start Your Consultation",
@@ -64,7 +64,7 @@ export const ATELIER_POLAROID_PROCESS_STAGES: ReadonlyArray<PolaroidProcessStage
         "Discover compositions, colours, and mural styles",
         "Shortlist artwork suitable for your interiors",
       ],
-      image: "/images/atelier/process/process-stage-02-design-exploration.webp",
+      image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-02-design-exploration.webp",
       imageAlt:
         "Design exploration flat-lay of watercolour botanical sketches, colour chips and plaster, tile, plywood and metal samples",
       ctaLabel: "Explore Wall Designs",
@@ -82,7 +82,7 @@ export const ATELIER_POLAROID_PROCESS_STAGES: ReadonlyArray<PolaroidProcessStage
         "Explore design variations and composition",
         "Preview selected artwork on your wall",
       ],
-      image: "/images/atelier/process/process-stage-03-customization.webp",
+      image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-03-customization.webp",
       imageAlt:
         "Designer scaling a mural artwork onto a wall elevation drawing with a pen tablet, tape measure and proportion studies",
       ctaLabel: "Preview on Your Wall",
@@ -100,7 +100,7 @@ export const ATELIER_POLAROID_PROCESS_STAGES: ReadonlyArray<PolaroidProcessStage
         "Confirm dimensions and visual alignment",
         "Approve artwork before execution",
       ],
-      image: "/images/atelier/process-stage-04-approval.jpg",
+      image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-04-approval.webp",
       imageAlt:
         "High-end architectural presentation setup on travertine featuring printed design proofs, material samples, and brass scale ruler",
       ctaLabel: "Discuss Your Design",
@@ -118,7 +118,7 @@ export const ATELIER_POLAROID_PROCESS_STAGES: ReadonlyArray<PolaroidProcessStage
         "Execute precision 3D wall printing",
         "Inspect the final artwork and finish",
       ],
-      image: "/images/atelier/process-stage-05-execution.jpg",
+      image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-05-execution.webp",
       imageAlt:
         "Sunlit double-height architectural interior featuring a completed direct-to-surface 3D relief mural of sandstone arches and botanicals",
       ctaLabel: "Start Your Wall Story",

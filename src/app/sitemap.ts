@@ -1,13 +1,14 @@
 import type { MetadataRoute } from "next";
-import { getPublishedCmsCollection } from "@/lib/cms-store";
+import { DEVELOPMENT_PROJECT_FIXTURES } from "@/lib/projects-catalogue";
+import { DEVELOPMENT_BLOG_FIXTURES } from "@/lib/blogs-catalogue";
 import { siteOrigin } from "@/lib/public-seo";
-import type { PortfolioProjectRecord } from "@/lib/projects-catalogue";
-import type { BlogArticleRecord } from "@/lib/blogs-catalogue";
-import type { PageContentDocument } from "@/types/models";
-export const dynamic = "force-dynamic";
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [projects, articles, pages] = await Promise.all([getPublishedCmsCollection<PortfolioProjectRecord>("projects"), getPublishedCmsCollection<BlogArticleRecord>("blogs"), getPublishedCmsCollection<PageContentDocument>("pages")]);
-  const noIndex = new Set(pages.filter(page => page.seo?.noIndex).map(page => page.pageKey));
-  const paths = ["home", "explore-designs", "projects", "services", "about", "process", "blogs", "visualizer", "contact"] as PageContentDocument["pageKey"][];
-  return [...paths.filter(path => !noIndex.has(path)).map(path => ({ url: `${siteOrigin()}${path === "home" ? "/" : `/${path}`}`, changeFrequency: "weekly" as const })), ...projects.map(project => ({ url: `${siteOrigin()}/projects/${encodeURIComponent(project.slug)}`, lastModified: project.updatedAt })), ...articles.map(article => ({ url: `${siteOrigin()}/blogs/${encodeURIComponent(article.slug)}`, ...(article.publishedIso ? { lastModified: article.publishedIso } : {}) }))];
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const origin = siteOrigin();
+  const paths = ["", "explore-designs", "projects", "services", "about", "process", "blogs", "visualizer", "contact"];
+  return [
+    ...paths.map((path) => ({ url: `${origin}${path ? `/${path}` : "/"}`, changeFrequency: "weekly" as const })),
+    ...DEVELOPMENT_PROJECT_FIXTURES.filter((project) => project.published).map((project) => ({ url: `${origin}/projects/${encodeURIComponent(project.slug)}`, lastModified: project.updatedAt })),
+    ...DEVELOPMENT_BLOG_FIXTURES.filter((article) => article.published).map((article) => ({ url: `${origin}/blogs/${encodeURIComponent(article.slug)}`, ...(article.publishedIso ? { lastModified: article.publishedIso } : {}) })),
+  ];
 }

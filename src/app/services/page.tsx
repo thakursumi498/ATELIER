@@ -64,7 +64,7 @@ const STUDIO_SPACE_STUDIES: StudioSpaceStudyCard[] = [
     studyLabel: "Studio Surface Study",
     title: "The Lotus Residence",
     locationAndSurface: "Andheri West, Mumbai • Lime Plaster Wall",
-    image: "/images/atelier/services/services-real-lotus-residence.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-real-lotus-residence.webp",
     projectSlug:
       "",
   },
@@ -74,7 +74,7 @@ const STUDIO_SPACE_STUDIES: StudioSpaceStudyCard[] = [
     studyLabel: "Studio Surface Study",
     title: "Creative Office Workspace",
     locationAndSurface: "BKC, Mumbai • Acoustic Wall & Blinds",
-    image: "/images/atelier/services/services-real-creative-office.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-real-creative-office.webp",
     projectSlug:
       "",
   },
@@ -84,7 +84,7 @@ const STUDIO_SPACE_STUDIES: StudioSpaceStudyCard[] = [
     studyLabel: "Studio Surface Study",
     title: "Café Terra Installation",
     locationAndSurface: "Powai, Mumbai • Ceramic Tile & Plaster",
-    image: "/images/atelier/services/services-real-cafe-terra.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-real-cafe-terra.webp",
     projectSlug:
       "",
   },
@@ -94,7 +94,7 @@ const STUDIO_SPACE_STUDIES: StudioSpaceStudyCard[] = [
     studyLabel: "Studio Surface Study",
     title: "Terracotta Arch Boutique",
     locationAndSurface: "Oshiwara, Mumbai • 3D Relief Wall",
-    image: "/images/atelier/services/services-real-terracotta-boutique.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-real-terracotta-boutique.webp",
     projectSlug:
       "",
   },
@@ -104,7 +104,7 @@ const STUDIO_SPACE_STUDIES: StudioSpaceStudyCard[] = [
     studyLabel: "Studio Surface Study",
     title: "Executive Boardroom Elevation",
     locationAndSurface: "Lower Parel, Mumbai • Plywood & Bronze",
-    image: "/images/atelier/services/services-real-executive-boardroom.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/services/services-real-executive-boardroom.webp",
     projectSlug:
       "",
   },

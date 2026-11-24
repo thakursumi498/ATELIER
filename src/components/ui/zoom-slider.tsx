@@ -1021,7 +1021,7 @@ export const ZoomSliderComp = forwardRef<
                       const target = e.currentTarget;
                       const fallback =
                         item.fallbackSrc ||
-                        "/images/atelier/hero-botanical-living.jpg";
+                        "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp";
                       if (target.src && !target.src.endsWith(fallback)) {
                         target.src = fallback;
                       }

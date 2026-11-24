@@ -21,6 +21,7 @@ import {
   DEVELOPMENT_BLOG_FIXTURES,
   filterBlogArticles,
 } from "@/lib/blogs-catalogue";
+import { getHeroHeadingBeforeHighlight } from "@/lib/hero-copy";
 import {
   ArrowRight,
   BookOpen,
@@ -57,10 +58,7 @@ function BlogsListingWorkspace() {
   const [visibleGridCount, setVisibleGridCount] = useState<number>(
     INITIAL_GRID_PAGE_SIZE
   );
-  const [liveDbArticles, setLiveDbArticles] =
-    useState<ReadonlyArray<BlogArticleRecord> | null>([
-      ...DEVELOPMENT_BLOG_FIXTURES,
-    ]);
+  const liveDbArticles: ReadonlyArray<BlogArticleRecord> = DEVELOPMENT_BLOG_FIXTURES;
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -68,25 +66,6 @@ function BlogsListingWorkspace() {
     }, 180);
     return () => window.clearTimeout(timer);
   }, [searchInput]);
-
-  // Fetch published articles from /api/blogs if available, falling back to approved studio journal essays
-  useEffect(() => {
-    let active = true;
-    fetch("/api/blogs")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((payload) => {
-        if (!active || !payload) return;
-        if (Array.isArray(payload.articles)) {
-          setLiveDbArticles(payload.articles);
-        }
-      })
-      .catch(() => {
-        // Keep local editorial fixtures visible if the request fails.
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
 
   const syncUrl = useCallback(
     (next: { category?: string; query?: string }) => {
@@ -207,7 +186,7 @@ function BlogsListingWorkspace() {
                 className="font-serif text-[clamp(2.65rem,4.7vw,4.35rem)] leading-[1.02] font-normal tracking-[-0.02em]"
               >
                 <span className="block text-[#1A1A1A]">
-                  {pageContent?.hero.heading || BLOGS_PAGE_CONTENT.hero.headlineLine1}
+                  {getHeroHeadingBeforeHighlight(pageContent?.hero.heading, pageContent?.hero.highlightedText) || BLOGS_PAGE_CONTENT.hero.headlineLine1}
                 </span>
                 <span className="mt-1 block text-[#9B1C1C]">
                   {pageContent?.hero.highlightedText || BLOGS_PAGE_CONTENT.hero.headlineLine2}
@@ -224,7 +203,7 @@ function BlogsListingWorkspace() {
               <div className="relative overflow-hidden rounded-tl-[110px] rounded-tr-[30px] rounded-b-[30px] border border-[#D9C8B5] bg-[#241B18] shadow-[0_26px_65px_rgba(36,27,24,0.16)]">
                 <div className="relative aspect-[16/9.8] w-full">
                   <img
-                    src="/images/atelier/journal-hero-burgundy-alcove.jpg"
+                    src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal-hero-burgundy-alcove.webp"
                     alt="Sculpted ivory plaster wall curving into a deep burgundy architectural alcove with natural window shadows and a ceramic vase of dried blossoms"
                     className="h-full w-full object-cover object-center"
                   />
@@ -619,7 +598,7 @@ function BlogsListingWorkspace() {
               {/* Right (5 cols): Sculptural Travertine Plinth, Books & Brass Lamp Still Life */}
               <div className="relative h-full min-h-[210px] lg:col-span-5">
                 <img
-                  src="/images/atelier/journal-divider-still-life.jpg"
+                  src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/blogs/journal-divider-still-life.webp"
                   alt="Warm cream travertine plinth with stacked linen books, glowing brass dome lamp, and dried botanicals"
                   className="h-full w-full object-cover object-center"
                 />

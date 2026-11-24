@@ -4,7 +4,6 @@ import { usePageContent } from "@/components/layout/PublicContentProvider";
 import React, {
   Suspense,
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -28,7 +27,10 @@ import {
   EXPLORE_DESIGNS_HERO_CONTENT,
   findDesignBySlugOrId,
   resolveCategoryFromQuery,
+  mergeManagedCategoryImages,
 } from "@/lib/designs-catalogue";
+import { useManagedCatalogueDesigns, useManagedCatalogueImages } from "@/lib/catalogue-images-client";
+import { getHeroHeadingBeforeHighlight } from "@/lib/hero-copy";
 import {
   buildVisualizerBridgeHref,
   stageDesignForWallVisualizer,
@@ -47,14 +49,12 @@ function ExploreDesignsWorkspace() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Live CMS / API synchronized categories & designs (initialized from canonical registry for zero layout shift)
-  const [catalogueCategories, setCatalogueCategories] = useState<
-    ReadonlyArray<CatalogueCategoryRecord>
-  >([...DESIGN_CATEGORY_RECORDS]);
-  const [catalogueDesigns, setCatalogueDesigns] = useState<
-    ReadonlyArray<CatalogueDesignItem>
-  >([...DEVELOPMENT_FIXTURE_DESIGNS]);
-  const [cmsErrorMessage, setCmsErrorMessage] = useState<string | null>(null);
+  const [managedImages] = useManagedCatalogueImages();
+  const catalogueCategories: ReadonlyArray<CatalogueCategoryRecord> = useMemo(
+    () => managedImages.length ? mergeManagedCategoryImages(DESIGN_CATEGORY_RECORDS, managedImages) : DESIGN_CATEGORY_RECORDS,
+    [managedImages],
+  );
+  const catalogueDesigns: ReadonlyArray<CatalogueDesignItem> = useManagedCatalogueDesigns(DEVELOPMENT_FIXTURE_DESIGNS);
 
 
   // Resolve initial category from ?category=cat-01 or ?slot=1
@@ -86,73 +86,6 @@ function ExploreDesignsWorkspace() {
     setActiveCategorySlug(urlCategorySlug);
     setPopupCategorySlug(urlCategorySlug !== "all" ? urlCategorySlug : null);
   }
-
-  const syncCatalogueFromApi = useCallback(async () => {
-    try {
-      setCmsErrorMessage(null);
-      const res = await fetch("/api/designs", { cache: "no-store" });
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-      const data = await res.json();
-      if (Array.isArray(data?.categories)) {
-        setCatalogueCategories(data.categories);
-      }
-      const combinedDesigns: CatalogueDesignItem[] = [
-        ...(Array.isArray(data?.approvedClientDesigns)
-          ? data.approvedClientDesigns
-          : []),
-        ...(Array.isArray(data?.developmentFixtures)
-          ? data.developmentFixtures
-          : []),
-      ];
-      if (Array.isArray(data?.approvedClientDesigns)) {
-        setCatalogueDesigns(combinedDesigns);
-      }
-    } catch {
-      setCmsErrorMessage(
-        "The design catalogue is temporarily unavailable. Please try again."
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch("/api/designs", { cache: "no-store" });
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
-        }
-        const data = await res.json();
-        if (cancelled) return;
-        if (Array.isArray(data?.categories)) {
-          setCatalogueCategories(data.categories);
-        }
-        const combinedDesigns: CatalogueDesignItem[] = [
-          ...(Array.isArray(data?.approvedClientDesigns)
-            ? data.approvedClientDesigns
-            : []),
-          ...(Array.isArray(data?.developmentFixtures)
-            ? data.developmentFixtures
-            : []),
-        ];
-        if (Array.isArray(data?.approvedClientDesigns)) {
-          setCatalogueDesigns(combinedDesigns);
-        }
-        setCmsErrorMessage(null);
-      } catch {
-        if (!cancelled) {
-          setCmsErrorMessage(
-            "The design catalogue is temporarily unavailable. Please try again."
-          );
-        }
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   const vaultCategories = useMemo(
     () => buildAtelierVaultCategories(catalogueCategories, catalogueDesigns),
@@ -328,7 +261,7 @@ function ExploreDesignsWorkspace() {
 
             {/* Editorial Serif Heading — balanced 3-line hierarchy, "Every Space" kept intact on its own line */}
             <h1 className="mt-4 font-serif text-[clamp(2.05rem,3.95vw,3.85rem)] min-[360px]:text-[clamp(2.25rem,3.95vw,3.85rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-[#1A1A1A]">
-              <span className="block">{pageContent?.hero.heading || "Explore Wall Art Designs for"}</span><em className="block text-[#9B1C1C]">{pageContent?.hero.highlightedText || "Every Space"}</em>
+              <span className="block">{getHeroHeadingBeforeHighlight(pageContent?.hero.heading, pageContent?.hero.highlightedText) || "Explore Wall Art Designs for"}</span><em className="block text-[#9B1C1C]">{pageContent?.hero.highlightedText || "Every Space"}</em>
             </h1>
 
             {/* Description */}
@@ -398,8 +331,6 @@ function ExploreDesignsWorkspace() {
         categories={vaultCategories}
         activeCategorySlug={activeCategorySlug}
         onSelectCategorySlug={handleSelectCategoryFromVault}
-        errorMessage={cmsErrorMessage}
-        onRetry={syncCatalogueFromApi}
         isModalOpen={Boolean(activePopupCategory || selectedDesign)}
       />
 

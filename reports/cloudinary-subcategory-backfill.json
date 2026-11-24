@@ -1,0 +1,290 @@
+{
+  "mode": "apply",
+  "totalDesignArtworkRecords": 40,
+  "matchedCloudinaryAssets": 40,
+  "updatedAndVerified": 40,
+  "missingCloudinaryAssets": [],
+  "results": [
+    {
+      "publicId": "atelier-wall-story/designs/categories/arts-and-entertainment/AE01-01",
+      "category": "Arts and entertainment",
+      "subcategory": "Design 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/food-and-lifestyle/AE02-01",
+      "category": "Food and lifestyle",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/food-and-lifestyle/AE02-02",
+      "category": "Food and lifestyle",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/food-and-lifestyle/AE02-03",
+      "category": "Food and lifestyle",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/food-and-lifestyle/AE02-04",
+      "category": "Food and lifestyle",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-01",
+      "category": "Kids education",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-02",
+      "category": "Kids education",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-03",
+      "category": "Kids education",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-04",
+      "category": "Kids education",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-05",
+      "category": "Kids education",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-06",
+      "category": "Kids education",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-07",
+      "category": "Kids education",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-08",
+      "category": "Kids education",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-09",
+      "category": "Kids education",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-10",
+      "category": "Kids education",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/kids-education/AE05-11",
+      "category": "Kids education",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/logo/AE06-01",
+      "category": "Logo",
+      "subcategory": "Main collection",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/logo/AE06-02",
+      "category": "Logo",
+      "subcategory": "Main collection",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/logo/AE06-03",
+      "category": "Logo",
+      "subcategory": "Main collection",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/logo/AE06-04",
+      "category": "Logo",
+      "subcategory": "Main collection",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/logo/AE06-05",
+      "category": "Logo",
+      "subcategory": "Main collection",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/logo/AE06-06",
+      "category": "Logo",
+      "subcategory": "Main collection",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/logo/AE06-07",
+      "category": "Logo",
+      "subcategory": "Main collection",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/motivation/AE07-01",
+      "category": "Motivation",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/motivation/AE07-02",
+      "category": "Motivation",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/motivation/AE07-03",
+      "category": "Motivation",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/motivation/AE07-04",
+      "category": "Motivation",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/nature-and-environment/AE08-01",
+      "category": "Nature and environment",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/nature-and-environment/AE08-02",
+      "category": "Nature and environment",
+      "subcategory": "Design - 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/nature-and-environment/AE08-03",
+      "category": "Nature and environment",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/nature-and-environment/AE08-04",
+      "category": "Nature and environment",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/nature-and-environment/AE08-05",
+      "category": "Nature and environment",
+      "subcategory": "Design - 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/nature-and-environment/AE08-06",
+      "category": "Nature and environment",
+      "subcategory": "Nature",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/nature-and-environment/AE08-07",
+      "category": "Nature and environment",
+      "subcategory": "Nature",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/wildlife/AE13-01",
+      "category": "Wildlife",
+      "subcategory": "Design 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/wildlife/AE13-02",
+      "category": "Wildlife",
+      "subcategory": "Design 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/wildlife/AE13-03",
+      "category": "Wildlife",
+      "subcategory": "Design 1",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/wildlife/AE13-04",
+      "category": "Wildlife",
+      "subcategory": "Design 2",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/wildlife/AE13-05",
+      "category": "Wildlife",
+      "subcategory": "Wildlife",
+      "status": "verified",
+      "httpStatus": 200
+    },
+    {
+      "publicId": "atelier-wall-story/designs/categories/wildlife/AE13-06",
+      "category": "Wildlife",
+      "subcategory": "Wildlife",
+      "status": "verified",
+      "httpStatus": 200
+    }
+  ],
+  "completedAt": "2026-11-24T19:33:46.241Z"
+}

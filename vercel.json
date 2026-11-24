@@ -1,10 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "schedules": {
-    "cms-publish-and-email-retries": {
-      "path": "/api/internal/publish",
-      "requestMethod": "GET",
-      "schedule": "*/15 * * * *"
+  "crons": [
+    {
+      "path": "/api/internal/enquiry-email-retries",
+      "schedule": "0 3 * * *"
     }
-  }
+  ]
 }

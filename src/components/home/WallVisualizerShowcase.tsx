@@ -17,7 +17,7 @@ const SAMPLE_PREVIEW_PRESETS = [
     slug: "category-2-featured-design",
     title: "Botanical Canopy Mural",
     slotNumber: 1,
-    imageUrl: "/images/atelier/wall-preview-after.jpg",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/wall-preview-after.webp",
     mode: "mural" as const,
   },
   {
@@ -25,7 +25,7 @@ const SAMPLE_PREVIEW_PRESETS = [
     slug: "category-1-featured-design",
     title: "Terracotta Wave Relief",
     slotNumber: 3,
-    imageUrl: "/images/atelier/artwork-terracotta-wave.jpg",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/artwork-terracotta-wave.webp",
     mode: "mural" as const,
   },
   {
@@ -33,7 +33,7 @@ const SAMPLE_PREVIEW_PRESETS = [
     slug: "category-3-featured-design",
     title: "Arch Series – Limestone",
     slotNumber: 4,
-    imageUrl: "/images/atelier/artwork-arch-limestone.jpg",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/artwork-arch-limestone.webp",
     mode: "mural" as const,
   },
 ];
@@ -196,7 +196,7 @@ export function WallVisualizerShowcase() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/atelier/wall-preview-before.jpg"
+                src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/wall-preview-before.webp"
                 alt="Prepared living room wall before 3D printing"
                 className="h-full w-full object-cover"
               />

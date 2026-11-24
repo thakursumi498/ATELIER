@@ -6,11 +6,11 @@ import "@/components/admin/admin-theme.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Studio CMS | ATELIER — WALL STORY",
-    template: "%s | ATELIER Studio CMS",
+    default: "Studio Admin | ATELIER — WALL STORY",
+    template: "%s | ATELIER Studio Admin",
   },
   description:
-    "ATELIER — WALL STORY editorial administration workspace for designs, categories, portfolio projects, page content, journal articles, enquiries, and site settings.",
+    "ATELIER — WALL STORY admin for Cloudinary website images and customer enquiries.",
   robots: {
     index: false,
     follow: false,

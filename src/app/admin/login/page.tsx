@@ -110,7 +110,7 @@ function AdminLoginWorkspace() {
       {/* Left Architectural Editorial Visual Panel */}
       <div className="relative h-60 sm:h-72 lg:h-auto lg:w-[45%] lg:min-h-screen shrink-0 overflow-hidden bg-[#2C2521]">
         <img
-          src="/images/atelier/admin-login-studio-arch.jpg"
+          src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/admin-login-studio-arch.webp"
           alt="Warm sunlit Venetian plaster arch framing a hand-crafted botanical mineral wall mural inside ATELIER — WALL STORY"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />

@@ -109,10 +109,10 @@ export function HeroVideoStage({
 
   const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
   const resolvedPoster = posterFallbackUsed
-    ? "/images/atelier/hero-poster-frame0.jpg"
+    ? "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-poster-frame0.webp"
     : posterUrl && !posterUrl.endsWith(".svg")
       ? posterUrl
-      : "/images/atelier-wall-printing-poster.webp";
+      : "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/images/atelier-wall-printing-poster.webp";
 
   return (
     <section

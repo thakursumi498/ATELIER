@@ -360,23 +360,19 @@ export const enquirySubmissionSchema = z.object({
 export type EnquirySubmissionInput = z.infer<typeof enquirySubmissionSchema>;
 
 /**
- * 13 stable category slots; slot 6 is retired so later category codes remain stable.
- * Official category titles, slugs, cover images, and descriptions are managed via `/admin/categories`
- * and persisted in MongoDB.
+ * Thirteen stable category slots; slot 6 is retired so later category codes remain stable.
+ * Official category titles, slugs, cover images, and descriptions are source-controlled in
+ * `@/lib/drive-category-assets`; Cloudinary supplies the managed image URLs.
  */
-export const CONFIGURABLE_CATEGORY_SLOTS: ReadonlyArray<{
+export const CATALOGUE_CATEGORY_SLOTS: ReadonlyArray<{
   slotNumber: number;
   slotCode: string;
-  adminPlaceholderLabel: string;
-  status: "awaiting_admin_configuration";
 }> = Array.from({ length: 13 }, (_, index) => {
   const num = index + 1;
   const code = num < 10 ? `0${num}` : `${num}`;
   return {
     slotNumber: num,
     slotCode: `CAT-${code}`,
-    adminPlaceholderLabel: `Category Slot ${code}`,
-    status: "awaiting_admin_configuration",
   };
 });
 

@@ -16,7 +16,6 @@ import {
 } from "@/components/motion/Reveal";
 import { getPublicHomeContent, getPublicProjects, getPublicSiteSettings } from "@/lib/public-cms";
 import { pageMetadata } from "@/lib/public-seo";
-export const dynamic = "force-dynamic";
 export async function generateMetadata() { return pageMetadata("home", "ATELIER — WALL STORY", "Architectural wall and surface art."); }
 import {
   ATELIER_BRAND,
@@ -167,7 +166,7 @@ export default async function HomePage() {
               <div className="group relative mt-4 h-[210px] w-full overflow-hidden rounded-xl border border-brand-stone/45 bg-brand-charcoal shadow-editorial sm:h-[234px] lg:h-[240px] xl:h-[248px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/atelier/home/home-printing-technology-closeup.webp"
+                  src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-printing-technology-closeup.webp"
                   alt="Vertical direct-to-wall printer mid-print, laying a sage botanical mural onto a primed interior wall"
                   className="h-full w-full object-cover object-[50%_42%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />

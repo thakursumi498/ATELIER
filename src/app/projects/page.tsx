@@ -20,6 +20,7 @@ import {
   PROJECTS_PAGE_CONTENT,
 } from "@/lib/projects-catalogue";
 import { ATELIER_SURFACES, buildWhatsAppUrl } from "@/lib/brand";
+import { getHeroHeadingBeforeHighlight } from "@/lib/hero-copy";
 import { cn } from "@/lib/cn";
 import {
   ArrowRight,
@@ -59,39 +60,8 @@ const STUDIO_APPROACH_PILLARS = [
 
 export default function ProjectsPage() {
   const pageContent = usePageContent("projects");
-  // Live API-backed project records (preserving MongoDB /api/projects contract)
-  const [projectsData, setProjectsData] = useState<
-    ReadonlyArray<PortfolioProjectRecord>
-  >([...DEVELOPMENT_PROJECT_FIXTURES]);
+  const projectsData: ReadonlyArray<PortfolioProjectRecord> = DEVELOPMENT_PROJECT_FIXTURES;
   const [heroSlideIndex, setHeroSlideIndex] = useState<number>(0);
-
-  useEffect(() => {
-    let active = true;
-    fetch("/api/projects")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((payload) => {
-        if (!active || !payload) return;
-        const clientList = Array.isArray(payload.approvedClientProjects)
-          ? (payload.approvedClientProjects as PortfolioProjectRecord[])
-          : [];
-        const developmentList = Array.isArray(payload.developmentFixtures)
-          ? (payload.developmentFixtures as PortfolioProjectRecord[])
-          : [];
-        if (
-          Array.isArray(payload.approvedClientProjects) ||
-          Array.isArray(payload.developmentFixtures)
-        ) {
-          setHeroSlideIndex(0);
-          setProjectsData([...clientList, ...developmentList]);
-        }
-      })
-      .catch(() => {
-        // Keep local development fixtures visible if the request fails.
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
 
   // Section 01: Hero Carousel State
   const heroTouchStartRef = useRef<{ x: number; y: number } | null>(null);
@@ -324,7 +294,7 @@ export default function ProjectsPage() {
                 id="projects-hero-heading"
                 className="mt-4 font-serif text-[clamp(2.35rem,4.2vw,3.75rem)] font-semibold leading-[1.04] tracking-[-0.02em] text-[#211D1A]"
               >
-                <span className="block">{pageContent?.hero.heading || "Real Spaces,"}</span><em className="block text-[#9B1C1C]">{pageContent?.hero.highlightedText || "Lasting Impressions."}</em>
+                <span className="block">{getHeroHeadingBeforeHighlight(pageContent?.hero.heading, pageContent?.hero.highlightedText) || "Real Spaces,"}</span><em className="block text-[#9B1C1C]">{pageContent?.hero.highlightedText || "Lasting Impressions."}</em>
               </h1>
 
               <p className="mt-4 max-w-[430px] text-[14.5px] leading-[1.65] text-[#6F665E]">

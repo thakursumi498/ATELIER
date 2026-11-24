@@ -13,6 +13,7 @@ import {
   stageDesignForWallVisualizer,
 } from "@/lib/visualizer-bridge";
 import { ATELIER_BRAND } from "@/lib/brand";
+import { useManagedCatalogueDesigns } from "@/lib/catalogue-images-client";
 import { ArrowRight, ArrowUpRight, Scan } from "lucide-react";
 
 /**
@@ -22,9 +23,10 @@ import { ArrowRight, ArrowUpRight, Scan } from "lucide-react";
  */
 export function FeaturedCollectionGallery() {
   const router = useRouter();
+  const catalogueDesigns = useManagedCatalogueDesigns(DEVELOPMENT_FIXTURE_DESIGNS);
   const categoryCount = DESIGN_CATEGORY_RECORDS.length;
   const sampleItems: ReadonlyArray<FeaturedSampleDesignItem> =
-    DEVELOPMENT_FIXTURE_DESIGNS.filter((design) => design.featured)
+    catalogueDesigns.filter((design) => design.featured)
       .slice(0, 4)
       .map((design) => ({
         id: design.id,
@@ -271,7 +273,7 @@ export function FeaturedCollectionGallery() {
                 <img
                   src={
                     cat.coverImage?.secureUrl ||
-                    "/images/atelier/cat-01-botanical.jpg"
+                    "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/cat-01-botanical.webp"
                   }
                   alt={cat.name}
                   className="h-full w-full object-contain p-1.5"

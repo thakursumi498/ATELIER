@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowRight, Box, Layers, MessageSquare, Send, Zap } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { ATELIER_ASSET_REGISTRY } from "@/lib/asset-registry";
+import { getHeroHeadingBeforeHighlight } from "@/lib/hero-copy";
 
 export function WhatsAppOutlineIcon({ className }: { className?: string }) {
   return (
@@ -200,7 +201,7 @@ export function ContactHeroAndCapabilities({
                 id="contact-hero-heading"
                 className="mt-3.5 font-serif text-[clamp(2.2rem,3.95vw,3.65rem)] leading-[1.06] font-normal tracking-[-0.022em] text-[#1A1A1A] sm:mt-4"
               >
-                <span className="block">{page?.hero.heading || "Let’s Create"}</span><em className="mt-0.5 block text-[#9B1C1C]">{page?.hero.highlightedText || "Something Remarkable."}</em>
+                <span className="block">{getHeroHeadingBeforeHighlight(page?.hero.heading, page?.hero.highlightedText) || "Let’s Create"}</span><em className="mt-0.5 block text-[#9B1C1C]">{page?.hero.highlightedText || "Something Remarkable."}</em>
               </h1>
             </div>
 

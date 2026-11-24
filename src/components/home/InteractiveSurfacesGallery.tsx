@@ -13,12 +13,12 @@ import {
 } from "lucide-react";
 
 const SURFACE_VISUAL_MAP: Record<string, string> = {
-  walls: "/images/atelier/home/home-substrate-walls.webp",
-  tiles: "/images/atelier/home/home-substrate-tiles.webp",
-  plywood: "/images/atelier/home/home-substrate-plywood.webp",
-  "office-blinds": "/images/atelier/home/home-substrate-blinds.webp",
-  metals: "/images/atelier/home/home-substrate-metals.webp",
-  glass: "/images/atelier/home/home-substrate-glass.webp",
+  walls: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-walls.webp",
+  tiles: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-tiles.webp",
+  plywood: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-plywood.webp",
+  "office-blinds": "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-blinds.webp",
+  metals: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-metals.webp",
+  glass: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-substrate-glass.webp",
 };
 
 /**

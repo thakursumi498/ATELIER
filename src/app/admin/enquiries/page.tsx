@@ -81,8 +81,13 @@ function LeadCard({ item, nowMs, onUpdate, onDelete, initiallyExpanded }: { item
         </form>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#E8DED3] pt-3 text-xs text-[#746B64]">
-        <p>Notification: {item.emailStatus || (item.emailNotificationSent ? "sent" : "pending")} · Last updated {formatDate(item.updatedAt)}{item.emailLastError ? ` · ${item.emailLastError}` : ""}</p>
-        {item.emailStatus === "failed" && <button type="button" disabled={busy || (item.emailAttempts || 0) >= 5 || Boolean(item.emailProviderId)} onClick={() => void save({ retryEmail: true })} className={adminButtonClass("secondary", "sm")}><RefreshCw className="h-3.5 w-3.5" />Retry notification</button>}
+        <div className="space-y-1">
+          <p>Owner notification: {item.emailStatus || (item.emailNotificationSent ? "sent" : "pending")}{item.emailLastError ? ` · ${item.emailLastError}` : ""}</p>
+          <p>Last updated {formatDate(item.updatedAt)}</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {item.emailStatus === "failed" && <button type="button" disabled={busy || (item.emailAttempts || 0) >= 5 || Boolean(item.emailProviderId)} onClick={() => void save({ retryEmail: true })} className={adminButtonClass("secondary", "sm")}><RefreshCw className="h-3.5 w-3.5" />Retry owner email</button>}
+        </div>
       </div>
       {error && <p role="alert" className="text-sm text-[#9B1C1C]">{error}</p>}
       {notice && <p role="status" className="text-sm text-[#264E32]">{notice}</p>}

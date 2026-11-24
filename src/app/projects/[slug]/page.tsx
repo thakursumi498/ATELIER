@@ -3,13 +3,16 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { ProjectDetailClient } from "@/components/projects/ProjectDetailClient";
-import { getPublicProjects, isPrivatePreview } from "@/lib/public-cms";
-export const dynamic = "force-dynamic";
+import { getPublicProjects } from "@/lib/public-cms";
+export const dynamicParams = false;
+export async function generateStaticParams() {
+  return (await getPublicProjects()).map(project => ({ slug: project.slug }));
+}
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const project = (await getPublicProjects()).find(item => item.slug === slug);
   if (!project) return { title: "Project Not Found", robots: { index: false } };
-  return { title: project.seoTitle || project.title, description: project.seoDescription || project.summary, alternates: { canonical: `/projects/${project.slug}` }, openGraph: { title: project.seoTitle || project.title, description: project.seoDescription || project.summary, images: [{ url: project.coverImage.secureUrl, alt: project.coverImage.altText }], url: `/projects/${project.slug}` }, robots: (await isPrivatePreview()) ? { index: false, follow: false } : undefined };
+  return { title: project.seoTitle || project.title, description: project.seoDescription || project.summary, alternates: { canonical: `/projects/${project.slug}` }, openGraph: { title: project.seoTitle || project.title, description: project.seoDescription || project.summary, images: [{ url: project.coverImage.secureUrl, alt: project.coverImage.altText }], url: `/projects/${project.slug}` } };
 }
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

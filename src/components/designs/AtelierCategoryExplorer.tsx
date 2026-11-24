@@ -7,7 +7,6 @@ import {
   ChevronRight,
   Layers,
   MoveHorizontal,
-  RefreshCw,
   RotateCcw,
   Sparkles,
 } from "lucide-react";
@@ -19,7 +18,6 @@ import {
 } from "@/components/ui/zoom-slider";
 import {
   ATELIER_ART_VAULT_CONTENT,
-  DESIGN_CATEGORY_RECORDS,
   type AtelierVaultCategoryItem,
 } from "@/lib/designs-catalogue";
 import { cn } from "@/lib/cn";
@@ -304,9 +302,6 @@ export interface AtelierCategoryExplorerProps {
     options?: { scrollToResults?: boolean }
   ) => void;
   isModalOpen?: boolean;
-  isLoading?: boolean;
-  errorMessage?: string | null;
-  onRetry?: () => void;
 }
 
 export function AtelierCategoryExplorer({
@@ -314,9 +309,6 @@ export function AtelierCategoryExplorer({
   activeCategorySlug,
   onSelectCategorySlug,
   isModalOpen = false,
-  isLoading = false,
-  errorMessage = null,
-  onRetry,
 }: AtelierCategoryExplorerProps) {
   const sliderRef = useRef<ZoomSliderControlHandle | null>(null);
   const categoriesRef = useRef<ReadonlyArray<AtelierVaultCategoryItem>>(categories);
@@ -470,55 +462,15 @@ export function AtelierCategoryExplorer({
           />
         </div>
 
-        {/* Optional CMS Sync Warning / Error Banner (Section 21) */}
-        {errorMessage && (
-          <div
-            role="status"
-            className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#9B1C1C]/35 bg-[#F6EAE6] px-4 py-3 text-xs text-[#211D1A]"
-          >
-            <span>{errorMessage}</span>
-            {onRetry && (
-              <button
-                type="button"
-                onClick={onRetry}
-                className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-[#DDD2C5] bg-[#FBF8F3] px-3 py-1 font-medium text-[#211D1A] hover:border-[#9B1C1C]"
-              >
-                <RefreshCw className="h-3 w-3" />
-                <span>Retry</span>
-              </button>
-            )}
-          </div>
-        )}
-
-        {/* Discrepancy note if fewer than the public catalogue categories are active */}
-        {!isLoading && categories.length > 0 && categories.length < DESIGN_CATEGORY_RECORDS.length && (
-          <div className="mt-4 rounded-xl border border-[#DDD2C5] bg-[#FBF8F3] px-4 py-2.5 text-xs text-[#6F665E]">
-            Showing {categories.length} of {DESIGN_CATEGORY_RECORDS.length} public design categories
-            currently marked active in CMS.
-          </div>
-        )}
-
         {/* Interactive category ZoomSlider gallery */}
         <div className="mt-4">
-          {isLoading ? (
-            <div
-              aria-busy="true"
-              aria-label={`Loading ${DESIGN_CATEGORY_RECORDS.length} Worlds of Wall Art gallery`}
-              className="flex h-[390px] w-full items-end gap-3 overflow-hidden rounded-2xl border border-[#DDD2C5] bg-[#F2EBE2] p-4 sm:h-[420px] lg:h-[450px]"
-            >
-              <div className="h-[25%] w-[8%] animate-pulse rounded-t-xl bg-[#DDD2C5]/60" />
-              <div className="h-[45%] w-[15%] animate-pulse rounded-t-xl bg-[#DDD2C5]/70" />
-              <div className="h-[68%] w-[26%] animate-pulse rounded-t-xl bg-[#DDD2C5]/80" />
-              <div className="h-[82%] flex-1 animate-pulse rounded-t-xl bg-[#DDD2C5]" />
-            </div>
-          ) : categories.length === 0 ? (
+          {categories.length === 0 ? (
             <div className="rounded-2xl border border-[#DDD2C5] bg-[#FBF8F3] p-12 text-center">
               <p className="font-serif text-2xl text-[#211D1A]">
-                No published categories available
+                The design collection is being prepared
               </p>
               <p className="mx-auto mt-2 max-w-md text-sm text-[#6F665E]">
-                Categories can be configured and published from the Atelier CMS
-                Category Registry.
+                Please check back soon or contact our Mumbai studio for a bespoke design.
               </p>
             </div>
           ) : (

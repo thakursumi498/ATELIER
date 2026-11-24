@@ -84,7 +84,7 @@ export function ProcessWallPreview() {
               >
                 {/* AFTER Layer (same viewpoint with botanical mural) */}
                 <img
-                  src="/images/atelier/wall-preview-after.jpg"
+                  src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/wall-preview-after.webp"
                   alt="After: Sunlit architectural living room wall transformed with a bespoke botanical mural"
                   draggable={false}
                   className="h-full w-full object-cover object-center"
@@ -98,7 +98,7 @@ export function ProcessWallPreview() {
                   }}
                 >
                   <img
-                    src="/images/atelier/wall-preview-before.jpg"
+                    src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/wall-preview-before.webp"
                     alt="Before: Sunlit bare neutral living room wall prior to mural printing"
                     draggable={false}
                     className="h-full w-full object-cover object-center"

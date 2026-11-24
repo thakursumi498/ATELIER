@@ -92,7 +92,7 @@ export const ATELIER_PROCESS_TIMELINE_ITEMS: ReadonlyArray<TimelineItem> = [
     description:
       "We begin by understanding your space, preferred printing surface, dimensions, aesthetic direction, and creative vision.",
     studioLabel: "STUDIO BRIEF & SURFACE ASSESSMENT",
-    imageUrl: "/images/atelier/process-stage-01-consultation.jpg",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-01-consultation.webp",
     imageAlt:
       "Atelier consultation desk with material swatches, travertine, ceramic tile, plywood samples, and elevation notes",
     position: "top",
@@ -105,7 +105,7 @@ export const ATELIER_PROCESS_TIMELINE_ITEMS: ReadonlyArray<TimelineItem> = [
     description:
       "Explore our curated design catalogue or discuss a bespoke artwork created around your architectural space.",
     studioLabel: "13 CURATED WORLDS & BESPOKE ART",
-    imageUrl: "/images/atelier/about-story-sketchbook.jpg",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-story-sketchbook.webp",
     imageAlt:
       "Open linen-bound artist sketchbook on honed travertine showing botanical and terracotta wall mural studies",
     position: "bottom",
@@ -120,7 +120,7 @@ export const ATELIER_PROCESS_TIMELINE_ITEMS: ReadonlyArray<TimelineItem> = [
     description:
       "Refine the artwork's scale, composition, colors, and placement. Preview selected designs on your own wall before proceeding.",
     studioLabel: "PROPORTIONING & LIVE WALL PREVIEW",
-    imageUrl: "/images/atelier/wall-preview-after.jpg",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/wall-preview-after.webp",
     imageAlt:
       "Live wall preview showing a custom-proportioned botanical mural mapped onto a sunlit living room elevation",
     position: "top",
@@ -135,7 +135,7 @@ export const ATELIER_PROCESS_TIMELINE_ITEMS: ReadonlyArray<TimelineItem> = [
     description:
       "Review the final artwork composition, positioning, and surface preparation requirements before execution.",
     studioLabel: "FINAL ELEVATION PROOF & SIGN-OFF",
-    imageUrl: "/images/atelier/process-stage-04-approval.jpg",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-04-approval.webp",
     imageAlt:
       "Final architectural design approval sheet with mural scale proof, pigment swatches, and brass ruler",
     position: "bottom",
@@ -148,7 +148,7 @@ export const ATELIER_PROCESS_TIMELINE_ITEMS: ReadonlyArray<TimelineItem> = [
     description:
       "Once the artwork and surface are ready, our team prints the design directly onto the selected architectural surface.",
     studioLabel: "DIRECT-TO-SURFACE EXECUTION",
-    imageUrl: "/images/atelier/process-stage-05-execution.jpg",
+    imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-stage-05-execution.webp",
     imageAlt:
       "Completed direct-to-surface 3D architectural wall mural in a sunlit double-height interior space",
     position: "top",
@@ -171,7 +171,7 @@ export function Timeline({
   mutedTextColor = "rgba(232, 226, 217, 0.76)",
   activeColor = "#9B1C1C",
   backgroundColor = "#1A1A1A",
-  imageUrl = "/images/atelier/process-hero-sculptural-arch.jpg",
+  imageUrl = "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/process/process-hero-sculptural-arch.webp",
   imageAlt = "Sculptural curved lime-plaster archway framing a luxury interior wall mural by Atelier Wall Story",
   duration,
   scrollDuration = 1.2,

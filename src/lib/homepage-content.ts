@@ -3,7 +3,7 @@
  *
  * Separates default studio copy and curated showcase visuals from
  * published database records (`designs`, `projects`, `page_contents`, `site_settings`)
- * so the Admin CMS (/admin/content) can override every homepage section without source code edits.
+ * so homepage sections use one source-controlled content definition.
  */
 
 import { ATELIER_BRAND } from "@/lib/brand";
@@ -151,7 +151,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
       "/videos/atelier-wall-printing-hero.mp4",
     posterUrl:
       process.env.NEXT_PUBLIC_HERO_POSTER_URL ||
-      "/images/atelier-wall-printing-poster.webp",
+      "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/images/atelier-wall-printing-poster.webp",
     isProvisionalCopy: false,
   },
   philosophy: {
@@ -163,7 +163,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
       "Operating from Oshiwara, Andheri West, Mumbai, ATELIER — WALL STORY approaches every interior elevation as an integral architectural statement. Through direct-to-surface 3D wall printing, murals and conceptual wall art are printed directly onto walls, tiles, plywood, office blinds, metals, and glass—uniting artistic authorship with material permanence.",
     ctaLabel: "About Us",
     ctaHref: "/about",
-    visualPlaceholderUrl: "/images/atelier/home/home-studio-philosophy.webp",
+    visualPlaceholderUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-studio-philosophy.webp",
     visualCaption:
       "Architectural Surface & Wall Mural Studio — Oshiwara, Andheri West, Mumbai",
   },
@@ -184,7 +184,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
         surfaceTag: "Walls & Plywood",
         defaultMode: "mural",
         aspectClass: "tall",
-        sampleImageUrl: "/images/atelier/artwork-terracotta-wave.jpg",
+        sampleImageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/artwork-terracotta-wave.webp",
         caption: "Textured Relief • Walls & Plywood",
         isTemporarySample: true,
       },
@@ -197,7 +197,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
         surfaceTag: "Walls, Tiles & Glass",
         defaultMode: "mural",
         aspectClass: "square",
-        sampleImageUrl: "/images/atelier/artwork-botanical-canopy.jpg",
+        sampleImageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/artwork-botanical-canopy.webp",
         caption: "Botanical Mural • Walls & Tiles",
         isTemporarySample: true,
       },
@@ -210,7 +210,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
         surfaceTag: "Plastered Interior Walls",
         defaultMode: "mural",
         aspectClass: "square",
-        sampleImageUrl: "/images/atelier/artwork-arch-limestone.jpg",
+        sampleImageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/artwork-arch-limestone.webp",
         caption: "Architectural • Plastered Walls",
         isTemporarySample: true,
       },
@@ -223,7 +223,7 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContentConfig = {
         surfaceTag: "Walls, Office Blinds & Glass",
         defaultMode: "mural",
         aspectClass: "wide",
-        sampleImageUrl: "/images/atelier/artwork-geometric-harmony.jpg",
+        sampleImageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/artwork-geometric-harmony.webp",
         caption: "Geometric • Walls & Office Blinds",
         isTemporarySample: true,
       },

@@ -113,6 +113,7 @@ export function AutoFitWallStudio({
   const [artworkUrl, setArtworkUrl] = useState<string | null>(null);
   const [savedArtworkUrl, setSavedArtworkUrl] = useState<string | null>(null);
   const [artworkImage, setArtworkImage] = useState<HTMLImageElement | null>(null);
+  const [loadedArtworkUrl, setLoadedArtworkUrl] = useState<string | null>(null);
   const [artworkName, setArtworkName] = useState("");
   const [artworkProgress, setArtworkProgress] = useState(0);
   const [detectionState, setDetectionState] = useState<DetectionState>("empty");
@@ -142,7 +143,8 @@ export function AutoFitWallStudio({
   const [draggingUpload, setDraggingUpload] = useState<"room" | "artwork" | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [renderError, setRenderError] = useState<string | null>(null);
-  const [isRendering, setIsRendering] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [activeAutoRenderKey, setActiveAutoRenderKey] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [savedProjects, setSavedProjects] = useState<AutoFitProjectMeta[]>([]);
@@ -161,7 +163,54 @@ export function AutoFitWallStudio({
   const restoredCornersRef = useRef<WallQuad | null>(null);
 
   const displayArtworkUrl = artworkUrl || savedArtworkUrl || galleryArtworkUrl(selectedDesign);
+  const readyArtworkImage =
+    loadedArtworkUrl === displayArtworkUrl ? artworkImage : null;
   const displayArtworkName = artworkFile?.name || (savedArtworkUrl ? artworkName : selectedDesign.title);
+  const autoRenderKey = useMemo(() => {
+    if (
+      !isOpen ||
+      step !== 3 ||
+      !roomImage ||
+      !readyArtworkImage ||
+      !wallCorners ||
+      isPainting
+    ) {
+      return null;
+    }
+    return JSON.stringify([
+      roomUrl,
+      displayArtworkUrl,
+      wallCorners,
+      mode,
+      scale,
+      offsetX,
+      offsetY,
+      opacity,
+      lighting,
+      brightness,
+      protectionStrokes,
+    ]);
+  }, [
+    brightness,
+    displayArtworkUrl,
+    isOpen,
+    isPainting,
+    lighting,
+    mode,
+    offsetX,
+    offsetY,
+    opacity,
+    protectionStrokes,
+    readyArtworkImage,
+    roomImage,
+    roomUrl,
+    scale,
+    step,
+    wallCorners,
+  ]);
+  const isRendering =
+    isDownloading ||
+    (autoRenderKey !== null && activeAutoRenderKey === autoRenderKey);
   const roomAspectRatio = useMemo(() => {
     if (!roomImage?.naturalWidth || !roomImage.naturalHeight) return 1.5;
     return roomImage.naturalWidth / roomImage.naturalHeight;
@@ -338,8 +387,6 @@ export function AutoFitWallStudio({
   }, [roomUrl]);
 
   useEffect(() => {
-    setArtworkImage(null);
-    setIsRendering(false);
     if (!displayArtworkUrl) return;
     let cancelled = false;
     const image = new Image();
@@ -348,16 +395,19 @@ export function AutoFitWallStudio({
       if (!cancelled) {
         if (image.naturalWidth * image.naturalHeight > MAX_IMAGE_PIXELS) {
           setArtworkImage(null);
+          setLoadedArtworkUrl(null);
           setRenderError("This artwork has more than 40 megapixels. Choose a smaller source image to keep the preview responsive.");
           return;
         }
         setArtworkImage(image);
+        setLoadedArtworkUrl(displayArtworkUrl);
         setRenderError(null);
       }
     };
     image.onerror = () => {
       if (!cancelled) {
         setArtworkImage(null);
+        setLoadedArtworkUrl(null);
         setRenderError("This artwork could not be loaded for the preview. Choose another design or upload a new file.");
       }
     };
@@ -368,61 +418,71 @@ export function AutoFitWallStudio({
   }, [displayArtworkUrl]);
 
   useEffect(() => {
-    if (!isOpen || step !== 3 || !roomImage || !artworkImage || !wallCorners || isPainting) return;
     const token = ++renderTokenRef.current;
-    setIsRendering(true);
-    setRenderError(null);
-    const frame = requestAnimationFrame(() => {
-      try {
-        const composite = renderAutoFitComposite({
-          room: roomImage,
-          artwork: artworkImage,
-          corners: wallCorners,
-          mode,
-          scale,
-          offsetX,
-          offsetY,
-          opacity,
-          lighting,
-          brightness,
-          protectionStrokes,
-          maxPixels: 2_000_000,
-        });
-        if (token !== renderTokenRef.current) return;
-        const canvas = resultCanvasRef.current;
-        const context = canvas?.getContext("2d");
-        if (!canvas || !context) throw new Error("The preview canvas is not available.");
-        canvas.width = composite.width;
-        canvas.height = composite.height;
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(composite, 0, 0);
-        setIsRendering(false);
-      } catch (error) {
-        if (token !== renderTokenRef.current) return;
-        setIsRendering(false);
-        setRenderError(
-          error instanceof Error
-            ? error.message
-            : "The preview could not be rendered. Try changing the wall corners or artwork mode."
-        );
-      }
+    if (!autoRenderKey || !roomImage || !readyArtworkImage || !wallCorners) return;
+    let startFrame = 0;
+    let renderFrame = 0;
+    startFrame = requestAnimationFrame(() => {
+      if (token !== renderTokenRef.current) return;
+      setActiveAutoRenderKey(autoRenderKey);
+      setRenderError(null);
+      renderFrame = requestAnimationFrame(() => {
+        try {
+          const composite = renderAutoFitComposite({
+            room: roomImage,
+            artwork: readyArtworkImage,
+            corners: wallCorners,
+            mode,
+            scale,
+            offsetX,
+            offsetY,
+            opacity,
+            lighting,
+            brightness,
+            protectionStrokes,
+            maxPixels: 2_000_000,
+          });
+          if (token !== renderTokenRef.current) return;
+          const canvas = resultCanvasRef.current;
+          const context = canvas?.getContext("2d");
+          if (!canvas || !context) throw new Error("The preview canvas is not available.");
+          canvas.width = composite.width;
+          canvas.height = composite.height;
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.drawImage(composite, 0, 0);
+          setActiveAutoRenderKey((current) =>
+            current === autoRenderKey ? null : current,
+          );
+        } catch (error) {
+          if (token !== renderTokenRef.current) return;
+          setActiveAutoRenderKey((current) =>
+            current === autoRenderKey ? null : current,
+          );
+          setRenderError(
+            error instanceof Error
+              ? error.message
+              : "The preview could not be rendered. Try changing the wall corners or artwork mode."
+          );
+        }
+      });
     });
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(startFrame);
+      cancelAnimationFrame(renderFrame);
+    };
   }, [
-    artworkImage,
+    autoRenderKey,
     brightness,
-    isOpen,
     lighting,
     mode,
     offsetX,
     offsetY,
     opacity,
     protectionStrokes,
+    readyArtworkImage,
     roomImage,
     scale,
-    step,
     wallCorners,
-    isPainting,
   ]);
 
   useEffect(() => {
@@ -497,7 +557,7 @@ export function AutoFitWallStudio({
       if (protectMode && step === 3) {
         event.currentTarget.setPointerCapture(event.pointerId);
         setIsPainting(true);
-        setIsRendering(false);
+        setIsDownloading(false);
         const nextStroke = { points: [point], width: brushWidth };
         activeStrokeRef.current = nextStroke;
         setProtectionStrokes((current) => [...current, nextStroke]);
@@ -663,13 +723,13 @@ export function AutoFitWallStudio({
   }, [artworkFile, currentDesignSlug, displayArtworkName, displayArtworkUrl, flashNotice, lighting, mode, offsetX, offsetY, opacity, protectionStrokes, roomFile, scale, wallCorners]);
 
   const handleDownload = useCallback(async () => {
-    if (!roomImage || !artworkImage || !wallCorners) return;
-    setIsRendering(true);
+    if (!roomImage || !readyArtworkImage || !wallCorners) return;
+    setIsDownloading(true);
     setRenderError(null);
     try {
       const composite = renderAutoFitComposite({
         room: roomImage,
-        artwork: artworkImage,
+        artwork: readyArtworkImage,
         corners: wallCorners,
         mode,
         scale,
@@ -700,29 +760,21 @@ export function AutoFitWallStudio({
           : "The preview could not be exported. Try another image or reduce its size."
       );
     } finally {
-      setIsRendering(false);
+      setIsDownloading(false);
     }
-  }, [artworkImage, brightness, flashNotice, lighting, mode, offsetX, offsetY, opacity, protectionStrokes, roomImage, roomName, scale, wallCorners]);
+  }, [brightness, flashNotice, lighting, mode, offsetX, offsetY, opacity, protectionStrokes, readyArtworkImage, roomImage, roomName, scale, wallCorners]);
 
   const handleDeleteProject = useCallback(async (id: string) => {
     await deleteAutoFitProject(id);
     setSavedProjects(await listAutoFitProjects());
   }, []);
 
-  const goToPreview = useCallback(() => {
-    if (!wallCorners || !artworkImage) return;
-    setStep(3);
-    setManualMode(false);
-    setProtectMode(false);
-    setCompareX(0.5);
-  }, [artworkImage, wallCorners]);
-
   const selectStep = useCallback((nextStep: WorkflowStep) => {
     if (nextStep === 2 && !wallCorners) return;
-    if (nextStep === 3 && (!wallCorners || !artworkImage)) return;
+    if (nextStep === 3 && (!wallCorners || !readyArtworkImage)) return;
     setStep(nextStep);
     setProtectMode(false);
-  }, [artworkImage, wallCorners]);
+  }, [readyArtworkImage, wallCorners]);
 
   const stageWidthStyle = useMemo<React.CSSProperties>(
     () => ({
@@ -837,8 +889,8 @@ export function AutoFitWallStudio({
                   <div className="rounded-xl border border-[#E5D9CA] bg-[#FCFAF6] p-4 sm:p-5"><div className="flex items-center justify-between gap-3"><div><p className="text-xs font-semibold text-[#1A1A1A]">Upload your design</p><p className="mt-1 text-xs leading-relaxed text-[#746B64]">JPG, PNG, or WebP up to 25 MB. PNG/WebP transparency is supported.</p></div><Upload className="h-5 w-5 shrink-0 text-[#9B1C1C]" /></div><input ref={artworkInputRef} type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" className="hidden" onChange={(event) => { const file = event.target.files?.[0]; event.target.value = ""; if (file) loadArtworkFile(file); }} /><button type="button" onClick={() => artworkInputRef.current?.click()} onDragOver={(event) => { event.preventDefault(); setDraggingUpload("artwork"); }} onDragLeave={() => setDraggingUpload(null)} onDrop={(event) => { event.preventDefault(); setDraggingUpload(null); const file = event.dataTransfer.files?.[0]; if (file) loadArtworkFile(file); }} className={cn("mt-4 flex min-h-[95px] w-full items-center justify-center gap-3 rounded-xl border-2 border-dashed px-4 py-4 text-center transition-colors", draggingUpload === "artwork" ? "border-[#9B1C1C] bg-[#FAF0EC]" : "border-[#DFD0C0] bg-white hover:border-[#9B1C1C]")}><span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#9B1C1C]/10 text-[#9B1C1C]"><Upload className="h-4 w-4" /></span><span><span className="block text-sm font-semibold text-[#1A1A1A]">Drop artwork or browse files</span><span className="mt-1 block text-[11px] text-[#746B64]">{artworkFile ? `${artworkFile.name} · ${formatFileSize(artworkFile.size)}` : "A larger source image gives a sharper preview."}</span></span></button>{artworkProgress > 0 && artworkProgress < 100 && <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#E9DED0]"><span className="block h-full bg-[#9B1C1C]" style={{ width: `${artworkProgress}%` }} /></div>}</div>
                 </div>
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#E5D9CA] bg-white p-3"><div className="flex min-w-0 items-center gap-3"><div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-[#EAE0D3]"><img src={displayArtworkUrl} alt="" className="h-full w-full object-contain p-1" /></div><div className="min-w-0"><p className="text-[10px] font-semibold uppercase tracking-[0.13em] text-[#746B64]">Selected artwork</p><p className="truncate text-sm font-semibold text-[#1A1A1A]">{displayArtworkName}</p></div></div>{artworkFile && <button type="button" onClick={() => { if (artworkUrlRef.current) URL.revokeObjectURL(artworkUrlRef.current); artworkUrlRef.current = null; setArtworkUrl(null); setArtworkFile(null); setSavedArtworkUrl(null); setArtworkName(""); }} className="rounded-full px-3 py-1.5 text-xs font-semibold text-[#9B1C1C] hover:bg-[#9B1C1C]/5">Use selected gallery design</button>}</div>
-                {artworkImage && <button type="button" onClick={() => selectStep(3)} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#9B1C1C] px-5 py-3 text-sm font-semibold text-white hover:bg-[#7D1616]">Auto-Fit Design <Sparkles className="h-4 w-4" /></button>}
-                {!artworkImage && <p role="status" className="mt-4 flex items-center gap-2 text-xs text-[#746B64]"><LoaderCircle className="h-4 w-4 animate-spin" /> Loading the selected artwork…</p>}
+                {readyArtworkImage && <button type="button" onClick={() => selectStep(3)} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#9B1C1C] px-5 py-3 text-sm font-semibold text-white hover:bg-[#7D1616]">Auto-Fit Design <Sparkles className="h-4 w-4" /></button>}
+                {!readyArtworkImage && <p role="status" className="mt-4 flex items-center gap-2 text-xs text-[#746B64]"><LoaderCircle className="h-4 w-4 animate-spin" /> Loading the selected artwork…</p>}
               </div>
             )}
 
@@ -881,7 +933,7 @@ export function AutoFitWallStudio({
           </main>
 
           <aside className="flex flex-col gap-4">
-            {step === 3 && <div className="rounded-2xl border border-[#E5D9CA] bg-[#FFFDF9] p-4"><p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#9B1C1C]">YOUR PROJECT</p><div className="mt-3 flex items-center gap-3"><div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-[#EAE0D3]"><img src={displayArtworkUrl} alt="" className="h-full w-full object-contain p-1" /></div><div className="min-w-0"><p className="truncate text-sm font-semibold text-[#1A1A1A]">{displayArtworkName}</p><p className="truncate text-xs text-[#746B64]">{roomName}</p></div></div><button type="button" onClick={handleDownload} disabled={!roomImage || !artworkImage || isRendering} className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#9B1C1C] px-4 py-2.5 text-xs font-semibold text-white hover:bg-[#7D1616] disabled:cursor-wait disabled:opacity-60">{isRendering ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />} Download Preview</button><button type="button" onClick={handleSaveProject} disabled={isSaving || !roomFile || !wallCorners} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#DFD0C0] bg-white px-4 py-2.5 text-xs font-semibold text-[#2A231F] hover:border-[#9B1C1C] disabled:opacity-60">{isSaving ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />} Save Project</button><a href={enquiryHref} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#DFD0C0] px-4 py-2.5 text-xs font-semibold text-[#3B332D] hover:border-[#9B1C1C] hover:text-[#9B1C1C]">Enquire With This Design <ArrowRight className="h-4 w-4" /></a><p className="mt-3 flex items-center gap-1.5 text-[10px] leading-relaxed text-[#746B64]"><ShieldCheck className="h-3.5 w-3.5 shrink-0 text-emerald-700" /> Photos and project files are saved only in this browser.</p></div>}
+            {step === 3 && <div className="rounded-2xl border border-[#E5D9CA] bg-[#FFFDF9] p-4"><p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#9B1C1C]">YOUR PROJECT</p><div className="mt-3 flex items-center gap-3"><div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-[#EAE0D3]"><img src={displayArtworkUrl} alt="" className="h-full w-full object-contain p-1" /></div><div className="min-w-0"><p className="truncate text-sm font-semibold text-[#1A1A1A]">{displayArtworkName}</p><p className="truncate text-xs text-[#746B64]">{roomName}</p></div></div><button type="button" onClick={handleDownload} disabled={!roomImage || !readyArtworkImage || isRendering} className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#9B1C1C] px-4 py-2.5 text-xs font-semibold text-white hover:bg-[#7D1616] disabled:cursor-wait disabled:opacity-60">{isRendering ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />} Download Preview</button><button type="button" onClick={handleSaveProject} disabled={isSaving || !roomFile || !wallCorners} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#DFD0C0] bg-white px-4 py-2.5 text-xs font-semibold text-[#2A231F] hover:border-[#9B1C1C] disabled:opacity-60">{isSaving ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />} Save Project</button><a href={enquiryHref} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#DFD0C0] px-4 py-2.5 text-xs font-semibold text-[#3B332D] hover:border-[#9B1C1C] hover:text-[#9B1C1C]">Enquire With This Design <ArrowRight className="h-4 w-4" /></a><p className="mt-3 flex items-center gap-1.5 text-[10px] leading-relaxed text-[#746B64]"><ShieldCheck className="h-3.5 w-3.5 shrink-0 text-emerald-700" /> Photos and project files are saved only in this browser.</p></div>}
             {step === 3 && <div className="rounded-2xl border border-[#E5D9CA] bg-[#FFFDF9] p-4"><p className="text-xs font-semibold text-[#1A1A1A]">Room photo</p><p className="mt-1 truncate text-xs text-[#746B64]">{roomName} · {roomImage ? `${roomImage.naturalWidth} × ${roomImage.naturalHeight}px` : "Preparing"}</p><p className="mt-3 text-xs font-semibold text-[#1A1A1A]">Fit quality</p>{manualMode ? <p className="mt-1 text-[11px] text-[#746B64]">Manual wall placement</p> : <div className="mt-1 flex items-center gap-2"><span className="h-1.5 flex-1 overflow-hidden rounded-full bg-[#E9DED0]"><span className="block h-full rounded-full bg-[#9B1C1C]" style={{ width: `${detectionPercent ?? 0}%` }} /></span><span className="text-[11px] tabular-nums text-[#746B64]">{detectionPercent ?? 0}%</span></div>}<p className="mt-2 text-[10px] leading-relaxed text-[#746B64]">Wall confidence describes detected geometry only; review the outline before using the preview.</p></div>}
             {(step === 1 || step === 2) && <div className="rounded-2xl border border-[#E5D9CA] bg-[#FFFDF9] p-4"><p className="text-xs font-semibold text-[#1A1A1A]">Your selected design</p><div className="mt-3 flex items-center gap-3"><div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-[#EAE0D3]"><img src={displayArtworkUrl} alt="" className="h-full w-full object-contain p-1" /></div><div className="min-w-0"><p className="truncate text-xs font-semibold text-[#1A1A1A]">{displayArtworkName}</p><button type="button" onClick={openArtworkPicker} className="mt-1 text-[11px] font-semibold text-[#9B1C1C] hover:underline">Change design</button></div></div></div>}
             <div className="rounded-2xl border border-[#E5D9CA] bg-[#FFFDF9] p-4"><p className="text-xs font-semibold text-[#1A1A1A]">How wall fitting works</p><p className="mt-1.5 text-xs leading-relaxed text-[#746B64]">Wall suggestions come from image edges and perspective lines in your photo. Low-confidence results stay in manual selection so the artwork is not placed on an assumed wall.</p></div>

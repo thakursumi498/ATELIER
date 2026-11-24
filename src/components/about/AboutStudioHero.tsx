@@ -496,12 +496,38 @@ function ExpertiseStrip() {
 export function AboutStudioHero() {
   const page = usePageContent("about");
   const settings = useSiteSettings();
+  const cmsHeading = page?.hero.heading?.trim();
+  const cmsHighlightedText = page?.hero.highlightedText?.trim();
+  const headingParts =
+    cmsHeading && cmsHighlightedText
+      ? cmsHeading.toLowerCase().includes(cmsHighlightedText.toLowerCase())
+        ? cmsHeading
+            .slice(
+              0,
+              cmsHeading.toLowerCase().indexOf(cmsHighlightedText.toLowerCase())
+            )
+            .trim()
+            .replace(/[\s,.:;!?]+$/, "")
+        : ""
+      : "";
+  const resolvedHeadlineLine1 =
+    headingParts ||
+    (cmsHeading &&
+    (!cmsHighlightedText ||
+      !cmsHeading
+        .toLowerCase()
+        .includes(cmsHighlightedText.toLowerCase()))
+      ? cmsHeading
+      : ABOUT_PAGE_CONTENT.hero.headlineLine1);
+  const resolvedHighlightedText =
+    cmsHighlightedText || ABOUT_PAGE_CONTENT.hero.headlineLine2;
+
   const hero = {
     ...ABOUT_PAGE_CONTENT.hero,
     ...(page
       ? {
           eyebrow: page.hero.eyebrow,
-          headlineLine1: page.hero.heading,
+          headlineLine1: resolvedHeadlineLine1,
           supportingText: page.hero.subheading,
           heroImageUrl:
             page.hero.posterImage?.secureUrl ||
@@ -581,7 +607,7 @@ export function AboutStudioHero() {
           <HeroContent
             eyebrow={hero.eyebrow}
             headlineLine1={hero.headlineLine1}
-            highlightedText={page?.hero.highlightedText || undefined}
+            highlightedText={resolvedHighlightedText}
             supportingText={hero.supportingText}
             primaryCtaLabel={page?.hero.primaryCta.label || "Our Story"}
             primaryCtaHref={page?.hero.primaryCta.href || "#studio-story"}

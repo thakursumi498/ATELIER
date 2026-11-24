@@ -160,7 +160,7 @@ export function WhyAtelierSection({ content = DEFAULT_HOMEPAGE_CONTENT }: { cont
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/atelier/home/home-why-atelier-completed-wall.webp"
+                  src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-why-atelier-completed-wall.webp"
                   alt="Sea-facing living room with a full wall printed with a muted gold and sage palm-and-peacock garden"
                   className="h-full w-full object-cover object-[50%_36%] transition-transform duration-700 ease-out group-hover:scale-[1.035] group-active:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 />

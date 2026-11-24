@@ -156,7 +156,7 @@ export function resolvePrintableArtworkInfo(
       sourceKind: "showcase_only_blocked",
       isPatternSuitable: false,
       sourceNote:
-        "Only an installed room showcase photograph is available for this record; upload a flat print texture in Admin CMS to preview on walls.",
+        "Only an installed room showcase photograph is available for this record; add a flat artwork image in the Image Library to preview it on walls.",
     };
   }
 

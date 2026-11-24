@@ -187,7 +187,7 @@ export function SpiralProcessJourney() {
               {/* Background Architectural Spiral Staircase Image */}
               <div className="relative aspect-[16/10] w-full sm:aspect-[16/9] lg:h-[440px] lg:aspect-auto">
                 <img
-                  src="/images/atelier/services-spiral-staircase.jpg"
+                  src="https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/services-spiral-staircase.webp"
                   alt="Sculptural curved warm lime-plaster architectural staircase with ascending process steps"
                   className="h-full w-full object-cover object-center"
                 />

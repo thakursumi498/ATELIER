@@ -1,20 +1,12 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
-
 import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { ADMIN_NAV_MODULES } from "@/lib/navigation";
 import {
-  BookOpen,
-  Building2,
-  Check,
-  Copy,
   Database,
   ExternalLink,
-  FileText,
-  FolderKanban,
   Images,
   KeyRound,
   LayoutDashboard,
@@ -22,20 +14,13 @@ import {
   LogOut,
   Menu,
   MessageSquare,
-  Palette,
-  Settings,
+  Settings as SettingsIcon,
   ShieldAlert,
-  Upload,
   X,
 } from "lucide-react";
-import { AdminMediaLibraryModal } from "@/components/admin/AdminMediaLibraryModal";
-import {
-  adminButtonClass,
-  adminInputClass,
-  adminLabelClass,
-} from "@/components/admin/AdminUiPrimitives";
+import { adminButtonClass } from "@/components/admin/AdminUiPrimitives";
 
-type NavGroupTitle = "Overview" | "Content" | "Business" | "System";
+type NavGroupTitle = "Overview" | "Media" | "Business";
 
 interface NavMeta {
   shortLabel: string;
@@ -45,27 +30,14 @@ interface NavMeta {
 
 const NAV_META_BY_ID: Record<string, NavMeta> = {
   overview: { shortLabel: "Dashboard", group: "Overview", Icon: LayoutDashboard },
-  content: { shortLabel: "Pages & Content", group: "Content", Icon: FileText },
-  designs: { shortLabel: "Design Collection", group: "Content", Icon: Palette },
-  categories: { shortLabel: "Categories", group: "Content", Icon: FolderKanban },
-  projects: { shortLabel: "Projects", group: "Content", Icon: Building2 },
-  blogs: { shortLabel: "Journal", group: "Content", Icon: BookOpen },
+  images: { shortLabel: "Manage Images", group: "Media", Icon: Images },
   enquiries: { shortLabel: "Enquiries", group: "Business", Icon: MessageSquare },
-  settings: { shortLabel: "Site Settings & SEO", group: "System", Icon: Settings },
+  settings: { shortLabel: "Settings", group: "Business", Icon: SettingsIcon },
 };
 
-const ORDERED_IDS = [
-  "overview",
-  "content",
-  "designs",
-  "categories",
-  "projects",
-  "blogs",
-  "enquiries",
-  "settings",
-] as const;
+const ORDERED_IDS = ["overview", "images", "enquiries", "settings"] as const;
 
-const GROUPS: NavGroupTitle[] = ["Overview", "Content", "Business", "System"];
+const GROUPS: NavGroupTitle[] = ["Overview", "Media", "Business"];
 
 export function AdminShellLayout({
   children,
@@ -82,9 +54,7 @@ export function AdminShellLayout({
 
   const [openedForPath, setOpenedForPath] = useState<string | null>(null);
   const mobileNavOpen = openedForPath === pathname;
-  const [mediaOpen, setMediaOpen] = useState(false);
   const [sessionEmail, setSessionEmail] = useState<string | null>(null);
-  const [openEnquiriesCount, setOpenEnquiriesCount] = useState<number | null>(null);
 
   const refreshChromeState = useCallback(() => {
     if (isLoginRoute) return;
@@ -95,19 +65,11 @@ export function AdminShellLayout({
       })
       .catch(() => {});
 
-    fetch("/api/admin/cms?collection=overview", { cache: "no-store" })
-      .then((res) => res.json())
-      .then((data) => {
-        if (typeof data?.counts?.enquiriesOpen === "number") {
-          setOpenEnquiriesCount(data.counts.enquiriesOpen);
-        }
-      })
-      .catch(() => {});
   }, [isLoginRoute]);
 
   useEffect(() => {
     refreshChromeState();
-  }, [pathname, refreshChromeState]);
+  }, [isLoginRoute, refreshChromeState]);
 
   useEffect(() => {
     if (!mobileNavOpen) return;
@@ -154,7 +116,7 @@ export function AdminShellLayout({
         >
           <BrandLogo variant="primary" size="md" priority />
           <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-[#746B64]">
-            Studio CMS
+            Studio Admin
           </span>
         </Link>
         {onNavigate ? (
@@ -221,13 +183,6 @@ export function AdminShellLayout({
                         />
                         <span className="truncate">{meta.shortLabel}</span>
                       </span>
-                      {mod.id === "enquiries" &&
-                      typeof openEnquiriesCount === "number" &&
-                      openEnquiriesCount > 0 ? (
-                        <span className="inline-flex items-center justify-center min-w-[22px] h-5 px-1.5 rounded-full bg-[#9B1C1C]/12 text-[#9B1C1C] font-sans text-[11px] font-semibold admin-tabular">
-                          {openEnquiriesCount}
-                        </span>
-                      ) : null}
                     </Link>
                   );
                 })}
@@ -236,23 +191,6 @@ export function AdminShellLayout({
           );
         })}
 
-        {/* Quick Asset Library Modal Launcher */}
-        <div>
-          <p className="px-3 mb-2 font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-[#746B64]">
-            Assets
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              onNavigate?.();
-              setMediaOpen(true);
-            }}
-            className="w-full flex items-center gap-3 rounded-xl px-3 py-2.5 font-sans text-[13px] font-medium text-[#574F49] hover:bg-[#FAF6F0] hover:text-[#1A1A1A] transition-colors cursor-pointer"
-          >
-            <Images className="w-4 h-4 shrink-0 text-[#746B64]" />
-            <span>Media Library</span>
-          </button>
-        </div>
       </nav>
 
       {/* Bottom Session Footer */}
@@ -406,10 +344,6 @@ export function AdminShellLayout({
         </main>
       </div>
 
-      <AdminMediaLibraryModal
-        open={mediaOpen}
-        onClose={() => setMediaOpen(false)}
-      />
     </div>
   );
 }
@@ -433,7 +367,7 @@ export function AdminAuthBanner({
             Administrator sign-in required
           </p>
           <p className="font-sans text-xs text-[#746B64]">
-            Sign in with your administrator credentials to publish, edit, upload imagery, or update enquiries.
+            Sign in with your administrator credentials to manage images and customer enquiries.
           </p>
         </div>
       </div>
@@ -444,147 +378,6 @@ export function AdminAuthBanner({
         <KeyRound className="h-3.5 w-3.5" />
         <span>Sign In to Edit</span>
       </Link>
-    </div>
-  );
-}
-
-export function AdminImageUploadField({
-  label,
-  value,
-  onChange,
-  disabled,
-}: {
-  label: string;
-  value: string;
-  onChange: (url: string) => void;
-  disabled?: boolean;
-}) {
-  const [uploading, setUploading] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
-  const [libraryOpen, setLibraryOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    setUploadError(null);
-    try {
-      const fd = new FormData();
-      fd.append("file", file);
-      const res = await fetch("/api/admin/upload", {
-        method: "POST",
-        body: fd,
-      });
-      const data = await res.json();
-      if (!res.ok || !data?.ok) {
-        setUploadError(data?.error || "Upload failed.");
-      } else if (data?.media?.secureUrl) {
-        onChange(data.media.secureUrl);
-      }
-    } catch {
-      setUploadError("Network error while uploading image.");
-    } finally {
-      setUploading(false);
-      e.target.value = "";
-    }
-  };
-
-  async function handleCopy() {
-    if (!value) return;
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      // Ignore clipboard failures in restricted frames
-    }
-  }
-
-  return (
-    <div className="space-y-2.5">
-      <label className={adminLabelClass}>{label}</label>
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-        <input
-          type="text"
-          value={value}
-          disabled={disabled}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder="/images/atelier/... or upload image"
-          className={`${adminInputClass} disabled:opacity-60`}
-        />
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            type="button"
-            disabled={disabled}
-            onClick={() => setLibraryOpen(true)}
-            className={adminButtonClass("secondary", "sm")}
-          >
-            <Images className="h-3.5 w-3.5 text-[#9B1C1C]" />
-            <span>Library</span>
-          </button>
-          <label
-            className={`${adminButtonClass("secondary", "sm")} ${
-              disabled || uploading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-            }`}
-          >
-            <Upload className="h-3.5 w-3.5 text-[#9B1C1C]" />
-            <span>{uploading ? "Uploading…" : "Upload"}</span>
-            <input
-              type="file"
-              accept="image/jpeg,image/png,image/webp,image/avif"
-              disabled={disabled || uploading}
-              onChange={handleFileChange}
-              className="hidden"
-            />
-          </label>
-        </div>
-      </div>
-
-      {uploadError ? (
-        <p role="alert" className="font-sans text-xs text-[#9B1C1C]">
-          {uploadError}
-        </p>
-      ) : null}
-
-      {value ? (
-        <div className="flex items-center justify-between gap-3 rounded-xl border border-[#E8DED3] bg-[#FAF6F0] p-2.5">
-          <div className="flex items-center gap-3 min-w-0">
-            <img
-              src={value}
-              alt="Selected asset preview"
-              className="h-12 w-16 rounded-lg border border-[#DFD0C0] object-cover shrink-0 bg-[#F2EAE1]"
-            />
-            <span className="truncate font-sans text-xs text-[#746B64]">
-              {value}
-            </span>
-          </div>
-          <button
-            type="button"
-            onClick={() => void handleCopy()}
-            className="inline-flex items-center gap-1 rounded-lg border border-[#DFD0C0] bg-[#FFFDF9] px-2.5 py-1.5 font-sans text-[11px] font-medium text-[#574F49] hover:text-[#1A1A1A] cursor-pointer shrink-0"
-          >
-            {copied ? (
-              <>
-                <Check className="w-3 h-3 text-[#264E32]" />
-                <span>Copied</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-3 h-3" />
-                <span>Copy URL</span>
-              </>
-            )}
-          </button>
-        </div>
-      ) : null}
-
-      <AdminMediaLibraryModal
-        open={libraryOpen}
-        onClose={() => setLibraryOpen(false)}
-        onSelect={(url) => onChange(url)}
-        title={`Select Asset — ${label}`}
-      />
     </div>
   );
 }

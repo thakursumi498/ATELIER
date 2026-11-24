@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "cms:migrate": "tsx scripts/migrate-cms.ts",
     "admin:password": "node scripts/hash-admin-password.mjs",
     "test": "tsx --test tests/*.test.ts"
   },
@@ -22,6 +21,7 @@
     "next": "16.4.5",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "sharp": "^0.35.5",
     "swiper": "^14.4.0",
     "tailwind-merge": "^3.7.0",
     "zod": "^4.6.7"

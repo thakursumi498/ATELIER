@@ -54,12 +54,12 @@ export const ATELIER_SCROLL_SERVICES: ReadonlyArray<AtelierScrollServiceItem> = 
       "Transform plain walls into captivating artistic statements with premium direct-to-wall printing.",
     fullDescription:
       "Atelier Wall Story brings intricate perspective-rich compositions and dimensional visual artwork directly onto prepared interior walls in Mumbai. By printing directly onto the wall surface without wallpaper seams or pasted panels, artwork integrates naturally with your room's proportions and lighting.",
-    image: "/images/atelier/home/home-scroll-3d-wall-printing.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-3d-wall-printing.webp",
     imageAlt:
       "3D Wall Printing — living room wall printed with a dimensional ivory and sand fan relief composition",
     galleryImages: [
       {
-        url: "/images/atelier/home/home-scroll-3d-wall-printing.webp",
+        url: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-3d-wall-printing.webp",
         alt: "3D Wall Printing — living room wall printed with a dimensional ivory and sand fan relief composition",
         caption: "Direct-to-wall dimensional fan relief composition",
       },
@@ -89,12 +89,12 @@ export const ATELIER_SCROLL_SERVICES: ReadonlyArray<AtelierScrollServiceItem> = 
       "Express your personality through bespoke murals designed to transform everyday spaces.",
     fullDescription:
       "Each mural is curated or custom-proportioned around your room's sightlines, furniture placement, and architectural trim. From serene botanical horizons to expressive contemporary compositions, our direct surface printing turns blank walls into personal narratives.",
-    image: "/images/atelier/home/home-scroll-custom-murals.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-custom-murals.webp",
     imageAlt:
       "Custom Murals — dining room with a full-wall misty forest and waterfall mural",
     galleryImages: [
       {
-        url: "/images/atelier/home/home-scroll-custom-murals.webp",
+        url: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-custom-murals.webp",
         alt: "Custom Murals — dining room with a full-wall misty forest and waterfall mural",
         caption: "Custom misty forest and waterfall dining mural",
       },
@@ -124,12 +124,12 @@ export const ATELIER_SCROLL_SERVICES: ReadonlyArray<AtelierScrollServiceItem> = 
       "Reimagine tiles with custom artwork and creative surface printing.",
     fullDescription:
       "Extend bespoke artwork onto ceramic, vitrified, and stone tile elevations. Whether composing a continuous mural across a tiled feature wall or introducing geometric and Mediterranean motifs, direct tile printing brings custom artistry to hard architectural surfaces.",
-    image: "/images/atelier/home/home-scroll-tile-printing.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-tile-printing.webp",
     imageAlt:
       "Tile Printing — hotel lobby tiled wall printed with a cream and terracotta floral pattern across the joints",
     galleryImages: [
       {
-        url: "/images/atelier/home/home-scroll-tile-printing.webp",
+        url: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-tile-printing.webp",
         alt: "Tile Printing — hotel lobby tiled wall printed with a cream and terracotta floral pattern across the joints",
         caption: "Continuous floral pattern printed across lobby tiles",
       },
@@ -159,12 +159,12 @@ export const ATELIER_SCROLL_SERVICES: ReadonlyArray<AtelierScrollServiceItem> = 
       "Add artistic character to glass partitions, interiors, and architectural features.",
     fullDescription:
       "Transform transparent cabin dividers, conference room glazing, and decorative interior glass panels into refined architectural features. Direct printing on glass allows layered line art, privacy bands, and bespoke graphic compositions while preserving natural light flow.",
-    image: "/images/atelier/home/home-scroll-glass-printing.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-glass-printing.webp",
     imageAlt:
       "Glass Printing — atrium glass wall printed with burgundy-to-clear botanical silhouettes",
     galleryImages: [
       {
-        url: "/images/atelier/home/home-scroll-glass-printing.webp",
+        url: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-glass-printing.webp",
         alt: "Glass Printing — atrium glass wall printed with burgundy-to-clear botanical silhouettes",
         caption: "Gradient botanical silhouettes printed on atrium glass",
       },
@@ -194,12 +194,12 @@ export const ATELIER_SCROLL_SERVICES: ReadonlyArray<AtelierScrollServiceItem> = 
       "Explore distinctive decorative possibilities through direct printing on wood and metal.",
     fullDescription:
       "Unify custom millwork and architectural cladding with your interior wall art. We print directly onto prepared plywood panels, timber surfaces, and flat brushed or coated metal sheets—harmonizing warm wood grain and modern metallic textures with bespoke graphic detail.",
-    image: "/images/atelier/home/home-scroll-plywood-metal-printing.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-plywood-metal-printing.webp",
     imageAlt:
       "Plywood & Metal Printing — birch plywood panels with botanical line drawings beside blackened steel with gold geometry",
     galleryImages: [
       {
-        url: "/images/atelier/home/home-scroll-plywood-metal-printing.webp",
+        url: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-plywood-metal-printing.webp",
         alt: "Plywood & Metal Printing — birch plywood panels with botanical line drawings beside blackened steel with gold geometry",
         caption: "Botanical linework on plywood beside geometric steel panels",
       },
@@ -229,12 +229,12 @@ export const ATELIER_SCROLL_SERVICES: ReadonlyArray<AtelierScrollServiceItem> = 
       "Personalize professional spaces with visually striking, custom-printed blinds.",
     fullDescription:
       "Turn functional commercial roller blinds into cohesive artistic statements when drawn. Ideal for Mumbai studios, boardrooms, and street-facing workspaces, custom-printed office blinds combine daylight control with calm editorial graphics or brand storytelling.",
-    image: "/images/atelier/home/home-scroll-office-blind-printing.webp",
+    image: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-office-blind-printing.webp",
     imageAlt:
       "Office Blind Printing — five roller blinds printed with one ochre and burgundy brushstroke composition",
     galleryImages: [
       {
-        url: "/images/atelier/home/home-scroll-office-blind-printing.webp",
+        url: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/home/home-scroll-office-blind-printing.webp",
         alt: "Office Blind Printing — five roller blinds printed with one ochre and burgundy brushstroke composition",
         caption: "Continuous brushstroke artwork across studio roller blinds",
       },

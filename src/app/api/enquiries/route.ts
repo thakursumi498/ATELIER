@@ -40,7 +40,9 @@ export async function POST(request: Request) {
     };
     const { record: saved, deduplicated } = await saveEnquiryRecord(record);
     // Persistence has succeeded. Delivery failure must never turn a saved enquiry into an error.
-    if (!deduplicated) await sendEnquiryNotification(saved.id).catch(() => undefined);
+    if (!deduplicated) {
+      await Promise.allSettled([sendEnquiryNotification(saved.id)]);
+    }
     return privateJson({ ok: true, referenceCode: saved.referenceCode, deduplicated, message: "Thank you. Our studio has received your enquiry and will get in touch shortly." }, 201);
   } catch (error) { return requestErrorResponse(error, "Unable to submit your enquiry right now. Please try again."); }
 }

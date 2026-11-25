@@ -526,7 +526,7 @@ export const ATELIER_ASSET_REGISTRY = {
     origin: "brand_supplied",
     licenseOrApproval: "User-supplied portrait retouched for the ATELIER About page",
     altText:
-      "Triparna Bardhan, Managing Director at ATELIER — WALL STORY, in a mustard-yellow blouse and colourful navy sari, facing the camera in a warm studio",
+      "Triparna Bardhan, Managing Director at ATELIER — WALL STORY, in a maroon top against a warm studio backdrop",
     fallbackUrl: "/images/atelier/about/about-person-triparna-bardhan-portrait.webp",
     cmsFieldMapping: "page_contents.about.peopleBehindStudio.representativeWorkspaces[1].imageUrl",
   },

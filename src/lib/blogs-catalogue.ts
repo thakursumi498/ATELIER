@@ -104,7 +104,7 @@ export const ABOUT_PAGE_CONTENT = {
       {
         imageUrl: "/images/atelier/about/about-person-triparna-bardhan-portrait.webp",
         shortRole: "Managing Director",
-        alt: "Triparna Bardhan, Managing Director at ATELIER — WALL STORY, in a mustard-yellow blouse and colourful navy sari, facing the camera in a warm studio",
+        alt: "Triparna Bardhan, Managing Director at ATELIER — WALL STORY, in a maroon top against a warm studio backdrop",
       },
     ],
     mumbaiStudio: {

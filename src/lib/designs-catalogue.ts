@@ -57,13 +57,63 @@ export function isHiddenCatalogueCategory(category: {
   );
 }
 
-const PUBLIC_DRIVE_CATEGORY_ASSETS = DRIVE_CATEGORY_ASSETS.filter(
-  (category) => !isHiddenCatalogueCategory(category),
+/** Keep one JPG/PNG preview for each artwork; print-ready file versions stay private. */
+function selectPublicRasterArtworks(
+  images: (typeof DRIVE_CATEGORY_ASSETS)[number]["images"],
+) {
+  const selectedByCreative = new Map<string, (typeof images)[number]>();
+  const creativeName = (sourceName: string) =>
+    sourceName
+      .replace(/\.[^.]+$/u, "")
+      .replace(/\s*\(\d+\)$/u, "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9/]+/gu, "-")
+      .replace(/^-|-$/gu, "");
+  const hasCopySuffix = (sourceName: string) =>
+    /\s*\(\d+\)(?=\.[^.]+$)/u.test(sourceName.split("/").at(-1) || sourceName);
+
+  for (const image of images) {
+    if (!/\.(?:jpe?g|png)$/i.test(image.sourceName)) continue;
+
+    const key = creativeName(image.sourceName);
+    const current = selectedByCreative.get(key);
+    if (
+      !current ||
+      (hasCopySuffix(current.sourceName) && !hasCopySuffix(image.sourceName))
+    ) {
+      selectedByCreative.set(key, image);
+    }
+  }
+
+  return [...selectedByCreative.values()];
+}
+
+const PUBLIC_DRIVE_CATEGORY_ASSETS = DRIVE_CATEGORY_ASSETS
+  .filter((category) => !isHiddenCatalogueCategory(category))
+  .map((category) => ({
+    ...category,
+    images: selectPublicRasterArtworks(category.images),
+  }));
+
+const PUBLIC_DRIVE_ARTWORK_KEYS = new Set(
+  PUBLIC_DRIVE_CATEGORY_ASSETS.flatMap((category) =>
+    category.images.map((image) => `${category.slug}:${image.code.toUpperCase()}`),
+  ),
+);
+
+/** Hide Cloudinary conversions of internal PDF/PSD source versions too. */
+const NON_PUBLIC_SOURCE_ARTWORK_KEYS = new Set(
+  DRIVE_CATEGORY_ASSETS.flatMap((category) =>
+    category.images
+      .filter((image) => !PUBLIC_DRIVE_ARTWORK_KEYS.has(`${category.slug}:${image.code.toUpperCase()}`))
+      .map((image) => `${category.slug}:${image.code.toUpperCase()}`),
+  ),
 );
 
 export const DESIGN_CATEGORY_RECORDS: ReadonlyArray<CatalogueCategoryRecord> =
   CATALOGUE_CATEGORY_SLOTS.flatMap((slot) => {
-    const category = DRIVE_CATEGORY_ASSETS.find(
+    const category = PUBLIC_DRIVE_CATEGORY_ASSETS.find(
       (candidate) => candidate.slotNumber === slot.slotNumber,
     );
     if (!category || isHiddenCatalogueCategory(category)) return [];
@@ -179,7 +229,7 @@ export function mergeManagedDesignImages(
 
   for (const image of images) {
     const key = `${image.categorySlug}:${image.artworkCode.toUpperCase()}`;
-    if (!image.active || used.has(key) || result.some((design) => `${design.categorySlug}:${(design.artworkCode || "").toUpperCase()}` === key)) continue;
+    if (!image.active || NON_PUBLIC_SOURCE_ARTWORK_KEYS.has(key) || used.has(key) || result.some((design) => `${design.categorySlug}:${(design.artworkCode || "").toUpperCase()}` === key)) continue;
     const category = DESIGN_CATEGORY_RECORDS.find((entry) => entry.slug === image.categorySlug);
     if (!category || !/^AE\d{2}-\d{2}$/i.test(image.artworkCode)) continue;
     const title = image.altText.trim() || image.artworkCode;
@@ -490,7 +540,15 @@ export function buildAtelierVaultCategories(
   const publishedDesigns = designs.filter((d) => d.published);
 
   return [...categories]
-    .filter((cat) => cat.isActive !== false)
+    .filter((cat) =>
+      cat.isActive !== false &&
+      publishedDesigns.some(
+        (design) =>
+          design.categorySlug.toLowerCase() === cat.slug.toLowerCase() ||
+          design.categoryId === cat.id ||
+          design.categorySlotNumber === cat.slotNumber,
+      ),
+    )
     .sort(
       (a, b) =>
         (a.displayOrder ?? a.slotNumber) - (b.displayOrder ?? b.slotNumber)

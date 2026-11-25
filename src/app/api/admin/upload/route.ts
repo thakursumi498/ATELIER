@@ -3,7 +3,8 @@ import sharp from "sharp";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { requireAdminRequest } from "@/lib/admin-auth";
-import { DEVELOPMENT_FIXTURE_DESIGNS, DESIGN_CATEGORY_RECORDS } from "@/lib/designs-catalogue";
+import { DESIGN_CATEGORY_RECORDS } from "@/lib/designs-catalogue";
+import { DRIVE_CATEGORY_ASSETS } from "@/lib/drive-category-assets";
 import { buildAdminImageTaxonomy, WEBSITE_IMAGE_SECTIONS } from "@/lib/admin-image-taxonomy";
 import { cloudinaryDeliveryUrl, fetchCloudinaryAsset, getCachedCloudinaryAssets, managedAsset, uploadCloudinaryImage } from "@/lib/media-store";
 
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
         if (subcategorySlug && !subcategory) return NextResponse.json({ ok: false, error: "That subcategory does not belong to the selected category." }, { status: 400, headers });
         const existing = await getCachedCloudinaryAssets();
         const usedCodes = new Set([
-          ...DEVELOPMENT_FIXTURE_DESIGNS.filter((design) => design.categorySlotNumber === category.slotNumber).map((design) => design.artworkCode || ""),
+          ...(DRIVE_CATEGORY_ASSETS.find((item) => item.slug === category.slug)?.images.map((image) => image.code) || []),
           ...existing.map((asset) => asset.context?.custom?.artwork_code || ""),
         ].map((code) => code.toUpperCase()));
         const requestedCode = String(form.get("artworkCode") || "").trim().toUpperCase();

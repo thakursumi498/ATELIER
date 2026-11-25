@@ -1,7 +1,8 @@
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import { requireAdminRequest } from "@/lib/admin-auth";
-import { DESIGN_CATEGORY_RECORDS, DEVELOPMENT_FIXTURE_DESIGNS } from "@/lib/designs-catalogue";
+import { DESIGN_CATEGORY_RECORDS } from "@/lib/designs-catalogue";
+import { DRIVE_CATEGORY_ASSETS } from "@/lib/drive-category-assets";
 import { buildAdminImageTaxonomy } from "@/lib/admin-image-taxonomy";
 import { destroyCloudAsset, fetchCloudinaryAsset, getCachedCloudinaryAssets, managedAsset, mediaReferences, updateCloudinaryContext } from "@/lib/media-store";
 
@@ -77,7 +78,7 @@ export async function PATCH(request: Request) {
       let artworkCode = (context.artwork_code || "").toUpperCase();
       if (!artworkCode || currentCategory !== category.slug) {
         const allAssets = await getCachedCloudinaryAssets();
-        const staticCodes = new Set(DEVELOPMENT_FIXTURE_DESIGNS.filter((design) => design.categorySlug === category.slug).map((design) => (design.artworkCode || "").toUpperCase()));
+        const staticCodes = new Set((DRIVE_CATEGORY_ASSETS.find((item) => item.slug === category.slug)?.images || []).map((image) => image.code.toUpperCase()));
         const usedCodes = new Set(allAssets.filter((item) => item.public_id !== asset.public_id).map((item) => item.context?.custom?.artwork_code || "").map((code) => code.toUpperCase()));
         for (const code of staticCodes) usedCodes.add(code);
         let index = 1;
@@ -90,7 +91,7 @@ export async function PATCH(request: Request) {
       if (currentCategory && currentCategory !== category.slug && context.artwork_code) {
         const originalCode = context.original_artwork_code || context.artwork_code;
         const originalSlug = context.original_category_slug || currentCategory;
-        const isStaticArtwork = DEVELOPMENT_FIXTURE_DESIGNS.some((design) => design.categorySlug === originalSlug && design.artworkCode?.toUpperCase() === originalCode.toUpperCase());
+        const isStaticArtwork = DRIVE_CATEGORY_ASSETS.find((item) => item.slug === originalSlug)?.images.some((image) => image.code.toUpperCase() === originalCode.toUpperCase()) ?? false;
         if (isStaticArtwork && !(originalSlug === category.slug && originalCode.toUpperCase() === artworkCode)) {
           context.original_category_slug = originalSlug;
           context.original_artwork_code = originalCode.toUpperCase();

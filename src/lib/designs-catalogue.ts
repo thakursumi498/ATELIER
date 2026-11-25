@@ -57,7 +57,7 @@ export function isHiddenCatalogueCategory(category: {
   );
 }
 
-/** Keep one JPG/PNG preview for each artwork; print-ready file versions stay private. */
+/** Keep one JPG/PNG preview per artwork and leave print-ready variants private. */
 function selectPublicRasterArtworks(
   images: (typeof DRIVE_CATEGORY_ASSETS)[number]["images"],
 ) {
@@ -102,7 +102,7 @@ const PUBLIC_DRIVE_ARTWORK_KEYS = new Set(
   ),
 );
 
-/** Hide Cloudinary conversions of internal PDF/PSD source versions too. */
+/** Keep Cloudinary conversions of the hidden source versions out of the public list. */
 const NON_PUBLIC_SOURCE_ARTWORK_KEYS = new Set(
   DRIVE_CATEGORY_ASSETS.flatMap((category) =>
     category.images
@@ -540,15 +540,7 @@ export function buildAtelierVaultCategories(
   const publishedDesigns = designs.filter((d) => d.published);
 
   return [...categories]
-    .filter((cat) =>
-      cat.isActive !== false &&
-      publishedDesigns.some(
-        (design) =>
-          design.categorySlug.toLowerCase() === cat.slug.toLowerCase() ||
-          design.categoryId === cat.id ||
-          design.categorySlotNumber === cat.slotNumber,
-      ),
-    )
+    .filter((cat) => cat.isActive !== false)
     .sort(
       (a, b) =>
         (a.displayOrder ?? a.slotNumber) - (b.displayOrder ?? b.slotNumber)

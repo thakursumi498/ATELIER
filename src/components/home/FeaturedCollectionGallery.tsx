@@ -24,12 +24,7 @@ import { ArrowRight, ArrowUpRight, Scan } from "lucide-react";
 export function FeaturedCollectionGallery() {
   const router = useRouter();
   const catalogueDesigns = useManagedCatalogueDesigns(DEVELOPMENT_FIXTURE_DESIGNS);
-  const availableCategories = DESIGN_CATEGORY_RECORDS.filter((category) =>
-    catalogueDesigns.some(
-      (design) => design.published && design.categorySlug === category.slug,
-    ),
-  );
-  const categoryCount = availableCategories.length;
+  const categoryCount = DESIGN_CATEGORY_RECORDS.length;
   const sampleItems: ReadonlyArray<FeaturedSampleDesignItem> =
     catalogueDesigns.filter((design) => design.featured)
       .slice(0, 4)
@@ -267,7 +262,7 @@ export function FeaturedCollectionGallery() {
         </div>
 
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
-          {availableCategories.map((cat) => (
+          {DESIGN_CATEGORY_RECORDS.map((cat) => (
             <Link
               key={cat.slug}
               href={`/explore-designs?category=${cat.slug}`}

@@ -4,6 +4,7 @@ import { useSiteSettings } from "@/components/layout/PublicContentProvider";
 import Link from "next/link";
 import {
   ATELIER_BRAND,
+  ATELIER_CONTACTS,
   ATELIER_SURFACES,
   buildWhatsAppUrl,
 } from "@/lib/brand";
@@ -24,6 +25,10 @@ import { MapPin, MessageCircle, Phone } from "lucide-react";
 export function Footer() {
   const settings = useSiteSettings();
   const currentYear = new Date().getFullYear();
+  const triparna = ATELIER_CONTACTS.find(
+    (person) => person.name === "Triparna Bardhan"
+  );
+  const triparnaPhone = triparna?.phones.find((phone) => phone.isWhatsApp);
 
   return (
     <footer className="border-t border-white/10 bg-[#201C1A] text-[#FDF8F3]">
@@ -161,6 +166,17 @@ export function Footer() {
             <ul className="mt-3 grid gap-2.5 text-xs text-[#EDE4DA]/85 sm:mt-3.5 sm:gap-3">
               {settings?.contact.primaryPhone && <li className="flex items-start gap-2"><Phone className="mt-2 h-3.5 w-3.5 shrink-0 text-[#991D20]" /><a className="inline-flex min-h-9 items-center" href={`tel:${settings.contact.primaryPhone.replace(/[^+\d]/g, "")}`}>{settings.contact.primaryPhone}</a></li>}
               {settings?.contact.whatsappNumber && <li className="flex items-start gap-2"><MessageCircle className="mt-2 h-3.5 w-3.5 shrink-0 text-[#991D20]" /><a className="inline-flex min-h-9 items-center" href={buildWhatsAppUrl(settings.contact.whatsappNumber.replace(/\D/g, ""))} target="_blank" rel="noopener noreferrer">WhatsApp · {settings.contact.whatsappNumber}</a></li>}
+              {triparna && triparnaPhone && (
+                <li className="flex items-start gap-2">
+                  <Phone className="mt-2 h-3.5 w-3.5 shrink-0 text-[#991D20]" />
+                  <a
+                    className="inline-flex min-h-9 items-center"
+                    href={triparnaPhone.telHref}
+                  >
+                    {triparna.name} · {triparnaPhone.display}
+                  </a>
+                </li>
+              )}
               {settings?.contact.email && <li><a className="break-all" href={`mailto:${settings.contact.email}`}>{settings.contact.email}</a></li>}
               {settings?.contact.workingHours && <li>{settings.contact.workingHours}</li>}
               {settings && Object.entries(settings.socialLinks).filter(([, href]) => href).map(([name, href]) => <li key={name}><a className="capitalize underline underline-offset-4" href={href} target="_blank" rel="noopener noreferrer">{name}</a></li>)}

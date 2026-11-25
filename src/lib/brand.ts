@@ -102,7 +102,7 @@ export const ATELIER_SURFACES: ReadonlyArray<PrintableSurfaceSpec> = [
 export const ATELIER_CONTACTS: ReadonlyArray<BrandContactPerson> = [
   {
     name: "Saikat Ray",
-    role: "Client Consultation & Project Direction",
+    role: "Managing Director",
     phones: [
       {
         display: "+91 85919 71675",
@@ -119,7 +119,7 @@ export const ATELIER_CONTACTS: ReadonlyArray<BrandContactPerson> = [
   },
   {
     name: "Triparna Bardhan",
-    role: "Client Consultation & Creative Coordination",
+    role: "Managing Director",
     phones: [
       {
         display: "+91 86971 70746",

@@ -97,14 +97,14 @@ export const ABOUT_PAGE_CONTENT = {
       "A Mumbai studio crafting bespoke murals and direct-to-surface prints with care.",
     representativeWorkspaces: [
       {
-        imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-person-saikat-ray.webp",
-        shortRole: "Project Direction",
-        alt: "Saikat Ray — Project Direction at ATELIER — WALL STORY, seated at a sunlit studio consultation desk with travertine samples and architectural elevation plans",
+        imageUrl: "/images/atelier/about/about-person-saikat-ray-portrait.webp",
+        shortRole: "Managing Director",
+        alt: "Saikat Ray, Managing Director at ATELIER — WALL STORY, in a navy polo against a warm studio backdrop",
       },
       {
-        imageUrl: "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/about/about-person-triparna-bardhan.webp",
-        shortRole: "Creative Coordination",
-        alt: "Triparna Bardhan — Creative Coordination at ATELIER — WALL STORY, reviewing mural pigment swatches and a botanical sketchbook in the sunlit Mumbai studio",
+        imageUrl: "/images/atelier/about/about-person-triparna-bardhan-portrait.webp",
+        shortRole: "Managing Director",
+        alt: "Triparna Bardhan, Managing Director at ATELIER — WALL STORY, wearing a red and black sari against a warm studio backdrop",
       },
     ],
     mumbaiStudio: {

@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "admin:password": "node scripts/hash-admin-password.mjs",
+    "generate:qr": "node scripts/generate-atelier-qr.mjs",
     "test": "tsx --test tests/*.test.ts"
   },
   "dependencies": {
@@ -31,9 +32,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@zxing/library": "^0.21.3",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
     "mongodb-memory-server": "^11.3.0",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.4",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5"

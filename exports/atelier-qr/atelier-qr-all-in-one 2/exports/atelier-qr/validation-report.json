@@ -1,0 +1,179 @@
+{
+  "generatedAt": "2026-11-26T04:52:18.504Z",
+  "destinationUrl": "https://www.atelierwallstory.com/",
+  "brandName": "ATELIER — WALL STORY",
+  "brandColors": {
+    "crimson": "#9B1C1C",
+    "warmBeige": "#E8E2D9",
+    "offWhite": "#FAF9F6",
+    "charcoal": "#1A1A1A"
+  },
+  "originalLogoSource": "public/brand/atelier-logo-black.png",
+  "passed": true,
+  "decodeChecks": [
+    {
+      "label": "01-classic SVG render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "01-classic PNG 1024×1024",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "01-classic PNG 2048×2048",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "01-classic PNG 4096×4096",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "01-classic PDF render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "02-website-theme SVG render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "02-website-theme PNG 1024×1024",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "02-website-theme PNG 2048×2048",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "02-website-theme PNG 4096×4096",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "02-website-theme PDF render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "03-premium-branded SVG render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "03-premium-branded PNG 1024×1024",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "03-premium-branded PNG 2048×2048",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "03-premium-branded PNG 4096×4096",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "03-premium-branded PDF render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    }
+  ],
+  "variants": [
+    {
+      "id": "01-classic",
+      "label": "Variant 01 — Simple Classic QR",
+      "foreground": "#000000",
+      "background": "#FFFFFF",
+      "contrastRatio": "21:1",
+      "errorCorrection": "H",
+      "matrixModules": "33×33",
+      "quietZoneModules": 4,
+      "logo": null,
+      "brandNameOutsideQuietZone": null,
+      "formats": {
+        "svg": "./01-classic/atelier-qr-01-classic.svg",
+        "png": [
+          "./01-classic/atelier-qr-01-classic-1024.png",
+          "./01-classic/atelier-qr-01-classic-2048.png",
+          "./01-classic/atelier-qr-01-classic-4096.png"
+        ],
+        "pdf": "./01-classic/atelier-qr-01-classic.pdf"
+      },
+      "pdfPrintDetails": {
+        "fileBytes": 222252,
+        "pageSizePoints": 432,
+        "printResolutionDpi": 682.7,
+        "output": "exports/atelier-qr/01-classic/atelier-qr-01-classic.pdf"
+      }
+    },
+    {
+      "id": "02-website-theme",
+      "label": "Variant 02 — Website Theme QR",
+      "foreground": "#9B1C1C",
+      "background": "#FAF9F6",
+      "contrastRatio": "7.74:1",
+      "errorCorrection": "H",
+      "matrixModules": "33×33",
+      "quietZoneModules": 4,
+      "logo": null,
+      "brandNameOutsideQuietZone": null,
+      "formats": {
+        "svg": "./02-website-theme/atelier-qr-02-website-theme.svg",
+        "png": [
+          "./02-website-theme/atelier-qr-02-website-theme-1024.png",
+          "./02-website-theme/atelier-qr-02-website-theme-2048.png",
+          "./02-website-theme/atelier-qr-02-website-theme-4096.png"
+        ],
+        "pdf": "./02-website-theme/atelier-qr-02-website-theme.pdf"
+      },
+      "pdfPrintDetails": {
+        "fileBytes": 222944,
+        "pageSizePoints": 432,
+        "printResolutionDpi": 682.7,
+        "output": "exports/atelier-qr/02-website-theme/atelier-qr-02-website-theme.pdf"
+      }
+    },
+    {
+      "id": "03-premium-branded",
+      "label": "Variant 03 — Premium Atelier Branded QR",
+      "foreground": "#1A1A1A",
+      "background": "#FAF9F6",
+      "contrastRatio": "16.53:1",
+      "errorCorrection": "H",
+      "matrixModules": "33×33",
+      "quietZoneModules": 4,
+      "logo": {
+        "source": "public/brand/atelier-logo-black.png",
+        "dimensions": "1750×408",
+        "widthRatio": 0.2,
+        "knockoutCoverageOfMatrixPercent": 1.87,
+        "monochromeValidation": "passed; no red or colored pixels detected"
+      },
+      "brandNameOutsideQuietZone": "ATELIER — WALL STORY",
+      "formats": {
+        "svg": "./03-premium-branded/atelier-qr-03-premium-branded.svg",
+        "png": [
+          "./03-premium-branded/atelier-qr-03-premium-branded-1024.png",
+          "./03-premium-branded/atelier-qr-03-premium-branded-2048.png",
+          "./03-premium-branded/atelier-qr-03-premium-branded-4096.png"
+        ],
+        "pdf": "./03-premium-branded/atelier-qr-03-premium-branded.pdf"
+      },
+      "pdfPrintDetails": {
+        "fileBytes": 205922,
+        "pageSizePoints": 432,
+        "printResolutionDpi": 682.7,
+        "output": "exports/atelier-qr/03-premium-branded/atelier-qr-03-premium-branded.pdf"
+      }
+    }
+  ]
+}

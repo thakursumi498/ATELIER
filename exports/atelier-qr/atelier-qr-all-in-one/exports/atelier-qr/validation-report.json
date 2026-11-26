@@ -1,0 +1,160 @@
+{
+  "generatedAt": "2026-11-26T04:34:07.506Z",
+  "destinationUrl": "https://www.atelierwallstory.com/",
+  "brandColors": {
+    "crimson": "#9B1C1C",
+    "warmBeige": "#E8E2D9",
+    "offWhite": "#FAF9F6",
+    "charcoal": "#1A1A1A"
+  },
+  "logoSource": "public/brand/atelier-logo-primary.png",
+  "passed": true,
+  "decodeChecks": [
+    {
+      "label": "variant-01-classic SVG",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-01-classic PNG 1024×1024",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-01-classic PNG 2048×2048",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-01-classic PNG 4096×4096",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-01-classic PDF render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-02-brand-theme SVG",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-02-brand-theme PNG 1024×1024",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-02-brand-theme PNG 2048×2048",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-02-brand-theme PNG 4096×4096",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-02-brand-theme PDF render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-03-print-edition SVG",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-03-print-edition PNG 1024×1024",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-03-print-edition PNG 2048×2048",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-03-print-edition PNG 4096×4096",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    },
+    {
+      "label": "variant-03-print-edition PDF render",
+      "decodedUrl": "https://www.atelierwallstory.com/",
+      "pass": true
+    }
+  ],
+  "variants": [
+    {
+      "id": "variant-01-classic",
+      "label": "Variant 01 — Classic",
+      "foreground": "#1A1A1A",
+      "background": "#FFFFFF",
+      "contrastRatio": "17.4:1",
+      "errorCorrection": "H",
+      "matrixModules": "33×33",
+      "quietZoneModules": 4,
+      "logoSource": "public/brand/atelier-logo-primary.png",
+      "logoPixels": "1750×408",
+      "logoWidthRatio": 0.2,
+      "logoKnockoutCoverageOfMatrixPercent": 1.87,
+      "files": {
+        "svg": "./variant-01-classic/atelier-qr-variant-01-classic.svg",
+        "png": [
+          "./variant-01-classic/atelier-qr-variant-01-classic-1024.png",
+          "./variant-01-classic/atelier-qr-variant-01-classic-2048.png",
+          "./variant-01-classic/atelier-qr-variant-01-classic-4096.png"
+        ],
+        "pdf": "./variant-01-classic/atelier-qr-variant-01-classic.pdf"
+      }
+    },
+    {
+      "id": "variant-02-brand-theme",
+      "label": "Variant 02 — Brand Theme",
+      "foreground": "#9B1C1C",
+      "background": "#FAF9F6",
+      "contrastRatio": "7.74:1",
+      "errorCorrection": "H",
+      "matrixModules": "33×33",
+      "quietZoneModules": 4,
+      "logoSource": "public/brand/atelier-logo-primary.png",
+      "logoPixels": "1750×408",
+      "logoWidthRatio": 0.2,
+      "logoKnockoutCoverageOfMatrixPercent": 1.87,
+      "files": {
+        "svg": "./variant-02-brand-theme/atelier-qr-variant-02-brand-theme.svg",
+        "png": [
+          "./variant-02-brand-theme/atelier-qr-variant-02-brand-theme-1024.png",
+          "./variant-02-brand-theme/atelier-qr-variant-02-brand-theme-2048.png",
+          "./variant-02-brand-theme/atelier-qr-variant-02-brand-theme-4096.png"
+        ],
+        "pdf": "./variant-02-brand-theme/atelier-qr-variant-02-brand-theme.pdf"
+      }
+    },
+    {
+      "id": "variant-03-print-edition",
+      "label": "Variant 03 — Print Edition",
+      "foreground": "#1A1A1A",
+      "background": "#FAF9F6",
+      "contrastRatio": "16.53:1",
+      "errorCorrection": "H",
+      "matrixModules": "33×33",
+      "quietZoneModules": 4,
+      "logoSource": "public/brand/atelier-logo-primary.png",
+      "logoPixels": "1750×408",
+      "logoWidthRatio": 0.2,
+      "logoKnockoutCoverageOfMatrixPercent": 1.87,
+      "files": {
+        "svg": "./variant-03-print-edition/atelier-qr-variant-03-print-edition.svg",
+        "png": [
+          "./variant-03-print-edition/atelier-qr-variant-03-print-edition-1024.png",
+          "./variant-03-print-edition/atelier-qr-variant-03-print-edition-2048.png",
+          "./variant-03-print-edition/atelier-qr-variant-03-print-edition-4096.png"
+        ],
+        "pdf": "./variant-03-print-edition/atelier-qr-variant-03-print-edition.pdf"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "destinationUrl": "https://www.atelierwallstory.com/",
+  "outputDirectory": "exports/atelier-qr",
+  "logoPath": "auto-black",
+  "logoWidthRatio": 0.2,
+  "quietZoneModules": 4,
+  "outputResolutions": [1024, 2048, 4096],
+  "formats": ["png", "svg", "pdf"],
+  "pdfPageSizeInches": 6,
+  "variants": [
+    {
+      "id": "01-classic",
+      "label": "Variant 01 — Simple Classic QR",
+      "foreground": "#000000",
+      "background": "#FFFFFF",
+      "centerLogo": false,
+      "brandName": null
+    },
+    {
+      "id": "02-website-theme",
+      "label": "Variant 02 — Website Theme QR",
+      "foreground": "$brand.charcoal",
+      "background": "$brand.warmBeige",
+      "centerLogo": false,
+      "brandName": null
+    },
+    {
+      "id": "03-premium-branded",
+      "label": "Variant 03 — Premium Atelier Branded QR",
+      "foreground": "$brand.charcoal",
+      "background": "$brand.offWhite",
+      "centerLogo": true,
+      "brandName": "$brand.name"
+    }
+  ]
+}

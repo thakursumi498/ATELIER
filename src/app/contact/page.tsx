@@ -28,6 +28,7 @@ function ContactEnquiryWorkspace() {
   const searchParams = useSearchParams();
   const formSectionRef = useRef<HTMLElement | null>(null);
   const fullNameInputRef = useRef<HTMLInputElement | null>(null);
+  const retryAttemptRef = useRef<{ signature: string; key: string } | null>(null);
 
   const prefilledDesignSlug = searchParams.get("design") || "";
   const prefilledProjectSlug = searchParams.get("project") || "";
@@ -158,9 +159,6 @@ function ContactEnquiryWorkspace() {
   }
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [lastSubmittedSignature, setLastSubmittedSignature] = useState<
-    string | null
-  >(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submissionNotice, setSubmissionNotice] =
     useState<SubmissionNoticeState | null>(null);
@@ -175,19 +173,6 @@ function ContactEnquiryWorkspace() {
     }
     return selectedSurface.trim();
   }, [selectedSurface]);
-
-  const currentPayloadSignature = JSON.stringify({
-    fullName: fullName.trim(),
-    email: email.trim(),
-    phone: phone.trim(),
-    serviceInterest: formattedServiceInterest,
-    selectedDesignReference: selectedDesignReference.trim(),
-    message: message.trim(),
-  });
-
-  const isDuplicateSubmission =
-    lastSubmittedSignature !== null &&
-    lastSubmittedSignature === currentPayloadSignature;
 
   const dynamicWhatsAppMessage = useMemo(() => {
     const lines: string[] = [
@@ -278,16 +263,6 @@ function ContactEnquiryWorkspace() {
     e.preventDefault();
     if (isSubmitting) return;
 
-    if (isDuplicateSubmission) {
-      setSubmissionNotice({
-        type: "error",
-        title: "Enquiry Already Received",
-        detail:
-          "This exact brief has already been submitted in your current session. Update any detail above if you wish to send a revised note.",
-      });
-      return;
-    }
-
     setFieldErrors({});
     setSubmissionNotice(null);
 
@@ -328,11 +303,18 @@ function ContactEnquiryWorkspace() {
       return;
     }
 
+    const requestSignature = JSON.stringify(parsed.data);
+    const previousAttempt = retryAttemptRef.current;
+    const idempotencyKey = previousAttempt?.signature === requestSignature
+      ? previousAttempt.key
+      : crypto.randomUUID();
+    retryAttemptRef.current = { signature: requestSignature, key: idempotencyKey };
+
     setIsSubmitting(true);
     try {
       const res = await fetch("/api/enquiries", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Idempotency-Key": idempotencyKey },
         body: JSON.stringify(parsed.data),
       });
       const data = await res.json();
@@ -350,7 +332,7 @@ function ContactEnquiryWorkspace() {
         return;
       }
 
-      setLastSubmittedSignature(currentPayloadSignature);
+      retryAttemptRef.current = null;
 
       setSubmissionNotice({
         type: "success",
@@ -417,7 +399,6 @@ function ContactEnquiryWorkspace() {
                 fieldErrors={fieldErrors}
                 submissionNotice={submissionNotice}
                 isSubmitting={isSubmitting}
-                isDuplicateSubmission={isDuplicateSubmission}
                 onSubmit={handleSubmit}
                 whatsAppEnquiryHref={studioWhatsAppHref}
                 prefilledContext={prefilledContext}

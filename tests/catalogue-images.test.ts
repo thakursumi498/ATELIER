@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { DEVELOPMENT_FIXTURE_DESIGNS, DESIGN_CATEGORY_RECORDS, mergeManagedCategoryImages, mergeManagedDesignImages, type ManagedCatalogueImage } from "../src/lib/designs-catalogue";
+import { buildAtelierVaultCategories, DEVELOPMENT_FIXTURE_DESIGNS, DESIGN_CATEGORY_RECORDS, isDuplicateSourceArtwork, mergeManagedCategoryImages, mergeManagedDesignImages, type ManagedCatalogueImage } from "../src/lib/designs-catalogue";
+import { DRIVE_CATEGORY_ASSETS } from "../src/lib/drive-category-assets";
+import { DEVELOPMENT_PROJECT_FIXTURES, projectExhibitionImage } from "../src/lib/projects-catalogue";
 
 const firstDesign = DEVELOPMENT_FIXTURE_DESIGNS[0];
 const managedImage = (overrides: Partial<ManagedCatalogueImage> = {}): ManagedCatalogueImage => ({
@@ -16,6 +18,16 @@ const managedImage = (overrides: Partial<ManagedCatalogueImage> = {}): ManagedCa
   displayOrder: 4,
   active: true,
   ...overrides,
+});
+
+test("project exhibition uses an existing alternate when it repeats the cover image", () => {
+  for (const project of DEVELOPMENT_PROJECT_FIXTURES) {
+    const exhibitionImage = projectExhibitionImage(project);
+    assert.ok(exhibitionImage);
+    if (project.exhibitionImage === project.coverImage.secureUrl) {
+      assert.notEqual(exhibitionImage, project.coverImage.secureUrl);
+    }
+  }
 });
 
 test("managed Cloudinary image metadata replaces catalogue image URLs and dimensions", () => {
@@ -48,6 +60,49 @@ test("managed category artwork updates its cover without changing static categor
   assert.equal(category.name, before.name);
   assert.equal(category.description, before.description);
   assert.equal(category.coverImage?.secureUrl, image.secureUrl);
+});
+
+test("the category cover artwork is also present inside its gallery", () => {
+  const sourceImages: ManagedCatalogueImage[] = DRIVE_CATEGORY_ASSETS.flatMap((category) =>
+    category.images.map((image, index) => ({
+      id: `source-${image.code}`,
+      publicId: `atelier-wall-story/designs/categories/${category.slug}/${image.code}`,
+      secureUrl: image.url,
+      altText: `${category.name}: ${image.title}`,
+      width: image.width,
+      height: image.height,
+      format: image.format,
+      categorySlug: category.slug,
+      artworkCode: image.code,
+      displayOrder: index + 1,
+      active: true,
+      placement: "design",
+    })),
+  );
+  const designs = mergeManagedDesignImages(DEVELOPMENT_FIXTURE_DESIGNS, sourceImages);
+  const categories = mergeManagedCategoryImages(DESIGN_CATEGORY_RECORDS, sourceImages);
+  const vaultCategories = buildAtelierVaultCategories(categories, designs);
+
+  assert.ok(designs.some((design) => design.categorySlug === "arts-and-entertainment"));
+  for (const category of vaultCategories) {
+    const categoryDesigns = designs.filter((design) => design.categorySlug === category.slug);
+    if (!categoryDesigns.length) {
+      assert.equal(category.coverImage, "", `${category.title} has a cover without a gallery design`);
+      continue;
+    }
+    assert.ok(
+      categoryDesigns.some((design) => design.coverImage.secureUrl === category.coverImage),
+      `${category.title} cover is missing from its gallery`,
+    );
+  }
+});
+
+test("duplicate source exports are removed while new uploads and archived logos stay available", () => {
+  assert.equal(isDuplicateSourceArtwork("motivation", "AE07-02"), true);
+  assert.equal(isDuplicateSourceArtwork("nature-and-environment", "AE08-05"), true);
+  assert.equal(isDuplicateSourceArtwork("motivation", "AE07-01"), false);
+  assert.equal(isDuplicateSourceArtwork("motivation", "AE07-99"), false);
+  assert.equal(isDuplicateSourceArtwork("logo", "AE06-03"), false);
 });
 
 test("moving a static artwork suppresses its old catalogue placement and publishes the new subcategory", () => {

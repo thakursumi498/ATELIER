@@ -16,9 +16,12 @@ import {
   PortfolioProjectRecord,
   PROJECTS_HERO_SLIDES,
   DEVELOPMENT_PROJECT_FIXTURES,
+  mergeManagedProjectImages,
+  projectExhibitionImage,
   type ProjectHeroSlide,
   PROJECTS_PAGE_CONTENT,
 } from "@/lib/projects-catalogue";
+import { useManagedCatalogueImages } from "@/lib/catalogue-images-client";
 import { ATELIER_SURFACES, buildWhatsAppUrl } from "@/lib/brand";
 import { getHeroHeadingBeforeHighlight } from "@/lib/hero-copy";
 import { cn } from "@/lib/cn";
@@ -60,7 +63,11 @@ const STUDIO_APPROACH_PILLARS = [
 
 export default function ProjectsPage() {
   const pageContent = usePageContent("projects");
-  const projectsData: ReadonlyArray<PortfolioProjectRecord> = DEVELOPMENT_PROJECT_FIXTURES;
+  const [managedImages] = useManagedCatalogueImages();
+  const projectsData: ReadonlyArray<PortfolioProjectRecord> = useMemo(
+    () => mergeManagedProjectImages(DEVELOPMENT_PROJECT_FIXTURES, managedImages),
+    [managedImages],
+  );
   const [heroSlideIndex, setHeroSlideIndex] = useState<number>(0);
 
   // Section 01: Hero Carousel State
@@ -630,8 +637,7 @@ export default function ProjectsPage() {
                     const zIndexes = [40, 30, 20, 10];
                     const opacities = [1, 0.9, 0.78, 0.62];
 
-                    const imgUrl =
-                      project.exhibitionImage || project.coverImage.secureUrl;
+                    const imgUrl = projectExhibitionImage(project);
 
                     return (
                       <div
@@ -772,10 +778,7 @@ export default function ProjectsPage() {
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={
-                          project.exhibitionImage ||
-                          project.coverImage.secureUrl
-                        }
+                        src={projectExhibitionImage(project)}
                         alt={project.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-[1.03]"
                       />

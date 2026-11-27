@@ -1,188 +1,280 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
-import { AdminAuthBanner } from "@/components/admin/AdminChromeClient";
-import { adminButtonClass, adminCardClass, AdminConfirmModal, adminInputClass, adminLabelClass, AdminPageHeader, adminSelectClass, AdminStatusBadge } from "@/components/admin/AdminUiPrimitives";
-import type { StoredEnquiryRecord } from "@/lib/enquiries-store";
+import { useEffect, useState } from "react";
+import { AdminConfirmModal, AdminPageHeader, AdminStatusBadge, adminButtonClass, adminCardClass, adminInputClass, adminLabelClass, adminSelectClass } from "@/components/admin/AdminUiPrimitives";
 import { Download, Inbox, Mail, MessageCircle, Phone, RefreshCw, Search, Send, Trash2 } from "lucide-react";
 
-const STATUSES = ["New", "Contacted", "Follow-up", "Qualified", "Converted", "Closed", "In Progress"];
-type Metrics = { statuses: { _id: string; count: number }[]; sources: { _id: string; count: number }[]; overdue: number };
-function formatDate(iso: string | null | undefined) {
-  if (!iso) return "Not set";
-  const value = new Date(iso);
-  return Number.isNaN(value.getTime()) ? "Not set" : value.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+const STATUSES = ["New", "Contacted", "Follow-up", "Converted", "Closed"] as const;
+type Status = (typeof STATUSES)[number];
+type Metrics = {
+  statuses: { _id: string; count: number }[];
+  services: { _id: string; count: number }[];
+  pendingFollowups: number;
+};
+interface AdminEnquiry {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  serviceInterest?: string;
+  serviceOrDesignInterest?: string;
+  message: string;
+  createdAt: string;
+  updatedAt?: string;
+  sourcePage?: string;
+  status: string;
+  followUpAt?: string | null;
+  selectedDesignReference?: string | null;
+  adminNotes?: Array<{ note: string; authorName: string; createdAt: string }>;
 }
-function localDate(iso: string | null | undefined) {
-  if (!iso) return "";
-  const value = new Date(iso);
-  if (Number.isNaN(value.getTime())) return "";
-  return new Date(value.getTime() - value.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+
+function normalizeStatus(value: string): Status {
+  switch (value.trim().toLowerCase()) {
+    case "contacted":
+    case "qualified":
+    case "in progress": return "Contacted";
+    case "follow-up":
+    case "follow up": return "Follow-up";
+    case "converted": return "Converted";
+    case "closed": return "Closed";
+    default: return "New";
+  }
 }
-function LeadCard({ item, nowMs, onUpdate, onDelete, initiallyExpanded }: { item: StoredEnquiryRecord; nowMs: number; onUpdate: (id: string, patch: Record<string, unknown>) => Promise<void>; onDelete: () => void; initiallyExpanded: boolean }) {
+
+function formatDate(value: string | null | undefined) {
+  if (!value) return "Not set";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "Not set" : date.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+}
+
+function localDate(value: string | null | undefined) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60_000).toISOString().slice(0, 16);
+}
+
+function receivedFrom(value: string | undefined) {
+  const page = (value || "").split("?")[0].replace(/\/$/, "");
+  const labels: Record<string, string> = {
+    "": "Website home page",
+    "/contact": "Contact page",
+    "/explore-designs": "Design catalogue",
+    "/projects": "Projects page",
+    "/services": "Services page",
+    "/visualizer": "Wall Preview",
+  };
+  return labels[page] || "Website";
+}
+
+function LeadCard({
+  item,
+  nowMs,
+  onUpdate,
+  onDelete,
+  initiallyExpanded,
+}: {
+  item: AdminEnquiry;
+  nowMs: number;
+  onUpdate: (id: string, patch: Record<string, unknown>) => Promise<void>;
+  onDelete: () => void;
+  initiallyExpanded: boolean;
+}) {
   const [expanded, setExpanded] = useState(initiallyExpanded);
   const [note, setNote] = useState("");
-  const [owner, setOwner] = useState(item.assignedOwner || "");
   const [followUp, setFollowUp] = useState(localDate(item.followUpAt));
-  const [status, setStatus] = useState(item.status === "new" ? "New" : item.status);
+  const [status, setStatus] = useState<Status>(normalizeStatus(item.status));
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
-  const overdue = Boolean(nowMs > 0 && item.followUpAt && new Date(item.followUpAt).getTime() < nowMs && !["Closed", "Converted"].includes(item.status));
-  const digits = item.phone?.replace(/\D/g, "");
+  const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
+  const digits = item.phone?.replace(/\D/g, "") || "";
+  const overdue = Boolean(nowMs > 0 && item.followUpAt && new Date(item.followUpAt).getTime() < nowMs && !["Closed", "Converted"].includes(normalizeStatus(item.status)));
+  const service = item.serviceOrDesignInterest || item.serviceInterest || "General enquiry";
+
   const save = async (patch: Record<string, unknown>) => {
-    setBusy(true); setError(null); setNotice(null);
-    try { await onUpdate(item.id, patch); setNote(""); setNotice("Enquiry updated."); }
-    catch (err) { setError(err instanceof Error ? err.message : "Unable to save. Please try again."); }
-    finally { setBusy(false); }
+    setBusy(true);
+    setError("");
+    setNotice("");
+    try {
+      await onUpdate(item.id, patch);
+      setNote("");
+      setNotice("Enquiry updated.");
+    } catch {
+      setError("Unable to save this enquiry. Please try again.");
+    } finally {
+      setBusy(false);
+    }
   };
-  return <article className={`${adminCardClass} overflow-hidden`}>
-    <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:justify-between">
-      <div className="min-w-0 space-y-2">
-        <p className="font-mono text-[11px] text-[#9B1C1C]">{item.referenceCode || item.id} · {formatDate(item.createdAt)}</p>
-        <h2 className="font-serif text-2xl text-[#1A1A1A]">{item.fullName}</h2>
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-[#574F49]">
-          <a href={`mailto:${item.email}`} className="inline-flex items-center gap-1 break-all"><Mail className="h-3.5 w-3.5 shrink-0" />{item.email}</a>
-          {item.phone && <a href={`tel:${item.phone}`} className="inline-flex items-center gap-1"><Phone className="h-3.5 w-3.5" />{item.phone}</a>}
+
+  return (
+    <article className={`${adminCardClass} overflow-hidden`}>
+      <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0 space-y-2">
+          <p className="text-xs text-[#746B64]">{formatDate(item.createdAt)}</p>
+          <h2 className="font-serif text-2xl text-[#1A1A1A]">{item.fullName}</h2>
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-[#574F49]">
+            <a href={`mailto:${item.email}`} className="inline-flex items-center gap-1 break-all"><Mail className="h-3.5 w-3.5 shrink-0" />{item.email}</a>
+            {item.phone ? <a href={`tel:${item.phone}`} className="inline-flex items-center gap-1"><Phone className="h-3.5 w-3.5" />{item.phone}</a> : null}
+          </div>
+          <p className="text-xs text-[#746B64]">Interested in: {service} <span className="px-1">·</span> Received from: {receivedFrom(item.sourcePage)}</p>
+          {item.followUpAt ? <p className={`text-xs ${overdue ? "font-semibold text-[#9B1C1C]" : "text-[#746B64]"}`}>{overdue ? "Follow-up is due" : "Follow-up scheduled"}: {formatDate(item.followUpAt)}</p> : null}
         </div>
-        <p className="text-xs text-[#746B64]">{item.serviceOrDesignInterest} · {item.sourcePage}</p>
-        {(item.assignedOwner || item.followUpAt) && <p className={`text-xs ${overdue ? "font-semibold text-[#9B1C1C]" : "text-[#746B64]"}`}>{item.assignedOwner && `Owner: ${item.assignedOwner} · `}{item.followUpAt && `${overdue ? "Overdue follow-up" : "Follow-up"}: ${formatDate(item.followUpAt)}`}</p>}
-      </div>
-      <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-        <AdminStatusBadge tone={item.status === "new" ? "New" : item.status}>{item.status === "new" ? "New" : item.status}</AdminStatusBadge>
-        <button type="button" aria-expanded={expanded} onClick={() => setExpanded(!expanded)} className={adminButtonClass("secondary", "sm")}>{expanded ? "Close details" : "View enquiry"}</button>
-        <button type="button" aria-label={`Delete enquiry from ${item.fullName}`} onClick={onDelete} className="rounded-xl border border-[#DFD0C0] p-2 text-[#9B1C1C]"><Trash2 className="h-4 w-4" /></button>
-      </div>
-    </div>
-    {expanded && <div className="space-y-5 border-t border-[#E8DED3] bg-[#FAF6F0]/70 p-5">
-      <div className="rounded-xl border border-[#E8DED3] bg-[#FFFDF9] p-4">
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#746B64]">Customer message</p>
-        <p className="whitespace-pre-wrap break-words text-sm leading-relaxed text-[#1A1A1A]">{item.message}</p>
-        {item.selectedDesignReference && <p className="mt-2 text-xs text-[#9B1C1C]">Design reference: {item.selectedDesignReference}</p>}
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a href={`mailto:${item.email}`} className={adminButtonClass("secondary", "sm")}><Mail className="h-3.5 w-3.5" />Reply by email</a>
-          {digits && <a href={`https://wa.me/${digits}?text=${encodeURIComponent(`Hello ${item.fullName}, thank you for contacting ATELIER (${item.referenceCode}).`)}`} target="_blank" rel="noreferrer" className={adminButtonClass("secondary", "sm")}><MessageCircle className="h-3.5 w-3.5" />WhatsApp</a>}
+        <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+          <AdminStatusBadge tone={normalizeStatus(item.status)}>{normalizeStatus(item.status)}</AdminStatusBadge>
+          <button type="button" aria-expanded={expanded} onClick={() => setExpanded((value) => !value)} className={adminButtonClass("secondary", "sm")}>{expanded ? "Close Details" : "View Details"}</button>
+          <button type="button" aria-label={`Delete enquiry from ${item.fullName}`} onClick={onDelete} className="rounded-xl border border-[#DFD0C0] p-2 text-[#9B1C1C] hover:bg-[#FAF6F0]"><Trash2 className="h-4 w-4" /></button>
         </div>
       </div>
-      <form onSubmit={e => { e.preventDefault(); void save({ status, assignedOwner: owner.trim() || null, followUpAt: followUp ? new Date(followUp).toISOString() : null }); }} className="space-y-3">
-        <div className="grid gap-4 sm:grid-cols-3">
-          <label className={adminLabelClass}>Lead status<select value={status} onChange={e => setStatus(e.target.value as typeof status)} className={`${adminSelectClass} mt-1.5`}>{STATUSES.map(value => <option key={value}>{value}</option>)}</select></label>
-          <label className={adminLabelClass}>Assigned owner<input maxLength={120} value={owner} onChange={e => setOwner(e.target.value)} placeholder="Team member name" className={`${adminInputClass} mt-1.5`} /></label>
-          <label className={adminLabelClass}>Follow-up date and time<input type="datetime-local" value={followUp} onChange={e => setFollowUp(e.target.value)} className={`${adminInputClass} mt-1.5`} /></label>
+
+      {expanded ? <div className="space-y-5 border-t border-[#E8DED3] bg-[#FAF6F0]/70 p-5">
+        <div className="rounded-xl border border-[#E8DED3] bg-[#FFFDF9] p-4">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#746B64]">Customer Message</p>
+          <p className="whitespace-pre-wrap break-words text-sm leading-relaxed text-[#1A1A1A]">{item.message}</p>
+          {item.selectedDesignReference ? <p className="mt-3 text-xs text-[#746B64]">Selected design or project: {item.selectedDesignReference}</p> : null}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {item.phone ? <a href={`tel:${item.phone}`} className={adminButtonClass("secondary", "sm")}><Phone className="h-3.5 w-3.5" />Call Customer</a> : null}
+            {digits ? <a href={`https://wa.me/${digits}?text=${encodeURIComponent(`Hello ${item.fullName}, thank you for contacting ATELIER.`)}`} target="_blank" rel="noreferrer" className={adminButtonClass("secondary", "sm")}><MessageCircle className="h-3.5 w-3.5" />Send WhatsApp Message</a> : null}
+            <a href={`mailto:${item.email}`} className={adminButtonClass("secondary", "sm")}><Mail className="h-3.5 w-3.5" />Send Email</a>
+          </div>
+          <dl className="mt-4 grid gap-3 border-t border-[#E8DED3] pt-4 text-xs sm:grid-cols-2">
+            <div><dt className="text-[#746B64]">Enquiry date and time</dt><dd className="mt-0.5 font-medium">{formatDate(item.createdAt)}</dd></div>
+            <div><dt className="text-[#746B64]">Received from</dt><dd className="mt-0.5 font-medium">{receivedFrom(item.sourcePage)}</dd></div>
+          </dl>
         </div>
-        <button disabled={busy} className={adminButtonClass("primary", "sm")}>{busy ? "Saving…" : "Save lead details"}</button>
-      </form>
-      <div className="space-y-3">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-[#746B64]">Internal notes</h3>
-        {(item.adminNotes || []).map((entry, index) => <div key={index} className="rounded-xl border border-[#E8DED3] bg-[#FFFDF9] p-3 text-xs text-[#574F49]"><p className="mb-1 font-medium text-[#9B1C1C]">{entry.authorName} · {formatDate(entry.createdAt)}</p><p className="whitespace-pre-wrap break-words">{entry.note}</p></div>)}
-        <form onSubmit={e => { e.preventDefault(); if (note.trim()) void save({ note: note.trim() }); }} className="flex flex-col gap-2 sm:flex-row sm:items-end">
-          <label className={`${adminLabelClass} flex-1`}>Add a private note<textarea maxLength={3000} value={note} onChange={e => setNote(e.target.value)} rows={2} className={`${adminInputClass} mt-1.5 h-auto py-3`} /></label>
-          <button disabled={busy || !note.trim()} className={adminButtonClass("primary", "sm")}><Send className="h-3.5 w-3.5" />Save note</button>
+
+        <form onSubmit={(event) => { event.preventDefault(); void save({ status, followUpAt: followUp ? new Date(followUp).toISOString() : null }); }} className="space-y-3">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className={adminLabelClass}>Current Status<select value={status} onChange={(event) => setStatus(event.target.value as Status)} className={`${adminSelectClass} mt-1.5`}>{STATUSES.map((value) => <option key={value}>{value}</option>)}</select></label>
+            <label className={adminLabelClass}>Schedule Follow-up<input type="datetime-local" value={followUp} onChange={(event) => setFollowUp(event.target.value)} className={`${adminInputClass} mt-1.5`} /></label>
+          </div>
+          <button disabled={busy} className={adminButtonClass("primary", "sm")}>{busy ? "Saving…" : "Save Changes"}</button>
         </form>
-      </div>
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#E8DED3] pt-3 text-xs text-[#746B64]">
-        <div className="space-y-1">
-          <p>Owner notification: {item.emailStatus || (item.emailNotificationSent ? "sent" : "pending")}{item.emailLastError ? ` · ${item.emailLastError}` : ""}</p>
-          <p>Last updated {formatDate(item.updatedAt)}</p>
+
+        <div className="space-y-3">
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-[#746B64]">Notes</h3>
+          {(item.adminNotes || []).map((entry, index) => <div key={`${entry.createdAt}-${index}`} className="rounded-xl border border-[#E8DED3] bg-[#FFFDF9] p-3 text-xs text-[#574F49]"><p className="mb-1 font-medium text-[#9B1C1C]">{entry.authorName} · {formatDate(entry.createdAt)}</p><p className="whitespace-pre-wrap break-words">{entry.note}</p></div>)}
+          <form onSubmit={(event) => { event.preventDefault(); if (note.trim()) void save({ note: note.trim() }); }} className="flex flex-col gap-2 sm:flex-row sm:items-end">
+            <label className={`${adminLabelClass} flex-1`}>Add a Note<textarea maxLength={3000} value={note} onChange={(event) => setNote(event.target.value)} rows={2} className={`${adminInputClass} mt-1.5 h-auto py-3`} /></label>
+            <button disabled={busy || !note.trim()} className={adminButtonClass("primary", "sm")}><Send className="h-3.5 w-3.5" />Save Note</button>
+          </form>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {item.emailStatus === "failed" && <button type="button" disabled={busy || (item.emailAttempts || 0) >= 5 || Boolean(item.emailProviderId)} onClick={() => void save({ retryEmail: true })} className={adminButtonClass("secondary", "sm")}><RefreshCw className="h-3.5 w-3.5" />Retry owner email</button>}
-        </div>
-      </div>
-      {error && <p role="alert" className="text-sm text-[#9B1C1C]">{error}</p>}
-      {notice && <p role="status" className="text-sm text-[#264E32]">{notice}</p>}
-    </div>}
-  </article>;
+        {error ? <p role="alert" className="text-sm text-[#9B1C1C]">{error}</p> : null}
+        {notice ? <p role="status" className="text-sm text-[#264E32]">{notice}</p> : null}
+      </div> : null}
+    </article>
+  );
 }
+
 export default function AdminEnquiriesPage() {
-  const [enquiries, setEnquiries] = useState<StoredEnquiryRecord[]>([]);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [enquiries, setEnquiries] = useState<AdminEnquiry[]>([]);
+  const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [querySearch, setQuerySearch] = useState("");
   const [status, setStatus] = useState("All");
-  const [source, setSource] = useState("");
-  const [overdue, setOverdue] = useState(false);
+  const [service, setService] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [pendingFollowups, setPendingFollowups] = useState(false);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [total, setTotal] = useState(0);
-  const [metrics, setMetrics] = useState<Metrics>({ statuses: [], sources: [], overdue: 0 });
-  const [pendingDelete, setPendingDelete] = useState<StoredEnquiryRecord | null>(null);
+  const [metrics, setMetrics] = useState<Metrics>({ statuses: [], services: [], pendingFollowups: 0 });
+  const [pendingDelete, setPendingDelete] = useState<AdminEnquiry | null>(null);
   const [deleting, setDeleting] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [nowMs, setNowMs] = useState(0);
-  const params = new URLSearchParams({ search: querySearch, status, source, overdue: String(overdue), page: String(page) });
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [loadedQuery, setLoadedQuery] = useState("");
+  const [loadedRefreshKey, setLoadedRefreshKey] = useState(-1);
+
+  const params = new URLSearchParams({ search: querySearch, status, service, dateFrom, dateTo, pendingFollowups: String(pendingFollowups), page: String(page) });
   const query = params.toString();
-  useEffect(() => { const timer = setTimeout(() => { setQuerySearch(search); setPage(1); }, 300); return () => clearTimeout(timer); }, [search]);
-  const load = useCallback(async () => {
-    await Promise.resolve();
-    setLoading(true); setError(null);
-    try {
-      const response = await fetch(`/api/admin/enquiries?${query}`, { cache: "no-store" });
-      const data = await response.json();
-      setNowMs(Date.now());
-      if (typeof window !== "undefined") setSelectedId(new URLSearchParams(window.location.search).get("enquiry") || "");
-      setAuthenticated(response.status !== 401 && response.status !== 403);
-      if (!response.ok || !data.ok) throw new Error(data.error || "Unable to load enquiries.");
-      setEnquiries(data.enquiries); setTotal(data.total); setPages(data.pages); setMetrics(data.metrics);
-    } catch (err) { setError(err instanceof Error ? err.message : "Unable to load enquiries."); }
-    finally { setLoading(false); }
-  }, [query]);
+  const loading = loadedQuery !== query || loadedRefreshKey !== refreshKey;
+
+  useEffect(() => { const timer = window.setTimeout(() => { setQuerySearch(search); setPage(1); }, 300); return () => window.clearTimeout(timer); }, [search]);
+
   useEffect(() => {
-    let cancelled = false;
+    let active = true;
     fetch(`/api/admin/enquiries?${query}`, { cache: "no-store" })
       .then(async (response) => {
         const data = await response.json();
-        if (cancelled) return;
+        if (!response.ok || !data.ok) throw new Error();
+        if (!active) return;
+        setEnquiries(data.enquiries);
+        setTotal(data.total);
+        setPages(data.pages);
+        setMetrics(data.metrics);
         setNowMs(Date.now());
-        if (typeof window !== "undefined") setSelectedId(new URLSearchParams(window.location.search).get("enquiry") || "");
-        setAuthenticated(response.status !== 401 && response.status !== 403);
-        if (!response.ok || !data.ok) throw new Error(data.error || "Unable to load enquiries.");
-        setEnquiries(data.enquiries); setTotal(data.total); setPages(data.pages); setMetrics(data.metrics); setError(null);
+        setSelectedId(new URLSearchParams(window.location.search).get("enquiry") || "");
+        setError("");
+        setLoadedQuery(query);
+        setLoadedRefreshKey(refreshKey);
       })
-      .catch((err) => { if (!cancelled) setError(err instanceof Error ? err.message : "Unable to load enquiries."); })
-      .finally(() => { if (!cancelled) setLoading(false); });
-    return () => { cancelled = true; };
-  }, [query]);
+      .catch(() => {
+        if (!active) return;
+        setError("Unable to load enquiries. Please refresh the page.");
+        setLoadedQuery(query);
+        setLoadedRefreshKey(refreshKey);
+      });
+    return () => { active = false; };
+  }, [query, refreshKey]);
+
   const update = async (id: string, patch: Record<string, unknown>) => {
     const response = await fetch("/api/admin/enquiries", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, ...patch }) });
     const data = await response.json();
-    if (!response.ok || !data.ok) throw new Error(data.error || "Unable to save enquiry.");
-    setEnquiries(items => items.map(item => item.id === id ? data.enquiry : item));
+    if (!response.ok || !data.ok) throw new Error("Unable to save enquiry.");
+    setEnquiries((items) => items.map((item) => item.id === id ? data.enquiry : item));
   };
+
   const remove = async () => {
     if (!pendingDelete) return;
     setDeleting(true);
     try {
       const response = await fetch(`/api/admin/enquiries?id=${encodeURIComponent(pendingDelete.id)}`, { method: "DELETE" });
       const data = await response.json();
-      if (!response.ok || !data.ok) throw new Error(data.error || "Unable to delete enquiry.");
-      setPendingDelete(null); await load();
-    } catch (err) { setError(err instanceof Error ? err.message : "Unable to delete enquiry."); setPendingDelete(null); }
-    finally { setDeleting(false); }
+      if (!response.ok || !data.ok) throw new Error();
+      setPendingDelete(null);
+      setRefreshKey((value) => value + 1);
+    } catch {
+      setError("Unable to delete this enquiry. Please try again.");
+      setPendingDelete(null);
+    } finally {
+      setDeleting(false);
+    }
   };
-  const newCount = metrics.statuses.filter(item => ["New", "new"].includes(item._id)).reduce((sum, item) => sum + item.count, 0);
-  const converted = metrics.statuses.find(item => item._id === "Converted")?.count || 0;
-  return <div className="space-y-6">
-    <AdminAuthBanner authenticated={authenticated} />
-    <AdminPageHeader eyebrow="Customer enquiries" title="Enquiry Inbox" description="Review project briefs, assign a team member, and keep every follow-up on track." />
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">{[["Matching enquiries", total], ["New leads", newCount], ["Overdue follow-ups", metrics.overdue], ["Converted", converted]].map(([label, value]) => <div key={label} className={`${adminCardClass} p-4`}><p className="text-xs text-[#746B64]">{label}</p><p className="mt-2 font-serif text-3xl text-[#1A1A1A]">{value}</p></div>)}</div>
-    <section className={`${adminCardClass} space-y-4 p-4 sm:p-5`}>
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <label className="relative flex-1"><span className="sr-only">Search enquiries</span><Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-[#746B64]" /><input type="search" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, email, phone, or reference" className={`${adminInputClass} pl-10`} /></label>
-        <a href={`/api/admin/enquiries?${query}&format=csv`} className={adminButtonClass("secondary", "sm")}><Download className="h-4 w-4" />Export matching leads</a>
+
+  const countStatus = (target: Status) => metrics.statuses.filter((entry) => normalizeStatus(entry._id) === target).reduce((count, entry) => count + entry.count, 0);
+  const exportParams = new URLSearchParams(params);
+  exportParams.set("format", "csv");
+
+  return (
+    <div className="space-y-5">
+      <AdminPageHeader eyebrow="Customer Management" title="Customer Enquiries" description="Review customer messages, respond directly, and keep follow-ups moving." />
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {[["Matching enquiries", total], ["New", countStatus("New")], ["Pending follow-ups", metrics.pendingFollowups], ["Converted customers", countStatus("Converted")]].map(([label, value]) => <div key={label} className={`${adminCardClass} p-4`}><p className="text-xs text-[#746B64]">{label}</p><p className="mt-2 font-serif text-3xl tabular-nums text-[#1A1A1A]">{value}</p></div>)}
       </div>
-      <div className="flex flex-wrap items-end gap-3">
-        <label className={adminLabelClass}>Status<select value={status} onChange={e => { setStatus(e.target.value); setPage(1); }} className={`${adminSelectClass} mt-1.5 w-auto`}><option>All</option>{STATUSES.map(value => <option key={value}>{value}</option>)}</select></label>
-        <label className={adminLabelClass}>Source page<select value={source} onChange={e => { setSource(e.target.value); setPage(1); }} className={`${adminSelectClass} mt-1.5 w-auto`}><option value="">All pages</option>{metrics.sources.map(value => <option key={value._id} value={value._id}>{value._id} ({value.count})</option>)}</select></label>
-        <label className="flex min-h-10 items-center gap-2 text-xs text-[#574F49]"><input type="checkbox" checked={overdue} onChange={e => { setOverdue(e.target.checked); setPage(1); }} />Overdue follow-ups only</label>
-        <button type="button" onClick={() => void load()} className={adminButtonClass("secondary", "sm")}><RefreshCw className="h-3.5 w-3.5" />Refresh</button>
-      </div>
-    </section>
-    {error && <p role="alert" className="rounded-xl border border-[#9B1C1C]/30 p-4 text-sm text-[#9B1C1C]">{error}</p>}
-    {loading ? <p role="status" className={`${adminCardClass} p-10 text-center text-sm text-[#746B64]`}>Loading enquiries…</p> : !error && enquiries.length === 0 ? <div className={`${adminCardClass} p-12 text-center`}><Inbox className="mx-auto h-8 w-8 text-[#746B64]" /><p className="mt-3 font-serif text-2xl">No matching enquiries</p><p className="mt-2 text-xs text-[#746B64]">Customer submissions will appear here. Try changing the filters.</p></div> : <div className="space-y-4">{enquiries.map(item => <LeadCard key={item.id} item={item} nowMs={nowMs} onUpdate={update} onDelete={() => setPendingDelete(item)} initiallyExpanded={selectedId === item.id} />)}</div>}
-    <div className="flex items-center justify-between gap-3 text-xs text-[#746B64]"><p>Page {page} of {pages} · {total} matching enquiries</p><div className="flex gap-2"><button disabled={loading || page <= 1} onClick={() => setPage(value => value - 1)} className={adminButtonClass("secondary", "sm")}>Previous</button><button disabled={loading || page >= pages} onClick={() => setPage(value => value + 1)} className={adminButtonClass("secondary", "sm")}>Next</button></div></div>
-    <AdminConfirmModal open={Boolean(pendingDelete)} title="Delete enquiry" description={pendingDelete ? `Permanently delete ${pendingDelete.referenceCode} from ${pendingDelete.fullName}, including its private notes?` : ""} confirmLabel="Delete enquiry" busy={deleting} onCancel={() => setPendingDelete(null)} onConfirm={remove} />
-  </div>;
+
+      <section className={`${adminCardClass} space-y-4 p-4 sm:p-5`}>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <label className="relative flex-1"><span className="sr-only">Search by customer name, email or phone</span><Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-[#746B64]" /><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search name, email or phone" className={`${adminInputClass} pl-10`} /></label>
+          <a href={`/api/admin/enquiries?${exportParams.toString()}`} className={adminButtonClass("secondary", "sm")}><Download className="h-4 w-4" />Export Enquiries</a>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <label className={adminLabelClass}>Status<select value={status} onChange={(event) => { setStatus(event.target.value); setPage(1); }} className={`${adminSelectClass} mt-1.5`}><option>All</option>{STATUSES.map((value) => <option key={value}>{value}</option>)}</select></label>
+          <label className={adminLabelClass}>Interested Service<select value={service} onChange={(event) => { setService(event.target.value); setPage(1); }} className={`${adminSelectClass} mt-1.5`}><option value="">All services</option>{metrics.services.map((entry) => <option key={entry._id} value={entry._id}>{entry._id}</option>)}</select></label>
+          <label className={adminLabelClass}>From Date<input type="date" value={dateFrom} onChange={(event) => { setDateFrom(event.target.value); setPage(1); }} className={`${adminInputClass} mt-1.5`} /></label>
+          <label className={adminLabelClass}>To Date<input type="date" value={dateTo} onChange={(event) => { setDateTo(event.target.value); setPage(1); }} className={`${adminInputClass} mt-1.5`} /></label>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#E8DED3] pt-3">
+          <label className="inline-flex min-h-9 items-center gap-2 text-xs text-[#574F49]"><input type="checkbox" checked={pendingFollowups} onChange={(event) => { setPendingFollowups(event.target.checked); setPage(1); }} />Pending follow-ups only</label>
+          <button type="button" disabled={loading} onClick={() => setRefreshKey((value) => value + 1)} className={adminButtonClass("secondary", "sm")}><RefreshCw className="h-3.5 w-3.5" />Refresh</button>
+        </div>
+      </section>
+
+      {error ? <p role="alert" className="rounded-xl border border-[#9B1C1C]/30 p-4 text-sm text-[#9B1C1C]">{error}</p> : null}
+      {loading ? <p role="status" className={`${adminCardClass} p-10 text-center text-sm text-[#746B64]`}>Loading enquiries…</p> : !error && enquiries.length === 0 ? <div className={`${adminCardClass} p-12 text-center`}><Inbox className="mx-auto h-8 w-8 text-[#9B1C1C]" /><p className="mt-3 font-serif text-2xl">No matching enquiries</p><p className="mt-2 text-xs text-[#746B64]">Try changing the filters, or check again when a customer contacts your studio.</p></div> : <div className="space-y-4">{enquiries.map((item) => <LeadCard key={item.id} item={item} nowMs={nowMs} onUpdate={update} onDelete={() => setPendingDelete(item)} initiallyExpanded={selectedId === item.id} />)}</div>}
+      <div className="flex items-center justify-between gap-3 text-xs text-[#746B64]"><p>Page {page} of {pages} · {total} matching enquiries</p><div className="flex gap-2"><button disabled={loading || page <= 1} onClick={() => setPage((value) => value - 1)} className={adminButtonClass("secondary", "sm")}>Previous</button><button disabled={loading || page >= pages} onClick={() => setPage((value) => value + 1)} className={adminButtonClass("secondary", "sm")}>Next</button></div></div>
+      <AdminConfirmModal open={Boolean(pendingDelete)} title="Delete enquiry?" description={pendingDelete ? `Permanently delete the enquiry from ${pendingDelete.fullName}, including its notes?` : ""} confirmLabel="Delete enquiry" busy={deleting} onCancel={() => setPendingDelete(null)} onConfirm={() => void remove()} />
+    </div>
+  );
 }

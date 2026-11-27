@@ -60,6 +60,49 @@ export interface PortfolioProjectRecord {
   updatedAt: string;
 }
 
+export interface ManagedProjectGalleryImage {
+  publicId: string;
+  secureUrl: string;
+  altText: string;
+  width: number;
+  height: number;
+  format: string;
+  projectSlug?: string;
+  placement?: string;
+  displayOrder: number;
+  active: boolean;
+}
+
+export function projectExhibitionImage(project: Pick<PortfolioProjectRecord, "coverImage" | "exhibitionImage" | "galleryMedia">) {
+  const coverUrl = project.coverImage.secureUrl;
+  const exhibitionUrl = project.exhibitionImage?.trim();
+  if (exhibitionUrl && exhibitionUrl !== coverUrl) return exhibitionUrl;
+  return project.galleryMedia.find((image) => image.secureUrl !== coverUrl)?.secureUrl || coverUrl;
+}
+
+export function mergeManagedProjectImages<T extends { slug: string; galleryMedia: ReadonlyArray<MediaAssetRef> }>(
+  projects: ReadonlyArray<T>,
+  images: ReadonlyArray<ManagedProjectGalleryImage>,
+): T[] {
+  return projects.map((project) => {
+    const additions = images
+      .filter((image) => image.placement === "project-gallery" && image.projectSlug === project.slug && image.active)
+      .sort((a, b) => a.displayOrder - b.displayOrder || a.publicId.localeCompare(b.publicId))
+      .map((image): MediaAssetRef => ({
+        publicId: image.publicId,
+        secureUrl: image.secureUrl,
+        resourceType: "image",
+        width: image.width,
+        height: image.height,
+        format: image.format || "webp",
+        altText: image.altText,
+      }));
+    if (!additions.length) return project;
+    const known = new Set(project.galleryMedia.map((media) => media.publicId));
+    return { ...project, galleryMedia: [...project.galleryMedia, ...additions.filter((media) => !known.has(media.publicId))] };
+  });
+}
+
 export interface ProjectHeroSlide {
   id: string;
   slideNumber: string;

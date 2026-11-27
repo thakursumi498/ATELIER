@@ -28,6 +28,7 @@ function AdminLoginWorkspace() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextHref = searchParams.get("next") || "/admin";
+  const passwordUpdated = searchParams.get("passwordUpdated") === "1";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -139,8 +140,7 @@ function AdminLoginWorkspace() {
               <span className="italic text-[#F2EAE1]">ATELIER Studio.</span>
             </h1>
             <p className="hidden sm:block mt-3 font-sans text-sm leading-relaxed text-[#FFFDF9]/82">
-              Curate wall designs, portfolio installations, editorial stories,
-              page content, and client enquiries from one serene workspace.
+              Manage website images and customer enquiries from one serene workspace.
             </p>
           </div>
         </div>
@@ -225,6 +225,12 @@ function AdminLoginWorkspace() {
                   </div>
                 </div>
               </div>
+            ) : null}
+
+            {passwordUpdated ? (
+              <p role="status" className="mt-5 rounded-xl border border-[#C9DBC9] bg-[#E9F0EA]/70 p-3 text-sm text-[#264E32]">
+                Your password has been updated. Sign in with your new password.
+              </p>
             ) : null}
 
             <form

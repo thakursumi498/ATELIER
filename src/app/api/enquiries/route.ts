@@ -11,6 +11,10 @@ const clean = (value: string) => value.replace(/[\u0000-\u0008\u000B\u000C\u000E
 export async function POST(request: Request) {
   try {
     checkSameOrigin(request);
+    const idempotencyKey = request.headers.get("idempotency-key")?.trim();
+    if (idempotencyKey && (idempotencyKey.length > 100 || !/^[a-zA-Z0-9._:-]+$/.test(idempotencyKey))) {
+      throw new RequestError("Please submit the enquiry again.");
+    }
     const body = await readJsonBody(request, 16 * 1024);
     if (body && typeof body === "object" && "honeypot" in body && body.honeypot) throw new RequestError("Submission rejected by spam protection.");
     const parsed = enquirySubmissionSchema.safeParse(body);
@@ -38,7 +42,7 @@ export async function POST(request: Request) {
       emailStatus: "pending", emailAttempts: 0, emailSent: false, emailNotificationSent: false,
       createdAt: now, updatedAt: now,
     };
-    const { record: saved, deduplicated } = await saveEnquiryRecord(record);
+    const { record: saved, deduplicated } = await saveEnquiryRecord(record, idempotencyKey);
     // Persistence has succeeded. Delivery failure must never turn a saved enquiry into an error.
     if (!deduplicated) {
       await Promise.allSettled([sendEnquiryNotification(saved.id)]);

@@ -1010,30 +1010,33 @@ export const ZoomSliderComp = forwardRef<
                     willChange: "width, height",
                   }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item.src}
-                    alt={item.alt || `${item.title} wall art category`}
-                    loading={Math.abs(idx - activeIndex) <= 2 ? "eager" : "lazy"}
-                    decoding="async"
-                    draggable={false}
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      const fallback =
-                        item.fallbackSrc ||
-                        "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp";
-                      if (target.src && !target.src.endsWith(fallback)) {
-                        target.src = fallback;
-                      }
-                    }}
-                    className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain"
-                    style={{
-                      transform: "none",
-                      objectPosition: "center center",
-                      transition: "none",
-                      willChange: "transform",
-                    }}
-                  />
+                  {/* eslint-disable @next/next/no-img-element */}
+                  {item.src ? (
+                    <img
+                      src={item.src}
+                      alt={item.alt || `${item.title} wall art category`}
+                      loading={Math.abs(idx - activeIndex) <= 2 ? "eager" : "lazy"}
+                      decoding="async"
+                      draggable={false}
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        const fallback =
+                          item.fallbackSrc ||
+                          "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp";
+                        if (target.src && !target.src.endsWith(fallback)) {
+                          target.src = fallback;
+                        }
+                      }}
+                      className="pointer-events-none absolute inset-0 h-full w-full select-none object-contain"
+                      style={{
+                        transform: "none",
+                        objectPosition: "center center",
+                        transition: "none",
+                        willChange: "transform",
+                      }}
+                    />
+                  ) : null}
+                  {/* eslint-enable @next/next/no-img-element */}
 
                   {/* Subtle architectural bottom gradient for panel legibility */}
                   <div
@@ -1065,11 +1068,6 @@ export const ZoomSliderComp = forwardRef<
                       </span>
                     </div>
 
-                    {isActiveSlide && (
-                      <span className="shrink-0 rounded-full bg-[#9B1C1C] px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#FAF9F6]">
-                        {isFilteredCatalogueMatch ? "Selected" : "Active"}
-                      </span>
-                    )}
                   </div>
                 </div>
               </div>

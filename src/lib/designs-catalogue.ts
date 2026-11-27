@@ -86,6 +86,13 @@ function selectPublicRasterArtworks(
     }
   }
 
+  // A few collections only have a single print-source export (for example a
+  // PSB). Keep that category cover in the public gallery instead of showing a
+  // cover card whose collection is empty.
+  if (selectedByCreative.size === 0 && images[0]) {
+    selectedByCreative.set(creativeName(images[0].sourceName), images[0]);
+  }
+
   return [...selectedByCreative.values()];
 }
 
@@ -110,6 +117,22 @@ const NON_PUBLIC_SOURCE_ARTWORK_KEYS = new Set(
       .map((image) => `${category.slug}:${image.code.toUpperCase()}`),
   ),
 );
+
+const PUBLIC_SOURCE_CATEGORY_SLUGS = new Set(
+  PUBLIC_DRIVE_CATEGORY_ASSETS.map((category) => category.slug),
+);
+
+/** True when a source export repeats an artwork already represented in its category. */
+export function isDuplicateSourceArtwork(categorySlug: string, artworkCode: string): boolean {
+  const slug = categorySlug.trim().toLowerCase();
+  const code = artworkCode.trim().toUpperCase();
+  return Boolean(
+    slug &&
+    code &&
+    PUBLIC_SOURCE_CATEGORY_SLUGS.has(slug) &&
+    NON_PUBLIC_SOURCE_ARTWORK_KEYS.has(`${slug}:${code}`),
+  );
+}
 
 export const DESIGN_CATEGORY_RECORDS: ReadonlyArray<CatalogueCategoryRecord> =
   CATALOGUE_CATEGORY_SLOTS.flatMap((slot) => {
@@ -194,6 +217,8 @@ export interface ManagedCatalogueImage {
   replacesArtworkCode?: string;
   displayOrder: number;
   active: boolean;
+  placement?: "design" | "project-gallery";
+  projectSlug?: string;
 }
 
 /** Merge Cloudinary image metadata into the source-controlled catalogue copy. */
@@ -201,8 +226,9 @@ export function mergeManagedDesignImages(
   staticDesigns: ReadonlyArray<CatalogueDesignItem>,
   images: ReadonlyArray<ManagedCatalogueImage>,
 ): CatalogueDesignItem[] {
-  const byKey = new Map(images.map((image) => [`${image.categorySlug}:${image.artworkCode.toUpperCase()}`, image]));
-  const replacedStaticKeys = new Set(images.flatMap((image) =>
+  const designImages = images.filter((image) => !image.placement || image.placement === "design");
+  const byKey = new Map(designImages.map((image) => [`${image.categorySlug}:${image.artworkCode.toUpperCase()}`, image]));
+  const replacedStaticKeys = new Set(designImages.flatMap((image) =>
     image.replacesCategorySlug && image.replacesArtworkCode
       ? [`${image.replacesCategorySlug}:${image.replacesArtworkCode.toUpperCase()}`]
       : [],
@@ -227,7 +253,7 @@ export function mergeManagedDesignImages(
     } else result.push(design);
   }
 
-  for (const image of images) {
+  for (const image of designImages) {
     const key = `${image.categorySlug}:${image.artworkCode.toUpperCase()}`;
     if (!image.active || NON_PUBLIC_SOURCE_ARTWORK_KEYS.has(key) || used.has(key) || result.some((design) => `${design.categorySlug}:${(design.artworkCode || "").toUpperCase()}` === key)) continue;
     const category = DESIGN_CATEGORY_RECORDS.find((entry) => entry.slug === image.categorySlug);
@@ -247,7 +273,13 @@ export function mergeManagedCategoryImages(
   images: ReadonlyArray<ManagedCatalogueImage>,
 ): CatalogueCategoryRecord[] {
   return categories.map((category) => {
-    const managed = images.filter((image) => image.categorySlug === category.slug).sort((a, b) => a.displayOrder - b.displayOrder);
+    const managed = images
+      .filter((image) =>
+        (!image.placement || image.placement === "design") &&
+        image.categorySlug === category.slug &&
+        !isDuplicateSourceArtwork(image.categorySlug, image.artworkCode),
+      )
+      .sort((a, b) => a.displayOrder - b.displayOrder);
     if (!managed.length) return category;
     const cover = managed.find((image) => image.active);
     if (!cover) return { ...category, coverImage: null };
@@ -522,9 +554,6 @@ export interface AtelierVaultCategoryItem {
   featuredDesignSlug: string | null;
 }
 
-const DEFAULT_CATEGORY_FALLBACK_IMAGE =
-  "https://res.cloudinary.com/y6kgj4yr/image/upload/f_auto,q_auto/atelier-wall-story/miscellaneous/hero-botanical-living.webp";
-
 /**
  * Adapts canonical source-controlled category records and artwork items into
  * normalized ZoomSlider items for THE ATELIER ART VAULT.
@@ -560,9 +589,7 @@ export function buildAtelierVaultCategories(
         }
       }
 
-      const fallbackFromDesign =
-        matchingDesigns[0]?.coverImage?.secureUrl ||
-        DEFAULT_CATEGORY_FALLBACK_IMAGE;
+      const fallbackFromDesign = matchingDesigns[0]?.coverImage?.secureUrl || "";
 
       const coverUrl =
         cat.coverImage?.secureUrl?.trim() || fallbackFromDesign;

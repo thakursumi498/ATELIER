@@ -89,7 +89,6 @@ interface ProjectEnquiryFormCardProps {
   fieldErrors: Record<string, string>;
   submissionNotice: SubmissionNoticeState | null;
   isSubmitting: boolean;
-  isDuplicateSubmission: boolean;
   onSubmit: (e: React.FormEvent) => void;
   whatsAppEnquiryHref: string;
   prefilledContext: PrefilledContextCard | null;
@@ -116,7 +115,6 @@ export function ProjectEnquiryFormCard({
   fieldErrors,
   submissionNotice,
   isSubmitting,
-  isDuplicateSubmission,
   onSubmit,
   whatsAppEnquiryHref,
   prefilledContext,
@@ -474,16 +472,12 @@ export function ProjectEnquiryFormCard({
         <div className="grid grid-cols-1 gap-3.5 pt-2 sm:grid-cols-2">
           <button
             type="submit"
-            disabled={isSubmitting || isDuplicateSubmission}
+            disabled={isSubmitting}
             className="inline-flex min-h-[48px] cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-[#9B1C1C] px-6 py-3.5 text-[13.5px] font-semibold tracking-[0.01em] text-[#FFFDF9] shadow-[0_12px_28px_-8px_rgba(155,28,28,0.44)] transition-[background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-[#7F1616] disabled:cursor-not-allowed disabled:opacity-65 disabled:hover:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9B1C1C]"
           >
             <Send aria-hidden="true" className="h-4 w-4" />
             <span>
-              {isSubmitting
-                ? "Submitting Enquiry…"
-                : isDuplicateSubmission
-                  ? "Enquiry Received"
-                  : "Submit Enquiry"}
+              {isSubmitting ? "Submitting Enquiry…" : "Submit Enquiry"}
             </span>
           </button>
 

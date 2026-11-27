@@ -2,12 +2,13 @@
 
 import React, { useCallback, useRef, useState } from "react";
 import Link from "next/link";
-import { PortfolioProjectRecord } from "@/lib/projects-catalogue";
+import { PortfolioProjectRecord, mergeManagedProjectImages } from "@/lib/projects-catalogue";
 import { ATELIER_BRAND, buildWhatsAppUrl } from "@/lib/brand";
 import { Container } from "@/components/layout/Container";
 import { FadeUp } from "@/components/motion/Reveal";
 import { ProjectMediaModal } from "@/components/projects/ProjectMediaModal";
 import { cn } from "@/lib/cn";
+import { useManagedCatalogueImages } from "@/lib/catalogue-images-client";
 import {
   ArrowLeft,
   ArrowRight,
@@ -30,9 +31,11 @@ interface ProjectDetailClientProps {
 }
 
 export function ProjectDetailClient({
-  project,
+  project: sourceProject,
   relatedProjects,
 }: ProjectDetailClientProps) {
+  const [managedImages] = useManagedCatalogueImages();
+  const project = mergeManagedProjectImages([sourceProject], managedImages)[0];
   const [activeHeroPlateIdx, setActiveHeroPlateIdx] = useState(0);
   const [revealPercent, setRevealPercent] = useState(65);
   const [isDraggingReveal, setIsDraggingReveal] = useState(false);

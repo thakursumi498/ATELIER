@@ -1,4 +1,6 @@
 import { DRIVE_CATEGORY_ASSETS } from "@/lib/drive-category-assets";
+import { DESIGN_CATEGORY_RECORDS } from "@/lib/designs-catalogue";
+import { DEVELOPMENT_PROJECT_FIXTURES } from "@/lib/projects-catalogue";
 
 export interface AdminImageSection {
   slug: string;
@@ -14,9 +16,10 @@ export interface AdminImageSubcategory {
 export interface AdminImageCategory {
   slug: string;
   name: string;
-  slotCode: string;
-  slotNumber: number;
+  slotCode?: string;
+  slotNumber?: number;
   retired: boolean;
+  isPublic: boolean;
   imageCount: number;
   subcategories: AdminImageSubcategory[];
 }
@@ -24,12 +27,18 @@ export interface AdminImageCategory {
 export interface AdminImageTaxonomy {
   sections: Array<AdminImageSection & { imageCount: number }>;
   categories: AdminImageCategory[];
+  projectGalleries: Array<{ slug: string; name: string; imageCount: number }>;
+  publicCounts: { designCategories: number; subcategories: number };
 }
 
 export interface AdminTaxonomyAsset {
   categorySlug?: string;
   subcategorySlug?: string;
+  projectSlug?: string;
+  placement?: string;
   sectionSlugs?: string[];
+  references?: ReadonlyArray<{ sourcePath?: string }>;
+  context?: Record<string, string>;
 }
 
 export const WEBSITE_IMAGE_SECTIONS: ReadonlyArray<AdminImageSection> = [
@@ -45,6 +54,22 @@ export const WEBSITE_IMAGE_SECTIONS: ReadonlyArray<AdminImageSection> = [
   { slug: "other", name: "Other Website Images" },
   { slug: "library", name: "Unassigned Uploads" },
 ];
+
+const WEBSITE_PAGE_SECTIONS = new Set(
+  WEBSITE_IMAGE_SECTIONS.map((section) => section.slug).filter(
+    (slug) => slug !== "other" && slug !== "library",
+  ),
+);
+
+/** Keep assigned or referenced website images in Manage Images, including inactive designs. */
+export function isWebsiteImageInUse(asset: AdminTaxonomyAsset): boolean {
+  if (asset.placement === "library" || asset.placement === "replacement-staging") return false;
+  if (asset.context?.upload_request_id && asset.context.upload_request_status !== "complete") return false;
+  if (asset.references?.length) return true;
+  if (asset.placement && WEBSITE_PAGE_SECTIONS.has(asset.placement)) return true;
+  if (asset.sectionSlugs?.some((section) => WEBSITE_PAGE_SECTIONS.has(section))) return true;
+  return asset.placement === "project-gallery" && Boolean(asset.projectSlug);
+}
 
 export function normalizeImageSectionSlug(value: string | undefined | null): string | null {
   const slug = value?.trim().toLowerCase();
@@ -115,6 +140,7 @@ export function slugifyImageTaxonomyLabel(value: string): string {
 }
 
 export function buildAdminImageTaxonomy(assets: ReadonlyArray<AdminTaxonomyAsset>): AdminImageTaxonomy {
+  const publicCategorySlugs = new Set(DESIGN_CATEGORY_RECORDS.map((category) => category.slug));
   const sections = WEBSITE_IMAGE_SECTIONS.map((section) => ({
     ...section,
     imageCount: assets.filter((asset) => asset.sectionSlugs?.includes(section.slug)).length,
@@ -136,11 +162,28 @@ export function buildAdminImageTaxonomy(assets: ReadonlyArray<AdminTaxonomyAsset
       name: category.name,
       slotCode: category.slotCode,
       slotNumber: category.slotNumber,
-      retired: category.slug === "logo" || category.slotNumber === 6,
+      retired: !publicCategorySlugs.has(category.slug),
+      isPublic: publicCategorySlugs.has(category.slug),
       imageCount: categoryAssets.length,
       subcategories,
     };
   });
 
-  return { sections, categories };
+  const projectGalleries = DEVELOPMENT_PROJECT_FIXTURES.filter((project) => project.published).map((project) => ({
+    slug: project.slug,
+    name: project.shortTitle || project.title,
+    imageCount: project.galleryMedia.length + assets.filter((asset) => asset.placement === "project-gallery" && asset.projectSlug === project.slug).length,
+  }));
+
+  return {
+    sections,
+    categories,
+    projectGalleries,
+    publicCounts: {
+      designCategories: categories.filter((category) => category.isPublic).length,
+      subcategories: categories
+        .filter((category) => category.isPublic)
+        .reduce((count, category) => count + category.subcategories.length, 0),
+    },
+  };
 }

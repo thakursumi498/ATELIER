@@ -124,6 +124,15 @@ function getDeliveryConfig(settings: SiteSettingsEnvelope) {
   return { provider, key, from, to, disabled };
 }
 
+/** Returns only the owner notification address for the authenticated account page. */
+export async function getEnquiryNotificationAddress(): Promise<string | null> {
+  const db = await getDb();
+  const settings = await db.collection<{ published?: SiteSettingsDocument | null }>("site_settings")
+    .findOne({ id: "site-settings-global" }) as SiteSettingsEnvelope;
+  const recipient = getDeliveryConfig(settings).to?.trim();
+  return validEmail(recipient) ? recipient : null;
+}
+
 async function sendEnquiryEmail(id: string): Promise<void> {
   const db = await getDb();
   const records = db.collection<NotificationRecord>("enquiries");

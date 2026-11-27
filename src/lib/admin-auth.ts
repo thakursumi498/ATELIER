@@ -22,21 +22,73 @@ function safeEqual(a: string, b: string): boolean {
 function credentialVersion() {
   return crypto.createHash("sha256").update(`${process.env.INITIAL_ADMIN_EMAIL?.toLowerCase()}:${process.env.INITIAL_ADMIN_PASSWORD_HASH || process.env.INITIAL_ADMIN_PASSWORD}`).digest("hex");
 }
-function passwordMatches(password: string): boolean {
-  const stored = process.env.INITIAL_ADMIN_PASSWORD_HASH;
+function passwordMatchesHash(password: string, stored: string | undefined): boolean {
   if (stored) {
     const [algorithm, salt, hash] = stored.split(":");
     if (algorithm !== "scrypt" || !/^[a-f0-9]{32,128}$/i.test(salt || "") || !/^[a-f0-9]{128}$/i.test(hash || "")) return false;
     return safeEqual(crypto.scryptSync(password, Buffer.from(salt, "hex"), 64).toString("hex"), hash);
   }
+  return false;
+}
+function legacyPasswordMatches(password: string): boolean {
+  const stored = process.env.INITIAL_ADMIN_PASSWORD_HASH;
+  if (stored) return passwordMatchesHash(password, stored);
   return Boolean(process.env.INITIAL_ADMIN_PASSWORD && safeEqual(password, process.env.INITIAL_ADMIN_PASSWORD));
+}
+interface PersistentAdminCredential {
+  _id: "primary";
+  email: string;
+  passwordHash: string;
+  sessionVersion: string;
+  createdAt: string;
+  updatedAt: string;
+}
+async function persistentAdminCredential() {
+  const db = await getDb();
+  return db.collection<PersistentAdminCredential>("admin_credentials").findOne({ _id: "primary" });
 }
 export function verifyAdminCredentials(email: string, password: string): { ok: true; email: string } | { ok: false; error: string } {
   const expected = process.env.INITIAL_ADMIN_EMAIL?.trim().toLowerCase();
-  if (!getAuthSecret() || !expected || !(process.env.INITIAL_ADMIN_PASSWORD_HASH || process.env.INITIAL_ADMIN_PASSWORD)) return { ok: false, error: "Administrator sign-in is not configured. Please contact the site owner." };
-  const matches = password.length <= 1024 && passwordMatches(password);
+  if (!getAuthSecret() || !expected || !(process.env.INITIAL_ADMIN_PASSWORD_HASH || process.env.INITIAL_ADMIN_PASSWORD)) return { ok: false, error: "Unable to sign in. Check your email and password and try again." };
+  const matches = password.length <= 1024 && legacyPasswordMatches(password);
   if (!safeEqual(email.trim().toLowerCase(), expected) || !matches) return { ok: false, error: "Invalid administrator email or password." };
   return { ok: true, email: expected };
+}
+export async function verifyAdminLoginCredentials(email: string, password: string) {
+  const expected = process.env.INITIAL_ADMIN_EMAIL?.trim().toLowerCase();
+  if (!getAuthSecret() || !expected || password.length > 1024 || !safeEqual(email.trim().toLowerCase(), expected)) {
+    return { ok: false as const, error: "Invalid administrator email or password." };
+  }
+  const stored = await persistentAdminCredential();
+  if (stored) {
+    if (!safeEqual(stored.email.trim().toLowerCase(), expected) || !passwordMatchesHash(password, stored.passwordHash)) {
+      return { ok: false as const, error: "Invalid administrator email or password." };
+    }
+    return { ok: true as const, email: expected, sessionVersion: stored.sessionVersion };
+  }
+  const legacy = verifyAdminCredentials(email, password);
+  return legacy.ok ? { ...legacy, sessionVersion: credentialVersion() } : legacy;
+}
+export function hashAdminPassword(password: string) {
+  const salt = crypto.randomBytes(32);
+  return `scrypt:${salt.toString("hex")}:${crypto.scryptSync(password, salt, 64).toString("hex")}`;
+}
+export async function persistAdminPassword(email: string, password: string): Promise<void> {
+  const db = await getDb();
+  const now = new Date().toISOString();
+  await db.collection<PersistentAdminCredential>("admin_credentials").updateOne(
+    { _id: "primary" },
+    {
+      $set: {
+        email: email.trim().toLowerCase(),
+        passwordHash: hashAdminPassword(password),
+        sessionVersion: crypto.randomBytes(32).toString("hex"),
+        updatedAt: now,
+      },
+      $setOnInsert: { createdAt: now },
+    },
+    { upsert: true },
+  );
 }
 export function signAdminSessionToken(email: string): string {
   const secret = getAuthSecret();
@@ -66,18 +118,24 @@ export function readAdminSessionFromRequest(request: Request): AdminSessionPaylo
     return verifyAdminSessionToken(cookie ? decodeURIComponent(cookie.slice(ADMIN_SESSION_COOKIE.length + 1)) : null);
   } catch { return null; }
 }
-export async function persistAdminSession(token: string) {
+export async function persistAdminSession(token: string, sessionVersion = credentialVersion()) {
   const session = verifyAdminSessionToken(token);
   if (!session) throw new Error("Invalid administrator session.");
   const db = await getDb();
   await db.collection("admin_sessions").createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 });
-  await db.collection("admin_sessions").insertOne({ sid: session.sid, email: session.email, expiresAt: new Date(session.exp * 1000), createdAt: new Date() });
+  await db.collection("admin_sessions").insertOne({ sid: session.sid, email: session.email, credentialVersion: sessionVersion, expiresAt: new Date(session.exp * 1000), createdAt: new Date() });
 }
 export async function getActiveAdminSession(request: Request): Promise<AdminSessionPayload | null> {
   const session = readAdminSessionFromRequest(request);
   if (!session) return null;
   const db = await getDb();
-  return await db.collection("admin_sessions").findOne({ sid: session.sid, expiresAt: { $gt: new Date() } }) ? session : null;
+  const [registered, credential] = await Promise.all([
+    db.collection<{ credentialVersion?: string }>("admin_sessions").findOne({ sid: session.sid, expiresAt: { $gt: new Date() } }),
+    db.collection<PersistentAdminCredential>("admin_credentials").findOne({ _id: "primary" }),
+  ]);
+  const activeVersion = credential?.sessionVersion || credentialVersion();
+  const registeredVersion = registered?.credentialVersion || credentialVersion();
+  return registered && registeredVersion === activeVersion ? session : null;
 }
 export async function revokeAdminSession(request: Request) {
   const session = readAdminSessionFromRequest(request);

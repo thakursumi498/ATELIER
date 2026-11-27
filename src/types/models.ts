@@ -232,7 +232,7 @@ export interface BlogPostDocument {
 }
 
 /** 9. Enquiry */
-export type EnquiryStatus = "New" | "Contacted" | "Follow-up" | "Qualified" | "Converted" | "In Progress" | "Closed" | "new";
+export type EnquiryStatus = "New" | "Contacted" | "Follow-up" | "Qualified" | "Converted" | "In Progress" | "Closed" | "new" | "follow-up" | "follow up";
 
 export interface EnquiryDocument {
   id: string;

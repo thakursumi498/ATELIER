@@ -1,13 +1,43 @@
 import { z } from "zod";
 import { requireAdminRequest } from "@/lib/admin-auth";
-import { buildEnquiryFilter, deleteEnquiryRecord, LEAD_STATUSES, queryEnquiries, updateEnquiryRecord, type StoredEnquiryRecord } from "@/lib/enquiries-store";
+import { buildEnquiryFilter, deleteEnquiryRecord, LEAD_STATUSES, normalizeEnquiryStatus, queryEnquiries, updateEnquiryRecord, type StoredEnquiryRecord } from "@/lib/enquiries-store";
 import { getDb } from "@/lib/mongodb";
 import { PRIVATE_HEADERS, privateJson, readJsonBody, RequestError, requestErrorResponse } from "@/lib/request-security";
 import { sendEnquiryNotification } from "@/lib/enquiry-email";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 function queryFromUrl(url: URL) {
-  return { page: Number(url.searchParams.get("page")) || 1, limit: Number(url.searchParams.get("limit")) || 25, search: url.searchParams.get("search") || "", status: url.searchParams.get("status") || "All", sourcePage: url.searchParams.get("source") || undefined, overdue: url.searchParams.get("overdue") === "true" };
+  return {
+    page: Number(url.searchParams.get("page")) || 1,
+    limit: Number(url.searchParams.get("limit")) || 25,
+    search: url.searchParams.get("search") || "",
+    status: url.searchParams.get("status") || "All",
+    sourcePage: url.searchParams.get("source") || undefined,
+    serviceInterest: url.searchParams.get("service") || undefined,
+    dateFrom: url.searchParams.get("dateFrom") || undefined,
+    dateTo: url.searchParams.get("dateTo") || undefined,
+    pendingFollowups: url.searchParams.get("pendingFollowups") === "true",
+    overdue: url.searchParams.get("overdue") === "true",
+  };
+}
+function clientEnquiry(record: StoredEnquiryRecord) {
+  return {
+    id: record.id,
+    fullName: record.fullName,
+    email: record.email,
+    phone: record.phone,
+    serviceInterest: record.serviceInterest,
+    serviceOrDesignInterest: record.serviceOrDesignInterest,
+    message: record.message,
+    createdAt: record.createdAt,
+    updatedAt: record.updatedAt,
+    sourcePage: record.sourcePage,
+    status: normalizeEnquiryStatus(String(record.status || "New")),
+    assignedOwner: record.assignedOwner || null,
+    followUpAt: record.followUpAt,
+    selectedDesignReference: record.selectedDesignReference,
+    adminNotes: (record.adminNotes || []).map((entry) => ({ note: entry.note, authorName: entry.authorName, createdAt: entry.createdAt })),
+  };
 }
 export function csvCell(value: unknown) {
   let text = String(value ?? "").replace(/\u0000/g, "");
@@ -26,8 +56,21 @@ export async function GET(request: Request) {
       for (const record of records) rows.push([record.referenceCode, record.fullName, record.email, record.phone, record.message, record.serviceOrDesignInterest, record.sourcePage, record.status, record.assignedOwner || "", record.followUpAt || "", record.createdAt]);
       return new Response("\uFEFF" + rows.map(row => row.map(csvCell).join(",")).join("\r\n"), { headers: { ...PRIVATE_HEADERS, "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": 'attachment; filename="atelier-enquiries.csv"' } });
     }
-    return privateJson({ ok: true, ...(await queryEnquiries(query)) });
-  } catch (error) { return requestErrorResponse(error, "Unable to load enquiries. Please try again."); }
+    const result = await queryEnquiries(query);
+    return privateJson({
+      ok: true,
+      enquiries: result.enquiries.map(clientEnquiry),
+      total: result.total,
+      page: result.page,
+      limit: result.limit,
+      pages: result.pages,
+      metrics: {
+        statuses: result.metrics.statuses,
+        services: result.metrics.services,
+        pendingFollowups: result.metrics.pendingFollowups,
+      },
+    });
+  } catch (error) { return requestErrorResponse(error, "Unable to load enquiries. Please refresh the page."); }
 }
 const updateSchema = z.object({ id: z.string().trim().min(1).max(100), status: z.enum(LEAD_STATUSES).optional(), note: z.string().trim().min(1).max(3000).optional(), assignedOwner: z.string().trim().max(120).nullable().optional(), followUpAt: z.string().datetime({ offset: true }).nullable().optional(), retryEmail: z.boolean().optional() }).strict();
 export async function PATCH(request: Request) {
@@ -40,7 +83,7 @@ export async function PATCH(request: Request) {
     if (retryEmail) await sendEnquiryNotification(id);
     const enquiry = await updateEnquiryRecord(id, { ...patch, authorName: auth.session.email });
     if (!enquiry) return privateJson({ ok: false, error: "Enquiry not found." }, 404);
-    return privateJson({ ok: true, enquiry });
+    return privateJson({ ok: true, enquiry: clientEnquiry(enquiry) });
   } catch (error) { return requestErrorResponse(error); }
 }
 export async function DELETE(request: Request) {

@@ -8,16 +8,27 @@ import {
 } from "@/lib/designs-catalogue";
 
 let catalogueRequest: Promise<ManagedCatalogueImage[]> | null = null;
+let catalogueFetchedAt = 0;
+const CATALOGUE_FRESH_FOR_MS = 60_000;
+const catalogueListeners = new Set<(images: ManagedCatalogueImage[]) => void>();
+const UPDATE_STORAGE_KEY = "atelier-managed-images-updated";
 
-function loadManagedImages() {
+function loadManagedImages(force = false) {
+  if (force || Date.now() - catalogueFetchedAt > CATALOGUE_FRESH_FOR_MS) catalogueRequest = null;
   if (!catalogueRequest) {
-    catalogueRequest = fetch("/api/site-images", { headers: { Accept: "application/json" } })
+    catalogueRequest = fetch("/api/site-images", { headers: { Accept: "application/json" }, cache: "no-store" })
       .then(async (response) => {
         if (!response.ok) throw new Error("Image catalogue unavailable");
         const data = await response.json() as { images?: ManagedCatalogueImage[] };
-        return Array.isArray(data.images) ? data.images : [];
+        const images = Array.isArray(data.images) ? data.images : [];
+        catalogueFetchedAt = Date.now();
+        catalogueListeners.forEach((listener) => listener(images));
+        return images;
       })
-      .catch(() => []);
+      .catch(() => {
+        catalogueRequest = null;
+        return [];
+      });
   }
   return catalogueRequest;
 }
@@ -31,13 +42,36 @@ export function useManagedCatalogueImages(): [ManagedCatalogueImage[], (images: 
   const [images, setImages] = useState<ManagedCatalogueImage[]>([]);
   useEffect(() => {
     let active = true;
+    const update = (next: ManagedCatalogueImage[]) => { if (active) setImages(next); };
+    catalogueListeners.add(update);
     void loadManagedImages().then((next) => { if (active) setImages(next); });
-    return () => { active = false; };
+    const refreshWhenVisible = () => { if (!document.hidden) void loadManagedImages(true); };
+    const handleStorage = (event: StorageEvent) => { if (event.key === UPDATE_STORAGE_KEY) void loadManagedImages(true); };
+    const refreshInterval = window.setInterval(() => {
+      if (!document.hidden && Date.now() - catalogueFetchedAt > CATALOGUE_FRESH_FOR_MS) void loadManagedImages(true);
+    }, CATALOGUE_FRESH_FOR_MS);
+    window.addEventListener("focus", refreshWhenVisible);
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+    window.addEventListener("storage", handleStorage);
+    window.addEventListener("atelier:managed-images-updated", refreshWhenVisible);
+    return () => {
+      active = false;
+      catalogueListeners.delete(update);
+      window.removeEventListener("focus", refreshWhenVisible);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("atelier:managed-images-updated", refreshWhenVisible);
+      window.clearInterval(refreshInterval);
+    };
   }, []);
   return [images, setImages];
 }
 
 export async function refreshManagedCatalogueImages() {
-  catalogueRequest = null;
-  return loadManagedImages();
+  const images = await loadManagedImages(true);
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("atelier:managed-images-updated"));
+    try { window.localStorage.setItem(UPDATE_STORAGE_KEY, String(Date.now())); } catch { /* storage can be disabled */ }
+  }
+  return images;
 }

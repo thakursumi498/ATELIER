@@ -404,16 +404,20 @@ test("image management uploads, retries, replaces, assigns and deletes through a
     const project = DEVELOPMENT_PROJECT_FIXTURES[0];
     const projectUpload = await uploadAdminImage(makeImageRequest("project-upload-key-0001", { placement: "project-gallery", projectSlug: project.slug }, "project.png"));
     assert.equal(projectUpload.status, 200);
+    const projectAsset = [...cloudAssets.values()].find((asset) => asset.context?.custom?.upload_request_id === "project-upload-key-0001");
+    assert.ok(projectAsset);
     const siteImagesResponse = await getManagedSiteImages();
     assert.equal(siteImagesResponse.status, 200);
     const siteImages = await siteImagesResponse.json();
     assert.ok(siteImages.images.some((image: { categorySlug: string; placement: string }) => image.categorySlug === "food-and-lifestyle" && image.placement === "design"));
+    const uploadedPublicIds = new Set([categoryAsset!.public_id, subcategoryAsset!.public_id, projectAsset!.public_id]);
+    const newlyUploadedPublicImages = siteImages.images.filter((image: { publicId: string }) => uploadedPublicIds.has(image.publicId));
+    assert.equal(newlyUploadedPublicImages.length, uploadedPublicIds.size, "every image from the multi-image upload flow reaches the public catalogue");
+    assert.ok(newlyUploadedPublicImages.every((image: { active: boolean }) => image.active), "new uploads are active on the website by default");
     const mergedProject = mergeManagedProjectImages([project], siteImages.images)[0];
     assert.equal(mergedProject.galleryMedia.length, project.galleryMedia.length + 1);
     assert.ok(mergedProject.galleryMedia.some((image) => image.publicId.includes("projects/managed/")));
 
-    const projectAsset = [...cloudAssets.values()].find((asset) => asset.context?.custom?.upload_request_id === "project-upload-key-0001");
-    assert.ok(projectAsset);
     const subcategoryAssetKey = adminMediaKey(subcategoryAsset!.public_id);
     const projectAssetKey = adminMediaKey(projectAsset.public_id);
     failAfterCloudinaryContextUpdate = true;

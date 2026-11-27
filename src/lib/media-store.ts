@@ -146,7 +146,10 @@ async function fetchCloudinaryUsage(): Promise<CloudinaryUsageSnapshot> {
 const cachedCloudinaryAssets = unstable_cache(
   fetchCloudinaryAssets,
   ["atelier-cloudinary-assets-v2", process.env.CLOUDINARY_CLOUD_NAME || "missing-cloud"],
-  { revalidate: 300, tags: ["atelier-cloudinary-assets"] },
+  // Admin edits can come from a different running instance (such as a local
+  // studio against the live Cloudinary account), where local tag invalidation
+  // cannot clear the website server's cache.
+  { revalidate: 15, tags: ["atelier-cloudinary-assets"] },
 );
 
 export async function getCachedCloudinaryAssets() {

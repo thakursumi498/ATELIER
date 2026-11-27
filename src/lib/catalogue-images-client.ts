@@ -13,10 +13,10 @@ const CATALOGUE_FRESH_FOR_MS = 60_000;
 const catalogueListeners = new Set<(images: ManagedCatalogueImage[]) => void>();
 const UPDATE_STORAGE_KEY = "atelier-managed-images-updated";
 
-function loadManagedImages(force = false) {
+function loadManagedImages(force = false, fresh = false) {
   if (force || Date.now() - catalogueFetchedAt > CATALOGUE_FRESH_FOR_MS) catalogueRequest = null;
   if (!catalogueRequest) {
-    catalogueRequest = fetch("/api/site-images", { headers: { Accept: "application/json" }, cache: "no-store" })
+    catalogueRequest = fetch(fresh ? "/api/site-images?fresh=1" : "/api/site-images", { headers: { Accept: "application/json" }, cache: "no-store" })
       .then(async (response) => {
         if (!response.ok) throw new Error("Image catalogue unavailable");
         const data = await response.json() as { images?: ManagedCatalogueImage[] };
@@ -46,21 +46,19 @@ export function useManagedCatalogueImages(): [ManagedCatalogueImage[], (images: 
     catalogueListeners.add(update);
     void loadManagedImages().then((next) => { if (active) setImages(next); });
     const refreshWhenVisible = () => { if (!document.hidden) void loadManagedImages(true); };
-    const handleStorage = (event: StorageEvent) => { if (event.key === UPDATE_STORAGE_KEY) void loadManagedImages(true); };
+    const handleStorage = (event: StorageEvent) => { if (event.key === UPDATE_STORAGE_KEY) void loadManagedImages(true, true); };
     const refreshInterval = window.setInterval(() => {
       if (!document.hidden && Date.now() - catalogueFetchedAt > CATALOGUE_FRESH_FOR_MS) void loadManagedImages(true);
     }, CATALOGUE_FRESH_FOR_MS);
     window.addEventListener("focus", refreshWhenVisible);
     document.addEventListener("visibilitychange", refreshWhenVisible);
     window.addEventListener("storage", handleStorage);
-    window.addEventListener("atelier:managed-images-updated", refreshWhenVisible);
     return () => {
       active = false;
       catalogueListeners.delete(update);
       window.removeEventListener("focus", refreshWhenVisible);
       document.removeEventListener("visibilitychange", refreshWhenVisible);
       window.removeEventListener("storage", handleStorage);
-      window.removeEventListener("atelier:managed-images-updated", refreshWhenVisible);
       window.clearInterval(refreshInterval);
     };
   }, []);
@@ -68,9 +66,8 @@ export function useManagedCatalogueImages(): [ManagedCatalogueImage[], (images: 
 }
 
 export async function refreshManagedCatalogueImages() {
-  const images = await loadManagedImages(true);
+  const images = await loadManagedImages(true, true);
   if (typeof window !== "undefined") {
-    window.dispatchEvent(new Event("atelier:managed-images-updated"));
     try { window.localStorage.setItem(UPDATE_STORAGE_KEY, String(Date.now())); } catch { /* storage can be disabled */ }
   }
   return images;

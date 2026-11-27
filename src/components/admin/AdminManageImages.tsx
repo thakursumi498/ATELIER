@@ -62,6 +62,47 @@ interface UploadQueueItem {
 const ALL_SECTIONS = "all";
 const PAGE_SIZE = 24;
 const MAX_BYTES = 5 * 1024 * 1024;
+const MAX_SOURCE_BYTES = 25 * 1024 * 1024;
+const MAX_IMAGE_PIXELS = 50_000_000;
+const MAX_IMAGE_EDGE = 2400;
+
+async function prepareUploadFile(file: File): Promise<File> {
+  if (file.size <= MAX_BYTES) return file;
+  if (file.size > MAX_SOURCE_BYTES) throw new Error("This image is larger than 25 MB.");
+
+  let bitmap: ImageBitmap | null = null;
+  const canvas = document.createElement("canvas");
+  try {
+    bitmap = await createImageBitmap(file);
+    if (!bitmap.width || !bitmap.height || bitmap.width * bitmap.height > MAX_IMAGE_PIXELS) {
+      throw new Error("This image is too large to prepare. Choose a smaller image.");
+    }
+    const context = canvas.getContext("2d", { alpha: true });
+    if (!context) throw new Error("This image could not be prepared. Please try again.");
+
+    for (const edge of [MAX_IMAGE_EDGE, 2000, 1600]) {
+      const scale = Math.min(1, edge / Math.max(bitmap.width, bitmap.height));
+      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+      context.imageSmoothingQuality = "high";
+      context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      for (const quality of [0.9, 0.82, 0.74, 0.66]) {
+        const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/webp", quality));
+        if (blob && blob.size <= MAX_BYTES) {
+          return new File([blob], file.name, { type: "image/webp", lastModified: file.lastModified });
+        }
+      }
+    }
+    throw new Error("This image could not be reduced enough to upload. Choose a smaller image.");
+  } catch (error) {
+    if (error instanceof Error && (error.message.startsWith("This image ") || error.message.startsWith("Choose a valid "))) throw error;
+    throw new Error("This image could not be prepared. Please try again.");
+  } finally {
+    bitmap?.close();
+    canvas.width = 0;
+    canvas.height = 0;
+  }
+}
 
 function humanizeSection(slug: string, taxonomy: AdminImageTaxonomy | null) {
   if (slug === "library") return "Needs a home";
@@ -212,14 +253,11 @@ export function AdminManageImages() {
   }
 
   async function uploadOne(item: UploadQueueItem) {
-    if (item.file.size > MAX_BYTES) {
-      updateQueuedItem(item.id, { status: "failed", error: "This image is larger than 5 MB.", retryable: false });
-      return false;
-    }
     updateQueuedItem(item.id, { status: "uploading", error: "", retryable: false });
     try {
+      const uploadFile = await prepareUploadFile(item.file);
       const form = new FormData();
-      form.append("file", item.file);
+      form.append("file", uploadFile, item.file.name);
       if (item.replaceAsset) {
         form.append("replaceId", item.replaceAsset.assetKey);
       } else if (item.destination?.kind === "design") {
@@ -250,8 +288,9 @@ export function AdminManageImages() {
       }
       updateQueuedItem(item.id, { status: "success", error: "", retryable: false });
       return true;
-    } catch {
-      updateQueuedItem(item.id, { status: "failed", error: "Unable to upload this image. Please try again.", retryable: true });
+    } catch (error) {
+      const message = error instanceof Error && error.message ? error.message : "Unable to upload this image. Please try again.";
+      updateQueuedItem(item.id, { status: "failed", error: message, retryable: message.startsWith("Unable to upload") });
       return false;
     }
   }

@@ -42,6 +42,9 @@ function jsonRequest(url: string, body: unknown, method = "POST", cookie?: strin
   return new Request(url, { method, headers: { "Content-Type": "application/json", ...(cookie ? { cookie } : {}), ...extraHeaders }, body: JSON.stringify(body) });
 }
 async function adminCookie() { const token = signAdminSessionToken("admin@example.test"); await persistAdminSession(token); return buildSessionCookieHeader(token).split(";")[0]; }
+function siteImagesRequest(cookie?: string, fresh = false) {
+  return new Request(`http://localhost/api/site-images${fresh ? "?fresh=1" : ""}`, { headers: cookie ? { cookie } : {} });
+}
 test("unauthenticated enquiry reads and mutations are blocked", async () => {
   assert.equal((await listEnquiries(new Request("http://localhost/api/admin/enquiries"))).status, 401);
   assert.equal((await patchEnquiry(jsonRequest("http://localhost/api/admin/enquiries", { id: "x", status: "Closed" }, "PATCH"))).status, 401);
@@ -215,6 +218,13 @@ test("image management uploads, retries, replaces, assigns and deletes through a
     tags: ["atelier-site", "explore-designs"],
     context: { custom: {} },
   });
+  const historyLegacyId = "atelier-wall-story/designs/history/AE04-01";
+  cloudAssets.set(historyLegacyId, {
+    public_id: historyLegacyId,
+    secure_url: `https://res.cloudinary.com/atelier-test-cloud/image/upload/f_auto,q_auto/${historyLegacyId}.webp`,
+    format: "webp", width: 1200, height: 800, bytes: 4000, tags: ["atelier-site", "explore-designs", "catalogue", "history"],
+    context: { custom: { alt: "Earlier History upload", placement: "design", page: "explore-designs", section: "catalogue", category_slug: "history", active: "true" } },
+  });
 
   globalThis.fetch = async (input, init) => {
     const rawUrl = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
@@ -314,6 +324,15 @@ test("image management uploads, retries, replaces, assigns and deletes through a
     const staticCategoryOrder = DEVELOPMENT_FIXTURE_DESIGNS.filter((design) => design.categorySlug === "food-and-lifestyle").reduce((highest, design) => Math.max(highest, design.sortOrder), 0);
     assert.equal(Number(categoryAsset.context?.custom?.display_order), staticCategoryOrder + 1);
 
+    const historyUpload = await uploadAdminImage(makeImageRequest("history-upload-key-0001", { placement: "design", categorySlug: "history" }, "history-art.png"));
+    assert.equal(historyUpload.status, 200);
+    const historyAsset = [...cloudAssets.values()].find((asset) => asset.context?.custom?.upload_request_id === "history-upload-key-0001");
+    assert.equal(historyAsset?.public_id, "atelier-wall-story/designs/history/unassigned/AE04-02", "uploads skip artwork codes stored only in older public IDs");
+    assert.equal(historyAsset?.context?.custom?.active, "true");
+    const freshPublicImages = await getManagedSiteImages(siteImagesRequest(cookie, true));
+    const freshPublicPayload = await freshPublicImages.json();
+    assert.ok(freshPublicPayload.images.some((image: { publicId: string; active: boolean }) => image.publicId === historyAsset?.public_id && image.active), "an authenticated post-upload refresh returns the exact new image as active");
+
     const categoryAssetKey = adminMediaKey(categoryAsset.public_id);
     const originalCategoryPlacement = {
       placement: categoryAsset.context?.custom?.placement,
@@ -336,7 +355,7 @@ test("image management uploads, retries, replaces, assigns and deletes through a
     assert.ok(inactiveCategoryBody.assets.some((asset: { secureUrl: string }) => asset.secureUrl.endsWith(`${categoryAsset.public_id}.webp`)));
     assert.equal(inactiveCategoryBody.counts.inactive, 1);
     assert.equal(inactiveCategoryBody.counts.active + inactiveCategoryBody.counts.inactive, inactiveCategoryBody.counts.all);
-    const publicWhileInactive = await (await getManagedSiteImages()).json();
+    const publicWhileInactive = await (await getManagedSiteImages(siteImagesRequest())).json();
     assert.equal(publicWhileInactive.images.find((image: { publicId: string }) => image.publicId === categoryAsset.public_id)?.active, false);
     assert.equal(mergeManagedDesignImages(DEVELOPMENT_FIXTURE_DESIGNS, publicWhileInactive.images).some((design) => design.coverImage.publicId === categoryAsset.public_id), false);
     const activeCategoryList = await getAdminMedia(new Request("http://localhost/api/admin/media?section=explore-designs&category=food-and-lifestyle&status=active", { headers: { cookie } }));
@@ -344,7 +363,7 @@ test("image management uploads, retries, replaces, assigns and deletes through a
 
     const reactivateCategoryImage = await patchAdminMedia(jsonRequest("http://localhost/api/admin/media", { action: "visibility", assetKey: categoryAssetKey, active: true }, "PATCH", cookie, { Origin: "http://localhost" }));
     assert.equal(reactivateCategoryImage.status, 200);
-    const publicAfterReactivation = await (await getManagedSiteImages()).json();
+    const publicAfterReactivation = await (await getManagedSiteImages(siteImagesRequest())).json();
     const restoredCategoryDesign = mergeManagedDesignImages(DEVELOPMENT_FIXTURE_DESIGNS, publicAfterReactivation.images).find((design) => design.coverImage.publicId === categoryAsset.public_id);
     assert.ok(restoredCategoryDesign);
     assert.equal(restoredCategoryDesign.sortOrder, Number(originalCategoryPlacement.order));
@@ -355,12 +374,12 @@ test("image management uploads, retries, replaces, assigns and deletes through a
     const legacyHide = await patchAdminMedia(jsonRequest("http://localhost/api/admin/media", { action: "visibility", assetKey: legacyDesignKey, active: false }, "PATCH", cookie, { Origin: "http://localhost" }));
     assert.equal(legacyHide.status, 200, "legacy category images without saved placement fields remain manageable");
     assert.equal(cloudAssets.get(legacyDesignId)?.context?.custom?.active, "false");
-    const publicWithoutLegacy = await (await getManagedSiteImages()).json();
+    const publicWithoutLegacy = await (await getManagedSiteImages(siteImagesRequest())).json();
     assert.equal(publicWithoutLegacy.images.some((image: { publicId: string; active: boolean }) => image.publicId === legacyDesignId && image.active), false);
     assert.equal(mergeManagedDesignImages(DEVELOPMENT_FIXTURE_DESIGNS, publicWithoutLegacy.images).some((design) => design.coverImage.publicId === legacyDesignId), false);
     const legacyReactivate = await patchAdminMedia(jsonRequest("http://localhost/api/admin/media", { action: "visibility", assetKey: legacyDesignKey, active: true }, "PATCH", cookie, { Origin: "http://localhost" }));
     assert.equal(legacyReactivate.status, 200);
-    const publicWithLegacy = await (await getManagedSiteImages()).json();
+    const publicWithLegacy = await (await getManagedSiteImages(siteImagesRequest())).json();
     assert.ok(publicWithLegacy.images.some((image: { publicId: string; active: boolean }) => image.publicId === legacyDesignId && image.active));
 
     const duplicate = await uploadAdminImage(makeImageRequest("design-upload-key-0001", { placement: "design", categorySlug: "food-and-lifestyle" }));
@@ -380,7 +399,7 @@ test("image management uploads, retries, replaces, assigns and deletes through a
       context: { custom: { alt: "Wall art for Food and lifestyle", placement: "design", page: "explore-designs", section: "catalogue", category_slug: "food-and-lifestyle", category_name: "Food and lifestyle", category_code: "CAT-02", artwork_code: "AE02-90", subcategory_slug: "", subcategory_name: "", display_order: "90", active: "true", upload_request_id: pendingKey, upload_request_fingerprint: pendingFingerprint, upload_request_status: "pending" } },
     });
     const countBeforePendingRetry = cloudAssets.size;
-    const pendingPublicResponse = await getManagedSiteImages();
+    const pendingPublicResponse = await getManagedSiteImages(siteImagesRequest());
     const pendingPublicBody = await pendingPublicResponse.json();
     assert.equal(pendingPublicBody.images.some((image: { publicId: string }) => image.publicId === pendingId), false);
     const pendingRetry = await uploadAdminImage(makeImageRequest(pendingKey, { placement: "design", categorySlug: "food-and-lifestyle" }));
@@ -406,7 +425,7 @@ test("image management uploads, retries, replaces, assigns and deletes through a
     assert.equal(projectUpload.status, 200);
     const projectAsset = [...cloudAssets.values()].find((asset) => asset.context?.custom?.upload_request_id === "project-upload-key-0001");
     assert.ok(projectAsset);
-    const siteImagesResponse = await getManagedSiteImages();
+    const siteImagesResponse = await getManagedSiteImages(siteImagesRequest());
     assert.equal(siteImagesResponse.status, 200);
     const siteImages = await siteImagesResponse.json();
     assert.ok(siteImages.images.some((image: { categorySlug: string; placement: string }) => image.categorySlug === "food-and-lifestyle" && image.placement === "design"));
@@ -430,7 +449,7 @@ test("image management uploads, retries, replaces, assigns and deletes through a
     assert.equal((await bulkInactive.json()).updated, 2);
     assert.equal(subcategoryAsset?.context?.custom?.active, "false");
     assert.equal(projectAsset.context?.custom?.active, "false");
-    const hiddenProject = mergeManagedProjectImages([project], (await (await getManagedSiteImages()).json()).images)[0];
+    const hiddenProject = mergeManagedProjectImages([project], (await (await getManagedSiteImages(siteImagesRequest())).json()).images)[0];
     assert.equal(hiddenProject.galleryMedia.length, project.galleryMedia.length);
     const bulkActive = await patchAdminMedia(jsonRequest("http://localhost/api/admin/media", { action: "visibility-bulk", assetKeys: [subcategoryAssetKey, projectAssetKey], active: true }, "PATCH", cookie, { Origin: "http://localhost" }));
     assert.equal(bulkActive.status, 200);

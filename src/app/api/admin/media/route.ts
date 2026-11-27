@@ -4,7 +4,7 @@ import { requireAdminRequest } from "@/lib/admin-auth";
 import { buildAdminImageTaxonomy, isWebsiteImageInUse } from "@/lib/admin-image-taxonomy";
 import { DESIGN_CATEGORY_RECORDS, DEVELOPMENT_FIXTURE_DESIGNS, isDuplicateSourceArtwork } from "@/lib/designs-catalogue";
 import { DRIVE_CATEGORY_ASSETS } from "@/lib/drive-category-assets";
-import { adminMediaKey, canToggleManagedAsset, destroyCloudAsset, fetchCloudinaryAssetByKey, getCachedCloudinaryAssets, humanizeMediaDisplayName, invalidateCloudinaryAssetCache, isFixedWebsiteImage, managedAsset, mediaReferences, updateCloudinaryContext, type CloudinaryAssetRecord } from "@/lib/media-store";
+import { adminMediaKey, canToggleManagedAsset, destroyCloudAsset, fetchCloudinaryAssetByKey, fetchCloudinaryAssets, getCachedCloudinaryAssets, humanizeMediaDisplayName, invalidateCloudinaryAssetCache, isFixedWebsiteImage, managedAsset, mediaReferences, updateCloudinaryContext, type CloudinaryAssetRecord } from "@/lib/media-store";
 import { readJsonBody } from "@/lib/request-security";
 
 export const runtime = "nodejs";
@@ -55,7 +55,10 @@ export async function GET(request: Request) {
     const subcategorySlug = searchParams.get("subcategory")?.trim().toLowerCase() || "";
     const projectSlug = searchParams.get("project")?.trim().toLowerCase() || "";
     const status = searchParams.get("status") === "active" || searchParams.get("status") === "inactive" ? searchParams.get("status") : "all";
-    const records = (await getCachedCloudinaryAssets()).map(managedAsset).filter((asset) =>
+    // This screen is used only by an authenticated administrator. Read the
+    // provider's current list so a just-uploaded batch cannot be replaced in
+    // the gallery by an older cached set from another server instance.
+    const records = (await fetchCloudinaryAssets()).map(managedAsset).filter((asset) =>
       asset.placement !== "replacement-staging" &&
       !asset.publicId.startsWith("atelier-wall-story/replacements/") &&
       isWebsiteImageInUse(asset) &&
@@ -85,7 +88,7 @@ export async function GET(request: Request) {
       assetKey: adminMediaKey(asset.publicId),
       secureUrl: asset.secureUrl,
       altText: asset.altText,
-      displayName: humanizeMediaDisplayName(asset.altText || asset.originalFilename, asset.projectName || "Website image"),
+      displayName: humanizeMediaDisplayName(asset.originalFilename || asset.altText, asset.projectName || "Website image"),
       width: asset.width,
       height: asset.height,
       active: publicStatus(asset),
@@ -150,7 +153,7 @@ export async function PATCH(request: Request) {
       const existing = await getCachedCloudinaryAssets();
       const usedCodes = new Set([
         ...(DRIVE_CATEGORY_ASSETS.find((item) => item.slug === category.slug)?.images.map((image) => image.code) || []),
-        ...existing.map((item) => item.context?.custom?.artwork_code || ""),
+        ...existing.map((item) => item.context?.custom?.artwork_code || item.public_id.match(/AE\d{2}-\d{2}/i)?.[0] || ""),
       ].map((code) => code.toUpperCase()));
       const artworkCode = nextArtworkCode(category.slotNumber, usedCodes);
       if (!new RegExp(`^AE${String(category.slotNumber).padStart(2, "0")}-\\d{2}$`).test(artworkCode)) return NextResponse.json({ ok: false, error: "This category has reached its image limit." }, { status: 409, headers });

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getCachedCloudinaryAssets, customContext, cloudinaryDeliveryUrl, managedAsset } from "@/lib/media-store";
+import { requireAdminRequest } from "@/lib/admin-auth";
+import { fetchCloudinaryAssets, getCachedCloudinaryAssets, customContext, cloudinaryDeliveryUrl, managedAsset } from "@/lib/media-store";
 import { DESIGN_CATEGORY_RECORDS, DEVELOPMENT_FIXTURE_DESIGNS, isDuplicateSourceArtwork, type ManagedCatalogueImage } from "@/lib/designs-catalogue";
 import { DEVELOPMENT_PROJECT_FIXTURES } from "@/lib/projects-catalogue";
 
@@ -7,9 +8,11 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const headers = { "Cache-Control": "no-store, max-age=0, must-revalidate" };
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const cloudAssets = await getCachedCloudinaryAssets();
+    const forceFresh = new URL(request.url).searchParams.get("fresh") === "1";
+    const auth = forceFresh ? await requireAdminRequest(request) : null;
+    const cloudAssets = auth?.ok ? await fetchCloudinaryAssets() : await getCachedCloudinaryAssets();
     const images = cloudAssets.flatMap((asset): ManagedCatalogueImage[] => {
       const context = customContext(asset);
       const managed = managedAsset(asset);

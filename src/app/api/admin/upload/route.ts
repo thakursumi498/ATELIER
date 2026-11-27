@@ -10,6 +10,7 @@ import {
   cloudinaryDeliveryUrl,
   destroyCloudAsset,
   fetchCloudinaryAssetByKey,
+  fetchCloudinaryAssets,
   getCachedCloudinaryAssets,
   invalidateCloudinaryAssetCache,
   renameCloudAsset,
@@ -123,7 +124,7 @@ export async function POST(request: Request) {
       tags = existing.tags || ["atelier-site"];
       const altText = altInput || context.alt || "Website image";
       fingerprintDestination = { replace: existing.public_id, altText };
-      const existingAssets = await getCachedCloudinaryAssets();
+      const existingAssets = await fetchCloudinaryAssets();
       const fingerprint = idempotencyFingerprint(input, fingerprintDestination);
       if (existing.context?.custom?.upload_request_id === idempotencyKey) {
         return await repeatedUploadResponse(existing, fingerprint);
@@ -146,7 +147,7 @@ export async function POST(request: Request) {
     } else {
       const placement = String(form.get("placement") || "");
       if (placement === "design") {
-        const assets = await getCachedCloudinaryAssets();
+        const assets = await fetchCloudinaryAssets();
         const selectedSlug = String(form.get("categorySlug") || "").trim().toLowerCase();
         const category = DESIGN_CATEGORY_RECORDS.find((item) => item.slug === selectedSlug);
         if (!category) return NextResponse.json({ ok: false, error: "Open a design category before adding images." }, { status: 400, headers });
@@ -164,7 +165,7 @@ export async function POST(request: Request) {
         }
         const usedCodes = new Set([
           ...(DRIVE_CATEGORY_ASSETS.find((item) => item.slug === category.slug)?.images.map((image) => image.code) || []),
-          ...assets.map((asset) => asset.context?.custom?.artwork_code || ""),
+          ...assets.map((asset) => asset.context?.custom?.artwork_code || asset.public_id.match(/AE\d{2}-\d{2}/i)?.[0] || ""),
         ].map((code) => code.toUpperCase()));
         const artworkCode = nextArtworkCode(category.slotNumber, usedCodes);
         if (!new RegExp(`^AE${String(category.slotNumber).padStart(2, "0")}-\\d{2}$`).test(artworkCode)) return NextResponse.json({ ok: false, error: "This category has reached its image limit." }, { status: 409, headers });
@@ -176,7 +177,7 @@ export async function POST(request: Request) {
         context = { alt: altText, original_filename: safeFilename(file.name), placement: "design", page: "explore-designs", section: "catalogue", category_slug: category.slug, category_name: category.name, category_code: category.slotCode, artwork_code: artworkCode, subcategory_slug: subcategory?.slug || "", subcategory_name: subcategory?.name || "", display_order: String(order), active: "true" };
         tags = ["atelier-site", "explore-designs", "catalogue", category.slug, ...(subcategory ? [subcategory.slug] : []), artworkCode.toLowerCase()];
       } else if (placement === "project-gallery") {
-        const assets = await getCachedCloudinaryAssets();
+        const assets = await fetchCloudinaryAssets();
         const projectSlug = String(form.get("projectSlug") || "").trim().toLowerCase();
         const project = DEVELOPMENT_PROJECT_FIXTURES.find((item) => item.published && item.slug === projectSlug);
         if (!project) return NextResponse.json({ ok: false, error: "Open a project gallery before adding images." }, { status: 400, headers });
